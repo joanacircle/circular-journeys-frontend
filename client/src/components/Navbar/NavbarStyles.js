@@ -1,12 +1,10 @@
 import styled from 'styled-components'
-import { theme } from '../../Styles/styled'
+import { Theme, Text } from '../../Styles/styled'
 
-const Title = styled.h1`
-  color:${theme.primaryOrange};
-  font-size:50px;
-  font-family:"Sigmar One", cursive;
+export const Option = styled(Text)`
+  font-size:18px;
+  transition: .3s;
+  &:hover {
+    border-bottom:5px solid ${Theme.Orange};
+  }
 `
-
-export {
-  Title
-}

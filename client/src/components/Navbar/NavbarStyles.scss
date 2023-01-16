@@ -1,0 +1,8 @@
+.navbar-fixed {
+  position: fixed;
+  top:0;
+  .navbar-title {
+    display: flex;
+    flex-direction: row;
+  }
+}

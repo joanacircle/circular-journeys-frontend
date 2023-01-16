@@ -39,7 +39,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to='/user/login'>
+              <Link to='/login'>
                 <FaUserAlt size={30} />
               </Link>
             </li>

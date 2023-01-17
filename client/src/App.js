@@ -8,6 +8,7 @@ import Login from './pages/User/Login'
 
 const App = () => {
   return (
+    <>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -16,7 +17,7 @@ const App = () => {
         {/* <Route path='/blog' element={<Blog />} /> */}
 
       </Routes>
-
+    </>
   )
 }
 

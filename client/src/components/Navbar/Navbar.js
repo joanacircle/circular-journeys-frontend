@@ -8,6 +8,7 @@ import { FaUserAlt } from 'react-icons/fa'
 
 const Navbar = () => {
   return (
+    <div className='navbar-container'>
     <Container className='navbar-fixed'>
       <Row align={'center'} justify={'space-between'}>
         <Col>
@@ -34,11 +35,6 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to='/#'>
-                <Option>套票 </Option>
-              </Link>
-            </li>
-            <li>
               <Link to='/user/login'>
                 <FaUserAlt size={30} />
               </Link>
@@ -47,6 +43,7 @@ const Navbar = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   )
 }
 

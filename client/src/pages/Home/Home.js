@@ -1,4 +1,4 @@
-import HomeShop from './HomeShop'
+import HomeShop from './HomeShop/HomeShop'
 
 const Home = () => {
   return (

@@ -1,0 +1,40 @@
+.images-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.top-row {
+    max-width: 1024px;
+    display: flex;
+    grid-gap: 12px;
+    justify-content: center;
+    margin: 12px auto;
+}
+
+.bottom-row {
+    max-width: 1024px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 9px;
+    
+}
+
+.image-box{
+    overflow: hidden;
+    border-radius: 15px;
+    &:hover {
+            cursor: pointer;
+            & .responsive-image {
+                transform: scale(1.1);
+                transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+            }
+        }
+}
+
+.responsive-image {
+    width: 100%;
+    margin-right: 5px;
+}

@@ -9,8 +9,8 @@ import { FaUserAlt } from 'react-icons/fa'
 const Navbar = () => {
   return (
     <Fragment>
-      <div className='navbar-container'>
-        <Container className='navbar-fixed'>
+      <div className='navbar-fixed'>
+        <Container className='navbar-container'>
           <Row align={'center'} justify={'space-between'}>
             <Col>
               <Link className='navbar-logo-place' to='/'>

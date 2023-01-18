@@ -3,8 +3,9 @@ import { Routes, Route } from 'react-router-dom'
 
 import Navbar from './components/Navbar/Navbar'
 import Home from './pages/Home/Home'
+import Login from './pages/User/Login/Login'
 import Shop from './pages/Shop/Shop'
-import Login from './pages/User/Login'
+
 
 const App = () => {
   return (

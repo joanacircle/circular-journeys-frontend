@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Theme, Title } from '../../../Styles/styled'
 
 export const Input = styled.input`
+  width:350px;
   border-radius: 10px;
   padding: 10px 20px;
   margin-top: 20px;
@@ -14,13 +15,8 @@ export const Input = styled.input`
 `
 export const LoginTitle = styled(Title)`
   letter-spacing:8px;
-  text-shadow: 1px 2px 5px #000;
+  text-shadow: 1px 2px 5px ${Theme.Black};
 `
 
 export const Button = styled.button`
-
-`
-
-export const Label = styled.label`
-  
 `

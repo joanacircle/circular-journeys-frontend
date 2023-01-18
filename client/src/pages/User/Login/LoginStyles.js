@@ -17,6 +17,3 @@ export const LoginTitle = styled(Title)`
   letter-spacing:8px;
   text-shadow: 1px 2px 5px ${Theme.Black};
 `
-
-export const Button = styled.button`
-`

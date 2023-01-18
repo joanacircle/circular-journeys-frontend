@@ -11,33 +11,63 @@ const Login = () => {
     <Container>
       <Row justify={'center'}>
         <Col className='login-place'>
-          <div className='login-flex'>
-            <LoginTitle size={Theme.H1} color={Theme.Orange} family={Theme.Family}>Login</LoginTitle>
-            <Input
-              type='text'
-              placeholder='Email'
-            />
-            <Input
-              type='password'
-              placeholder='Password'
-            />
-            <div className='login-remember-place'>
-              <div className='login-checkbox'>
-                <input
-                  type='checkbox'
-                  name='remember'
-                  id='remember'
-                />
-                <label htmlFor='remember'>
-                  記住我
-                </label>
+          <form>
+            <div className='login-flex'>
+              <LoginTitle size={Theme.H1} color={Theme.Orange} family={Theme.Family}>Login</LoginTitle>
+              <Input
+                type='text'
+                placeholder='Email'
+              />
+              <Input
+                type='password'
+                placeholder='Password'
+              />
+              <div className='login-remember-place'>
+                <div className='login-checkbox'>
+                  <input
+                    type='checkbox'
+                    name='remember'
+                    id='remember'
+                  />
+                  <label htmlFor='remember'>
+                    記住我
+                  </label>
+                </div>
+                <div>
+                  <a href="#">加入會員？</a>
+                  <a href="#">忘記密碼？</a>
+                </div>
               </div>
-              <div>
-                <a href="#">加入會員？</a>
-                <a href="#">忘記密碼？</a>
+              <Input
+                className='input-submit'
+                type='submit'
+                value='登入'
+              />
+              <div className='login-contact-link'>
+                <a className='btn input-submit' href="http:#">
+                  <button
+                    type="button"
+                  >
+                    <FcGoogle size={25} />
+                  </button>
+                </a>
+                <a className='btn btn-fb input-submit' href="http:#">
+                  <button
+                    type="button"
+                  >
+                    <FaFacebookSquare color='#fff' size={25} />
+                  </button>
+                </a>
+                <a className='btn btn-ap input-submit' href="http:#">
+                  <button
+                    type="button"
+                  >
+                    <AiFillApple color='#fff' size={25} />
+                  </button>
+                </a>
               </div>
             </div>
-          </div>
+          </form>
         </Col>
       </Row>
     </Container>

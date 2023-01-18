@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './LoginStyles.scss'
 import { Input, LoginTitle, Button } from './LoginStyles'
 import { Container, Row, Col, Theme } from '../../../Styles/styled'
@@ -34,8 +35,8 @@ const Login = () => {
                   </label>
                 </div>
                 <div>
-                  <a href="#">加入會員？</a>
-                  <a href="#">忘記密碼？</a>
+                  <Link to='/signup'>加入會員？</Link>
+                    <a href="#">忘記密碼？</a>
                 </div>
               </div>
               <Input

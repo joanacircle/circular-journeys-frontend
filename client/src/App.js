@@ -6,7 +6,6 @@ import Home from './pages/Home/Home'
 import Login from './pages/User/Login/Login'
 import Shop from './pages/Shop/Shop'
 
-
 const App = () => {
   return (
     <>

@@ -1,51 +1,50 @@
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
-import Navbar from '../components/Navbar/Navbar'
-import '../components/Navbar/NavbarStyles.scss'
+
+import './Header.scss'
 import { FaUserAlt } from 'react-icons/fa'
-// import { Container, Row, Col, Title, Theme } from '../../Styles/styled'
-import { Option } from '../components/Navbar/NavbarStyles'
+// import { Option } from '../components/Navbar/NavbarStyles'
+// import { Theme } from '../Styles/styled'
 
 const Header = () => {
   return (
     <>
-      <header className="d-flex align-items-center border-bottom">
-        {/* <Navbar /> */}
-        <a
-          href="/"
-          className="d-flex align-items-center text-dark text-decoration-none"
-        ><Logo />
+      <header>
+        <div>
 
-          <span className="fs-4">Circular Journeys</span>
-        </a>
+          <Link
+            to="/"
+            className='brand'
+          ><Logo />
 
-        <ul className='navbar-option-place'>
-          <li className="nav-item">
-            <Link class="nav-link active" aria-current="page" to="/">
-              首頁
-            </Link>
-          </li>
-          <li>
-            <Link to='/blog' title='Blog'>
-              <Option>部落格</Option>
-            </Link>
-          </li>
-          <li>
-            <Link to='/shop'>
-              <Option>商城</Option>
-            </Link>
-          </li>
-          <li>
-            <Link to='/#'>
-              <Option>自由行</Option>
-            </Link>
-          </li>
-          <li>
-            <Link to='/user/login'>
-              <FaUserAlt size={30} />
-            </Link>
-          </li>
-        </ul>
+            <span className='title'><h1>Circular Journeys</h1></span>
+          </Link>
+
+          <section>
+            <ul>
+              <li>
+                <Link to='/blog' title='Blog'>
+                  <span className='links'>部落格</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='/shop'>
+                  <span className='links'>商城</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='/'>
+                  <span className='links'>自由行</span>
+                </Link>
+              </li>
+              <li>
+                <Link to='/user/login'>
+                  <FaUserAlt size={30} />
+                </Link>
+              </li>
+            </ul>
+          </section>
+        </div>
       </header>
     </>
   )

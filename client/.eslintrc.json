@@ -18,6 +18,9 @@
   "rules": {
     "no-console": "off",
     "no-unused-vars": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "space-before-function-paren": "off",
+    "indent": "off",
+    "react/prop-types": "off"
   }
 }

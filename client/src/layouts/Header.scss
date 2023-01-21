@@ -1,0 +1,55 @@
+header {
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  height: 70px;
+  align-items: center;
+  border-bottom-width: 2px;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+
+  div {
+    margin: 0 auto;
+    max-width: 1160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+      .brand {
+          display: flex;
+          align-items: center;
+        }
+      
+        .title {
+          white-space: nowrap;
+          font-family: Sigmar One;
+          font-size: 42px;
+          color: #F2AE3D;
+        }
+
+        section {
+          
+          ul {
+              display: flex;
+              align-items: center;
+
+              li {
+                margin: 0px 10px;
+              }
+              .links {
+
+                white-space: nowrap;
+                font-weight: bold;
+
+                &:hover {
+                  font-size: 18px;
+                  transition: .3s;
+                  border-bottom: 5px solid;
+                  color: #F2AE3D;
+                }
+              }
+            }
+        }
+  }
+}

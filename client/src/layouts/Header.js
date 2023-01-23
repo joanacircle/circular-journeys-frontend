@@ -3,6 +3,7 @@ import Logo from '../images/Logo/Logo'
 
 import './Header.scss'
 import { FaUserAlt } from 'react-icons/fa'
+import { BiShoppingBag } from 'react-icons/bi'
 // import { Option } from '../components/Navbar/NavbarStyles'
 // import { Theme } from '../Styles/styled'
 
@@ -27,14 +28,20 @@ const Header = () => {
                   <span className='links'>部落格</span>
                 </Link>
               </li>
+
+              <li>
+                <Link to='/'>
+                  <span className='links'>自由行</span>
+                </Link>
+              </li>
               <li>
                 <Link to='/shop'>
                   <span className='links'>商城</span>
                 </Link>
               </li>
               <li>
-                <Link to='/'>
-                  <span className='links'>自由行</span>
+                <Link to='/shop'>
+                  <BiShoppingBag size={30} />
                 </Link>
               </li>
               <li>

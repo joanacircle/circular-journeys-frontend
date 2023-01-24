@@ -1,4 +1,5 @@
 footer {
+  margin-top: 40px;
   background-color: #333;
   color: #fff;
   padding: 2rem 0;
@@ -9,9 +10,9 @@ footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: flex-start;
 
-    .col-md-4 {
+    .footer-items {
+      text-align: center;
       width: 100%;
 
       @media (min-width: 768px) {
@@ -28,12 +29,24 @@ footer {
 
       h5 {
         margin-bottom: 1rem;
+        font-size: 19px;
       }
 
       p {
         font-size: 0.9rem;
         line-height: 1.5;
         margin-bottom: 2rem;
+      }
+
+      .follow-us {
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        
+        width: 35%;
+      }
+      Link {
+        size: 20px;
       }
 
       ul {

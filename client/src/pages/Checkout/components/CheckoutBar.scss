@@ -1,0 +1,71 @@
+$color_1: green;
+$color_2: #ddd;
+$background-color_1: #fff;
+$background-color_2: #ddd;
+$background-color_3: green;
+$border-color_1: green;
+
+.container {
+  width: 100%;
+}
+
+.progressbar {
+  counter-reset: step;
+
+  li {
+    list-style: none;
+    display: inline-block;
+    width: 24%;
+    position: relative;
+    text-align: center;
+
+    &:before {
+      content: counter(step);
+      counter-increment: step;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border: 1px solid #ddd;
+      border-radius: 100%;
+      display: block;
+      text-align: center;
+      margin: 0 auto 10px auto;
+      background-color: $background-color_1;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: $background-color_2;
+      top: 15px;
+      left: -50%;
+      z-index: -1;
+    }
+
+    &:first-child {
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  li.active {
+    color: $color_1;
+
+    &:before {
+      border-color: $border-color_1;
+      background-color: $background-color_3;
+      color: $color_2;
+    }
+
+    + {
+      li {
+        &:after {
+          background-color: $background-color_3;
+        }
+      }
+    }
+  }
+}

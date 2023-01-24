@@ -45,11 +45,7 @@ const Checkout = () => {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+
       <h1>Circular Journeys.</h1>
       {/* 進度條 */}
       <div>

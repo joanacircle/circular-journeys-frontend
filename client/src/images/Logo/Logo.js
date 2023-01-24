@@ -6,7 +6,6 @@ const NavbarLogo = styled(LogoSVG)`
   width: ${props => props.width || '80px'};
   height: ${props => props.height || '80px'};
   fill: ${Theme.Orange};
-  stroke:${Theme.Black};
 `
-
+// stroke:${Theme.Black};
 export default NavbarLogo

@@ -1,4 +1,5 @@
 import { BsFacebook, BsInstagram, BsTwitter } from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 import './Footer.scss'
 
 const Footer = () => {
@@ -7,41 +8,34 @@ const Footer = () => {
       <footer>
         <div className="container">
           <div className="row">
-            <div className="col-md-4">
+            <div className="footer-items">
               <h5>Circular Journeys</h5>
               <p>Explore the world in a circular way</p>
             </div>
-            <div className="col-md-4">
-              <h5>Quick Links</h5>
-              <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Destinations</a></li>
-                <li><a href="#">Contact Us</a></li>
-              </ul>
-            </div>
-            <div className="col-md-4">
-              <h5>Contact Us</h5>
-              <ul>
-                <li>Email: info@circularjourneys.com</li>
-                <li>Phone: +1 555 555 555</li>
-              </ul>
-              <p>
-                Follow us on
-                <a href="#"><BsFacebook /></a>
-                <a href="#"><BsTwitter /></a>
-                <a href="#"><BsInstagram /></a>
-
+            <div className="footer-items">
+              <h5>Follow Us</h5>
+              <p className='follow-us'>
+                <Link to="#"><BsFacebook size={20} /></Link>
+                <Link to="#"><BsTwitter size={20} /></Link>
+                <Link to="#"><BsInstagram size={20} /></Link>
               </p>
+            </div>
+            <div className="footer-items">
+              <h5><Link to="#">About Us</Link></h5>
+              <p>
+                <Link to='info@circularjourneys.com'>Email: info@circularjourneys.com
+                </Link>
+              </p>
+
             </div>
           </div>
           <div className="row">
             <div className="col-md-12">
-              <p className="text-center">Copyright &copy; Circular Journeys 2022</p>
+              <p className="text-center">Copyright &copy; Circular Journeys 2023</p>
             </div>
           </div>
-        </div>
-      </footer>
+        </div >
+      </footer >
     </>
   )
 }

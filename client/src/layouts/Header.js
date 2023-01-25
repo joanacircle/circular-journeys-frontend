@@ -12,15 +12,12 @@ const Header = () => {
     <>
       <header>
         <div>
-
           <Link
             to="/"
             className='brand'
           ><Logo />
-
             <span className='title'><h1>Circular Journeys</h1></span>
           </Link>
-
           <section>
             <ul>
               <li>
@@ -45,7 +42,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/user/login'>
+                <Link to='/login'>
                   <FaUserAlt size={30} />
                 </Link>
               </li>

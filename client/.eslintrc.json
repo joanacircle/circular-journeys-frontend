@@ -21,6 +21,9 @@
     "react/react-in-jsx-scope": "off",
     "space-before-function-paren": "off",
     "indent": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "allowTemplateLiterals": 0,
+    "padded-blocks": "off",
+    "no-multiple-empty-lines": "off"
   }
 }

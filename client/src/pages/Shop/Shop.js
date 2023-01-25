@@ -11,31 +11,70 @@ import SortBar from './components/SortBar/'
 import { data } from './data/'
 
 const Shop = () => {
+  const [products, setProducts] = useState([])
+  // 2. 排序、搜尋後的資料
+  const [displayProducts, setDisplayProducts] = useState([])
+  // 載入spinner
+  const [isLoading, setIsLoading] = useState(false)
+
+  // x秒後自動關掉spinner(設定isLoading為false)
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+    }
+  }, [isLoading])
+
+  // Spinner
+  const spinner = (
+    <div className="d-flex justify-content-center">
+      <div className="spinner-border text-warning" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </div>
+  )
+
+  useEffect(() => {
+    setIsLoading(true)
+    setProducts(data)
+    setDisplayProducts(data)
+  }, [])
+
   return (
     <>
 
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <div className="grid search">
-              <div className="grid-body">
+            <div className="">
+              <div className="">
                 <div className="row">
                   <div className="col-md-3">
-                    <h1>Filter</h1>
+                    <h5>Filter</h5>
                   </div>
 
                   <div className="col-md-9">
+
+                    <SearchBar />
+
                     <div className="d-flex justify-between">
-                      <h2 className="display-6">商品列表</h2>
-                      <h2 className="text-danger display-6 font-weight-bold">
-                        <Link to="../checkout" title="結帳">
-                          結帳
-                        </Link>
-                      </h2>
+                      <h5>商品列表</h5>
+                      <h5 className="text-danger">
+                        <Link to="../checkout" title="結帳">結帳</Link>
+                      </h5>
+                      <SortBar />
+
                     </div>
                     <hr />
-
-                    <div className="padding"></div>
+                    <br />
+                    {isLoading
+                      ? (
+                        spinner
+                      )
+                      : (
+                        <ProductList products={displayProducts} />
+                      )}
 
                   </div>
                 </div>

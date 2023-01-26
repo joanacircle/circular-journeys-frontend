@@ -19,6 +19,7 @@ const Shop = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const [sortBy, setSortBy] = useState('')
+  const [searchWord, setSearchWord] = useState('')
 
   // x秒後自動關掉spinner(設定isLoading為false)
   useEffect(() => {
@@ -44,12 +45,19 @@ const Shop = () => {
   }, [])
 
   useEffect(() => {
+
+    // if (searchWord.length < 2 && searchWord.length !== 0) {
+    //   return
+    // }
+
     setIsLoading(true)
 
     let newProducts = [...products]
+    newProducts = handleSearch(newProducts, searchWord)
     newProducts = handleSort(newProducts, sortBy)
+
     setDisplayProducts(newProducts)
-  }, [sortBy])
+  }, [sortBy, searchWord, products])
 
 
   // 排序邏輯
@@ -75,6 +83,17 @@ const Shop = () => {
     return newProducts
   }
 
+  const handleSearch = (products, searchWord) => {
+    let newProducts = [...products]
+
+    if (searchWord.length) {
+      newProducts = products.filter((product) => {
+        return product.name.toLowerCase().includes(searchWord.toLowerCase())
+      })
+    }
+    return newProducts
+  }
+
   return (
     <>
       <div className="container">
@@ -89,7 +108,10 @@ const Shop = () => {
 
                   <div className="col-md-9">
 
-                    <SearchBar />
+                    <SearchBar
+                      searchWord={searchWord}
+                      setSearchWord={setSearchWord}
+                    />
 
                     <div className="d-flex justify-between">
                       <h5>商品列表</h5>

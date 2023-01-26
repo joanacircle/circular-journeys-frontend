@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import './Shop.scss'
 
 // import './Shop.scss'
 import FilterBar from './components/FilterBar/'
@@ -12,10 +13,12 @@ import { data } from './data/'
 
 const Shop = () => {
   const [products, setProducts] = useState([])
-  // 2. 排序、搜尋後的資料
+  // 排序、搜尋後的資料
   const [displayProducts, setDisplayProducts] = useState([])
   // 載入spinner
   const [isLoading, setIsLoading] = useState(false)
+
+  const [sortBy, setSortBy] = useState('')
 
   // x秒後自動關掉spinner(設定isLoading為false)
   useEffect(() => {
@@ -29,21 +32,51 @@ const Shop = () => {
   // Spinner
   const spinner = (
     <div className="d-flex justify-content-center">
-      <div className="spinner-border text-warning" role="status">
+      <div className="spinner-border text-warning" role="status" >
         <span className="sr-only">Loading...</span>
       </div>
     </div>
   )
-
   useEffect(() => {
     setIsLoading(true)
     setProducts(data)
     setDisplayProducts(data)
   }, [])
 
+  useEffect(() => {
+    setIsLoading(true)
+
+    let newProducts = [...products]
+    newProducts = handleSort(newProducts, sortBy)
+    setDisplayProducts(newProducts)
+  }, [sortBy])
+
+
+  // 排序邏輯
+  const handleSort = (products, sortBy) => {
+    const newProducts = [...products]
+
+    // 少到多
+    if (sortBy === '1') {
+      newProducts.sort((a, b) =>
+        a.price - b.price
+      )
+    }
+    // 多到少
+    if (sortBy === '2') {
+      newProducts.sort((a, b) =>
+        b.price - a.price
+      )
+    }
+    // 預設id
+    if (sortBy === '' && newProducts.length > 0) {
+      newProducts.sort((a, b) => a.id - b.id)
+    }
+    return newProducts
+  }
+
   return (
     <>
-
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -63,7 +96,7 @@ const Shop = () => {
                       <h5 className="text-danger">
                         <Link to="../checkout" title="結帳">結帳</Link>
                       </h5>
-                      <SortBar />
+                      <SortBar sortBy={sortBy} setSortBy={setSortBy} />
 
                     </div>
                     <hr />

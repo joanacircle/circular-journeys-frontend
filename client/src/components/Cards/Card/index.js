@@ -1,12 +1,12 @@
 import React from 'react'
-import { Title, Theme } from 'Styles/styled'
+import './Card.scss'
 
 const Card = (props) => {
   return (
     <div className="card">
       <img src={props.imgSrc} className="card-img-top" alt={props.imgAlt} />
       <div className="card-body">
-          <Title size={Theme.H5} color={Theme.Black} family="Sigmar One" class="card-title">{props.title}</Title>
+          <h5>{props.title}</h5>
       </div>
     </div>
 

@@ -1,10 +1,10 @@
 import HomeShop from './HomeShop/HomeShop'
-import './Home.css'
+import HomeBlog from './HomeBlog/HomeBlog'
 
 const Home = () => {
   return (
     <div>
-      <div className='navbar-space'></div>
+      <HomeBlog />
       <HomeShop />
     </div>
 

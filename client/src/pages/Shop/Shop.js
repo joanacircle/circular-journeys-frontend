@@ -15,6 +15,13 @@ const Shop = () => {
   const [products, setProducts] = useState([])
   // 排序、搜尋後的資料
   const [displayProducts, setDisplayProducts] = useState([])
+
+  const [categories, setCategories] = useState([])
+  const categoryMenu = ['戶外遠足', '登山露營', '背包收納', '電子類別', '旅行配件']
+
+  const [priceRange, setPriceRange] = useState('所有')
+  const priceRangeMenu = ['所有', '1萬以下', '1-2萬']
+
   // 載入spinner
   const [isLoading, setIsLoading] = useState(false)
 
@@ -46,18 +53,17 @@ const Shop = () => {
 
   useEffect(() => {
 
-    // if (searchWord.length < 2 && searchWord.length !== 0) {
-    //   return
-    // }
-
     setIsLoading(true)
 
     let newProducts = [...products]
+
     newProducts = handleSearch(newProducts, searchWord)
     newProducts = handleSort(newProducts, sortBy)
+    newProducts = handleCategories(newProducts, categories)
+    newProducts = handlePriceRange(newProducts, priceRange)
 
     setDisplayProducts(newProducts)
-  }, [sortBy, searchWord, products])
+  }, [products, sortBy, searchWord, categories, priceRange])
 
 
   // 排序邏輯
@@ -94,6 +100,46 @@ const Shop = () => {
     return newProducts
   }
 
+  const handleCategories = (products, categories) => {
+    let newProducts = [...products]
+
+    if (categories.length > 0) {
+      newProducts = [...newProducts].filter((product) => {
+        let isFound = false
+        const productCategories = product.categories.split(',')
+
+        for (let i = 0; i < categories.length; i++) {
+          if (productCategories.includes(categories[i])) {
+            isFound = true
+            break
+          }
+        }
+        return isFound
+      })
+    }
+    return newProducts
+  }
+
+  const handlePriceRange = (products, priceRange) => {
+    let newProducts = [...products]
+
+    switch (priceRange) {
+      case '1萬以下':
+        newProducts = products.filter((p) => {
+          return p.price <= 10000
+        })
+        break
+      case '1-2萬':
+        newProducts = products.filter((p) => {
+          return p.price >= 10000 && p.price <= 20000
+        })
+        break
+      default:
+        break
+    }
+    return newProducts
+  }
+
   return (
     <>
       <div className="container">
@@ -103,7 +149,14 @@ const Shop = () => {
               <div className="">
                 <div className="row">
                   <div className="col-md-3">
-                    <h5>Filter</h5>
+                    <FilterBar
+                      priceRangeMenu={priceRangeMenu}
+                      priceRange={priceRange}
+                      setPriceRange={setPriceRange}
+                      categoryMenu={categoryMenu}
+                      categories={categories}
+                      setCategories={setCategories}
+                    />
                   </div>
 
                   <div className="col-md-9">

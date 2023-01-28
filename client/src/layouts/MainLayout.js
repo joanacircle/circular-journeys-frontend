@@ -1,16 +1,20 @@
 import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
-import '../Styles/style.scss'
+import './MainLayout.scss'
 
 const MainLayout = () => {
   return (
     <>
       <>
         <Header />
-        <main>
-          <Outlet />
+
+        <main className='main-content' >
+          <div className='center-content'>
+            <Outlet />
+          </div>
         </main>
+
         <Footer />
       </>
     </>

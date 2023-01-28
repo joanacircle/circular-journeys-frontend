@@ -1,6 +1,6 @@
 import React from 'react'
-import PriceRangeRadio from './PriceRangeRadio'
-import TagCheckbox from './TagCheckbox'
+import PriceRangeSlider from './PriceRangeSlider'
+import CategoryCheckbox from './CategoryCheckbox'
 import './FilterBar.scss'
 
 const FilterBar = (props) => {
@@ -8,13 +8,13 @@ const FilterBar = (props) => {
     categoryMenu,
     categories,
     setCategories,
-    priceRangeMenu,
     priceRange,
     setPriceRange
   } = props
 
   const handleSelected = (e) => {
     const value = e.target.value
+
     if (!categories.includes(value)) return setCategories([...categories, value])
 
     if (categories.includes(value)) {
@@ -25,13 +25,12 @@ const FilterBar = (props) => {
 
   return (
     <>
-      <h4>
+      <h5>
         商品分類
-
-      </h4>
+      </h5>
 
       {categoryMenu.map((value, i) => (
-        <TagCheckbox
+        <CategoryCheckbox
           value={value}
           key={i}
           categories={categories}
@@ -48,7 +47,10 @@ const FilterBar = (props) => {
         <p>$0</p><p>$10000</p>
       </div>
 
-      <PriceRangeRadio />
+      <PriceRangeSlider
+        priceRange={priceRange}
+        setPriceRange={setPriceRange}
+      />
     </>
   )
 }

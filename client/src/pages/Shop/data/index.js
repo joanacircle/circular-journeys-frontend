@@ -5,7 +5,7 @@ const data = [
     picture: 'sample0.jpg',
     stock: 5,
     name: 'iPhone 12 Pro',
-    price: 25000,
+    price: 2500,
     categories: '戶外遠足,登山露營,背包收納'
   },
   {
@@ -13,7 +13,7 @@ const data = [
     picture: 'sample1.jpg',
     stock: 5,
     name: 'iPhone 12',
-    price: 15000,
+    price: 1500,
     categories: '登山露營,背包收納'
   },
   {
@@ -21,7 +21,7 @@ const data = [
     picture: 'sample2.jpg',
     stock: 10,
     name: 'iPhone SE',
-    price: 12500,
+    price: 1250,
     categories: '背包收納,電子類別,旅行配件'
   },
   {
@@ -29,7 +29,7 @@ const data = [
     picture: 'sample3.jpg',
     stock: 10,
     name: 'iPhone XS',
-    price: 22000,
+    price: 2200,
     categories: '電子類別,旅行配件'
   }
   // {

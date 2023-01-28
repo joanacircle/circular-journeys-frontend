@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import Slider from '@mui/material/Slider'
 import { BiBorderAll } from 'react-icons/bi'
 
-const PriceRangeRadio = (props) => {
+const PriceRangeSlider = (props) => {
 
-
-  const [value, setValue] = useState([500, 5000])
+  const { priceRange, setPriceRange } = props
 
   const handleChange = (event, newValue) => {
-    setValue(newValue)
+    setPriceRange(newValue)
   }
 
 
@@ -17,23 +16,24 @@ const PriceRangeRadio = (props) => {
       <div>
         <Slider
 
-          aria-label="price range"
+          arialabel="price range"
           aria-labelledby="range-slider"
           min={0}
           max={10000}
           step={500}
-          value={value}
+          value={priceRange}
           onChange={handleChange}
           valueLabelDisplay="auto"
           getAriaValueText={val => `$${val}`}
           sx={{
             width: '60%',
-            color: '#F2AE3D'
-            // '& .MuiSlider-thumb': {
-            //   '&:hover, &.Mui-focusVisible': {
-            //     outline: 'none'
-            //   }
-            // }
+            color: '#F2AE3D',
+            '& .MuiSlider-thumb': {
+              '&:hover, &.Mui-focusVisible': {
+                outline: 'none',
+                boxShadow: 'none'
+              }
+            }
           }}
         />
       </div>
@@ -41,7 +41,7 @@ const PriceRangeRadio = (props) => {
   )
 }
 
-export default PriceRangeRadio
+export default PriceRangeSlider
 
 
   // < div className = "form-check" >

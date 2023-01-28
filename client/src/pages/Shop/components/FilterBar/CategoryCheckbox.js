@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TagCheckbox = (props) => {
+const CategoryCheckbox = (props) => {
   const { value, handleSelected, categories } = props
   return (
     <>
@@ -20,4 +20,4 @@ const TagCheckbox = (props) => {
   )
 }
 
-export default TagCheckbox
+export default CategoryCheckbox

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './Shop.scss'
 
-// import './Shop.scss'
 import FilterBar from './components/FilterBar/'
 import ProductList from './components/ProductList/'
 import SearchBar from './components/SearchBar/'
@@ -19,8 +18,8 @@ const Shop = () => {
   const [categories, setCategories] = useState([])
   const categoryMenu = ['戶外遠足', '登山露營', '背包收納', '電子類別', '旅行配件']
 
-  const [priceRange, setPriceRange] = useState('所有')
-  const priceRangeMenu = ['所有', '1萬以下', '1-2萬']
+  const [priceRange, setPriceRange] = useState([0, 10000])
+
 
   // 載入spinner
   const [isLoading, setIsLoading] = useState(false)
@@ -122,117 +121,65 @@ const Shop = () => {
 
   const handlePriceRange = (products, priceRange) => {
     let newProducts = [...products]
+    console.log(products)
 
-    switch (priceRange) {
-      case '1萬以下':
-        newProducts = products.filter((p) => {
-          return p.price <= 10000
-        })
-        break
-      case '1-2萬':
-        newProducts = products.filter((p) => {
-          return p.price >= 10000 && p.price <= 20000
-        })
-        break
-      default:
-        break
-    }
+    newProducts = products.filter((p) => {
+      return p.price >= priceRange[0] && p.price <= priceRange[1]
+    })
     return newProducts
   }
 
   return (
     <>
       <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="">
-              <div className="">
-                <div className="row">
-                  <div className="col-md-3">
-                    <FilterBar
-                      priceRangeMenu={priceRangeMenu}
-                      priceRange={priceRange}
-                      setPriceRange={setPriceRange}
-                      categoryMenu={categoryMenu}
-                      categories={categories}
-                      setCategories={setCategories}
-                    />
-                  </div>
 
-                  <div className="col-md-9">
+        <div className='search-bar'>
+          <SearchBar
+            searchWord={searchWord}
+            setSearchWord={setSearchWord}
+          />
+        </div>
+        <div className="col-md-12">
+          <div className="row">
 
-                    <SearchBar
-                      searchWord={searchWord}
-                      setSearchWord={setSearchWord}
-                    />
+            <div className="col-md-3">
+              <FilterBar
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                categoryMenu={categoryMenu}
+                categories={categories}
+                setCategories={setCategories}
+              />
+            </div>
 
-                    <div className="d-flex justify-between">
-                      <h5>商品列表</h5>
-                      <h5 className="text-danger">
-                        <Link to="../checkout" title="結帳">結帳</Link>
-                      </h5>
-                      <SortBar sortBy={sortBy} setSortBy={setSortBy} />
+            <div className="col-md-9">
 
-                    </div>
-                    <hr />
-                    <br />
-                    {isLoading
-                      ? (
-                        spinner
-                      )
-                      : (
-                        <ProductList products={displayProducts} />
-                      )}
+              <div className="d-flex justify-between">
+                <h5>商品列表</h5>
+                <h5 className="text-danger">
+                  <Link to="../checkout" title="結帳">結帳</Link>
+                </h5>
+                <SortBar sortBy={sortBy} setSortBy={setSortBy} />
 
-                  </div>
-                </div>
               </div>
+              <hr />
+              <br />
+              {isLoading
+                ? (
+                  spinner
+                )
+                : (
+                  <ProductList products={displayProducts} />
+                )}
             </div>
           </div>
         </div>
+
       </div>
-
-      {/* <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <div className="row">
-              <div className="col-md-3">
-                <h1>Filter Bars</h1>
-              </div>
-              <div className="col-md-9">
-                <h2>商品列表</h2>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   )
 
-  // // sample users
-  // const [users, setUsers] = useState([
-  //   {
-  //     product_id: '000001',
-  //     product_name: '載入中',
-  //     description: '00'
-  //   },
-  //   {
-  //     product_id: '000002',
-  //     product_name: '載入中',
-  //     description: '00'
-  //   },
-  //   {
-  //     product_id: '000003',
-  //     product_name: '載入中',
-  //     description: '00'
-  //   },
-  //   {
-  //     product_id: '000004',
-  //     product_name: '載入中',
-  //     description: '00'
-  //   }
-  // ])
+
 
   // const [loader, setLoader] = useState(false)
 

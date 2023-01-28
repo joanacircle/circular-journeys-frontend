@@ -4,7 +4,6 @@ import './Home.css'
 const Home = () => {
   return (
     <div>
-      <div className='navbar-space'></div>
       <HomeShop />
     </div>
 

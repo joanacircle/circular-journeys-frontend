@@ -1,9 +1,10 @@
 import HomeShop from './HomeShop/HomeShop'
-import './Home.css'
+import HomeBlog from './HomeBlog/HomeBlog'
 
 const Home = () => {
   return (
     <div>
+      <HomeBlog />
       <HomeShop />
     </div>
 

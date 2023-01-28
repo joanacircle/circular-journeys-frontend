@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home/Home'
-import Login from 'pages/User/Login/Login'
-import Shop from './pages/Shop/Shop'
+import Login from './pages/User/Login/Login'
 import Checkout from './pages/Checkout'
+import Shop from './pages/Shop/Shop'
+import Blog from 'pages/Blog/Blog'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
 
@@ -17,7 +18,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<MainLayout />}>
           <Route index element={<Home />} />
-          {/* <Route path='/blog' element={<Blog />} /> */}
+          <Route path='/blog' element={<Blog />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='checkout' element={<Checkout />} />
           <Route path='member' element={<User />}>

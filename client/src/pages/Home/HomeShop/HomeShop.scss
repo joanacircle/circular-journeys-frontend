@@ -1,4 +1,5 @@
 .images-container {
+    margin: auto 10px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -36,5 +37,5 @@
 
 .responsive-image {
     width: 100%;
-    margin-right: 5px;
+    
 }

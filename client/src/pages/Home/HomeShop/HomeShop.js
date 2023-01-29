@@ -9,7 +9,7 @@ import './HomeShop.scss'
 const HomeShop = () => {
   return (
     <>
-      <container className="images-container">
+      <div className="images-container">
         <div className="top-row">
           <div className="image-box">
             <Link to='/shop'>
@@ -41,7 +41,7 @@ const HomeShop = () => {
           </div>
 
         </div>
-      </container>
+      </div>
     </>
   )
 }

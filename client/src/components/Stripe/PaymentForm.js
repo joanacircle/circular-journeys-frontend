@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import axios from 'axios'
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import axios from "axios"
+import React, { useState } from 'react'
+
+const apiKey = process.env.SECRET_KEY
 
 const CARD_OPTIONS = {
   iconStyle: "solid",
@@ -21,39 +23,39 @@ const CARD_OPTIONS = {
     }
   }
 }
-
-export const PaymentForm = () => {
-
+export default function PaymentForm() {
   const [success, setSuccess] = useState(false)
   const stripe = useStripe()
-  const elememts = useElements()
+  const elements = useElements()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: elememts.getElement(CardElement)
+      type: "card",
+      card: elements.getElement(CardElement)
     })
 
-
-    if (error) {
+    if (!error) {
       try {
         const { id } = paymentMethod
-        const response = await axios.post('htt[://localhost:4000/payment', {
+
+        await axios.post("https://api.stripe.com/v1/charges", {
           amount: 1000,
-          id
+          currency: "usd",
+          source: id,
+          description: "Example charge"
+        }, {
+          headers: {
+            Authorization: `Bearer ${apiKey}`
+          }
         })
 
-        if (response.data.success) {
-          console.log('Successful payment')
-          setSuccess(true)
-        }
+        setSuccess(true)
       } catch (error) {
-        console.log('Error', error)
-
+        console.error(error)
       }
     } else {
-      console.log(error.message)
+      console.error(error.message)
     }
   }
 
@@ -61,15 +63,15 @@ export const PaymentForm = () => {
     <>
       {!success
         ? <form onSubmit={handleSubmit}>
-          <fieldset className='FormGroup'>
-            <div className='FormRow'>
+          <fieldset className="FormGroup">
+            <div className="FormRow">
               <CardElement options={CARD_OPTIONS} />
             </div>
           </fieldset>
           <button>Pay</button>
         </form>
         : <div>
-          <h2>You just bought a sweet spatula</h2>
+          <h2>You just bought a sweet spatula congrats</h2>
         </div>
       }
     </>

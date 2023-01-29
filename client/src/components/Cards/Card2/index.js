@@ -1,5 +1,4 @@
 import React from 'react'
-import { AiOutlineHeart } from 'react-icons/ai'
 import './Card2.scss'
 
 const Card2 = (props) => {
@@ -10,7 +9,6 @@ const Card2 = (props) => {
         <button>{props.tags}</button>
         <h4>{props.title}</h4>
         <div className='article-likes'>
-          <AiOutlineHeart className='icon'/>
           <p>{props.likes}</p>
         </div>
       </div>

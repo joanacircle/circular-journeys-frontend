@@ -2,9 +2,12 @@ import React from 'react'
 import './HomeBlog.scss'
 import { Container, Row, Col } from 'Styles/styled'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
+import { BiSearch } from 'react-icons/bi'
+// import { IoSearchCircle } from 'react-icons/io'
 
 import Card from 'components/Cards/Card'
 import Card2 from 'components/Cards/Card2'
+import Banner from 'images/Blog/home-banner.jpeg'
 import B001 from 'images/Blog/B001.jpeg'
 import B002 from 'images/Blog/B002.jpeg'
 import B003 from 'images/Blog/B003.jpeg'
@@ -14,6 +17,18 @@ import B004 from 'images/Blog/B004.jpeg'
 const HomeBlog = () => {
   return (
     <>
+    <section className='home-banner'>
+      <img src={Banner} alt="Banner"></img>
+      <h1>高雄最棒的旅遊體驗</h1>
+      <form>
+        <input placeholder="Search">
+        </input>
+        <button type="submit">
+            <BiSearch className='search-icon'/>
+        </button>
+      </form>
+    </section>
+
     <section>
       <Container className='h2-container'>
       <h2>熱門文章</h2>

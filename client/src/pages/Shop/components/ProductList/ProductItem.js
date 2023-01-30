@@ -6,10 +6,14 @@ const ProductItem = (props) => {
 
   return (
     <div className="product-card">
+      <div className='card-img'>
+        <img src={require(`images/shop/products/${picture}`)} />
+      </div>
 
-      <img src={require(`images/shop/products/${picture}`)} />
-      <h3>{name}</h3>
-      <p>${price}</p>
+      <div className='card-info'>
+        <p className='card-title'>{name}</p>
+        <p className='card-price'>${price}</p>
+      </div>
 
     </div>
   )

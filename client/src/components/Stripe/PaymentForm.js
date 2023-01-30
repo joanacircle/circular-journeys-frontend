@@ -2,8 +2,6 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
 import React, { useState } from 'react'
 
-const apiKey = process.env.SECRET_KEY
-
 const CARD_OPTIONS = {
   iconStyle: "solid",
   style: {
@@ -23,10 +21,12 @@ const CARD_OPTIONS = {
     }
   }
 }
+
 export default function PaymentForm() {
   const [success, setSuccess] = useState(false)
   const stripe = useStripe()
   const elements = useElements()
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -35,27 +35,25 @@ export default function PaymentForm() {
       card: elements.getElement(CardElement)
     })
 
+
     if (!error) {
       try {
         const { id } = paymentMethod
-
-        await axios.post("https://api.stripe.com/v1/charges", {
+        const response = await axios.post("http://localhost:4000/payment", {
           amount: 1000,
-          currency: "usd",
-          source: id,
-          description: "Example charge"
-        }, {
-          headers: {
-            Authorization: `Bearer ${apiKey}`
-          }
+          id
         })
 
-        setSuccess(true)
+        if (response.data.success) {
+          console.log("Successful payment")
+          setSuccess(true)
+        }
+
       } catch (error) {
-        console.error(error)
+        console.log("Error", error)
       }
     } else {
-      console.error(error.message)
+      console.log(error.message)
     }
   }
 
@@ -71,9 +69,10 @@ export default function PaymentForm() {
           <button>Pay</button>
         </form>
         : <div>
-          <h2>You just bought a sweet spatula congrats</h2>
+          <h2>Thank you for your purchase</h2>
         </div>
       }
+
     </>
   )
 }

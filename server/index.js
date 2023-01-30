@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 require("dotenv").config()
-const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
+const stripe = require("stripe")(process.env.SECRET_KEY)
 const bodyParser = require("body-parser")
 const cors = require("cors")
 
@@ -10,28 +10,13 @@ app.use(bodyParser.json())
 
 app.use(cors())
 
-app.use((req, res, next) => {
-  const bearerHeader = req.headers["authorization"];
-  if (bearerHeader) {
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
-    if (bearerToken === process.env.SECRET_KEY) {
-      next();
-    } else {
-      res.status(401).json({ message: "Unauthorized" });
-    }
-  } else {
-    res.status(401).json({ message: "Unauthorized" });
-  }
-});
-
 app.post("/payment", cors(), async (req, res) => {
   let { amount, id } = req.body
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
-      currency: "USD",
-      description: "Spatula company",
+      currency: "NTD",
+      description: "Circular Journeys",
       payment_method: id,
       confirm: true
     })

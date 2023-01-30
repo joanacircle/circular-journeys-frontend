@@ -6,6 +6,8 @@ import './Shop.scss'
 import FilterBar from './components/FilterBar/'
 import ProductList from './components/ProductList/'
 import SearchBar from './components/SearchBar/'
+import Placeholder from 'components/Placeholder/Placeholder'
+
 import SortBar from './components/SortBar/'
 // data
 import { data } from './data/'
@@ -139,6 +141,7 @@ const Shop = () => {
             setSearchWord={setSearchWord}
           />
         </div>
+
         <div className="col-md-12">
           <div className="row">
 
@@ -166,12 +169,13 @@ const Shop = () => {
               <br />
               {isLoading
                 ? (
-                  spinner
+                  <Placeholder />
                 )
                 : (
                   <ProductList products={displayProducts} />
                 )}
             </div>
+
           </div>
         </div>
 

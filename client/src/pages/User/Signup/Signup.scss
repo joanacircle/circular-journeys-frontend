@@ -1,0 +1,62 @@
+@import "../styles/styles.scss";
+@import "../../../index.scss";
+
+.signup-place {
+  @include flex(center, "");
+  margin: 60px 0px 40px 0px;
+  box-shadow: 0px 0px 10px 0.5px $gray;
+  border-radius: 10px;
+  min-width: 500px;
+  .col {
+    margin: 40px;
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: $orange;
+      letter-spacing: 2px;
+      // font-family: $family;
+      text-transform: uppercase;
+    }
+    input {
+      border-radius: $br2;
+      box-shadow: 0px 0px 5px 0.5px $gray;
+      padding: 5px 5px;
+      margin: 10px 0px;
+      width: 100%;
+      font-size: 18px;
+    }
+    select {
+      margin: 10px 0px;
+      box-shadow: 0px 0px 5px 0.5px $gray;
+      border-radius: 10px;
+      padding: 5px 5px;
+    }
+    .btn-place {
+      text-align: center;
+      margin-top: 15px;
+      .btn {
+        width: 40%;
+        margin: 10px;
+        transition: 0.3s;
+      }
+      .backto-btn {
+        &:hover {
+          color: $white;
+          background: $gray;
+        }
+        &:active {
+          background: #8e8e8e;
+        }
+      }
+      .submit-btn {
+        &:hover {
+          color: $white;
+          background: $orange;
+        }
+        &:active {
+          background: #ce9233;
+        }
+      }
+    }
+  }
+}

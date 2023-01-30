@@ -1,0 +1,14 @@
+@import "../styles/styles.scss";
+
+
+.signup-place {
+  @include flex(center,'');
+  margin-top: 40px;
+  border: .5px solid #333;
+  min-width: 500px;
+  height: 500px;
+  .col {
+    flex: 1;
+    width: 100%;
+  }
+}

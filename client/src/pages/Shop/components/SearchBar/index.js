@@ -16,11 +16,12 @@ const SearchBar = (props) => {
             value={searchWord}
             onChange={(e) => setSearchWord(e.target.value)}
           />
-          <button type="button" className="btn form-control">
+          <button type="button" className="btn">
             <BiSearch className='bi-search' />
           </button>
         </div>
       </div>
+
     </>
   )
 }

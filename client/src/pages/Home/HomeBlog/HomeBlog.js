@@ -29,7 +29,7 @@ const HomeBlog = () => {
       </form>
     </section>
 
-    <section>
+    <section className='section'>
       <Container className='h2-container'>
       <h2>熱門文章</h2>
       </Container >
@@ -55,7 +55,7 @@ const HomeBlog = () => {
 
     </section>
 
-    <section>
+    <section className='section'>
     <Container className='h2-container'>
       <h2>最新文章</h2>
     </Container >

@@ -14,7 +14,7 @@ const Login = () => {
         <Col className='login-place'>
           <form>
             <div className='login-flex'>
-              <LoginTitle size={Theme.H1} color={Theme.Orange} family={Theme.Family}>Login</LoginTitle>
+              <LoginTitle size={Theme.H1} color={Theme.Orange}>Login</LoginTitle>
               <Input
                 type='text'
                 placeholder='Email'

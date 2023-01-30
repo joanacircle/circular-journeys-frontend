@@ -7,16 +7,13 @@ const PUBLIC_KEY = 'pk_test_51MVV2XL9vOMbHljwYxDpUN8irGCzLHgUXSxQamceHfPCY7BdMKV
 
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
 
-export const StripeContainer = () => {
-
+export function StripeContainer() {
   return (
     <Elements stripe={stripeTestPromise}>
       <PaymentForm />
     </Elements>
   )
 }
-
-
 
 // import { Elements } from "@stripe/react-stripe-js"
 // import { loadStripe } from "@stripe/stripe-js"

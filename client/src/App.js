@@ -9,6 +9,7 @@ import Shop from './pages/Shop/Shop'
 import Blog from 'pages/Blog/Blog'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
+import Signup from 'pages/User/Signup/Signup'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route index element={<Login />} />
             <Route path='login' element={<Login />} />
           </Route>
+          <Route path='signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
 

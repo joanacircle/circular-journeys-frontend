@@ -44,8 +44,8 @@ const Signup = () => {
             />
           </div>
           <div>
-            <label htmlFor="userSix">性別：</label>
-            <select name="userSix" id="userSix" required>
+            <label htmlFor="userSex">性別：</label>
+            <select name="userSex" id="userSex" required>
               <option>請選擇</option>
               <option value="male">男</option>
               <option value="female">女</option>

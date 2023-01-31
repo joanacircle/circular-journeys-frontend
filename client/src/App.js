@@ -11,6 +11,7 @@ import MemberCentre from './pages/User/MemberCentre/MemberCentre'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
 import Signup from 'pages/User/Signup/Signup'
+import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/shop' element={<Shop />} />
-          <Route path='checkout' element={<Checkout />} />
+          <Route path='/cart' element={<ShoppingCart />} />
+
           <Route path='member' element={<User />}>
             <Route index element={<Login />} />
             <Route path='login' element={<Login />} />
@@ -30,11 +32,10 @@ const App = () => {
           <Route path='signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
-
-
           <Route path='/membercentre' element={<MemberCentre />} />
 
         </Route>
+        <Route path='checkout' element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   )

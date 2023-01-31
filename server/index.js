@@ -15,8 +15,8 @@ app.post("/payment", cors(), async (req, res) => {
   try {
     const payment = await stripe.paymentIntents.create({
       amount,
-      currency: "NTD",
-      description: "Circular Journeys",
+      currency: "twd",
+      description: "Circular Journeys Inc",
       payment_method: id,
       confirm: true
     })

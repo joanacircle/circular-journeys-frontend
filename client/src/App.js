@@ -23,7 +23,7 @@ const App = () => {
           <Route path='/blog' element={<Blog />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/cart' element={<ShoppingCart />} />
-          <Route path='checkout' element={<Checkout />} />
+
           <Route path='member' element={<User />}>
             <Route index element={<Login />} />
             <Route path='login' element={<Login />} />
@@ -31,8 +31,8 @@ const App = () => {
           <Route path='signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
-
         </Route>
+        <Route path='checkout' element={<Checkout />} />
       </Routes>
     </BrowserRouter>
   )

@@ -15,11 +15,16 @@ const Header = () => {
   const toggleModal = () => {
     setModalVisibility(!modalVisibility)
   }
+  const closeModal = (event) => {
+    if (event.target === event.currentTarget) {
+      toggleModal()
+    }
+  }
 
   return (
     <>
       <header>
-        <div>
+        <div className='navbar-content'>
           <Link
             to="/"
             className='brand'
@@ -60,10 +65,17 @@ const Header = () => {
 
         <div className='cart'>
           {modalVisibility && (
-            <div className="modal-background">
+            <div className="modal-background" onClick={closeModal}>
               <div className="modal-content">
+                <div className="close-button">
+                  <button onClick={toggleModal}>&times;</button>
+                </div>
+
                 <h1>hi im modal</h1>
-                {/* Modal content goes here */}
+                <h5 className="text-danger">
+                  <Link onClick={toggleModal} to="../checkout" title="結帳">結帳</Link>
+                </h5>
+
                 <button onClick={toggleModal}>Close</button>
               </div>
             </div>
@@ -76,56 +88,3 @@ const Header = () => {
 
 export default Header
 
-  // import React, { Fragment } from 'react'
-  // import '../components/Navbar/NavbarStyles.scss'
-  // import { Link, Outlet } from 'react-router-dom'
-  // import { Container, Row, Col, Title, Theme } from '../Styles/styled'
-  // import { Option } from '../components/Navbar/NavbarStyles'
-  // import Logo from '../images/Logo/Logo'
-  // import { FaUserAlt } from 'react-icons/fa'
-
-  // const Header = () => {
-  //   return (
-  //     <Fragment>
-  //       <div className='navbar-fixed'>
-  //         <Container className='navbar-container'>
-  //           <Row align={'center'} justify={'space-between'}>
-  //             <Col>
-  //               <Link className='navbar-logo-place' to='/'>
-  //                 <Logo />
-  //                 <Title family={Theme.Family} size={Theme.H1} color={Theme.Orange}>circular journeys</Title>
-  //               </Link>
-  //             </Col>
-  //             <Col>
-  // < ul className = 'navbar-option-place' >
-  //               <li>
-  //                 <Link to='/blog' title='Blog'>
-  //                   <Option>部落格</Option>
-  //                 </Link>
-  //               </li>
-  //               <li>
-  //                 <Link to='/shop'>
-  //                   <Option>商城</Option>
-  //                 </Link>
-  //               </li>
-  //               <li>
-  //                 <Link to='/#'>
-  //                   <Option>自由行</Option>
-  //                 </Link>
-  //               </li>
-  //               <li>
-  //                 <Link to='/user/login'>
-  //                   <FaUserAlt size={30} />
-  //                 </Link>
-  //               </li>
-  //             </ ul >
-//             </Col>
-//           </Row>
-//         </Container>
-//       </div>
-//       <Outlet />
-//     </Fragment>
-//   )
-// }
-
-// export default Header

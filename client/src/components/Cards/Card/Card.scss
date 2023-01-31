@@ -7,8 +7,8 @@
   border: none;
   border-radius: $br1;
 
-  img{
-    height: 133px;
+  .card-img{
+    max-height: 133px;
     object-fit: cover;
     border-radius: $br1 $br1 0 0;
   }

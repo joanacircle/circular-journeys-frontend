@@ -10,6 +10,7 @@ import Blog from 'pages/Blog/Blog'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
 import Signup from 'pages/User/Signup/Signup'
+import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/cart' element={<ShoppingCart />} />
           <Route path='checkout' element={<Checkout />} />
           <Route path='member' element={<User />}>
             <Route index element={<Login />} />

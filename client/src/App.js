@@ -7,7 +7,7 @@ import Login from './pages/User/Login/Login'
 import Checkout from './pages/Checkout'
 import Shop from './pages/Shop/Shop'
 import Blog from 'pages/Blog/Blog'
-import MemberCenter from './pages/User/MemberCenter/MemberCenter'
+import MemberCenter from 'pages/User/MemberCenter/MemberCenter'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
 import Signup from 'pages/User/Signup/Signup'
@@ -34,8 +34,8 @@ const App = () => {
           <Route path='*' element={<NotFound />} />
 
 
-          <Route path='/membercenter' element={<MemberCenter />} />
 
+          <Route path='/membercenter' element={<MemberCenter />} />
         </Route>
         <Route path='checkout' element={<Checkout />} />
       </Routes>

@@ -1,26 +1,40 @@
 @import "../styles/styles.scss";
 @import "../../../index.scss";
 
+.background {
+  min-width: 100vw;
+  .background-rgba {
+    background-image: url(../../../images//Logo/bg-03.jpg);
+    min-height: 1000px;
+    width: auto;
+    .background-img {
+      background-color: rgba(0, 0, 0, 0.4);
+      min-height: 1000px;
+      width: auto;
+    }
+  }
+}
+
 .signup-place {
   @include flex(center, "");
   min-width: 400px;
+  min-height: 1000px;
   .col {
     margin: 40px;
     h1 {
       text-align: center;
       margin-bottom: 20px;
-      color: $orange;
+      color: $white;
       letter-spacing: 2px;
-      font-weight: 800;
-      // font-family: $family;
+      font-size: 48px;
       text-transform: uppercase;
+      font-family: "Oswald", Helvetica, Arial, sans-serif;
     }
     label {
       font-weight: 900;
     }
     input {
       border-radius: $br2;
-      box-shadow: 0px 0px 5px 0.5px $gray;
       padding: 5px 20px;
       margin: 10px 10px;
       width: 100%;
@@ -31,12 +45,12 @@
         outline: none;
       }
       &:focus::-webkit-input-placeholder {
+        transition: 0.5s;
         color: transparent;
       }
     }
     select {
       margin: 10px 10px;
-      box-shadow: 0px 0px 5px 0.5px $gray;
       border-radius: $br2;
       padding: 5px 20px;
     }
@@ -46,26 +60,27 @@
       .btn {
         width: 40%;
         margin: 10px;
+        letter-spacing: 2px;
         transition: 0.3s;
       }
       .backto-btn {
         color: $white;
         background: $gray;
         &:hover {
-          opacity: .8;
+          background: #8e8e8e;
         }
         &:active {
-          background: #8e8e8e;
+          background: #5d5d5d;
         }
       }
       .submit-btn {
         color: $white;
         background: $orange;
         &:hover {
-          opacity: .8;
+          background: $purple;
         }
         &:active {
-          background: #ce9233;
+          background: #3f3875;
         }
       }
     }

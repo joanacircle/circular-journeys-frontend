@@ -46,7 +46,7 @@ const Login = () => {
                   value='登入'
                 />
                 <div>
-                  <p className='text-size'>or enter with</p>
+                  <p className='text-size'>其他登入方式</p>
                 </div>
                 <div className='login-contact-link'>
                   <a className='btn input-submit' href="http:#">

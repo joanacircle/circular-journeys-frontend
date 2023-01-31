@@ -15,8 +15,8 @@
 }
 
 .text-size {
-  font-weight: 600;
-  font-size: 16px;
+  font-size: 14px;
+  color: $white;
 }
 
 .login-place {
@@ -35,7 +35,7 @@
     .login-remember-place {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
+      margin-top: 10px;
       width: 100%;
       input {
         margin-right: 10px;

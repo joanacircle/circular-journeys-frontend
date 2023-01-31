@@ -1,5 +1,5 @@
 import React from 'react'
-import './MemberCentre.scss'
+import './MemberCenter.scss'
 
 const MemberCentre = () => {
   return (

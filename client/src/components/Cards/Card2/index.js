@@ -1,18 +1,27 @@
 import React from 'react'
+import { AiOutlineHeart } from 'react-icons/ai'
 import './Card2.scss'
 
 const Card2 = (props) => {
   return (
+    <>
     <div className="card2">
-      <img src={props.imgSrc} className="card-img-top" alt={props.imgAlt} />
+      <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
       <div className="card-body">
-        <button>{props.tags}</button>
-        <h4>{props.title}</h4>
-        <div className='article-likes'>
-          <p>{props.likes}</p>
+        <ul className='blog-tags d-flex'>
+              <li>{props.tags}</li>
+              <li>{props.tags}</li>
+        </ul>
+          <h4 className='card-title'>
+            {props.title}
+          </h4>
+        <div className='card-likes d-flex'>
+              <AiOutlineHeart size={25} className='heart-icon'/>
+              <p>{props.likes}</p>
         </div>
       </div>
     </div>
+    </>
 
   )
 }

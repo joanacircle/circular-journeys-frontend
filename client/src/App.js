@@ -7,7 +7,7 @@ import Login from './pages/User/Login/Login'
 import Checkout from './pages/Checkout'
 import Shop from './pages/Shop/Shop'
 import Blog from 'pages/Blog/Blog'
-import MemberCentre from './pages/User/MemberCentre/MemberCentre'
+import MemberCenter from './pages/User/MemberCenter/MemberCenter'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
 import Signup from 'pages/User/Signup/Signup'
@@ -32,7 +32,9 @@ const App = () => {
           <Route path='signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
           <Route path='*' element={<NotFound />} />
-          <Route path='/membercentre' element={<MemberCentre />} />
+
+
+          <Route path='/membercenter' element={<MemberCenter />} />
 
         </Route>
         <Route path='checkout' element={<Checkout />} />

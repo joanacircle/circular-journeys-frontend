@@ -3,11 +3,10 @@ import './HomeBlog.scss'
 import { Container, Row, Col } from 'Styles/styled'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import { BiSearch } from 'react-icons/bi'
-// import { IoSearchCircle } from 'react-icons/io'
 
 import Card from 'components/Cards/Card'
 import Card2 from 'components/Cards/Card2'
-import Banner from 'images/Blog/home-banner.jpeg'
+import Banner from 'images/Blog/home-banner.jpg'
 import B001 from 'images/Blog/B001.jpeg'
 import B002 from 'images/Blog/B002.jpeg'
 import B003 from 'images/Blog/B003.jpeg'
@@ -17,16 +16,19 @@ import B004 from 'images/Blog/B004.jpeg'
 const HomeBlog = () => {
   return (
     <>
-    <section className='home-banner'>
-      <img src={Banner} alt="Banner"></img>
-      <h1>高雄最棒的旅遊體驗</h1>
-      <form>
-        <input placeholder="Search">
-        </input>
-        <button type="submit">
-            <BiSearch className='search-icon'/>
-        </button>
-      </form>
+    <section className='home-banner section'>
+      {/* alt 下關鍵字 */}
+      <img className='home-banner-img' src={Banner} alt="Banner"></img>
+      <div className='title-section'>
+        <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
+        <form className='home-search'>
+          <input className='home-input' placeholder="Search">
+          </input>
+          <button className='home-button' type="submit">
+            <BiSearch className='home-search-icon'/>
+          </button>
+        </form>
+      </div>
     </section>
 
     <section className='section'>

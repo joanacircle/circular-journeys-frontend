@@ -35,12 +35,12 @@ export default function PaymentForm() {
       card: elements.getElement(CardElement)
     })
 
-
     if (!error) {
       try {
+        console.log('PaymentForm:' + paymentMethod)
         const { id } = paymentMethod
         const response = await axios.post("http://localhost:4000/payment", {
-          amount: 1000,
+          amount: 10000,
           id
         })
 

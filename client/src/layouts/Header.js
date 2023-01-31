@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import Logo from '../images/Logo/Logo'
 
 import './Header.scss'
 import { FaUserAlt } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
-// import { Option } from '../components/Navbar/NavbarStyles'
-// import { Theme } from '../Styles/styled'
+
+
 
 const Header = () => {
+
+  const [modalVisibility, setModalVisibility] = useState(false)
+
+  const toggleModal = () => {
+    setModalVisibility(!modalVisibility)
+  }
+
   return (
     <>
       <header>
@@ -37,9 +45,9 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/shop'>
+                <button onClick={toggleModal}>
                   <BiShoppingBag size={30} />
-                </Link>
+                </button>
               </li>
               <li>
                 <Link to='/login'>
@@ -48,6 +56,18 @@ const Header = () => {
               </li>
             </ul>
           </section>
+        </div>
+
+        <div className='cart'>
+          {modalVisibility && (
+            <div className="modal-background">
+              <div className="modal-content">
+                <h1>hi im modal</h1>
+                {/* Modal content goes here */}
+                <button onClick={toggleModal}>Close</button>
+              </div>
+            </div>
+          )}
         </div>
       </header>
     </>

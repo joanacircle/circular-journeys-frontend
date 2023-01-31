@@ -1,2 +1,88 @@
-@import '../styles/styles.scss';
-@import '../../../index.scss';
+@import "../styles/styles.scss";
+@import "../../../index.scss";
+
+// .center-content {
+//   display: inline-block;
+// }
+
+.membercenter-place {
+  width: 100%;
+  .membercenter-box {
+    display: flex;
+    margin: 20px;
+    .col {
+      margin: 0 5px;
+    }
+    .col-1 {
+      width: 25%;
+      .aside-box {
+        box-shadow: 0px 0px 10px 0.8px $gray;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 6px;
+        margin-bottom: 15px;
+        .user-img {
+          width: 120px;
+          height: 120px;
+          margin: 0 auto;
+          background: #eaeaea;
+          border-radius: 100%;
+          border: 1px solid #eee;
+          position: relative;
+          .camera-place {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 4px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+        }
+        .user-name {
+          text-align: center;
+          margin-top: 20px;
+          font-size: 20px;
+          font-weight: 500;
+        }
+        .user-information {
+          text-align: center;
+          font-weight: 400;
+          line-height: 1.7;
+          font-size: 14px;
+          margin: 10px 0;
+          color: #666;
+        }
+      }
+      .page-menu {
+        list-style: none;
+        box-shadow: 0px 0px 10px 0.8px $gray;
+        border-radius: 5px;
+        margin-top: 30px;
+        padding: 5px 15px;
+        .list-item {
+          padding: 5px 10px;
+          .link-flex {
+            display: flex;
+            align-items: center;
+            opacity: .9;
+            transition: .3s;
+            &:hover {
+              padding-left: 10px;
+              border-left: 5px solid $orange;
+              color: $orange;
+            }
+            .link-content {
+              margin: 5px 10px;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+    .col-2 {
+      width: 75%;
+    }
+  }
+}

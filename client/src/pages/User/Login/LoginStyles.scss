@@ -3,7 +3,7 @@
 .background {
   min-width: 100vw;
   .background-img {
-    background-image: url(../../../images//Logo/bg-03.jpg);
+    background-image:url(../../../images//Logo/bg-03.jpg);
     width: auto;
   }
 }
@@ -48,9 +48,8 @@
       transition: 0.3s;
       background: $orange;
       color: #fff;
-      opacity: .7;
       &:hover {
-        opacity: 1
+        opacity: .8
       }
       &:active {
         background: #ad7b2b;
@@ -68,7 +67,7 @@
         padding: 10px;
         background: #fff;
         &:hover {
-          opacity: 1;
+          opacity: .8;
         }
         &:active {
           background: #696969b7;
@@ -79,7 +78,7 @@
         margin-left: 5px;
         margin-right: 5px;
         &:hover {
-          opacity: 1;
+          opacity: .8;
         }
         &:active {
           background: #273f6f;
@@ -88,7 +87,7 @@
       .btn-ap {
         background: #000;
         &:hover {
-          opacity: 1;
+          opacity: .8;
         }
         &:active {
           background: rgba(0, 0, 0, 0.859);

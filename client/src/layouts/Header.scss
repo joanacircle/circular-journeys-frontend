@@ -10,7 +10,7 @@ header {
   z-index: 10;
   overflow: hidden;
 
-  div {
+  .navbar-content {
     margin: 0 auto;
     max-width: 1160px;
     display: flex;
@@ -53,15 +53,15 @@ header {
             }
         }
 
-        
   }
   .modal-background {
     position: fixed;
     top: 0;
     right: 0;
+    left: 0;
     bottom: 0;
-    width: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
+    width: auto;
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +69,28 @@ header {
   .modal-content {
     overflow-y: auto;
     background-color: white;
+    position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    width: 375px;
     padding: 20px;
+    height: 100%;
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+
+        button {
+          
+            background-color: transparent;
+            border: 0;
+            font-size: 1.5em;
+            cursor: pointer;
+          }
+      }
 
   }
 }

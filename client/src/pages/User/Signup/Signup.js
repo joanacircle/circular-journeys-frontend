@@ -1,31 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import validator from 'validator'
 import './Signup.scss'
 
 const url = 'http://localhost:3002/api/user/signup'
 
 const Signup = () => {
   const [inputValue, setInputValue] = useState({})
-  // const [error, setError] = useState({})
+  const [inputType, setInputType] = useState('text')
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
     setInputValue({ ...inputValue, [name]: value })
   }
-
-  // const validate = () => {
-  //   const newErrors = {}
-  //   if (!validator.isEmail(inputValue.userEmail)) {
-  //     newErrors.email = '輸入無效的信箱，請確認！'
-  //   }
-  //   if (!validate.isMobilePhone(inputValue.userTelephone, 'zh-TW')) {
-  //     newErrors.telephone = '輸入無效的電話！'
-  //   }
-  //   setError(newErrors)
-  //   return Object.keys(newErrors).length === 0
-  // }
 
   const isObjectEmpty = (obj) => {
     for (const key in obj) {
@@ -60,104 +47,102 @@ const Signup = () => {
               <h1>Signup</h1>
               <form method="post">
                 <div>
-                  <label htmlFor="userFirstName">姓：</label>
                   <input
                     type="text"
                     id="userFirstName"
                     name="userFirstName"
                     onChange={handleInputChange}
+                    placeholder='姓'
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userLastName">名：</label>
                   <input
                     type="text"
                     id="userLastName"
                     name="userLastName"
                     onChange={handleInputChange}
+                    placeholder='名'
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userEmail">信箱：</label>
                   <input
                     type="email"
                     id="userEmail"
                     name="userEmail"
-                    // value={error.email && error.email}
                     onChange={handleInputChange}
-                    placeholder='example@email.com'
+                    placeholder='信箱'
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userPassword">密碼：</label>
                   <input
                     type="password"
                     id="userPassword"
                     name="userPassword"
                     onChange={handleInputChange}
+                    placeholder='密碼'
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userSex">性別：</label>
                   <select name="userSex" id="userSex" onChange={handleInputChange} required>
-                    <option>請選擇</option>
+                    <option disabled selected>性別</option>
                     <option value="m">男</option>
                     <option value="f">女</option>
                     <option value="o">其他</option>
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="userTelephone">電話：</label>
                   <input
                     type="text"
                     id="userTelephone"
                     name="userTelephone"
-                    // value={error.telephone && error.telephone}
                     onChange={handleInputChange}
+                    placeholder='電話'
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userBirthday">生日：</label>
                   <input
-                    type="date"
+                    type={inputType}
                     id="userBirthday"
                     name="userBirthday"
                     onChange={handleInputChange}
+                    onFocus={() => setInputType('date')}
+                    onBlur={() => setInputType('text')}
+                    placeholder={inputType === 'date' ? '' : '生日'}
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userCountry">國籍：</label>
                   <input
                     type="text"
                     id="userCountry"
                     name="userCountry"
                     onChange={handleInputChange}
+                    placeholder='國籍'
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userCity">城市：</label>
                   <input
                     type="text"
                     id="userCity"
                     name="userCity"
                     onChange={handleInputChange}
+                    placeholder='城市'
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="userAddress">地址：</label>
                   <input
                     type="text"
                     id="userAddress"
                     name="userAddress"
                     onChange={handleInputChange}
+                    placeholder='地址'
                     required
                   />
                 </div>

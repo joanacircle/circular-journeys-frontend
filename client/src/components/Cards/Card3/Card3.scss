@@ -1,0 +1,50 @@
+@import 'index.scss';
+
+.card3{
+  text-align: center;
+  border: none;
+
+  .card-img{
+    border-radius: $br1 $br1 0 0;
+  }
+
+  .card-caption{
+    background: $white;
+    border-radius: 0 0 $br1 $br1;
+    padding-top: 25px;
+
+    .card-header{
+      padding: 0 38px 0 38px;
+      justify-content: space-between;
+      .blog-tags{
+
+        li{
+          margin-right: 5px;
+          width: fit-content;
+          border-radius: $br2;
+          background-color: $orange;
+          color: $white;
+          padding: 2px 8px;
+        }
+      }
+    }
+
+    .card-body{
+      min-height: 200px;
+      padding: 20px 38px 20px 38px;
+    }
+  }
+
+  .card-footer{
+    border-top: 1px solid $light-gray;
+    padding: 20px 38px 20px 38px;
+    justify-content: space-between;
+
+    .heart-icon{
+      height: 100%;
+      display: block;
+      color: $orange;
+      margin-right: 3px;
+    }
+  }
+}

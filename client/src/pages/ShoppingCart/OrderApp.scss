@@ -1,0 +1,166 @@
+// $color_1: rgb(65, 65, 65);
+// $color_2: transparent;
+// $color_3: white;
+// $color_4: black;
+// $font-family_1: sans-serif;
+// $background-color_1: #fff;
+// $background-color_2: #ddd;
+// $background-color_3: rgb(247, 247, 247);
+// $background-color_4: #000;
+// $border-color_1: #000;
+
+// /* 原本body的css定義改為 #root */
+// #root {
+// 	background: #ddd;
+// 	min-height: 100vh;
+// 	vertical-align: middle;
+// 	display: flex;
+// 	font-family: $font-family_1;
+// 	font-size: 0.8rem;
+// 	font-weight: bold;
+// }
+// .title {
+// 	margin-bottom: 5vh;
+// 	b {
+// 		font-size: 1.5rem;
+// 	}
+// }
+// .card {
+// 	margin: auto;
+// 	max-width: 950px;
+// 	width: 90%;
+// 	box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+// 	border-radius: 1rem;
+// 	border: transparent;
+// }
+// .cart {
+// 	background-color: $background-color_1;
+// 	padding: 4vh 5vh;
+// 	border-bottom-left-radius: 1rem;
+// 	border-top-left-radius: 1rem;
+// }
+// .summary {
+// 	background-color: $background-color_2;
+// 	border-top-right-radius: 1rem;
+// 	border-bottom-right-radius: 1rem;
+// 	padding: 4vh;
+// 	color: $color_1;
+// 	.col-2 {
+// 		padding: 0;
+// 	}
+// 	.col-10 {
+// 		padding: 0;
+// 	}
+// }
+// .row {
+// 	margin: 0;
+// }
+// .main {
+// 	margin: 0;
+// 	padding: 2vh 0;
+// 	width: 100%;
+// }
+// .col-2 {
+// 	padding: 0 1vh;
+// }
+// .col {
+// 	padding: 0 1vh;
+// }
+// a {
+// 	padding: 0 1vh;
+// 	color: $color_4;
+// 	&:hover {
+// 		color: $color_4;
+// 		text-decoration: none;
+// 	}
+// }
+// .close {
+// 	margin-left: auto;
+// 	font-size: 0.7rem;
+// }
+// img {
+// 	width: 3.5rem;
+// }
+// .back-to-shop {
+// 	margin-top: 4.5rem;
+// }
+// h5 {
+// 	margin-top: 4vh;
+// }
+// hr {
+// 	margin-top: 1.25rem;
+// }
+// form {
+// 	padding: 2vh 0;
+// }
+// select {
+// 	border: 1px solid rgba(0, 0, 0, 0.137);
+// 	padding: 1.5vh 1vh;
+// 	margin-bottom: 4vh;
+// 	outline: none;
+// 	width: 100%;
+// 	background-color: $background-color_3;
+// }
+// input {
+// 	border: 1px solid rgba(0, 0, 0, 0.137);
+// 	padding: 1vh;
+// 	margin-bottom: 4vh;
+// 	outline: none;
+// 	width: 100%;
+// 	background-color: $background-color_3;
+// 	&:focus {
+// 		&::-webkit-input-placeholder {
+// 			color: $color_2;
+// 		}
+// 	}
+// }
+// .btn {
+// 	background-color: $background-color_4;
+// 	border-color: $border-color_1;
+// 	color: $color_3;
+// 	width: 100%;
+// 	font-size: 0.7rem;
+// 	margin-top: 4vh;
+// 	padding: 1vh;
+// 	border-radius: 0;
+// 	&:focus {
+// 		box-shadow: none;
+// 		outline: none;
+// 		box-shadow: none;
+// 		color: $color_3;
+// 		-webkit-box-shadow: none;
+// 		user-select: none;
+// 		-webkit-user-select: none;
+// 		transition: none;
+// 	}
+// 	&:hover {
+// 		color: $color_3;
+// 	}
+// }
+// #code {
+// 	background-image: linear-gradient( to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185) ), url('https://img.icons8.com/small/16/000000/long-arrow-right.png');
+// 	background-repeat: no-repeat;
+// 	background-position-x: 95%;
+// 	background-position-y: center;
+// }
+// .pl-0 {
+// 	padding-left: 0;
+// }
+// .bt-1-ptb-2v {
+// 	border-top: 1px solid rgba(0, 0, 0, 0.1);
+// 	padding: 2vh 0;
+// }
+// @media (max-width: 767px) {
+// 	.card {
+// 		margin: 3vh auto;
+// 	}
+// 	.cart {
+// 		padding: 4vh;
+// 		border-bottom-left-radius: unset;
+// 		border-top-right-radius: 1rem;
+// 	}
+// 	.summary {
+// 		border-top-right-radius: unset;
+// 		border-bottom-left-radius: 1rem;
+// 	}
+// }

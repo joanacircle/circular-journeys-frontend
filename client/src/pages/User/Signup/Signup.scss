@@ -3,10 +3,7 @@
 
 .signup-place {
   @include flex(center, "");
-  margin: 60px 0px 40px 0px;
-  box-shadow: 0px 0px 10px 0.5px $gray;
-  border-radius: 10px;
-  min-width: 500px;
+  min-width: 400px;
   .col {
     margin: 40px;
     h1 {
@@ -14,22 +11,34 @@
       margin-bottom: 20px;
       color: $orange;
       letter-spacing: 2px;
+      font-weight: 800;
       // font-family: $family;
       text-transform: uppercase;
+    }
+    label {
+      font-weight: 900;
     }
     input {
       border-radius: $br2;
       box-shadow: 0px 0px 5px 0.5px $gray;
-      padding: 5px 5px;
-      margin: 10px 0px;
+      padding: 5px 20px;
+      margin: 10px 10px;
       width: 100%;
+      min-width: 180px;
       font-size: 18px;
+      transition: 0.3s;
+      &:focus {
+        outline: none;
+      }
+      &:focus::-webkit-input-placeholder {
+        color: transparent;
+      }
     }
     select {
-      margin: 10px 0px;
+      margin: 10px 10px;
       box-shadow: 0px 0px 5px 0.5px $gray;
-      border-radius: 10px;
-      padding: 5px 5px;
+      border-radius: $br2;
+      padding: 5px 20px;
     }
     .btn-place {
       text-align: center;
@@ -40,18 +49,20 @@
         transition: 0.3s;
       }
       .backto-btn {
+        color: $white;
+        background: $gray;
         &:hover {
-          color: $white;
-          background: $gray;
+          opacity: .8;
         }
         &:active {
           background: #8e8e8e;
         }
       }
       .submit-btn {
+        color: $white;
+        background: $orange;
         &:hover {
-          color: $white;
-          background: $orange;
+          opacity: .8;
         }
         &:active {
           background: #ce9233;

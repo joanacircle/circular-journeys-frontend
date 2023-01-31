@@ -9,8 +9,8 @@ import { AiFillApple } from 'react-icons/ai'
 
 const Login = () => {
   return (
-    <Container>
-      <Row justify={'center'}>
+    <Container className="background">
+      <Row className="background-img" justify={'center'}>
         <Col className='login-place'>
           <form>
             <div className='login-flex'>
@@ -36,7 +36,7 @@ const Login = () => {
                 </div>
                 <div>
                   <Link to='/signup'>加入會員？</Link>
-                    <a href="#">忘記密碼？</a>
+                  <a href="#">忘記密碼？</a>
                 </div>
               </div>
               <Input
@@ -44,6 +44,9 @@ const Login = () => {
                 type='submit'
                 value='登入'
               />
+              <div>
+                <p>or enter with</p>
+              </div>
               <div className='login-contact-link'>
                 <a className='btn input-submit' href="http:#">
                   <button

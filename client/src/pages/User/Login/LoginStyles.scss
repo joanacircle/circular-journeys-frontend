@@ -1,5 +1,13 @@
 @import '../../../index.scss';
 
+.background {
+  min-width: 100vw;
+  .background-img {
+    background-image:url(../../../images//Logo/bg-03.jpg);
+    width: auto;
+  }
+}
+
 .login-place {
   display: flex;
   flex-direction: column;
@@ -7,9 +15,9 @@
   justify-content: center;
   margin-top: 5rem;
   margin-bottom: 5rem;
-  box-shadow: 0px 10px 50px 0.5px rgba(73, 73, 73, 0.467);
-  border-radius: 10px;
-  max-width: 500px;
+  // box-shadow: 0px 10px 50px 0.5px rgba(73, 73, 73, 0.467);
+  // border-radius: 10px;
+  // max-width: 500px;
   padding-top: 50px;
   padding-bottom: 50px;
   .login-flex {
@@ -32,14 +40,16 @@
       border-radius:$br2;
       padding: 10px 40px;
       margin-top: 20px;
+      margin-bottom: 20px;
       box-shadow: 0px 0px 5px 0.5px rgba(73, 73, 73, 0.467);
       transition: 0.2s;
       cursor: pointer;
       letter-spacing: 5px;
       transition: 0.3s;
+      background: $orange;
+      color: #fff;
       &:hover {
-        color: #fff;
-        background: $orange;
+        opacity: .8
       }
       &:active {
         background: #ad7b2b;
@@ -47,14 +57,17 @@
     }
     .login-contact-link {
       display: flex;
+      justify-content: center;
       width: 100%;
-      justify-content: space-between;
       margin-bottom: 30px;
       .btn {
         display: flex;
         justify-content: center;
+        border-radius: 100%;
+        padding: 10px;
+        background: #fff;
         &:hover {
-          background: rgba(0, 0, 0, 0.281);
+          opacity: .8;
         }
         &:active {
           background: #696969b7;
@@ -65,7 +78,7 @@
         margin-left: 5px;
         margin-right: 5px;
         &:hover {
-          background: #466fc0;
+          opacity: .8;
         }
         &:active {
           background: #273f6f;
@@ -74,7 +87,7 @@
       .btn-ap {
         background: #000;
         &:hover {
-          background: rgba(0, 0, 0, 0.707);
+          opacity: .8;
         }
         &:active {
           background: rgba(0, 0, 0, 0.859);

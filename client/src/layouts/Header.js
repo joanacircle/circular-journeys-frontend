@@ -1,17 +1,30 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import Logo from '../images/Logo/Logo'
 
 import './Header.scss'
 import { FaUserAlt } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
-// import { Option } from '../components/Navbar/NavbarStyles'
-// import { Theme } from '../Styles/styled'
+
+
 
 const Header = () => {
+
+  const [modalVisibility, setModalVisibility] = useState(false)
+
+  const toggleModal = () => {
+    setModalVisibility(!modalVisibility)
+  }
+  const closeModal = (event) => {
+    if (event.target === event.currentTarget) {
+      toggleModal()
+    }
+  }
+
   return (
     <>
       <header>
-        <div>
+        <div className='navbar-content'>
           <Link
             to="/"
             className='brand'
@@ -37,9 +50,9 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to='/shop'>
+                <button onClick={toggleModal}>
                   <BiShoppingBag size={30} />
-                </Link>
+                </button>
               </li>
               <li>
                 <Link to='/login'>
@@ -49,6 +62,25 @@ const Header = () => {
             </ul>
           </section>
         </div>
+
+        <div className='cart'>
+          {modalVisibility && (
+            <div className="modal-background" onClick={closeModal}>
+              <div className="modal-content">
+                <div className="close-button">
+                  <button onClick={toggleModal}>&times;</button>
+                </div>
+
+                <h1>hi im modal</h1>
+                <h5 className="text-danger">
+                  <Link onClick={toggleModal} to="../checkout" title="結帳">結帳</Link>
+                </h5>
+
+                <button onClick={toggleModal}>Close</button>
+              </div>
+            </div>
+          )}
+        </div>
       </header>
     </>
   )
@@ -56,56 +88,3 @@ const Header = () => {
 
 export default Header
 
-  // import React, { Fragment } from 'react'
-  // import '../components/Navbar/NavbarStyles.scss'
-  // import { Link, Outlet } from 'react-router-dom'
-  // import { Container, Row, Col, Title, Theme } from '../Styles/styled'
-  // import { Option } from '../components/Navbar/NavbarStyles'
-  // import Logo from '../images/Logo/Logo'
-  // import { FaUserAlt } from 'react-icons/fa'
-
-  // const Header = () => {
-  //   return (
-  //     <Fragment>
-  //       <div className='navbar-fixed'>
-  //         <Container className='navbar-container'>
-  //           <Row align={'center'} justify={'space-between'}>
-  //             <Col>
-  //               <Link className='navbar-logo-place' to='/'>
-  //                 <Logo />
-  //                 <Title family={Theme.Family} size={Theme.H1} color={Theme.Orange}>circular journeys</Title>
-  //               </Link>
-  //             </Col>
-  //             <Col>
-  // < ul className = 'navbar-option-place' >
-  //               <li>
-  //                 <Link to='/blog' title='Blog'>
-  //                   <Option>部落格</Option>
-  //                 </Link>
-  //               </li>
-  //               <li>
-  //                 <Link to='/shop'>
-  //                   <Option>商城</Option>
-  //                 </Link>
-  //               </li>
-  //               <li>
-  //                 <Link to='/#'>
-  //                   <Option>自由行</Option>
-  //                 </Link>
-  //               </li>
-  //               <li>
-  //                 <Link to='/user/login'>
-  //                   <FaUserAlt size={30} />
-  //                 </Link>
-  //               </li>
-  //             </ ul >
-//             </Col>
-//           </Row>
-//         </Container>
-//       </div>
-//       <Outlet />
-//     </Fragment>
-//   )
-// }
-
-// export default Header

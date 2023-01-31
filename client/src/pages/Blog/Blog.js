@@ -48,13 +48,13 @@ const Blog = () => {
             </div>
           </div>
           <div className='blog-aside col-md-10 col-lg-4'>
-          <form className='blog-search'>
-            <input className='blog-input' placeholder="Search">
-            </input>
-            <button className='blog-button' type="submit">
-            <BiSearch className='search-icon'/>
-            </button>
-          </form>
+            <form className='blog-search'>
+              <input className='blog-input' placeholder="Search">
+              </input>
+              <button className='blog-button' type="submit">
+                <BiSearch className='search-icon'/>
+              </button>
+            </form>
           </div>
         </div>
       </div>

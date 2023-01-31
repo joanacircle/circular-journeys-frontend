@@ -11,11 +11,13 @@ export const Input = styled.input`
     outline:none;
   }
   &:focus::-webkit-input-placeholder {
+    transition:.5s;
     color: transparent;
   }
 `
 export const LoginTitle = styled(Title)`
   letter-spacing:2px;
-  font-weight:800;
+  font-size:48px;
   text-transform:uppercase;
+  font-family: "Oswald", Helvetica, Arial, sans-serif;
 `

@@ -16,16 +16,19 @@ import B004 from 'images/Blog/B004.jpeg'
 const HomeBlog = () => {
   return (
     <>
-    <section className='home-banner'>
-      <img src={Banner} alt="Banner"></img>
-      <h1>高雄最棒的旅遊體驗</h1>
-      <form className='home-search'>
-        <input className='home-input' placeholder="Search">
-        </input>
-        <button className='home-button' type="submit">
-            <BiSearch className='search-icon'/>
-        </button>
-      </form>
+    <section className='home-banner section'>
+      {/* alt 下關鍵字 */}
+      <img className='home-banner-img' src={Banner} alt="Banner"></img>
+      <div className='title-section'>
+        <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
+        <form className='home-search'>
+          <input className='home-input' placeholder="Search">
+          </input>
+          <button className='home-button' type="submit">
+            <BiSearch className='home-search-icon'/>
+          </button>
+        </form>
+      </div>
     </section>
 
     <section className='section'>

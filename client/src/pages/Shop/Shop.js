@@ -159,9 +159,7 @@ const Shop = () => {
 
               <div className="d-flex justify-between">
                 <h5>商品列表</h5>
-                <h5 className="text-danger">
-                  <Link to="../checkout" title="結帳">結帳</Link>
-                </h5>
+
                 <SortBar sortBy={sortBy} setSortBy={setSortBy} />
 
               </div>

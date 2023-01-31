@@ -12,7 +12,7 @@ const Shipping = () => {
         {showItem
           ? <StripeContainer />
           : <div>
-            <h3>$10.00</h3><button onClick={() => setShowItem(true)}>Purchase</button>
+            <h3>$100.00</h3><button onClick={() => setShowItem(true)}>Purchase</button>
           </div>
         }
       </div>

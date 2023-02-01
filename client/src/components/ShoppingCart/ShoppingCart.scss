@@ -1,0 +1,47 @@
+@import 'index.scss';
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal-content {
+      overflow-y: auto;
+      background-color: $white;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 375px;
+      padding: 20px;
+      height: 100%;
+      align-items: center;
+
+      .modal-title{
+        border-bottom: 1px solid $light-gray;
+      }
+
+      .close-button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+
+        .close-button-button {
+
+          background-color: transparent;
+          border: 0;
+          font-size: 1.5em;
+          cursor: pointer;
+        }
+      }
+
+    }
+  }

@@ -1,17 +1,18 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Logo from '../images/Logo/Logo'
-
 import './Header.scss'
 import { FaUserAlt } from 'react-icons/fa'
-import { BiShoppingBag } from 'react-icons/bi'
+import { BiShoppingBag, BiArrowBack } from 'react-icons/bi'
 
-
+import LoginModal from 'pages/User/Login/LoginModal'
 
 const Header = () => {
 
   const [modalVisibility, setModalVisibility] = useState(false)
+  const [loginModal, setLoginModal] = useState(false)
 
+  // shopping cart
   const toggleModal = () => {
     setModalVisibility(!modalVisibility)
   }
@@ -19,6 +20,11 @@ const Header = () => {
     if (event.target === event.currentTarget) {
       toggleModal()
     }
+  }
+
+  // Login modal
+  const handleToggleLoginModal = () => {
+    setLoginModal(!loginModal)
   }
 
   return (
@@ -55,31 +61,41 @@ const Header = () => {
                 </button>
               </li>
               <li>
-                <Link to='/login'>
-                  <FaUserAlt size={30} />
-                </Link>
+                <button onClick={handleToggleLoginModal}>
+                  <FaUserAlt size={25} />
+                </button>
               </li>
             </ul>
           </section>
         </div>
 
         <div className='cart'>
-          {modalVisibility && (
-            <div className="modal-background" onClick={closeModal}>
-              <div className="modal-content">
-                <div className="close-button">
-                  <button onClick={toggleModal}>&times;</button>
+          {
+            modalVisibility &&
+            (
+              <div className="modal-background" onClick={closeModal}>
+                <div className="modal-content">
+                  <div className="close-button">
+                    <button onClick={toggleModal}>&times;</button>
+                  </div>
+
+                  <h1>hi im modal</h1>
+                  <h5 className="text-danger">
+                    <Link onClick={toggleModal} to="../checkout" title="結帳">結帳</Link>
+                  </h5>
+
+                  <button onClick={toggleModal}>Close</button>
                 </div>
-
-                <h1>hi im modal</h1>
-                <h5 className="text-danger">
-                  <Link onClick={toggleModal} to="../checkout" title="結帳">結帳</Link>
-                </h5>
-
-                <button onClick={toggleModal}>Close</button>
               </div>
-            </div>
-          )}
+            )
+          }
+        </div>
+
+        <div className='login-modal'>
+          {
+            loginModal &&
+            <LoginModal handleToggleLoginModal={handleToggleLoginModal} />
+          }
         </div>
       </header>
     </>

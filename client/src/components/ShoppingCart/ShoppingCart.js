@@ -23,7 +23,9 @@ export const ShoppingCart = (props) => {
               <button className='close-button-button' onClick={toggleModal}>&times;</button>
             </div>
 
+
             <h5 className='modal-title'>我的購物袋</h5>
+            <hr className='cart-separator' />
             <h5 className="text-danger">
               <Link onClick={toggleModal} to="../checkout" title="結帳">結帳</Link>
             </h5>

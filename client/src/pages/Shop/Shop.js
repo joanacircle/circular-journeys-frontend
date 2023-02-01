@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import './Shop.scss'
 
 import FilterBar from './components/FilterBar/'

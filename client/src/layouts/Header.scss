@@ -17,25 +17,38 @@ header {
     max-width: 1160px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:center;
+      .brand {
+          display: flex;
+          align-items: center;
+        }
+      
+        .title {
+          white-space: nowrap;
+          font-family: Sigmar One;
+          // font-size: h1;
+          color: $orange;
+        }
 
-    .brand {
-      display: flex;
-      align-items: center;
-    }
-
-    .title {
-      white-space: nowrap;
-      font-family: Sigmar One;
-      font-size: 42px;
-      color: $orange;
-    }
-
-    section {
-      ul {
-        display: flex;
-        align-items: center;
-
+        .header-section {
+          .header-ul {
+              display: flex;
+              align-items: center;
+              .header-li {
+                margin: 0px 10px;
+              }
+              .links {
+               
+                white-space: nowrap;
+                font-weight: bold;
+                transition: .3s;
+                &:hover {  
+                  border-bottom: 5px solid $orange;
+                  color: $orange;
+                }
+              }
+            }
+        }
         li {
           margin: 0px 10px;
         }
@@ -49,45 +62,6 @@ header {
             border-bottom: 5px solid $orange;
             color: $orange;
           }
-        }
-      }
-    }
-  }
-  // shopping car css
-  .modal-background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    width: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .modal-content {
-      overflow-y: auto;
-      background-color: $white;
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 375px;
-      padding: 20px;
-      height: 100%;
-
-      .close-button {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 10px;
-
-        button {
-          background-color: transparent;
-          border: 0;
-          font-size: 1.5em;
-          cursor: pointer;
         }
       }
     }

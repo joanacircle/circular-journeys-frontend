@@ -59,19 +59,23 @@
         @include flex(center, column);
         width: 80%;
         .input-box {
+          position: relative;
           border-radius: $br2;
           margin: 10px 0px;
           padding: 10px 20px;
           width: 100%;
           font-size: 16px;
           &::-webkit-input-placeholder {
-            transition: 0.3s;
+            transition: 0.5s;
           }
           &:focus {
             outline: none;
           }
           &:focus::-webkit-input-placeholder {
-            color: transparent;
+            position: absolute;
+            top: 0;
+            left: 5;
+            font-size: 12px;
           }
         }
         .login-option {

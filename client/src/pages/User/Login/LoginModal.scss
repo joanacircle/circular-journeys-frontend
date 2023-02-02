@@ -9,7 +9,7 @@
   left: 0;
   bottom: 0;
   width: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
   @include flex(center, "");
 
   .login-modal-content {
@@ -75,8 +75,8 @@
             right: 0;
             top: 0;
             margin: 10px;
-            transform: translateX(-50%),translateY(-50%);
-            transition: .3s;
+            transform: translateX(-50%), translateY(-50%);
+            transition: 0.3s;
             &:hover {
               color: $orange;
             }

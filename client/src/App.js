@@ -9,7 +9,6 @@ import Blog from 'pages/Blog/Blog'
 import MemberCenter from 'pages/User/MemberCenter/MemberCenter'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
-import Signup from 'pages/User/Signup/Signup'
 import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
 
 const App = () => {

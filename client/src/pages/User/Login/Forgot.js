@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Forgot.scss'
 import { BiShow, BiHide } from 'react-icons/bi'
+import 'animate.css'
 
 const Forgot = ({ showPassword, handleShowPasswordButton }) => {
   const [showVerifyInput, setShowVerifyInput] = useState(false)

@@ -75,7 +75,10 @@ const Header = () => {
         </div>
         {
           loginModal &&
-          <LoginModal handleToggleLoginModal={handleToggleLoginModal} />
+          <LoginModal
+            loginModal={loginModal}
+            handleToggleLoginModal={handleToggleLoginModal}
+          />
         }
         {modalVisibility &&
           <ShoppingCart

@@ -3,6 +3,7 @@
 
 //login css
 .login-modal-background {
+  @include flex(center, "");
   position: fixed;
   top: 0;
   right: 0;
@@ -10,8 +11,6 @@
   bottom: 0;
   width: auto;
   background-color: rgba(0, 0, 0, 0.4);
-  @include flex(center, "");
-
   .login-modal-content {
     position: relative;
     overflow-y: auto;
@@ -20,23 +19,25 @@
     width: 500px;
     height: 550px;
     border-radius: 20px;
-    background-image: url(../../../images//Logo/bg-03.jpg);
-    background-size: cover;
-    background-position: center;
+    background: #BAC1B8;
+    // background-image: url(../../../images//Logo/bg-03.jpg);
+    // background-size: cover;
+    // background-position: center;
     .login-modal-content-background {
-      background-color: rgba(0, 0, 0, 0.1);
-      width: 100%;
-      height: 100%;
+      // background-color: rgba(0, 0, 0, 0);
+      // width: 100%;
+      // height: 100%;
     }
     .close-login-button {
       position: absolute;
+      color: $white;
       top: 15px;
       left: 15px;
       background-color: transparent;
       transition: 0.3s;
       cursor: pointer;
       &:hover {
-        color: $white;
+        color: $purple;
       }
     }
 
@@ -77,7 +78,7 @@
             transform: translateX(-50%), translateY(-50%);
             transition: 0.3s;
             &:hover {
-              color: $orange;
+              color: $purple;
             }
           }
         }
@@ -141,8 +142,10 @@
             }
             .btn-google {
               background: $white;
+              opacity: .8;
               &:hover {
-                background: #e0e0e0;
+                background: $white;
+                opacity: 1;
               }
               &:active {
                 background: $gray;
@@ -152,20 +155,24 @@
               background: #385898;
               margin-left: 15px;
               margin-right: 15px;
+              opacity: .8;
               &:hover {
-                background: #273f6f;
+                background: #385898;
+                opacity: 1;
               }
               &:active {
-                opacity: 0.7;
+                background: #273f6f;
               }
             }
             .btn-apple {
               background: #111;
+              opacity: .8;
               &:hover {
-                background: $dark-gray;
+                background: #111;
+                opacity: 1;
               }
               &:active {
-                opacity: 0.7;
+                background: $dark-gray;
               }
             }
           }
@@ -184,7 +191,7 @@
   margin: 0 5px;
   cursor: pointer;
   &:hover {
-    color: $orange;
+    color: $purple;
   }
 }
 .other-login-text {

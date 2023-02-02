@@ -7,9 +7,10 @@ import { FaFacebookSquare } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
+import 'animate.css'
 
 
-const LoginModal = ({ handleToggleLoginModal }) => {
+const LoginModal = ({ loginModal, handleToggleLoginModal }) => {
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
@@ -42,7 +43,9 @@ const LoginModal = ({ handleToggleLoginModal }) => {
       className="login-modal-background"
       onClick={handleCloseLoginModal}
     >
-      <div className="login-modal-content">
+      <div
+        className='login-modal-content animate__animated animate__faster
+        animate__fadeInDown'>
         <div className="login-modal-content-background">
           <div className="close-login-button">
             {

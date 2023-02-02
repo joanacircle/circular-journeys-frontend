@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Logo from '../images/Logo/Logo'
 import './Header.scss'
 import { FaUserAlt } from 'react-icons/fa'
-import { BiShoppingBag, BiArrowBack } from 'react-icons/bi'
+import { BiShoppingBag } from 'react-icons/bi'
 
 import LoginModal from 'pages/User/Login/LoginModal'
 

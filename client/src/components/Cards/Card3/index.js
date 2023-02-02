@@ -11,8 +11,8 @@ const Card3 = (props) => {
         <div className="card-caption">
           <div className='card-header d-flex'>
             <ul className='blog-tags d-flex'>
-              <li>{props.tags}</li>
-              <li>{props.tags}</li>
+              <li># {props.tags}</li>
+              <li># {props.tags}</li>
             </ul>
             <ul className='blog-avatar'>
               <li>{props.avatar}</li>

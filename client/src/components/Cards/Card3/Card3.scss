@@ -25,6 +25,10 @@
           background-color: $orange;
           color: $white;
           padding: 2px 8px;
+
+          &:hover{
+            background-color: $purple;
+          }
         }
       }
     }

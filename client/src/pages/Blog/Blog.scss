@@ -31,40 +31,96 @@
         margin-bottom: 30px;
       }
 
-      .blog-aside{
-        .blog-search{
-          padding: 5px;
-          max-width: 300px;
-          max-height: 60px;
-          background-color: $white;
-          border-radius: $br2;
+      .blog-pagination{
+        margin: 30px auto;
+        
+        ul{
           display: flex;
+          justify-content: center;
+          gap: 10px;
 
-          .blog-input{
-            width: 100%;
-            padding: 10px;
+          li{
+            font-size: 24px;
+          }
+        }
+      }
+
+      .blog-aside{
+        .blog-aside-item{
+          margin-bottom: 30px;
+
+          .blog-search{
+            padding: 5px;
+            max-width: 300px;
+            max-height: 60px;
+            background-color: $white;
             border-radius: $br2;
-            font-size: large;
-          }
-
-          .blog-input::placeholder{
-            text-align: left;
-          }
-
-          .blog-input:focus{
-            outline: none;
-          }
-
-          .blog-button{
-            width: auto;
-            height: auto;
-            padding: 10px;
-            color: $orange;
-            border-radius: $br2;
-      
-            .search-icon{
-              margin: 0 auto;
+            display: flex;
+  
+            .blog-input{
+              width: 100%;
+              padding: 10px;
+              border-radius: $br2;
+              font-size: large;
             }
+  
+            .blog-input::placeholder{
+              text-align: left;
+            }
+  
+            .blog-input:focus{
+              outline: none;
+            }
+  
+            .blog-button{
+              width: auto;
+              height: auto;
+              padding: 10px;
+              color: $orange;
+              border-radius: $br2;
+        
+              .search-icon{
+                margin: 0 auto;
+              }
+            }
+          }
+
+          .blog-categories{
+            margin-top: 15px;
+            padding-left: 25px;
+
+            li{
+              margin-bottom: 5px;
+              font-size: larger;
+
+            &:hover{
+              color: $purple;
+            }
+            }
+          }
+
+          .blog-aside-tags{
+            margin-top: 15px;
+            padding-left: 25px;
+            display: flex;
+            flex-wrap: wrap;
+
+            li{
+              margin: 0 5px 10px 0;
+              padding: 2px 8px;
+              width: fit-content;
+              border-radius: $br2;
+              border: 2px solid $orange;
+              color: $orange;
+              font-size: larger;
+
+              &:hover{
+                border: 2px solid $purple;
+                // background-color: $purple;
+                color: $purple;
+              }
+            }
+
           }
         }
       }

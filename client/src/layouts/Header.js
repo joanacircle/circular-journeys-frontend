@@ -1,17 +1,26 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
-import { useState } from 'react'
 import './Header.scss'
 import { FaUserAlt } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
+import LoginModal from 'pages/User/Login/LoginModal'
 
 const Header = () => {
 
   // for modals
   const [modalVisibility, setModalVisibility] = useState(false)
+  const [loginModal, setLoginModal] = useState(false)
+
+  // shopping cart
   const toggleModal = () => {
     setModalVisibility(!modalVisibility)
+  }
+
+  // Login modal
+  const handleToggleLoginModal = () => {
+    setLoginModal(!loginModal)
   }
 
   return (
@@ -48,12 +57,19 @@ const Header = () => {
                 </button>
               </li>
               <li className='header-li'>
-                <Link to='/login'>
-                  <FaUserAlt size={30} />
-                </Link>
+                <button onClick={handleToggleLoginModal}>
+                  <FaUserAlt size={25} />
+                </button>
               </li>
             </ul>
           </section>
+        </div>
+
+        <div className='login-modal'>
+          {
+            loginModal &&
+            <LoginModal handleToggleLoginModal={handleToggleLoginModal} />
+          }
         </div>
 
         {modalVisibility &&

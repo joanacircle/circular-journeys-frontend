@@ -1,0 +1,172 @@
+@import "../../../index.scss";
+@import "../styles/styles.scss";
+
+//login css
+.login-modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  @include flex(center, "");
+
+  .login-modal-content {
+    position: relative;
+    overflow-y: auto;
+    position: fixed;
+    margin: 0 auto;
+    width: 500px;
+    height: 550px;
+    border-radius: 20px;
+    background-image: url(../../../images//Logo/bg-03.jpg);
+    background-size: cover;
+    background-position: center;
+    .login-modal-content-background {
+      background-color: rgba(0, 0, 0, 0.2);
+      width: 100%;
+      height: 100%;
+    }
+    .close-login-button {
+      position: absolute;
+      padding: 15px;
+      top: 0;
+      left: 0;
+      background-color: transparent;
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover {
+        color: $white;
+      }
+    }
+
+    .login-place {
+      @include flex(center, "");
+      flex-direction: column;
+      padding: 50px;
+      h1 {
+        margin-top: 40px;
+        margin-bottom: 30px;
+        letter-spacing: 2px;
+        font-size: 40px;
+        text-transform: uppercase;
+        font-family: "Oswald", Helvetica, Arial, sans-serif;
+        color: $white;
+        text-shadow: 0px 5px 5px $gray;
+      }
+      .form-place {
+        @include flex(center, column);
+        width: 80%;
+        .input-box {
+          position: relative;
+          border-radius: $br2;
+          margin: 10px 0px;
+          padding: 10px 20px;
+          width: 100%;
+          font-size: 16px;
+          &::-webkit-input-placeholder {
+            transition: 0.5s;
+          }
+          &:focus {
+            outline: none;
+          }
+          &:focus::-webkit-input-placeholder {
+            position: absolute;
+            top: 0;
+            left: 5;
+            font-size: 12px;
+          }
+        }
+        .login-option {
+          @include flex(space-between, "");
+          width: 100%;
+          margin-top: 5px;
+        }
+        .submit-place {
+          @include flex(center, column);
+          width: 100%;
+          .input-submit {
+            width: 100%;
+            border-radius: $br2;
+            padding: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 5px 0.5px $gray;
+            transition: 0.2s;
+            letter-spacing: 5px;
+            transition: 0.3s;
+            background: $orange;
+            color: #fff;
+            cursor: pointer;
+            &:hover {
+              background: $purple;
+            }
+            &:active {
+              background: #3f3875;
+            }
+          }
+          .other-login-place {
+            @include flex(center, "");
+            width: 100%;
+            margin-top: 15px;
+            .other-login-btn {
+              @include flex(center, "");
+              border-radius: 100%;
+              padding: 10px;
+              transition: 0.3s;
+            }
+            .btn-google {
+              background: $white;
+              &:hover {
+                background: #e0e0e0;
+              }
+              &:active {
+                background: $gray;
+              }
+            }
+            .btn-facebook {
+              background: #385898;
+              margin-left: 15px;
+              margin-right: 15px;
+              &:hover {
+                background: #273f6f;
+              }
+              &:active {
+                opacity: 0.7;
+              }
+            }
+            .btn-apple {
+              background: #111;
+              &:hover {
+                background: $dark-gray;
+              }
+              &:active {
+                opacity: 0.7;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.text-style {
+  font-size: 15px;
+  color: $white;
+  font-weight: 400;
+  letter-spacing: 1px;
+  transition: 0.3s;
+  margin: 0 5px;
+  cursor: pointer;
+  &:hover {
+    color: $orange;
+  }
+}
+.other-login-text {
+  font-size: 15px;
+  color: $white;
+  font-weight: 400;
+  letter-spacing: 1px;
+}

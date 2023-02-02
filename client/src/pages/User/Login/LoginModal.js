@@ -4,10 +4,12 @@ import { IoCloseSharp } from 'react-icons/io5'
 import { FaFacebookSquare } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { AiFillApple, AiOutlineMail } from 'react-icons/ai'
+import { BiShow, BiHide } from 'react-icons/bi'
 
 
 const LoginModal = ({ handleToggleLoginModal }) => {
   const [signupModal, setSignupModal] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   // Signup modal
   const handleToggleSignupModal = () => {
@@ -18,6 +20,10 @@ const LoginModal = ({ handleToggleLoginModal }) => {
     if (event.target === event.currentTarget) {
       handleToggleLoginModal()
     }
+  }
+
+  const handleShowPasswordButton = () => {
+    setShowPassword(!showPassword)
   }
 
   return (
@@ -43,13 +49,32 @@ const LoginModal = ({ handleToggleLoginModal }) => {
                 id="userEmail"
                 placeholder='Email'
               />
-              <input
-                className='input-box'
-                type="password"
-                name="userPassword"
-                id="userPassword"
-                placeholder='Password'
-              />
+              <div className='input-password'>
+                <input
+                  className='input-box'
+                  type={showPassword ? 'text' : 'password'}
+                  name="userPassword"
+                  id="userPassword"
+                  placeholder='Password'
+                />
+                {
+                  showPassword
+                    ? (
+                      <BiHide
+                        className='show-password-icon'
+                        size={25}
+                        onClick={handleShowPasswordButton}
+                      />
+                    )
+                    : (
+                      <BiShow
+                        className='show-password-icon'
+                        size={25}
+                        onClick={handleShowPasswordButton}
+                      />
+                    )
+                }
+              </div>
               <div className="login-option">
                 <div className="check-box">
                   <input

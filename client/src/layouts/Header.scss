@@ -1,4 +1,4 @@
-@import '../index.scss';
+@import "../index.scss";
 
 header {
   position: sticky;
@@ -17,41 +17,37 @@ header {
     max-width: 1160px;
     display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
 
-      .brand {
-          display: flex;
-          align-items: center;
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .title {
+      white-space: nowrap;
+      font-family: Sigmar One;
+      // font-size: h1;
+      color: $orange;
+    }
+
+    .header-section {
+      .header-ul {
+        display: flex;
+        align-items: center;
+        .header-li {
+          margin: 0px 10px;
         }
-      
-        .title {
+        .links {
           white-space: nowrap;
-          font-family: Sigmar One;
-          // font-size: h1;
-          color: $orange;
+          font-weight: bold;
+          transition: 0.3s;
+          &:hover {
+            border-bottom: 5px solid $orange;
+            color: $orange;
+          }
         }
-
-        .header-section {
-          .header-ul {
-              display: flex;
-              align-items: center;
-              .header-li {
-                margin: 0px 10px;
-              }
-              .links {
-               
-                white-space: nowrap;
-                font-weight: bold;
-                transition: .3s;
-                &:hover {  
-                  border-bottom: 5px solid $orange;
-                  color: $orange;
-                }
-              }
-            }
-        }
-
+      }
+    }
   }
- 
-    
 }

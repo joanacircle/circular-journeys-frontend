@@ -8,6 +8,14 @@ import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import LoginModal from 'pages/User/Login/LoginModal'
 
 const Header = () => {
+  // for user state
+  const [userState, setUserState] = useState(false)
+
+  // for drop down
+  const [userMenu, setUserMenu] = useState(false)
+  const handleDropdownMenu = () => {
+    setUserMenu(!userMenu)
+  }
 
   // for modals
   const [modalVisibility, setModalVisibility] = useState(false)
@@ -22,6 +30,7 @@ const Header = () => {
   const handleToggleLoginModal = () => {
     setLoginModal(!loginModal)
   }
+
 
   return (
     <>
@@ -64,14 +73,10 @@ const Header = () => {
             </ul>
           </section>
         </div>
-
-        <div className='login-modal'>
-          {
-            loginModal &&
-            <LoginModal handleToggleLoginModal={handleToggleLoginModal} />
-          }
-        </div>
-
+        {
+          loginModal &&
+          <LoginModal handleToggleLoginModal={handleToggleLoginModal} />
+        }
         {modalVisibility &&
           <ShoppingCart
             modalVisibility={modalVisibility}

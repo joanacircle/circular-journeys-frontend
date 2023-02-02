@@ -18,7 +18,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     .brand {
       display: flex;
       align-items: center;
@@ -27,24 +26,21 @@ header {
     .title {
       white-space: nowrap;
       font-family: Sigmar One;
-      font-size: 42px;
+      // font-size: h1;
       color: $orange;
     }
 
-    section {
-      ul {
+    .header-section {
+      .header-ul {
         display: flex;
         align-items: center;
-
-        li {
+        .header-li {
           margin: 0px 10px;
         }
         .links {
-          margin: 0 10px;
           white-space: nowrap;
           font-weight: bold;
           transition: 0.3s;
-          padding-bottom: 15px;
           &:hover {
             border-bottom: 5px solid $orange;
             color: $orange;
@@ -52,43 +48,18 @@ header {
         }
       }
     }
-  }
-  // shopping car css
-  .modal-background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    width: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .modal-content {
-      overflow-y: auto;
-      background-color: $white;
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 375px;
-      padding: 20px;
-      height: 100%;
-
-      .close-button {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 10px;
-
-        button {
-          background-color: transparent;
-          border: 0;
-          font-size: 1.5em;
-          cursor: pointer;
-        }
+    li {
+      margin: 0px 10px;
+    }
+    .links {
+      margin: 0 10px;
+      white-space: nowrap;
+      font-weight: bold;
+      transition: 0.3s;
+      padding-bottom: 15px;
+      &:hover {
+        border-bottom: 5px solid $orange;
+        color: $orange;
       }
     }
   }

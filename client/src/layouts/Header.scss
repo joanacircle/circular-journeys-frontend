@@ -23,6 +23,14 @@ header {
       align-items: center;
     }
 
+<<<<<<< HEAD
+=======
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+>>>>>>> 1c4ad55d62cd87f42f2dc879507f797056f6d26d
     .title {
       white-space: nowrap;
       font-family: Sigmar One;
@@ -48,6 +56,7 @@ header {
         }
       }
     }
+<<<<<<< HEAD
     li {
       margin: 0px 10px;
     }
@@ -62,5 +71,7 @@ header {
         color: $orange;
       }
     }
+=======
+>>>>>>> 1c4ad55d62cd87f42f2dc879507f797056f6d26d
   }
 }

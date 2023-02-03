@@ -10,7 +10,7 @@ import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 
 const Header = () => {
   // for user state
-  const [userState, setUserState] = useState(true)
+  const [userState, setUserState] = useState(false)
 
   // for drop down
   const [userMenu, setUserMenu] = useState(false)
@@ -67,6 +67,8 @@ const Header = () => {
                       useState && userMenu &&
                       <DropdownMenu
                         handleToggleLoginModal={handleToggleLoginModal}
+                        userState={userState}
+                        setUserState={setUserState}
                       />
                     }
                   </li>
@@ -84,7 +86,8 @@ const Header = () => {
         {
           loginModal &&
           <LoginModal
-            loginModal={loginModal}
+            userState={userState}
+            setUserState={setUserState}
             handleToggleLoginModal={handleToggleLoginModal}
           />
         }

@@ -1,0 +1,27 @@
+@import "../../../index.scss";
+@import "../styles/styles.scss";
+
+  .setting-place {
+    box-shadow: 0px 0px 10px 0.8px $gray;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 20px;
+    .input-place {
+      @include flex("", "");
+      .label-place {
+        display: flex;
+        flex-direction: column;
+        label {
+          font-size: 16px;
+          font-weight: 300;
+          margin-bottom: 5px;
+        }
+        input,
+        select {
+          border-radius: 8px;
+          border: 0.5px solid $gray;
+          padding: 8px 15px;
+        }
+      }
+    }
+  }

@@ -6,9 +6,10 @@ import Home from './pages/Home/Home'
 import Checkout from './pages/Checkout'
 import Shop from './pages/Shop/Shop'
 import Blog from 'pages/Blog/Blog'
-import MemberCenter from 'pages/User/MemberCenter/MemberCenter'
+import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 import { NotFound } from './pages/NotFound'
 import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
+import MemberSetting from 'pages/User/MemberCenter/MemberSetting'
 
 const App = () => {
   return (
@@ -22,9 +23,7 @@ const App = () => {
           <Route path='/shop' element={<Shop />} />
           <Route path='/cart' element={<ShoppingCart />} />
 
-          <Route path='/member' element={<MemberCenter />}>
-
-          </Route>
+          <Route path='/member' element={<MemberCenter />} />
           <Route path='*' element={<NotFound />} />
         </Route>
         <Route path='checkout' element={<Checkout />} />

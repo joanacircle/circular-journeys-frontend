@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './DropdownMenu.scss'
 import 'animate.css'
-import { FaLessThanEqual, FaUserAlt } from 'react-icons/fa'
+import { FaLessThanEqual, FaUserAlt, FaHouseUser } from 'react-icons/fa'
 import { AiOutlineLike } from 'react-icons/ai'
 import { IoSettingsOutline, IoNotificationsOutline } from 'react-icons/io5'
 import { HiOutlineTicket, HiOutlineShoppingCart } from 'react-icons/hi'
@@ -10,7 +10,7 @@ import { MdOutlineAttachMoney } from 'react-icons/md'
 import { CgNotes } from 'react-icons/cg'
 // import { BiMessageRoundedCheck } from 'react-icons/bi'
 
-const DropdownMenu = ({ handleToggleLoginModal }) => {
+const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
   // handleClickOutside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -28,6 +28,15 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
       window.removeEventListener('click', handleClickOutside)
     }
   }, [])
+
+  const handleLogoutButton = () => {
+    if (userState) {
+      alert('已登出')
+      setUserState(!userState)
+      handleToggleLoginModal()
+    }
+  }
+
   return (
     <div className="user-dropdown-menu animate__animated animate__faster animate__fadeIn">
       <div className='menu-place'>
@@ -42,7 +51,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
           <IoSettingsOutline size={20} />
         </Link>
         <div className='divider'></div>
-        <Link className='menu-option' to='/member'>
+        <Link className='menu-option'>
           <div className='user-name'>
             <MdOutlineAttachMoney size={20} />
             <p>Points</p>
@@ -56,7 +65,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
             </div>
             <div className='message'>10</div>
           </Link> */}
-        <Link className='menu-option' to='/member'>
+        <Link className='menu-option'>
           <div className='user-name'>
             <HiOutlineTicket size={20} />
             <p>折扣卷</p>
@@ -64,13 +73,19 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
           <div className='ticket'>3</div>
         </Link>
         <div className='divider'></div>
+        <Link className='menu-option' to='/member'>
+          <div className='user-name' >
+            <FaHouseUser size={20} />
+            <p>會員中心</p>
+          </div>
+        </Link>
         {/* <Link className='menu-option' to='/member'>
             <div className='user-name'>
               <BiMessageRoundedCheck size={20} />
               <p>訊息管理</p>
             </div>
           </Link> */}
-        <Link className='menu-option' to='/member'>
+        {/* <Link className='menu-option' to='/member'>
           <div className='user-name'>
             <CgNotes size={20} />
             <p>訂單管理</p>
@@ -87,9 +102,9 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
             <AiOutlineLike size={20} />
             <p>我的收藏</p>
           </div>
-        </Link>
+        </Link> */}
         <div className='divider'></div>
-        <Link className='menu-option logout-button' to='#'>
+        <Link className='menu-option logout-button' to='#' onClick={handleLogoutButton}>
           <div className='user-name'>
             <div>登出</div>
           </div>

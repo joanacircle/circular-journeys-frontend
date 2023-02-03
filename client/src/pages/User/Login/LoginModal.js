@@ -9,21 +9,30 @@ import { FcGoogle } from 'react-icons/fc'
 import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
 
+const data = {
+  testEmail: 'test@gmail.com',
+  testPassword: '123456'
+}
 
-const LoginModal = ({ handleToggleLoginModal }) => {
+const LoginModal = ({ handleToggleLoginModal, setUserState, userState }) => {
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
   const [inputChange, setInputChange] = useState({})
 
-  useEffect(() => {
-
-  }, [])
   const handelInputChange = (event) => {
     setInputChange({
       ...inputChange,
       [event.target.name]: event.target.value
     })
+  }
+  const handleLoginButton = (event) => {
+    event.preventDefault()
+    if (inputChange.userEmail === data.testEmail && inputChange.userPassword === data.testPassword) {
+      alert('登入成功')
+      handleToggleLoginModal()
+      setUserState(!userState)
+    }
   }
   const handleCloseLoginModal = (event) => {
     if (event.target === event.currentTarget) {
@@ -147,6 +156,7 @@ const LoginModal = ({ handleToggleLoginModal }) => {
                             className='input-submit'
                             type="submit"
                             value="登入"
+                            onClick={handleLoginButton}
                           />
                           <a
                             className='text-style'

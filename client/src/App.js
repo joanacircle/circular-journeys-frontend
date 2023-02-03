@@ -9,6 +9,7 @@ import Shop from './pages/Shop/Shop'
 import Blog from 'pages/Blog/Blog'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
+import Tour from 'pages/Tour/Tour'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/tour' element={<Tour />} />
           <Route path='checkout' element={<Checkout />} />
           <Route path="member" element={<User />}>
             <Route index element={<Login />} />

@@ -30,7 +30,7 @@ const Header = () => {
               </li>
 
               <li>
-                <Link to='/'>
+                <Link to='/tour'>
                   <span className='links'>自由行</span>
                 </Link>
               </li>

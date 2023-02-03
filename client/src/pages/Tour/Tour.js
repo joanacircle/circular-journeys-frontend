@@ -1,5 +1,5 @@
 import React from 'react'
-import TourTitle from './components/TourBar/TourTitle'
+import TourTitle from './components/TourTitle/TourTitle'
 
 const Tour = () => {
   return (

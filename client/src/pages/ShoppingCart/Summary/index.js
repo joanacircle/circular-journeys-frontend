@@ -1,3 +1,4 @@
+// comment
 function Summary({ totalNumber = 0, totalPrice = 0 }) {
   return (
     <>

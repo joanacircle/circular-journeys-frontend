@@ -29,7 +29,6 @@ const Header = () => {
     return userState ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
   }
 
-
   return (
     <>
       <header>
@@ -62,18 +61,22 @@ const Header = () => {
                 <button onClick={toggleModal}>
                   <BiShoppingBag size={32} />
                 </button>
+                <ul>
+                  <li>
+                    {
+                      useState && userMenu &&
+                      <DropdownMenu
+                        handleToggleLoginModal={handleToggleLoginModal}
+                      />
+                    }
+                  </li>
+                </ul>
               </li>
               <li className='header-li'>
-                <button onClick={handleToggleLoginModal}>
-                  <FaUserAlt size={30} />
+                <button
+                  onClick={handleToggleLoginModal}>
+                  <FaUserAlt id='user-menu' size={30} />
                 </button>
-                {
-                  useState && userMenu &&
-                  <DropdownMenu
-                    userMenu={userMenu}
-                    setUserMenu={setUserMenu}
-                  />
-                }
               </li>
             </ul>
           </section>

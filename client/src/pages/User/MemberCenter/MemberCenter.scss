@@ -1,10 +1,6 @@
 @import "../styles/styles.scss";
 @import "../../../index.scss";
 
-// .center-content {
-//   display: inline-block;
-// }
-
 .membercenter-place {
   width: 100%;
   .membercenter-box {
@@ -54,6 +50,10 @@
           margin: 10px 0;
           color: #666;
         }
+        .user-point {
+          color: darkolivegreen;
+          font-size: 16px;
+        }
       }
       .page-menu {
         list-style: none;
@@ -66,8 +66,8 @@
           .link-flex {
             display: flex;
             align-items: center;
-            opacity: .9;
-            transition: .3s;
+            opacity: 0.9;
+            transition: 0.3s;
             &:hover {
               padding-left: 10px;
               border-left: 5px solid $orange;

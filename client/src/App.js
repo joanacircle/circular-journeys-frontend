@@ -8,7 +8,6 @@ import Shop from './pages/Shop/Shop'
 import Blog from 'pages/Blog/Blog'
 import MemberCenter from 'pages/User/MemberCenter/MemberCenter'
 import { NotFound } from './pages/NotFound'
-import { User } from './pages/User/User'
 import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
 
 const App = () => {
@@ -23,19 +22,10 @@ const App = () => {
           <Route path='/shop' element={<Shop />} />
           <Route path='/cart' element={<ShoppingCart />} />
 
-          <Route path='member' element={<User />}>
-            {/* <Route index element={<Login />} />
-            <Route path='login' element={<Login />} /> */}
+          <Route path='/member' element={<MemberCenter />}>
+
           </Route>
-          {/* <Route path='signup' element={<Signup />} />
-          <Route path='/login' element={<Login />} /> */}
-
-
           <Route path='*' element={<NotFound />} />
-
-
-
-          <Route path='/membercenter' element={<MemberCenter />} />
         </Route>
         <Route path='checkout' element={<Checkout />} />
       </Routes>

@@ -6,16 +6,14 @@ import { FaUserAlt } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import LoginModal from 'pages/User/Login/LoginModal'
+import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 
 const Header = () => {
   // for user state
-  const [userState, setUserState] = useState(false)
+  const [userState, setUserState] = useState(true)
 
   // for drop down
   const [userMenu, setUserMenu] = useState(false)
-  const handleDropdownMenu = () => {
-    setUserMenu(!userMenu)
-  }
 
   // for modals
   const [modalVisibility, setModalVisibility] = useState(false)
@@ -28,7 +26,7 @@ const Header = () => {
 
   // Login modal
   const handleToggleLoginModal = () => {
-    setLoginModal(!loginModal)
+    return userState ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
   }
 
 
@@ -67,8 +65,15 @@ const Header = () => {
               </li>
               <li className='header-li'>
                 <button onClick={handleToggleLoginModal}>
-                  <FaUserAlt size={25} />
+                  <FaUserAlt size={30} />
                 </button>
+                {
+                  useState && userMenu &&
+                  <DropdownMenu
+                    userMenu={userMenu}
+                    setUserMenu={setUserMenu}
+                  />
+                }
               </li>
             </ul>
           </section>
@@ -80,12 +85,14 @@ const Header = () => {
             handleToggleLoginModal={handleToggleLoginModal}
           />
         }
-        {modalVisibility &&
+        {
+          modalVisibility &&
           <ShoppingCart
             modalVisibility={modalVisibility}
             setModalVisibility={setModalVisibility}
             toggleModal={toggleModal}
-          />}
+          />
+        }
 
       </header>
 

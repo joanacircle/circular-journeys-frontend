@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './LoginModal.scss'
+import 'animate.css'
 import SignupModal from '../Signup/SignupModal'
 import Forgot from './Forgot'
 import { IoCloseSharp } from 'react-icons/io5'
@@ -7,13 +8,31 @@ import { FaFacebookSquare } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
-import 'animate.css'
 
 
-const LoginModal = ({ loginModal, handleToggleLoginModal }) => {
+const LoginModal = ({ handleToggleLoginModal }) => {
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
+  const [inputChange, setInputChange] = useState({})
+
+  useEffect(() => {
+
+  }, [])
+  const handelInputChange = (event) => {
+    setInputChange({
+      ...inputChange,
+      [event.target.name]: event.target.value
+    })
+  }
+  const handleCloseLoginModal = (event) => {
+    if (event.target === event.currentTarget) {
+      handleToggleLoginModal()
+    }
+  }
+  const handleShowPasswordButton = () => {
+    setShowPassword(!showPassword)
+  }
 
   // Signup modal
   const handleToggleSignupModal = () => {
@@ -28,24 +47,14 @@ const LoginModal = ({ loginModal, handleToggleLoginModal }) => {
     setUserForgot(!userForgot)
   }
 
-  const handleCloseLoginModal = (event) => {
-    if (event.target === event.currentTarget) {
-      handleToggleLoginModal()
-    }
-  }
-
-  const handleShowPasswordButton = () => {
-    setShowPassword(!showPassword)
-  }
-
   return (
     <div
       className="login-modal-background"
       onClick={handleCloseLoginModal}
     >
       <div
-        className='login-modal-content animate__animated animate__faster
-        animate__fadeInDown'>
+        className='login-modal-content animate__animated animate__faster animate__bounceIn
+        '>
         <div className="login-modal-content-background">
           <div className="close-login-button">
             {
@@ -94,6 +103,7 @@ const LoginModal = ({ loginModal, handleToggleLoginModal }) => {
                           name="userEmail"
                           id="userEmail"
                           placeholder='Email'
+                          onChange={handelInputChange}
                         />
                         <div className='input-password'>
                           <input
@@ -102,6 +112,7 @@ const LoginModal = ({ loginModal, handleToggleLoginModal }) => {
                             name="userPassword"
                             id="userPassword"
                             placeholder='Password'
+                            onChange={handelInputChange}
                           />
                           {
                             showPassword
@@ -122,23 +133,7 @@ const LoginModal = ({ loginModal, handleToggleLoginModal }) => {
                           }
                         </div>
                         <div className="login-option">
-                          <div className="check-box">
-                            <input
-                              type="checkbox"
-                              name="remember"
-                              id="remember"
-                            />
-                            <label className='text-style' htmlFor='remember'>
-                              記住我
-                            </label>
-                          </div>
                           <div>
-                            <a
-                              className='text-style'
-                              onClick={handleToggleSignupModal}
-                            >
-                              加入會員？
-                            </a>
                             <a
                               className='text-style'
                               onClick={handleToggleForgotPage}
@@ -153,6 +148,12 @@ const LoginModal = ({ loginModal, handleToggleLoginModal }) => {
                             type="submit"
                             value="登入"
                           />
+                          <a
+                            className='text-style'
+                            onClick={handleToggleSignupModal}
+                          >
+                            還未加入會員嗎？立即註冊！
+                          </a>
                           <p className='other-login-text'>其他登入方式</p>
                           <div className='other-login-place'>
                             <button

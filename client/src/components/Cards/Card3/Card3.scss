@@ -25,13 +25,18 @@
           background-color: $orange;
           color: $white;
           padding: 2px 8px;
+
+          &:hover{
+            background-color: $purple;
+          }
         }
       }
     }
 
     .card-body{
-      min-height: 200px;
+      min-height: 150px;
       padding: 20px 38px 20px 38px;
+      text-align: left;
     }
   }
 

@@ -5,7 +5,10 @@ import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home/Home'
 import Checkout from './pages/Checkout'
 import Shop from './pages/Shop/Shop'
-import Blog from 'pages/Blog/Blog'
+
+import Blog from 'pages/Blog'
+import UserBlog from 'pages/Blog/UserBlog'
+
 import MemberCenter from 'pages/User/MemberCenter/MemberCenter'
 import { NotFound } from './pages/NotFound'
 import { User } from './pages/User/User'
@@ -21,6 +24,7 @@ const App = () => {
         <Route path='/' element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path='/blog' element={<Blog />} />
+          <Route path='/blog/:memberId' element={<UserBlog />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/cart' element={<ShoppingCart />} />
 

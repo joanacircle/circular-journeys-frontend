@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
-import './Blog.scss'
+import Pagination from 'rc-pagination'
 
+import './Blog.scss'
 import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
 import B001 from 'images/Blog/B001.jpeg'
 
 
 const Blog = () => {
-  const pages = [1, 2, 3, 4, 5]
   return (
     <>
     <div>
@@ -33,13 +33,13 @@ const Blog = () => {
                 <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
                 tags='旅遊'
                 avatar='CircleChang'
-                title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+                title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
               </div>
               <div className='blog-post col-md-6'>
                 <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
                 tags='旅遊'
                 avatar='CircleChang'
-                title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+                title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
               </div>
               <div className='blog-post col-md-6'>
                 <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
@@ -48,11 +48,7 @@ const Blog = () => {
                 title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
               </div>
               <div className='blog-pagination'>
-                <ul>
-                    {pages.map((v, i) => {
-                        return (<li key={v}>{v}</li>)
-                    })}
-                </ul>
+                <Pagination />
               </div>
             </div>
           </div>

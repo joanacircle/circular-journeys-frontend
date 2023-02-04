@@ -19,7 +19,7 @@ const Card3 = (props) => {
             </ul>
           </div>
           <div className='card-body'>
-            <h5>{props.title}</h5>
+            <h4>{props.title}</h4>
           </div>
           <div className='card-footer d-flex'>
             <div>

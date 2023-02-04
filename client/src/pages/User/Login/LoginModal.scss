@@ -3,6 +3,7 @@
 
 //login css
 .login-modal-background {
+  @include flex(center, "");
   position: fixed;
   top: 0;
   right: 0;
@@ -10,8 +11,6 @@
   bottom: 0;
   width: auto;
   background-color: rgba(0, 0, 0, 0.4);
-  @include flex(center, "");
-
   .login-modal-content {
     position: relative;
     overflow-y: auto;
@@ -20,31 +19,32 @@
     width: 500px;
     height: 550px;
     border-radius: 20px;
-    background-image: url(../../../images//Logo/bg-03.jpg);
-    background-size: cover;
-    background-position: center;
-    .login-modal-content-background {
-      background-color: rgba(0, 0, 0, 0.2);
-      width: 100%;
-      height: 100%;
-    }
+    background: #bac1b8;
+    // background-image: url(../../../images//Logo/bg-03.jpg);
+    // background-size: cover;
+    // background-position: center;
+    // .login-modal-content-background {
+      // background-color: rgba(0, 0, 0, 0);
+      // width: 100%;
+      // height: 100%;
+    // }
     .close-login-button {
       position: absolute;
-      padding: 15px;
-      top: 0;
-      left: 0;
+      color: $white;
+      top: 15px;
+      left: 15px;
       background-color: transparent;
       transition: 0.3s;
       cursor: pointer;
       &:hover {
-        color: $white;
+        color: $purple;
       }
     }
 
     .login-place {
       @include flex(center, "");
       flex-direction: column;
-      padding: 50px;
+      padding: 40px;
       h1 {
         margin-top: 40px;
         margin-bottom: 30px;
@@ -58,6 +58,30 @@
       .form-place {
         @include flex(center, column);
         width: 80%;
+        .input-password {
+          position: relative;
+          background: $white;
+          border-radius: $br2;
+          margin: 10px 0px;
+          width: 100%;
+          font-size: 16px;
+          .input-box {
+            margin: 0px;
+            width: 90%;
+          }
+          .show-password-icon {
+            position: absolute;
+            cursor: pointer;
+            right: 0;
+            top: 0;
+            margin: 10px;
+            transform: translateX(-50%), translateY(-50%);
+            transition: 0.3s;
+            &:hover {
+              color: $purple;
+            }
+          }
+        }
         .input-box {
           position: relative;
           border-radius: $br2;
@@ -79,7 +103,7 @@
           }
         }
         .login-option {
-          @include flex(space-between, "");
+          @include flex(end, "");
           width: 100%;
           margin-top: 5px;
         }
@@ -91,7 +115,7 @@
             border-radius: $br2;
             padding: 10px;
             margin-top: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             box-shadow: 0px 0px 5px 0.5px $gray;
             transition: 0.2s;
             letter-spacing: 5px;
@@ -118,8 +142,10 @@
             }
             .btn-google {
               background: $white;
+              opacity: 0.8;
               &:hover {
-                background: #e0e0e0;
+                background: $white;
+                opacity: 1;
               }
               &:active {
                 background: $gray;
@@ -129,20 +155,24 @@
               background: #385898;
               margin-left: 15px;
               margin-right: 15px;
+              opacity: 0.8;
               &:hover {
-                background: #273f6f;
+                background: #385898;
+                opacity: 1;
               }
               &:active {
-                opacity: 0.7;
+                background: #273f6f;
               }
             }
             .btn-apple {
               background: #111;
+              opacity: 0.8;
               &:hover {
-                background: $dark-gray;
+                background: #111;
+                opacity: 1;
               }
               &:active {
-                opacity: 0.7;
+                background: $dark-gray;
               }
             }
           }
@@ -161,10 +191,11 @@
   margin: 0 5px;
   cursor: pointer;
   &:hover {
-    color: $orange;
+    color: $purple;
   }
 }
 .other-login-text {
+  margin-top: 10px;
   font-size: 15px;
   color: $white;
   font-weight: 400;

@@ -16,7 +16,7 @@ import B004 from 'images/Blog/B004.jpeg'
 const HomeBlog = () => {
   return (
     <>
-    <section className='home-banner section'>
+    <div className='home-banner section'>
       {/* alt 下關鍵字 */}
       <img className='home-banner-img' src={Banner} alt="Banner"></img>
       <div className='title-section'>
@@ -29,7 +29,7 @@ const HomeBlog = () => {
           </button>
         </form>
       </div>
-    </section>
+    </div>
 
     <section className='section'>
       <Container className='h2-container'>

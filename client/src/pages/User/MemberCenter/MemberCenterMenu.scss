@@ -1,14 +1,11 @@
 @import "../styles/styles.scss";
 @import "../../../index.scss";
 
-// .center-content {
-//   display: inline-block;
-// }
-
 .membercenter-place {
   width: 100%;
   .membercenter-box {
     display: flex;
+    justify-content: center;
     margin: 20px;
     .col {
       margin: 0 5px;
@@ -54,6 +51,10 @@
           margin: 10px 0;
           color: #666;
         }
+        .user-point {
+          color: darkolivegreen;
+          font-size: 16px;
+        }
       }
       .page-menu {
         list-style: none;
@@ -63,11 +64,11 @@
         padding: 5px 15px;
         .list-item {
           padding: 5px 10px;
-          .link-flex {
+          .link {
             display: flex;
             align-items: center;
-            opacity: .9;
-            transition: .3s;
+            opacity: 0.9;
+            transition: 0.3s;
             &:hover {
               padding-left: 10px;
               border-left: 5px solid $orange;
@@ -78,11 +79,25 @@
               font-size: 15px;
             }
           }
+          .link-hover {
+            display: flex;
+            align-items: center;
+            opacity: 0.9;
+            transition: 0.3s;
+            padding-left: 10px;
+            border-left: 5px solid $orange;
+            color: $orange;
+            .link-content {
+              margin: 5px 10px;
+              font-size: 15px;
+            }
+          }
         }
       }
     }
     .col-2 {
-      width: 75%;
+      width: 70%;
+      margin-left: 15px;
     }
   }
 }

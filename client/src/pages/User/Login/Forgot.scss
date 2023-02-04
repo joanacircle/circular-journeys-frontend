@@ -1,7 +1,7 @@
 @import "../../../index.scss";
 @import "../styles/styles.scss";
 
-.signup-place {
+.forgot-place {
   @include flex(center, "");
   flex-direction: column;
   padding: 40px;
@@ -42,13 +42,6 @@
         }
       }
     }
-    .input-name-place {
-      @include flex(space-between,'');
-      .input-name {
-        width: 48%;
-      }
-    }
-    
     .input-box {
       position: relative;
       border-radius: $br2;
@@ -80,7 +73,7 @@
         margin-bottom: 20px;
         box-shadow: 0px 0px 5px 0.5px $gray;
         transition: 0.2s;
-        letter-spacing: 5px;
+        letter-spacing: 2px;
         transition: 0.3s;
         background: $orange;
         color: #fff;

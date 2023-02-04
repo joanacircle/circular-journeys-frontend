@@ -6,6 +6,7 @@ import { FaUserAlt } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import LoginModal from 'pages/User/Login/LoginModal'
+import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 
 const Header = () => {
   // for user state
@@ -13,9 +14,6 @@ const Header = () => {
 
   // for drop down
   const [userMenu, setUserMenu] = useState(false)
-  const handleDropdownMenu = () => {
-    setUserMenu(!userMenu)
-  }
 
   // for modals
   const [modalVisibility, setModalVisibility] = useState(false)
@@ -28,9 +26,8 @@ const Header = () => {
 
   // Login modal
   const handleToggleLoginModal = () => {
-    setLoginModal(!loginModal)
+    return userState ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
   }
-
 
   return (
     <>
@@ -64,10 +61,23 @@ const Header = () => {
                 <button onClick={toggleModal}>
                   <BiShoppingBag size={32} />
                 </button>
+                <ul>
+                  <li>
+                    {
+                      useState && userMenu &&
+                      <DropdownMenu
+                        handleToggleLoginModal={handleToggleLoginModal}
+                        userState={userState}
+                        setUserState={setUserState}
+                      />
+                    }
+                  </li>
+                </ul>
               </li>
               <li className='header-li'>
-                <button onClick={handleToggleLoginModal}>
-                  <FaUserAlt size={25} />
+                <button
+                  onClick={handleToggleLoginModal}>
+                  <FaUserAlt id='user-menu' size={30} />
                 </button>
               </li>
             </ul>
@@ -75,14 +85,20 @@ const Header = () => {
         </div>
         {
           loginModal &&
-          <LoginModal handleToggleLoginModal={handleToggleLoginModal} />
+          <LoginModal
+            userState={userState}
+            setUserState={setUserState}
+            handleToggleLoginModal={handleToggleLoginModal}
+          />
         }
-        {modalVisibility &&
+        {
+          modalVisibility &&
           <ShoppingCart
             modalVisibility={modalVisibility}
             setModalVisibility={setModalVisibility}
             toggleModal={toggleModal}
-          />}
+          />
+        }
 
       </header>
 

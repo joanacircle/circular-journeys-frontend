@@ -10,6 +10,7 @@ import B001 from 'images/Blog/B001.jpeg'
 
 
 const Blog = () => {
+  const memberId = '123' // 從 database 取得
   return (
     <>
     <div>
@@ -26,24 +27,28 @@ const Blog = () => {
               <div className='blog-post col-md-6'>
                 <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
                 tags='旅遊'
+                memberId={memberId}
                 avatar='CircleChang'
                 title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
               </div>
               <div className='blog-post col-md-6'>
                 <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
                 tags='旅遊'
+                memberId={memberId}
                 avatar='CircleChang'
                 title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
               </div>
               <div className='blog-post col-md-6'>
                 <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
                 tags='旅遊'
+                memberId={memberId}
                 avatar='CircleChang'
                 title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
               </div>
               <div className='blog-post col-md-6'>
                 <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
                 tags='旅遊'
+                memberId={memberId}
                 avatar='CircleChang'
                 title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
               </div>

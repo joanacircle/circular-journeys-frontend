@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Card3.scss'
 
 import { AiOutlineHeart } from 'react-icons/ai'
@@ -15,7 +16,9 @@ const Card3 = (props) => {
               <li># {props.tags}</li>
             </ul>
             <ul className='blog-avatar'>
-              <li>{props.avatar}</li>
+              <Link to={`/blog/${props.memberId}`}>
+                <li>{props.avatar}</li>
+              </Link>
             </ul>
           </div>
           <div className='card-body'>

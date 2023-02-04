@@ -1,0 +1,81 @@
+@import 'index.scss';
+
+.card4{
+  background: $white;
+  border-radius: $br1;
+  border: 1px solid $gray;
+  margin-bottom: 50px;
+  
+  .post-header{
+    padding: 20px 30px;
+
+    .post-meta{
+      display: flex;
+      gap: 30px;
+
+      .post-likes{
+        display: flex;
+        margin: 15px 0 15px 0;
+  
+        .heart-icon{
+          color: $orange;
+          margin-right: 3px;
+        }
+  
+        p{
+          font-size: 25px;
+          color: $dark-gray;
+        }
+      }
+  
+      .post-tags{
+
+        ul{
+          display: flex;
+          align-items: center;
+          height: 100%;
+  
+          li{
+            margin-right: 10px;
+            width: fit-content;
+            border-radius: $br2;
+            background-color: $orange;
+            color: $white;
+            padding: 2px 8px;
+            font-size: 25px;
+  
+            &:hover{
+              background-color: $purple;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .post-footer{
+    padding: 20px 30px;
+
+    .create-at-group{
+      display: flex;
+      gap: 10px;
+
+      .calendar-icon{
+        height: '100%';
+      }
+      .create-at{
+        font-size: 19px;
+        color: $gray;
+      }
+    }
+    
+    .post-content{
+      font-size: 19px;
+      line-height: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      overflow: hidden;
+    }
+  }
+}

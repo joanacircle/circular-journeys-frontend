@@ -16,5 +16,8 @@
     "stripe": "^11.8.0",
     "uuid": "^9.0.0",
     "validator": "^13.7.0"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
   }
 }

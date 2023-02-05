@@ -6,16 +6,37 @@
     flex-direction: column;
     align-items: center;
     padding: 0px;
-    
-    background: #111;
+    position: relative;
+
     box-shadow: 3px 3px 16px 4px rgba(0, 0, 0, 0.25);
     
     font-size: 16px;
     line-height: 19px;
     text-align: left;
+    
+}
+.TourCard:hover .TourCardImg{
+    background: linear-gradient(135deg, #f403d1, #64b5f6);
+    filter: blur(8px);
+    // transform: translateY(30px) scale(0.9);
+}
+.TourCard:hover .TourCardText{
+    background: linear-gradient(135deg, #ffec61, #f321d7);
+
 }
 .TourCardImg{
-    width: 352px;
-    height: 198px;
+    width: 380px;
+    height: 240px;
     object-fit: cover;
+
+}
+.TourCardText{
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 15px;
+    color:#EEE;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

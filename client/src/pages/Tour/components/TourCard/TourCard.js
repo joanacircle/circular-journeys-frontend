@@ -6,8 +6,12 @@ const TourCard = () => {
     return (
     <>
     <div className='TourCard'>
-    <img src={require("images/Tour/T01.jpg")} className='TourCardImg' alt='TourCardImg'/>
-      <div>TourCard</div>
+    <img src={require("images/Tour/T06.jpg")}
+    className='TourCardImg' alt='TourCardImg'/>
+      <span className='TourCardText'>
+      <h2>TourCard</h2>
+      <h4>NiceOne</h4>
+      </span>
     </div>
     </>
     )

@@ -5,7 +5,6 @@ const Tour = () => {
   return (
     <>
     <TourCard />
-    <TourTitle />
     </>
   )
 }

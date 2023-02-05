@@ -49,5 +49,24 @@
         }
       }
     }
+    .input-submit {
+      @include flex(flex-end, "");
+      .label-place {
+        input {
+          padding: 10px 30px;
+          transition: 0.3s;
+          letter-spacing: 2px;
+          color: $white;
+          background: $orange;
+          border: 0.3px solid #fff;
+          &:hover {
+            background: $purple;
+          }
+          &:active {
+            background: #3f3875;
+          }
+        }
+      }
+    }
   }
 }

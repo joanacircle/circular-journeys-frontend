@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { taiwan } from 'data/taiwan-data'
 
-const DynamicSelect = () => {
-  // TODO: make object to handle input change
-  const [firstOption, setFirstOption] = useState('')
-  const [secondOption, setSecondOption] = useState('')
+const DynamicSelect = ({ inputData, handleInputChange }) => {
   const options = taiwan
 
-  const handleFirstOptionChange = (event) => {
-    setFirstOption(event.target.value)
-    setSecondOption('')
-  }
-  const handleSecondOptionChange = (event) => {
-    setSecondOption(event.target.value)
-  }
-  console.log(firstOption, secondOption)
   return (
     <>
+      <div className='label-place'>
+        <label htmlFor="nation">國家</label>
+        <select
+          name='nation'
+          id='nation'
+          onChange={handleInputChange}
+          required
+        >
+          <option value="">--- 請選擇 ---</option>
+          <option value='臺灣'>臺灣</option>
+        </select>
+      </div>
       <div className='label-place'>
         <label htmlFor="city">城市</label>
         <select
           name='city'
           id='city'
-          value={firstOption}
-          onChange={handleFirstOptionChange}
+          onChange={handleInputChange}
+          required
         >
-          <option>--- 請選擇 ---</option>
+          <option value=''>--- 請選擇 ---</option>
           {
+            inputData.nation !== undefined && inputData.nation !== '' &&
             options.map((item) => (
               <option key={item.value} value={item.value}>
                 {item.value}
@@ -40,14 +42,14 @@ const DynamicSelect = () => {
         <select
           name='districts'
           id='districts'
-          value={secondOption}
-          onChange={handleSecondOptionChange}
+          onChange={handleInputChange}
+          required
         >
-          <option>--- 請選擇 ---</option>
+          <option value=''>--- 請選擇 ---</option>
           {
-            firstOption !== '' &&
+            inputData.nation !== '' &&
             options.map(item => (
-              item.value === firstOption &&
+              item.value === inputData.city &&
               item.districts.map(item => (
                 <option key={item.name} value={item.name}>
                   {item.name}
@@ -57,26 +59,31 @@ const DynamicSelect = () => {
           }
         </select>
       </div>
-      <div className='label-place'>
+      {/* <div className='label-place'>
         <label htmlFor="postalCode">郵遞區號</label>
         <select
           name='postalCode'
           id='postalCode'
-          disabled
+          onChange={handleInputChange}
+          required
         >
+          <option value=''>--- 請選擇 ---</option>
           {
-            firstOption !== '' &&
-            options.map(item => (
-              item.districts.map(item => (
-                item.name === secondOption &&
-                <option key={item.pc} value={item.pc} >
-                  {item.pc}
-                </option>
+            inputData.city !== '' &&
+            (
+              options.map(item => (
+                item.districts.map(item => (
+                  item.name === inputData.districts &&
+                  <option key={item.pc} value={item.pc} >
+                    {item.pc}
+                  </option>
+                ))
               ))
-            ))
+            )
+
           }
         </select>
-      </div>
+      </div> */}
     </>
   )
 }

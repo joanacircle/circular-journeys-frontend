@@ -6,41 +6,30 @@
   border: 1px solid $gray;
   margin-bottom: 50px;
   
-  .post-header{
+  .card-header{
     padding: 20px 30px;
 
+    
     .post-meta{
+      margin-bottom: 10px;
       display: flex;
       gap: 30px;
-
-      .post-likes{
-        display: flex;
-        margin: 15px 0 15px 0;
-  
-        .heart-icon{
-          color: $orange;
-          margin-right: 3px;
-        }
-  
-        p{
-          font-size: 25px;
-          color: $dark-gray;
-        }
-      }
-  
+      justify-content: space-between;
+      
       .post-tags{
-
+  
         ul{
           display: flex;
           align-items: center;
           height: 100%;
+          gap: 10px;
   
           li{
-            margin-right: 10px;
-            width: fit-content;
-            border-radius: $br2;
-            background-color: $orange;
-            color: $white;
+            // width: fit-content;
+            // border-radius: $br2;
+            // background-color: $orange;
+            // color: $white;
+            color: $orange;
             padding: 2px 8px;
             font-size: 25px;
   
@@ -50,24 +39,66 @@
           }
         }
       }
+
+      .post-likes{
+
+        .heart-icon{
+          color: $orange;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+  
     }
   }
 
-  .post-footer{
+  .card-footer{
     padding: 20px 30px;
 
-    .create-at-group{
+    .post-meta2{
       display: flex;
-      gap: 10px;
+      gap: 15px;
+      align-items: center;
 
-      .calendar-icon{
-        height: '100%';
-      }
-      .create-at{
-        font-size: 19px;
+      .create-at-group{
+        display: flex;
+        gap: 5px;
         color: $gray;
+        align-items: center;
+  
+        .calendar-icon{
+          height: '100%';
+          border-radius: 50%;
+          background: $gray;
+          color: $white;
+          padding: 3px;
+        }
+        p{
+          font-size: 19px;
+        }
       }
+
+      .post-likes-group{
+        display: flex;
+        gap: 5px;
+        color: $gray;
+        align-items: center;
+
+        .heart-icon{
+          height: '100%';
+          border-radius: 50%;
+          background: $gray;
+          color: $white;
+          padding: 3px;
+        }
+
+        p{
+          font-size: 19px;
+        }
+      }
+
     }
+
     
     .post-content{
       font-size: 19px;
@@ -76,6 +107,32 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 5;
       overflow: hidden;
+    }
+
+    .read-more{
+      margin-top: 10px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      
+      p{
+        font-size: 19px;
+      }
+      
+      .right-icon{
+        color: $orange;
+      }
+
+      &:hover{
+        p{
+          color: $purple;
+        }
+        
+        .right-icon{
+          color: $purple;
+        }
+      }
     }
   }
 }

@@ -103,10 +103,10 @@
             border: 2px solid $orange;
             color: $orange;
             font-size: larger;
+            cursor: pointer;
 
             &:hover{
               border: 2px solid $purple;
-              // background-color: $purple;
               color: $purple;
             }
           }

@@ -135,7 +135,7 @@
             padding-left: 25px;
             display: flex;
             flex-wrap: wrap;
-  
+            
             li{
               margin: 0 5px 10px 0;
               padding: 2px 8px;
@@ -144,6 +144,7 @@
               border: 2px solid $orange;
               color: $orange;
               font-size: larger;
+              cursor: pointer;
   
               &:hover{
                 border: 2px solid $purple;

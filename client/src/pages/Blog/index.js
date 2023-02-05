@@ -7,6 +7,7 @@ import './Blog.scss'
 import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
 import B001 from 'images/Blog/B001.jpeg'
+import BlogCategory from 'components/BlogCategory'
 
 
 const Blog = () => {
@@ -68,24 +69,7 @@ const Blog = () => {
               </form>
             </div>
             <div className='blog-aside-item'>
-              <h4>分類</h4>
-              <ul className='blog-categories'>
-                <Link to='/blog' title='Blog'>
-                  <li>熱門</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>最新</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>美食</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>景點</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>住宿</li>
-                </Link>
-              </ul>
+              <BlogCategory />
             </div>
             <div className='blog-aside-item'>
               <h4>探索</h4>

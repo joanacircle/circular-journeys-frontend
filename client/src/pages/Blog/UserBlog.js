@@ -5,12 +5,14 @@ import Pagination from 'rc-pagination'
 
 import './UserBlog.scss'
 import Card4 from 'components/Cards/Card4'
+import BlogCategory from 'components/BlogCategory'
 import B001 from 'images/Blog/B001.jpeg'
 
 const UserBlog = () => {
   const { memberId } = useParams()
   const memberName = 'CircleChang'
   // Card4 props:
+  const linkToTags = '#'
   const tags = '旅遊'
   const title = '高雄一日遊-駁二、愛河、瑞豐夜市'
   const linkToPost = '#'
@@ -39,6 +41,29 @@ const UserBlog = () => {
                 </ul>
               </div>
               <Card4
+                linkToTags={linkToTags}
+                tags={tags}
+                title={title}
+                linkToPost={linkToPost}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                createAt= {createAt}
+                likes={likes}
+                postContent={postContent}/>
+
+              <Card4
+                linkToTags={linkToTags}
+                tags={tags}
+                title={title}
+                linkToPost={linkToPost}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                createAt= {createAt}
+                likes={likes}
+                postContent={postContent}/>
+
+              <Card4
+                linkToTags={linkToTags}
                 tags={tags}
                 title={title}
                 linkToPost={linkToPost}
@@ -71,24 +96,7 @@ const UserBlog = () => {
               </form>
             </div>
             <div className='userblog-aside-item'>
-              <h4>分類</h4>
-              <ul className='blog-categories'>
-                <Link to='/blog' title='Blog'>
-                  <li>熱門</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>最新</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>美食</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>景點</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>住宿</li>
-                </Link>
-              </ul>
+              <BlogCategory />
             </div>
             <div className='userblog-aside-item'>
               <h4>探索</h4>

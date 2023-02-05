@@ -14,9 +14,15 @@ const Card4 = (props) => {
         <div className='post-meta'>
           <div className="post-tags">
             <ul>
-              <li># {props.tags}</li>
-              <li># {props.tags}</li>
-              <li># {props.tags}</li>
+              <Link to={props.linkToTags}>
+                <li># {props.tags}</li>
+              </Link>
+              <Link to={props.linkToTags}>
+                <li># {props.tags}</li>
+              </Link>
+              <Link to={props.linkToTags}>
+                <li># {props.tags}</li>
+              </Link>
             </ul>
           </div>
           <div className='post-likes'>

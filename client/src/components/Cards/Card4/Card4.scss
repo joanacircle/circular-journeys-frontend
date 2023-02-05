@@ -25,16 +25,12 @@
           gap: 10px;
   
           li{
-            // width: fit-content;
-            // border-radius: $br2;
-            // background-color: $orange;
-            // color: $white;
             color: $orange;
             padding: 2px 8px;
             font-size: 25px;
   
             &:hover{
-              background-color: $purple;
+              color: $purple;
             }
           }
         }

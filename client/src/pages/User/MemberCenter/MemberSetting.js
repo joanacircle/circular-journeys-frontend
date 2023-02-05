@@ -14,7 +14,7 @@ const MemberSetting = () => {
   }
 
   return (
-    <div className="setting-place">
+    <div className="setting-place animate__animated animate__fadeInDown">
       <h3>帳號設定</h3>
       <hr />
       <div className='setting-input-place'>

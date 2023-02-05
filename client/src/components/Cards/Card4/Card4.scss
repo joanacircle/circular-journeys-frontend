@@ -1,0 +1,138 @@
+@import 'index.scss';
+
+.card4{
+  background: $white;
+  border-radius: $br1;
+  border: 1px solid $gray;
+  margin-bottom: 50px;
+  
+  .card-header{
+    padding: 20px 30px;
+
+    
+    .post-meta{
+      margin-bottom: 10px;
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+      
+      .post-tags{
+  
+        ul{
+          display: flex;
+          align-items: center;
+          height: 100%;
+          gap: 10px;
+  
+          li{
+            // width: fit-content;
+            // border-radius: $br2;
+            // background-color: $orange;
+            // color: $white;
+            color: $orange;
+            padding: 2px 8px;
+            font-size: 25px;
+  
+            &:hover{
+              background-color: $purple;
+            }
+          }
+        }
+      }
+
+      .post-likes{
+
+        .heart-icon{
+          color: $orange;
+          margin-right: 5px;
+          cursor: pointer;
+        }
+      }
+  
+    }
+  }
+
+  .card-footer{
+    padding: 20px 30px;
+
+    .post-meta2{
+      display: flex;
+      gap: 15px;
+      align-items: center;
+
+      .create-at-group{
+        display: flex;
+        gap: 5px;
+        color: $gray;
+        align-items: center;
+  
+        .calendar-icon{
+          height: '100%';
+          border-radius: 50%;
+          background: $gray;
+          color: $white;
+          padding: 3px;
+        }
+        p{
+          font-size: 19px;
+        }
+      }
+
+      .post-likes-group{
+        display: flex;
+        gap: 5px;
+        color: $gray;
+        align-items: center;
+
+        .heart-icon{
+          height: '100%';
+          border-radius: 50%;
+          background: $gray;
+          color: $white;
+          padding: 3px;
+        }
+
+        p{
+          font-size: 19px;
+        }
+      }
+
+    }
+
+    
+    .post-content{
+      font-size: 19px;
+      line-height: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      overflow: hidden;
+    }
+
+    .read-more{
+      margin-top: 10px;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      
+      p{
+        font-size: 19px;
+      }
+      
+      .right-icon{
+        color: $orange;
+      }
+
+      &:hover{
+        p{
+          color: $purple;
+        }
+        
+        .right-icon{
+          color: $purple;
+        }
+      }
+    }
+  }
+}

@@ -1,16 +1,16 @@
 import React from 'react'
 import './TourCard.scss'
 
-const TourCard = () => {
-
+const TourCard = (p) => {
+const { id, name, adress, img, tags } = p.card
     return (
     <>
     <div className='TourCard'>
-    <img src={require("images/Tour/T06.jpg")}
+    <img src={require(`images/Tour/${img}`)}
     className='TourCardImg' alt='TourCardImg'/>
       <span className='TourCardText'>
-      <h2>TourCard</h2>
-      <h4>NiceOne</h4>
+      <h3>{name}</h3>
+      <h5>{adress}</h5>
       </span>
     </div>
     </>

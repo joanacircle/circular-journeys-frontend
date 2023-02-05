@@ -6,11 +6,15 @@ import Pagination from 'rc-pagination'
 import './Blog.scss'
 import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
+import BlogCategory from 'components/BlogCategory'
+import TagsCategory from 'components/TagsCategory'
 import B001 from 'images/Blog/B001.jpeg'
 
 
 const Blog = () => {
   const memberId = '123' // 從 database 取得
+  const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
+
   return (
     <>
     <div>
@@ -68,41 +72,10 @@ const Blog = () => {
               </form>
             </div>
             <div className='blog-aside-item'>
-              <h4>分類</h4>
-              <ul className='blog-categories'>
-                <Link to='/blog' title='Blog'>
-                  <li>熱門</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>最新</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>美食</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>景點</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>住宿</li>
-                </Link>
-              </ul>
+              <BlogCategory />
             </div>
             <div className='blog-aside-item'>
-              <h4>探索</h4>
-              <ul className='blog-aside-tags'>
-                <li>左營</li>
-                <li>高雄港</li>
-                <li>壽山</li>
-                <li>旗津</li>
-                <li>一日遊</li>
-                <li>夜市</li>
-                <li>新開幕</li>
-                <li>熱門打卡</li>
-                <li>親子餐廳</li>
-                <li>各種</li>
-                <li>標籤</li>
-                <li>想不到</li>
-              </ul>
+              <TagsCategory tags={tagsCategory}/>
             </div>
           </div>
         </div>

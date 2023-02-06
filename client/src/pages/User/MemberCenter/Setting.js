@@ -16,10 +16,10 @@ const SettingPage = () => {
   console.log(inputData)
 
   return (
-    <div className="setting-place animate__animated animate__fadeInLeft animate__faster">
+    <div className="top-place animate__animated animate__fadeInDown animate__faster">
       <h3>帳號設定</h3>
       <hr />
-      <div className='setting-input-place'>
+      <div className='input-place'>
         <form>
           <div className='input-place'>
             <div className='label-place'>

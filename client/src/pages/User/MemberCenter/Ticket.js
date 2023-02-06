@@ -3,10 +3,10 @@ import './Ticket.scss'
 
 const TicketPage = () => {
   return (
-    <div className="ticket-place animate__animated animate__fadeInLeft animate__faster">
+    <div className="top-place animate__animated animate__fadeInDown animate__faster">
       <h3>折扣卷</h3>
       <hr />
-      <div className='ticket-input-place'>
+      <div className='input-place'>
       </div >
     </div >
   )

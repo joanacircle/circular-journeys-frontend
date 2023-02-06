@@ -15,7 +15,7 @@ import B004 from 'images/Blog/B004.jpeg'
 
 const HomeBlog = () => {
   // Card props:
-  const postId = '1'
+  const postId = 'b123'
   const imgSrc = [B001, B002, B003, B004]
   const imgAlt = [B001, B002, B003, B004]
   const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
@@ -76,13 +76,13 @@ const HomeBlog = () => {
       <Row>
         <Col>
           <Card2
-          tags={tags}
-          postId={postId}
-          imgSrc={imgSrc[0]}
-          imgAlt={imgAlt[0]}
-          tagId={tagId}
-          title={title}
-          likes={likes}/>
+            tags={tags}
+            postId={postId}
+            imgSrc={imgSrc[0]}
+            imgAlt={imgAlt[0]}
+            tagId={tagId}
+            title={title}
+            likes={likes}/>
         </Col>
         <Col className='padding-left padding-right'>
           <Card2

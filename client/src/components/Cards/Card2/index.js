@@ -8,7 +8,7 @@ const Card2 = (props) => {
   return (
     <>
     <div className="card2">
-      <Link to={`blog/${props.postId}`}>
+      <Link to={`/blog/${props.postId}`}>
         <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
       </Link>
       <div className="card-body">

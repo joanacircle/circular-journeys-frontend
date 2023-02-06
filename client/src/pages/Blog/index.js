@@ -16,7 +16,7 @@ const Blog = () => {
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
   // Card3 props:
   const tags = ['旅遊', '旅遊', '旅遊']
-  const postId = '456'
+  const postId = 'b123'
   const imgSrc = B001
   const imgAlt = 'imgAlt'
   const tagId = '1' // 先抓到 tag value 在找到該 tag 的 id

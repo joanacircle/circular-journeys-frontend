@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './MemberCenterMenu.scss'
 import { AiFillCamera, AiOutlineLike } from 'react-icons/ai'
@@ -12,6 +12,11 @@ import MemberSetting from './MemberSetting'
 
 
 const MemberCenterMenu = () => {
+  const [changePage, setChangePage] = useState(false)
+  const handleChangePage = () => {
+    setChangePage(!changePage)
+  }
+
   return (
     <div className="membercenter-place">
       <div className="membercenter-box">
@@ -28,7 +33,7 @@ const MemberCenterMenu = () => {
           </div>
           <ul className="page-menu">
             <li className="list-item">
-              <Link className="link" to='#' >
+              <Link className={changePage ? 'link-hover' : 'link'} onClick={handleChangePage} >
                 <IoSettingsOutline />
                 <span className="link-content">帳號設定</span>
               </Link>
@@ -73,6 +78,7 @@ const MemberCenterMenu = () => {
         </div>
         <div className="col col-2">
           {
+            changePage &&
             <MemberSetting />
           }
         </div>

@@ -14,6 +14,16 @@ import B004 from 'images/Blog/B004.jpeg'
 
 
 const HomeBlog = () => {
+  // Card props:
+  const postId = '1'
+  const imgSrc = [B001, B002, B003, B004]
+  const imgAlt = [B001, B002, B003, B004]
+  const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
+  // Card2 props:
+  const tags = ['旅遊', '旅遊']
+  const tagId = '2'
+  const likes = '10k'
+
   return (
     <>
     <div className='home-banner section'>
@@ -39,16 +49,16 @@ const HomeBlog = () => {
         <BsFillArrowLeftCircleFill className='arrow-left' />
         <Row>
         <Col>
-          <Card imgSrc={B001} imgAlt="abc" title="文章標題"/>
+          <Card postId={postId} imgSrc={imgSrc[0]} imgAlt={imgAlt[0]} title={title}/>
         </Col>
         <Col className='padding-left'>
-          <Card imgSrc={B002} imgAlt="abc" title="文章標題"/>
+          <Card postId={postId} imgSrc={imgSrc[1]} imgAlt={imgAlt[1]} title={title}/>
         </Col>
         <Col className='padding-left padding-right'>
-          <Card imgSrc={B003} imgAlt="abc" title="文章標題"/>
+          <Card postId={postId} imgSrc={imgSrc[2]} imgAlt={imgAlt[0]} title={title}/>
         </Col>
         <Col>
-          <Card imgSrc={B004} imgAlt="abc" title="文章標題"/>
+          <Card postId={postId} imgSrc={imgSrc[3]} imgAlt={imgAlt[0]} title={title}/>
         </Col>
         </Row>
         <BsFillArrowRightCircleFill className='arrow-right'/>
@@ -65,13 +75,34 @@ const HomeBlog = () => {
       <BsFillArrowLeftCircleFill className='arrow-left' />
       <Row>
         <Col>
-          <Card2 imgSrc={B001} imgAlt="B001" tags="旅遊" title="文章標題" likes="10k"/>
+          <Card2
+          tags={tags}
+          postId={postId}
+          imgSrc={imgSrc[0]}
+          imgAlt={imgAlt[0]}
+          tagId={tagId}
+          title={title}
+          likes={likes}/>
         </Col>
         <Col className='padding-left padding-right'>
-          <Card2 imgSrc={B003} imgAlt="B001" tags="旅遊" title="文章標題" likes="10k"/>
+          <Card2
+            tags={tags}
+            postId={postId}
+            imgSrc={imgSrc[0]}
+            imgAlt={imgAlt[0]}
+            tagId={tagId}
+            title={title}
+            likes={likes}/>
         </Col>
         <Col>
-          <Card2 imgSrc={B004} imgAlt="B001" tags="旅遊" title="文章標題" likes="10k"/>
+          <Card2
+            tags={tags}
+            postId={postId}
+            imgSrc={imgSrc[0]}
+            imgAlt={imgAlt[0]}
+            tagId={tagId}
+            title={title}
+            likes={likes}/>
         </Col>
       </Row>
       <BsFillArrowRightCircleFill className='arrow-right'/>

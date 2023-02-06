@@ -4,17 +4,13 @@
   margin-top: 15px;
   padding-left: 25px;
 
-  ul{
-
     li{
       margin-bottom: 5px;
-      font-size: larger;
       cursor: pointer;
-  
+      font-size: 20px;
+      
       &:hover{
         color: $purple;
       }
-
     }
-  }
 }

@@ -5,15 +5,23 @@ import './Card3.scss'
 import { AiOutlineHeart } from 'react-icons/ai'
 
 const Card3 = (props) => {
+  const TagsValue = props.tags
   return (
     <>
       <div className="card3">
-        <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
+        <Link to={`blog/${props.postId}`}>
+          <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
+        </Link>
         <div className="card-caption">
           <div className='card-header d-flex'>
             <ul className='blog-tags d-flex'>
-              <li># {props.tags}</li>
-              <li># {props.tags}</li>
+              {TagsValue.map((v, i) => {
+                return (
+                  <li key={i}>
+                    <Link to={`blog/${props.tagId}`}># {v}</Link>
+                  </li>
+                )
+              })}
             </ul>
             <ul className='blog-avatar'>
               <Link to={`/blog/${props.memberId}`}>

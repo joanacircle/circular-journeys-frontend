@@ -12,8 +12,19 @@ import B001 from 'images/Blog/B001.jpeg'
 
 
 const Blog = () => {
-  const memberId = '123' // 從 database 取得
+  // 從 database 取得
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
+  // Card3 props:
+  const tags = ['旅遊', '旅遊', '旅遊']
+  const postId = '456'
+  const imgSrc = B001
+  const imgAlt = 'imgAlt'
+  const tagId = '1' // 先抓到 tag value 在找到該 tag 的 id
+  const memberId = '123'
+  const avatar = 'CircleChang'
+  const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
+  const createAt = 'Feb 27, 2018 at 6:53pm'
+  const likes = '10k'
 
   return (
     <>
@@ -29,32 +40,56 @@ const Blog = () => {
           <div className='col-md-10 col-lg-8 col-xl-7 text-center'>
             <div className='row'>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
+                <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
                 memberId={memberId}
-                avatar='CircleChang'
-                title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
+              <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
                 memberId={memberId}
-                avatar='CircleChang'
-                title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
+              <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
                 memberId={memberId}
-                avatar='CircleChang'
-                title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
+              <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
                 memberId={memberId}
-                avatar='CircleChang'
-                title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-pagination'>
                 <Pagination />

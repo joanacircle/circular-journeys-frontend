@@ -86,6 +86,11 @@
     top: calc(50% - 20px);
     left: calc(0% - 50px);
     color: $orange;
+    cursor: pointer;
+
+    &:hover{
+      color: $purple;
+    }
   }
   
   .arrow-right{
@@ -95,5 +100,10 @@
     top: calc(50% - 20px);
     right: calc(0% - 50px);
     color: $orange;
+    cursor: pointer;
+
+    &:hover{
+      color: $purple;
+    }
   }
 }

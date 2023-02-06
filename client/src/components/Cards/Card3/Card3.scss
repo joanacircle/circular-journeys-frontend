@@ -29,6 +29,10 @@
           &:hover{
             background-color: $purple;
           }
+
+          a:hover{
+            color: $white;
+          }
         }
       }
     }
@@ -50,6 +54,7 @@
       display: block;
       color: $orange;
       margin-right: 3px;
+      cursor: pointer;
     }
   }
 }

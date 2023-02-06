@@ -6,10 +6,26 @@ import Pagination from 'rc-pagination'
 import './Blog.scss'
 import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
+import BlogCategory from 'components/BlogCategory'
+import TagsCategory from 'components/TagsCategory'
 import B001 from 'images/Blog/B001.jpeg'
 
 
 const Blog = () => {
+  // 從 database 取得
+  const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
+  // Card3 props:
+  const tags = ['旅遊', '旅遊', '旅遊']
+  const postId = 'b123'
+  const imgSrc = B001
+  const imgAlt = 'imgAlt'
+  const tagId = '1' // 先抓到 tag value 在找到該 tag 的 id
+  const memberId = '123'
+  const avatar = 'CircleChang'
+  const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
+  const createAt = 'Feb 27, 2018 at 6:53pm'
+  const likes = '10k'
+
   return (
     <>
     <div>
@@ -24,28 +40,56 @@ const Blog = () => {
           <div className='col-md-10 col-lg-8 col-xl-7 text-center'>
             <div className='row'>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
-                avatar='CircleChang'
-                title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+                <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
+                memberId={memberId}
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
-                avatar='CircleChang'
-                title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+              <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
+                memberId={memberId}
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
-                avatar='CircleChang'
-                title="假設文章標題為十五個字可以吧嗎" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+              <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
+                memberId={memberId}
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-post col-md-6'>
-                <Card3 className='' imgSrc={B001} imgAlt="B001.jpg"
-                tags='旅遊'
-                avatar='CircleChang'
-                title="文章標題" createAt='Feb 27, 2018 at 6:53pm' likes='10k'/>
+              <Card3
+                tags={tags}
+                postId={postId}
+                imgSrc={imgSrc}
+                imgAlt={imgAlt}
+                tagId={tagId}
+                memberId={memberId}
+                avatar={avatar}
+                title={title}
+                createAt={createAt}
+                likes={likes}/>
               </div>
               <div className='blog-pagination'>
                 <Pagination />
@@ -63,41 +107,10 @@ const Blog = () => {
               </form>
             </div>
             <div className='blog-aside-item'>
-              <h4>分類</h4>
-              <ul className='blog-categories'>
-                <Link to='/blog' title='Blog'>
-                  <li>熱門</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>最新</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>美食</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>景點</li>
-                </Link>
-                <Link to='/blog' title='Blog'>
-                  <li>住宿</li>
-                </Link>
-              </ul>
+              <BlogCategory />
             </div>
             <div className='blog-aside-item'>
-              <h4>探索</h4>
-              <ul className='blog-aside-tags'>
-                <li>左營</li>
-                <li>高雄港</li>
-                <li>壽山</li>
-                <li>旗津</li>
-                <li>一日遊</li>
-                <li>夜市</li>
-                <li>新開幕</li>
-                <li>熱門打卡</li>
-                <li>親子餐廳</li>
-                <li>各種</li>
-                <li>標籤</li>
-                <li>想不到</li>
-              </ul>
+              <TagsCategory tags={tagsCategory}/>
             </div>
           </div>
         </div>

@@ -1,0 +1,121 @@
+@import 'index.scss';
+
+.userblog-container{
+  width: 100vw;
+  background: $light-gray;
+  min-height: 100vh;
+
+    .page-body{
+      max-width: 1500px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      padding-top: 30px;
+
+      .post-container{
+        display: flex;
+        flex-direction: column;
+        max-width: 1000px;
+        width: 100%;
+        
+        .userblog-h2{
+          margin: 60px 0 60px 0;
+          font-size: 60px;
+        }
+
+        .userblog-nav{
+          border-bottom: 1px solid $gray;
+          margin-bottom: 30px;
+
+          ul{
+            display: flex;
+
+            li{
+              margin-right: 30px;
+              padding-bottom: 15px;
+              font-size: 20px;
+              
+              &:hover{
+                color: $purple;
+              }
+            }
+            .Active{
+              border-bottom: 2px solid $dark-gray;
+
+              &:hover{
+                border-bottom: 2px solid $purple;
+              }
+            }
+          }
+        }
+
+      
+          .userblog-pagination{
+            margin: 30px auto;
+            // display: flex;
+            // justify-content: center;
+          }
+      }
+
+      .userblog-aside{
+        max-width: 450px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .userblog-aside-item{
+          margin-bottom: 30px;
+
+          .member-avatar{
+
+            img{
+              border-radius: 50%;
+              background: $white;
+              width: 100px;
+              height: 100px;
+              margin-bottom: 15px;
+            }
+            h4{
+              font-weight: bold;
+            }
+          }
+
+          .blog-search{
+            padding: 5px;
+            max-width: 300px;
+            max-height: 60px;
+            background-color: $white;
+            border-radius: $br2;
+            display: flex;
+
+            .blog-input{
+              width: 100%;
+              padding: 10px;
+              border-radius: $br2;
+              font-size: large;
+            }
+
+            .blog-input::placeholder{
+              text-align: left;
+            }
+
+            .blog-input:focus{
+              outline: none;
+            }
+
+            .blog-button{
+              width: auto;
+              height: auto;
+              padding: 10px;
+              color: $orange;
+              border-radius: $br2;
+        
+              .search-icon{
+                margin: 0 auto;
+              }
+            }
+          }
+        }
+      }
+    }
+}

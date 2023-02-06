@@ -8,8 +8,10 @@ import Shop from './pages/Shop/Shop'
 
 import Blog from 'pages/Blog'
 import UserBlog from 'pages/Blog/UserBlog'
-import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
+import SinglePost from 'pages/Blog/SinglePost'
+import SearchResult from 'pages/Blog/SearchResult'
 
+import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 import { NotFound } from './pages/NotFound'
 import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
 import MemberSetting from 'pages/User/MemberCenter/Setting'
@@ -24,6 +26,8 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path='/blog' element={<Blog />} />
           <Route path='/blog/:memberId' element={<UserBlog />} />
+          <Route path='/blog/b123' element={<SinglePost />} />
+          {/* <Route path='/blog/:tagId' element={<SearchResult />} /> */}
           <Route path='/shop' element={<Shop />} />
           <Route path='/cart' element={<ShoppingCart />} />
 

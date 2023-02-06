@@ -1,5 +1,5 @@
 const express = require('express')
-const db = require('../../modules/connect-sql')
+const db = require('../../model/connect-sql')
 const uuid = require('uuid')
 
 const router = express.Router()
@@ -35,7 +35,7 @@ router.post('/signup', (req, res, next) => {
     if (err) throw err
     if (result.length > 0) {
       res.send({
-        state:false,
+        state: false,
         message: `此信箱已重複註冊！`
       })
     } else {
@@ -56,12 +56,12 @@ router.post('/signup', (req, res, next) => {
         if (err) throw err
         if (result) {
           res.send({
-            state:true,
+            state: true,
             message: `註冊成功！`
           })
         } else {
           res.send({
-            state:false,
+            state: false,
             message: `註冊失敗！`
           })
         }

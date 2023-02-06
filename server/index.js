@@ -1,39 +1,25 @@
 const express = require("express")
 const app = express()
-require("dotenv").config()
-const stripe = require("stripe")(process.env.SECRET_KEY)
-const bodyParser = require("body-parser")
-const cors = require("cors")
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
-app.use(bodyParser.urlencoded({ extended: true }))
+// require("dotenv").config()
+
+// individual component
+const user = require('./src/route/user/users')
+const paymentRoute = require("./src/route/shop/payment")(cors)
+
+// general middleware
 app.use(bodyParser.json())
-
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
-app.post("/payment", cors(), async (req, res) => {
-  let { amount, id } = req.body
-  try {
-    const payment = await stripe.paymentIntents.create({
-      amount,
-      currency: "twd",
-      description: "Circular Journeys Inc",
-      payment_method: id,
-      confirm: true
-    })
-    console.log("Payment", payment)
-    res.json({
-      message: "Payment successful",
-      success: true
-    })
-  } catch (error) {
-    console.log("Error", error)
-    res.json({
-      message: "Payment failed",
-      success: false
-    })
-  }
-})
+// user
+app.use('/api/user', user)
 
-app.listen(process.env.PORT || 4000, () => {
-  console.log("Sever is listening on port 4000")
-})
+// payment
+app.post('/payment', paymentRoute)
+
+const PORT = process.env.PORT || 8080
+
+app.listen(PORT, () => { console.log(`Server is running on http://localhost:${PORT}`) })

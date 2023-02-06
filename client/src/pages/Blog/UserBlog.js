@@ -16,7 +16,7 @@ const UserBlog = () => {
   const linkToTags = '#'
   const tags = '旅遊'
   const title = '高雄一日遊-駁二、愛河、瑞豐夜市'
-  const linkToPost = '#'
+  const postId = 'b123'
   const imgSrc = B001
   const imgAlt = 'img'
   const createAt = '2023/02/02'
@@ -31,7 +31,7 @@ const UserBlog = () => {
     <>
     <div>
       <div className='userblog-container'>
-        <div className='userblog-body'>
+        <div className='page-body'>
           <div className='post-container'>
               <h2 className='userblog-h2'>{memberName}</h2>
               <div className='userblog-nav'>
@@ -48,7 +48,7 @@ const UserBlog = () => {
                 linkToTags={linkToTags}
                 tags={tags}
                 title={title}
-                linkToPost={linkToPost}
+                postId={postId}
                 imgSrc={imgSrc}
                 imgAlt={imgAlt}
                 createAt= {createAt}
@@ -59,7 +59,7 @@ const UserBlog = () => {
                 linkToTags={linkToTags}
                 tags={tags}
                 title={title}
-                linkToPost={linkToPost}
+                postId={postId}
                 imgSrc={imgSrc}
                 imgAlt={imgAlt}
                 createAt= {createAt}
@@ -70,7 +70,7 @@ const UserBlog = () => {
                 linkToTags={linkToTags}
                 tags={tags}
                 title={title}
-                linkToPost={linkToPost}
+                postId={postId}
                 imgSrc={imgSrc}
                 imgAlt={imgAlt}
                 createAt= {createAt}

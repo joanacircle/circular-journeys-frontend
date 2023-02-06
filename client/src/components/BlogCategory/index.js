@@ -20,7 +20,7 @@ const BlogCategory = () => {
         <Link to='#' title='景點'>景點</Link>
       </li>
       <li>
-        <Link to='#' title='景點'>住宿</Link>
+        <Link to='#' title='住宿'>住宿</Link>
       </li>
     </ul>
     </>

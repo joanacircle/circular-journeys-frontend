@@ -65,6 +65,8 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
           <div className='ticket'>3</div>
         </div>
         <div className='divider'></div>
+
+        {/* for ' circle circle ' */}
         <Link className='menu-option'>
           <div className='user-name'>
             <BsPersonBadge size={20} />
@@ -74,9 +76,11 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
         <Link className='menu-option'>
           <div className='user-name'>
             <CiEdit size={20} />
-            <p>撰寫文章</p>
+            <p>撰寫日誌</p>
           </div>
         </Link>
+        {/* ------------------ */}
+
         <div className='divider'></div>
         <Link className='menu-option logout-button' to='#' onClick={handleLogoutButton}>
           <div className='user-name'>

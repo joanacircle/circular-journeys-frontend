@@ -58,52 +58,47 @@
 
 }
 
-.section{
-  margin-bottom: 30px;
+.blog-section{
+  max-width: 1160px;
+  margin: 0 auto;
   
-  .h2-container{
-    padding: 20px 0;
-  }
-
-  .card-container{
-    position: relative;
-  }
-
-  .padding-left{
-    width: 100%;
-    padding-left: 15px;
-  }
+  .post-section{
+    margin-bottom: 30px;
   
-  .padding-right{
-    width: 100%;
-    padding-right: 15px;
-  }
-
-  .arrow-left{
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: calc(50% - 20px);
-    left: calc(0% - 50px);
-    color: $orange;
-    cursor: pointer;
-
-    &:hover{
-      color: $purple;
+    .card-container{
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 15px;
     }
-  }
   
-  .arrow-right{
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: calc(50% - 20px);
-    right: calc(0% - 50px);
-    color: $orange;
-    cursor: pointer;
-
-    &:hover{
-      color: $purple;
+    .arrow-left{
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: calc(50% - 20px);
+      left: calc(0% - 50px);
+      color: $orange;
+      cursor: pointer;
+  
+      &:hover{
+        color: $purple;
+      }
+    }
+    
+    .arrow-right{
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: calc(50% - 20px);
+      right: calc(0% - 50px);
+      color: $orange;
+      cursor: pointer;
+  
+      &:hover{
+        color: $purple;
+      }
     }
   }
 }

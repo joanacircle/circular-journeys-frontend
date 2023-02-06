@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import './MemberSetting.scss'
+import './Setting.scss'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
 
-const MemberSetting = () => {
+const SettingPage = () => {
   const [changeInputType, setChangeInputType] = useState('text')
   const [inputData, setInputData] = useState({})
 
@@ -13,8 +13,10 @@ const MemberSetting = () => {
     })
   }
 
+  console.log(inputData)
+
   return (
-    <div className="setting-place animate__animated animate__fadeInDown">
+    <div className="setting-place animate__animated animate__fadeInLeft animate__faster">
       <h3>帳號設定</h3>
       <hr />
       <div className='setting-input-place'>
@@ -30,7 +32,7 @@ const MemberSetting = () => {
                 placeholder='王'
               />
             </div>
-            <div className='label-place'>
+            <div className='label-place' >
               <label htmlFor="userLastName">名</label>
               <input
                 type="text"
@@ -74,7 +76,6 @@ const MemberSetting = () => {
             {
               <DynamicSelect
                 inputData={inputData}
-                setInputData={setInputData}
                 handleInputChange={handleInputChange}
               />
             }
@@ -122,9 +123,9 @@ const MemberSetting = () => {
             </div>
           </div>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
 
-export default MemberSetting
+export default SettingPage

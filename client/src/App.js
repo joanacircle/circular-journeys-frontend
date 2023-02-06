@@ -12,7 +12,7 @@ import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 
 import { NotFound } from './pages/NotFound'
 import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
-import MemberSetting from 'pages/User/MemberCenter/MemberSetting'
+import MemberSetting from 'pages/User/MemberCenter/Setting'
 
 const App = () => {
   return (

@@ -12,7 +12,7 @@ const Card2 = (props) => {
         <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
       </Link>
       <div className="card-body">
-        <ul className='blog-tags d-flex'>
+        <ul className='blog-tags'>
         {value.map((v, i) => {
           return (
             <li key={i}>

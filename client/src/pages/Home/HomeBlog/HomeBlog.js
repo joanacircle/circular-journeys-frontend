@@ -41,40 +41,39 @@ const HomeBlog = () => {
       </div>
     </div>
 
-    <section className='section'>
-      <Container className='h2-container'>
-      <h2>熱門文章</h2>
-      </Container >
-      <Container className='card-container'>
-        <BsFillArrowLeftCircleFill className='arrow-left' />
-        <Row>
-        <Col>
-          <Card postId={postId} imgSrc={imgSrc[0]} imgAlt={imgAlt[0]} title={title}/>
-        </Col>
-        <Col className='padding-left'>
-          <Card postId={postId} imgSrc={imgSrc[1]} imgAlt={imgAlt[1]} title={title}/>
-        </Col>
-        <Col className='padding-left padding-right'>
-          <Card postId={postId} imgSrc={imgSrc[2]} imgAlt={imgAlt[0]} title={title}/>
-        </Col>
-        <Col>
-          <Card postId={postId} imgSrc={imgSrc[3]} imgAlt={imgAlt[0]} title={title}/>
-        </Col>
-        </Row>
-        <BsFillArrowRightCircleFill className='arrow-right'/>
-      </Container>
+    <div className='blog-section'>
+      <div className='post-section'>
+        <h2>熱門文章</h2>
+        <div className='card-container'>
+          <BsFillArrowLeftCircleFill className='arrow-left' />
+            <Card
+              postId={postId}
+              imgSrc={imgSrc[0]}
+              imgAlt={imgAlt[0]}
+              title={title}/>
+            <Card
+              postId={postId}
+              imgSrc={imgSrc[1]}
+              imgAlt={imgAlt[1]}
+              title={title}/>
+            <Card
+              postId={postId}
+              imgSrc={imgSrc[2]}
+              imgAlt={imgAlt[2]}
+              title={title}/>
+            <Card
+              postId={postId}
+              imgSrc={imgSrc[3]}
+              imgAlt={imgAlt[3]}
+              title={title}/>
+          <BsFillArrowRightCircleFill className='arrow-right'/>
+        </div>
+      </div>
 
-
-    </section>
-
-    <section className='section'>
-    <Container className='h2-container'>
-      <h2>最新文章</h2>
-    </Container >
-    <Container className='card-container'>
-      <BsFillArrowLeftCircleFill className='arrow-left' />
-      <Row>
-        <Col>
+      <div className='post-section'>
+        <h2>最新文章</h2>
+        <div className='card-container'>
+          <BsFillArrowLeftCircleFill className='arrow-left' />
           <Card2
             tags={tags}
             postId={postId}
@@ -83,31 +82,26 @@ const HomeBlog = () => {
             tagId={tagId}
             title={title}
             likes={likes}/>
-        </Col>
-        <Col className='padding-left padding-right'>
           <Card2
             tags={tags}
             postId={postId}
-            imgSrc={imgSrc[0]}
-            imgAlt={imgAlt[0]}
+            imgSrc={imgSrc[2]}
+            imgAlt={imgAlt[2]}
             tagId={tagId}
             title={title}
             likes={likes}/>
-        </Col>
-        <Col>
           <Card2
             tags={tags}
             postId={postId}
-            imgSrc={imgSrc[0]}
-            imgAlt={imgAlt[0]}
+            imgSrc={imgSrc[3]}
+            imgAlt={imgAlt[3]}
             tagId={tagId}
             title={title}
             likes={likes}/>
-        </Col>
-      </Row>
-      <BsFillArrowRightCircleFill className='arrow-right'/>
-    </Container>
-    </section>
+          <BsFillArrowRightCircleFill className='arrow-right'/>
+        </div>
+      </div>
+    </div>
     </>
   )
 }

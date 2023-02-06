@@ -6,15 +6,67 @@ import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineTicket, HiOutlineShoppingCart } from 'react-icons/hi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { CgNotes } from 'react-icons/cg'
-// import { BiMessageRoundedCheck } from 'react-icons/bi'
 
-import MemberSetting from './MemberSetting'
+// page
+import SettingPage from './Setting'
+import PointsPage from './Points'
+import TicketPage from './Ticket'
+import OrderPage from './Order'
+import ShopHistoryPage from './ShopHistory'
+import LikeHistoryPage from './LikeHistory'
 
+const menuObj = {
+  info: [
+    {
+      state: true,
+      label: '帳號設定',
+      icon: < IoSettingsOutline />,
+      element: <SettingPage />
+    },
+    {
+      state: false,
+      label: 'Points',
+      icon: <MdOutlineAttachMoney />,
+      element: <PointsPage />
+    },
+    {
+      state: false,
+      label: '折扣卷',
+      icon: <HiOutlineTicket />,
+      element: <TicketPage />
+    },
+    {
+      state: false,
+      label: '訂單管理',
+      icon: <CgNotes />,
+      element: <OrderPage />
+    },
+    {
+      state: false,
+      label: '消費紀錄',
+      icon: <HiOutlineShoppingCart />,
+      element: <ShopHistoryPage />
+    },
+    {
+      state: false,
+      label: '我的收藏',
+      icon: <AiOutlineLike />,
+      element: <LikeHistoryPage />
+    }
+  ]
+}
 
 const MemberCenterMenu = () => {
-  const [changePage, setChangePage] = useState(false)
-  const handleChangePage = () => {
-    setChangePage(!changePage)
+  const [changePage, setChangePage] = useState(menuObj)
+
+  const handleChangePage = (event) => {
+    const newInfo = changePage.info.map(item => {
+      if (event.target.id === item.label) {
+        return { ...item, state: true }
+      }
+      return { ...item, state: false }
+    })
+    setChangePage({ ...changePage, info: newInfo })
   }
 
   return (
@@ -31,55 +83,27 @@ const MemberCenterMenu = () => {
             <div className="user-information">管理者</div>
             <div className="user-information user-point">$9,457</div>
           </div>
-          <ul className="page-menu">
-            <li className="list-item">
-              <Link className={changePage ? 'link-hover' : 'link'} onClick={handleChangePage} >
-                <IoSettingsOutline />
-                <span className="link-content">帳號設定</span>
-              </Link>
-            </li>
-            <li className="list-item">
-              <Link className="link" to='#' >
-                <MdOutlineAttachMoney />
-                <span className="link-content">Points</span>
-              </Link>
-            </li>
-            <li className="list-item">
-              <Link className="link" to='#' >
-                <HiOutlineTicket />
-                <span className="link-content">折扣卷</span>
-              </Link>
-            </li>
-            <li className="list-item">
-              <Link className="link" to='#' >
-                <CgNotes />
-                <span className="link-content">訂單管理</span>
-              </Link>
-            </li>
-            <li className="list-item">
-              <Link className="link" to='#' >
-                <HiOutlineShoppingCart />
-                <span className="link-content">消費紀錄</span>
-              </Link>
-            </li>
-            {/* <li className="list-item">
-              <Link className="link" to='#' >
-                <BiMessageRoundedCheck />
-                <span className="link-content">訊息管理</span>
-              </Link>
-            </li> */}
-            <li className="list-item">
-              <Link className="link" to='#' >
-                <AiOutlineLike />
-                <span className="link-content">我的收藏</span>
-              </Link>
-            </li>
+          <ul className="page-menu" onClick={handleChangePage}>
+            {
+              changePage.info.map(item => (
+                <li key={item.label} id={item.label} className="list-item">
+                  <Link id={item.label} className={item.state ? 'link-hover' : 'link'}>
+                    {item.icon}
+                    <span id={item.label} className="link-content">{item.label}</span>
+                  </Link>
+                </li>
+              ))
+            }
           </ul>
         </div>
         <div className="col col-2">
           {
-            changePage &&
-            <MemberSetting />
+            changePage.info.map(item => (
+              item.state &&
+              <div key={item.label}>
+                {item.element}
+              </div>
+            ))
           }
         </div>
       </div>

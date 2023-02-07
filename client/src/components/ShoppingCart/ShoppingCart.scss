@@ -12,7 +12,14 @@
     align-items: center;
     justify-content: center;
 
-    .modal-content {
+    
+    // .show-modal-content {
+    // transform: translateX(0%);
+    // }
+    }
+  
+
+.modal-content {
       overflow-y: auto;
       background-color: $white;
       position: fixed;
@@ -23,29 +30,32 @@
       padding: 20px;
       height: 100%;
       align-items: center;
-
-      .modal-title{
+  
+      // transform: translateX(100%);
+      // transition: transform 2s ease-in-out;
+  
+  
+      .modal-title {
         font-weight: bold;
       }
-      .cart-separator{
+  
+      .cart-separator {
         width: 375px;
         margin: 10px;
       }
-
+  
       .close-button {
         position: absolute;
         top: 0;
         left: 0;
         padding: 10px;
-
+  
         .close-button-button {
-
+  
           background-color: transparent;
           border: 0;
           font-size: 1.5em;
           cursor: pointer;
         }
       }
-
-    }
-  }
+}

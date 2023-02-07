@@ -18,7 +18,7 @@ const Card3 = (props) => {
               {TagsValue.map((v, i) => {
                 return (
                   <li key={i}>
-                    <Link to={`blog/${props.tagId}`}># {v}</Link>
+                    <Link to={`/blog/${props.tagId}`}># {v}</Link>
                   </li>
                 )
               })}

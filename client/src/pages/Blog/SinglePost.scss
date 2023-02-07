@@ -12,7 +12,7 @@
     gap: 30px;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+    // text-align: center;
     align-items: center;
     padding-top: 30px;
   }
@@ -39,6 +39,8 @@
     }
 
     h5{
+      text-align: center;
+
       a{
         color: $orange;
 
@@ -73,8 +75,53 @@
     width: 100%;
     text-align: left;
 
+    .createAt{
+      display: flex;
+      gap: 5px;
+      color: $gray;
+      align-items: center;
+      
+      .icon{
+        height: 100%;
+        border-radius: 50%;
+        background: $gray;
+        color: $white;
+        padding: 3px;
+      }
+
+      p{
+        font-size: 20px;
+      }
+    }
+
+    .post-content{
+      font-size: 20px;
+      margin-top: 10px;
+    }
+  }
+
+  .post-footer{
+    .heart-icon{
+      width: 100%;
+      color: $orange;
+      cursor: pointer;
+    }
+
     p{
       font-size: 20px;
+      margin-top: 10px;
+      text-align: center;
+
+      a:hover{
+        color: $purple;
+      }
     }
+  }
+
+  .related-post{
+    display: flex;
+    gap: 15px;
+    border-top: 1px solid $gray;
+    padding: 50px 0;
   }
 }

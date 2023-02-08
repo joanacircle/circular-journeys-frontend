@@ -39,7 +39,7 @@ const Checkout = () => {
   }
 
   const prevStep = () => {
-    if (step < maxSteps) setStep(step - 1)
+    if (step <= maxSteps) setStep(step - 1)
   }
 
   return (

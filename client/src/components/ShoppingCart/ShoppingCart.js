@@ -87,9 +87,11 @@ export const ShoppingCart = (props) => {
             totalPrice={totalPrice()}
           />
           <div className='checkout-box' >
-            <button className="checkout-button">
-              <Link onClick={toggleModal} to="../checkout" title="結帳">結帳</Link>
-            </button>
+            <Link onClick={toggleModal} to="../checkout" title="結帳">
+              <button className="checkout-button">
+                結帳
+              </button>
+            </Link>
           </div>
 
         </div>

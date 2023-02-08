@@ -14,13 +14,13 @@ const Card4 = (props) => {
         <div className='post-meta'>
           <div className="post-tags">
             <ul>
-              <Link to={props.linkToTags}>
+              <Link to={`/blog/${props.tagId}`}>
                 <li># {props.tags}</li>
               </Link>
-              <Link to={props.linkToTags}>
+              <Link to={`/blog/${props.tagId}`}>
                 <li># {props.tags}</li>
               </Link>
-              <Link to={props.linkToTags}>
+              <Link to={`/blog/${props.tagId}`}>
                 <li># {props.tags}</li>
               </Link>
             </ul>

@@ -13,10 +13,10 @@ const UserBlog = () => {
   const { memberId } = useParams()
   const memberName = 'CircleChang'
   // Card4 props:
-  const linkToTags = '#'
+  const tagId = 't123'
   const tags = '旅遊'
   const title = '高雄一日遊-駁二、愛河、瑞豐夜市'
-  const postId = 'b123'
+  const postId = 'p123'
   const imgSrc = B001
   const imgAlt = 'img'
   const createAt = '2023/02/02'
@@ -45,7 +45,7 @@ const UserBlog = () => {
                 </ul>
               </div>
               <Card4
-                linkToTags={linkToTags}
+                tagId={tagId}
                 tags={tags}
                 title={title}
                 postId={postId}
@@ -56,7 +56,7 @@ const UserBlog = () => {
                 postContent={postContent}/>
 
               <Card4
-                linkToTags={linkToTags}
+                tagId={tagId}
                 tags={tags}
                 title={title}
                 postId={postId}
@@ -67,7 +67,7 @@ const UserBlog = () => {
                 postContent={postContent}/>
 
               <Card4
-                linkToTags={linkToTags}
+                tagId={tagId}
                 tags={tags}
                 title={title}
                 postId={postId}

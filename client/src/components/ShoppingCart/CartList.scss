@@ -1,0 +1,26 @@
+.itemImage {
+  float: left;
+  width: 20%;
+
+  .deleteItem{
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
+}
+.itemDetail {
+  float: left;
+  width: 60%;
+  padding: 10px;
+  
+}
+.itemTotal {
+  float: right;
+  width: 20%;
+  padding: 10px;
+  
+}

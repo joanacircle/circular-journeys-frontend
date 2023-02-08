@@ -1,13 +1,34 @@
 import { Link } from 'react-router-dom'
 import './ShoppingCart.scss'
 import 'animate.css'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import CartList from './CartList'
+import CartTotal from './CartTotal'
+
+const sampleData = [
+  {
+    id: 1,
+    name: '白色T-shirt',
+    price: 100,
+    img: 'https://i.imgur.com/ba3tvGm.jpg'
+  },
+  {
+    id: 2,
+    name: '黑色T-shirt',
+    price: 200,
+    img: 'https://i.imgur.com/pHQ3xT3.jpg'
+  },
+  {
+    id: 3,
+    name: '咖啡色T-shirt',
+    price: 300,
+    img: 'https://i.imgur.com/1GrakTl.jpg'
+  }
+]
 
 export const ShoppingCart = (props) => {
 
   const {
-    modalVisibility,
-    setModalVisibility,
     toggleModal
   } = props
 
@@ -17,6 +38,26 @@ export const ShoppingCart = (props) => {
     }
   }
 
+  const [products, setProducts] = useState(sampleData.map((v, i) => ({
+    ...v, count: 1
+  })))
+
+  const totalQuantity = () => {
+    let qty = 0
+    for (let i = 0; i < products.length; i++) {
+      qty += products[i].count
+    }
+    return qty
+  }
+
+  const totalPrice = () => {
+    let price = 0
+
+    for (let i = 0; i < products.length; i++) {
+      price += products[i].count * products[i].price
+    }
+    return price
+  }
 
 
   return (
@@ -35,12 +76,23 @@ export const ShoppingCart = (props) => {
 
           <h5 className='modal-title'>我的購物袋</h5>
           <hr className='cart-separator' />
-          <h5 className="text-danger">
+          <CartList
+            products={products}
+            setProducts={setProducts}
+          />
+          <hr className='cart-separator' />
+
+          <CartTotal
+            totalQuantity={totalQuantity()}
+            totalPrice={totalPrice()}
+          />
+
+        </div>
+        <button className="checkout-button">
+          <h5 >
             <Link onClick={toggleModal} to="../checkout" title="結帳">結帳</Link>
           </h5>
-
-          <button onClick={toggleModal}>Close</button>
-        </div>
+        </button>
       </div>
     </>
   )

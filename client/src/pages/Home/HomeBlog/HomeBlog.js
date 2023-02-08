@@ -15,13 +15,13 @@ import B004 from 'images/Blog/B004.jpeg'
 
 const HomeBlog = () => {
   // Card props:
-  const postId = 'b123'
+  const postId = 'p123'
   const imgSrc = [B001, B002, B003, B004]
   const imgAlt = [B001, B002, B003, B004]
   const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
   // Card2 props:
   const tags = ['旅遊', '旅遊']
-  const tagId = '2'
+  const tagId = 't123'
   const likes = '10k'
 
   return (

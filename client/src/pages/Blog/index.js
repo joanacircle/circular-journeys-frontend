@@ -16,10 +16,10 @@ const Blog = () => {
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
   // Card3 props:
   const tags = ['旅遊', '旅遊', '旅遊']
-  const postId = 'b123'
+  const postId = 'p123'
   const imgSrc = B001
   const imgAlt = 'imgAlt'
-  const tagId = '1' // 先抓到 tag value 在找到該 tag 的 id
+  const tagId = 't123' // 先抓到 tag value 在找到該 tag 的 id
   const memberId = '123'
   const avatar = 'CircleChang'
   const title = '假設文章標題上限為二十個字應該可以吧嗎吧'

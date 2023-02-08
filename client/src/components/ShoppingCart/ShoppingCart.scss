@@ -16,7 +16,7 @@
     // .show-modal-content {
     // transform: translateX(0%);
     // }
-    }
+}
   
 
 .modal-content {
@@ -30,17 +30,36 @@
       padding: 20px;
       height: 100%;
       align-items: center;
+      overflow-x:hidden;
   
       // transform: translateX(100%);
       // transition: transform 2s ease-in-out;
-  
+
+      .checkout-box{
+          background-color: white;
+          position: sticky;
+          bottom: 0;
+          width: 100%;
+
+          .checkout-button {
+            background-color: $orange;
+            color: white;
+            white-space: nowrap;
+            width: 100%;
+            margin: 10px;
+            padding: 10px 15px;
+            border-radius: $br2;
+            
+            text-align: center; 
+        }
+      }
   
       .modal-title {
         font-weight: bold;
       }
   
       .cart-separator {
-        width: 375px;
+        width: 100%;
         margin: 10px;
       }
 

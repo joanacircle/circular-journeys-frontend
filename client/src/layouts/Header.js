@@ -16,13 +16,14 @@ const Header = () => {
   const [userMenu, setUserMenu] = useState(false)
 
   // for modals
-  const [modalVisibility, setModalVisibility] = useState(false)
   const [loginModal, setLoginModal] = useState(false)
 
   // shopping cart
+  const [modalVisibility, setModalVisibility] = useState(false)
   const toggleModal = () => {
     setModalVisibility(!modalVisibility)
   }
+
 
   // Login modal
   const handleToggleLoginModal = () => {
@@ -101,7 +102,6 @@ const Header = () => {
         }
 
       </header>
-
     </>
   )
 }

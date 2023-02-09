@@ -13,7 +13,6 @@ import SearchResult from 'pages/Blog/SearchResult'
 
 import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 import { NotFound } from './pages/NotFound'
-import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
 import MemberSetting from 'pages/User/MemberCenter/Setting'
 
 const App = () => {
@@ -29,7 +28,7 @@ const App = () => {
           <Route path='/blog/t123' element={<SearchResult />} />
           <Route path='/blog/:memberId' element={<UserBlog />} />
           <Route path='/shop' element={<Shop />} />
-          <Route path='/cart' element={<ShoppingCart />} />
+
           <Route path='/member' element={<MemberCenter />} />
           <Route path='*' element={<NotFound />} />
         </Route>

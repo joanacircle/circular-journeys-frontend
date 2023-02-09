@@ -16,8 +16,24 @@
     margin-bottom: 40px;
   }
 
-  .address-box2 {
-      display: flex;
-      flex-direction: column;
+  .address-boxes{
+    display: flex;
+    flex-direction: row;
+
+    .toggleEdit{
+      border: 1px solid black;
     }
+
+    .address-box {
+      display: flex;
+      
+
+      .radio-groups{
+        display: flex;
+        flex-direction: column;
+        
+      }
+    }
+  }
+ 
 }

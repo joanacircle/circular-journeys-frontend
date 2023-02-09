@@ -1,0 +1,12 @@
+@import 'index.scss';
+
+.payment-container{
+
+  .payment-title{
+    margin: 20px;
+
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

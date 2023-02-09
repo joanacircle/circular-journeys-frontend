@@ -1,11 +1,9 @@
-import useState from 'react'
+import { useState } from 'react'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
-import CartList from '../../../components/ShoppingCart/CartList'
-import CartTotal from '../../../components/ShoppingCart/CartTotal'
 
-function EditAddress() {
 
-  const [changeInputType, setChangeInputType] = useState('text')
+const EditAddress = ({ showEditAddress, setShowEditAddress }) => {
+
   const [inputData, setInputData] = useState({})
 
   const handleInputChange = (event) => {
@@ -18,6 +16,8 @@ function EditAddress() {
     <div className="setting-place">
       <h3>運送地址</h3>
       <hr />
+
+
       <div className='setting-input-place'>
         <form>
           <div className='input-place'>
@@ -78,15 +78,12 @@ function EditAddress() {
             </div>
 
           </div>
-          {/* <CartList />
-            <CartTotal /> */}
-          {/* <div className="input-place input-submit">
-              <div className="label-place">
-                <input type="submit" value="儲存" />
-              </div>
-            </div> */}
+
         </form>
       </div >
+      <button onClick={() => setShowEditAddress(false)}>隱藏編輯地址</button>
+
+
     </div >
   )
 }

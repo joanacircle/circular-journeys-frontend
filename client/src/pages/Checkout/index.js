@@ -22,13 +22,13 @@ const Checkout = () => {
       phone: '0917666666'
     },
     {
-      name: 'Kevin La',
-      address: '56 Starbuck St',
-      city: 'Staten Island',
+      name: 'James La',
+      address: '58 Starstrike Ave',
+      city: 'Brooklyn',
       province: 'NY',
-      zip: '10304',
+      zip: '10004',
       country: 'USA',
-      phone: '0917666666'
+      phone: '0917666555'
     }
   ])
 
@@ -36,7 +36,7 @@ const Checkout = () => {
   const [step, setStep] = useState(1)
   const stepNames = ['產品確認', '付款方式', '訂單確認']
 
-  const components = [Shipping, Payment, OrderDetail, EditAddress]
+  const components = [Shipping, Payment, OrderDetail]
   const BlockComponent = components[step - 1]
 
 

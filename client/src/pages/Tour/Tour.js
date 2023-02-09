@@ -5,7 +5,7 @@ import TourCardList from './components/TourCardList/TourCardList'
 const Tour = () => {
   return (
     <>
-    <TourCardList />
+    <TourCard />
     </>
   )
 }

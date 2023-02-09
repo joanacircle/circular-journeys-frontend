@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './TourCard.scss'
+import { data } from '../../data/index'
 
 const TourCard = (p) => {
+
 const { id, name, adress, img, tags } = p.card
     return (
     <>

@@ -1,15 +1,15 @@
 const express = require('express');
-const db = require('../../model/connect-blog-sql')
+const db = require('../../model/connect-sql')
 require('dotenv').config();
 const router = express.Router();
 
 // http://localhost:3002/blog
 router.get('/', async (req, res)=>{
-  console.log(process.env.DB_NAME);
-  res.send('blog-page');
-  // const sql = 'SELECT `post_title`, `post_content`, `post_img` FROM `post` WHERE 1'
-  // const [rows, fields] = await db.query(sql);
-  // res.json(rows);
+  // console.log(process.env.DB_NAME);
+  // res.send('blog-page');
+  const sql = 'SELECT `post_title`, `post_content`, `post_img` FROM `post` WHERE 1'
+  const [rows, fields] = await db.query(sql);
+  res.json(rows);
 })
 
 // http://localhost:3002/:member_id

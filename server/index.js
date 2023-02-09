@@ -8,6 +8,7 @@ const cors = require('cors')
 // individual component
 const user = require('./src/route/user/users')
 const paymentRoute = require("./src/route/shop/payment")(cors)
+const blogRouter = require('./src/route/blog/blog')
 
 // general middleware
 app.use(bodyParser.json())
@@ -19,6 +20,9 @@ app.use('/api/user', user)
 
 // payment
 app.post('/payment', paymentRoute)
+
+// blog
+app.post('/blog', blogRouter)
 
 const PORT = process.env.PORT || 8080
 

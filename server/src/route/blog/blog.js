@@ -1,14 +1,22 @@
 const express = require('express');
-const db = require('../../model/connect-sql')
+const db = require('../../model/connect-sql');
 require('dotenv').config();
 const router = express.Router();
 
-// http://localhost:3002/blog
+// http://localhost:3002/api/blog
+// router.get('/', async (req, res)=>{
+//   console.log(process.env.DATABASE_DEV);
+//   res.send('blog-page');
+//   // const sql = SELECT * FROM `post`
+//   // const [rows, fields] = await db.query(sql);
+//   // res.json(rows);
+// })
+
 router.get('/', async (req, res)=>{
-  // console.log(process.env.DB_NAME);
+  // console.log(process.env.DATABASE_DEV);
   // res.send('blog-page');
-  const sql = 'SELECT `post_title`, `post_content`, `post_img` FROM `post` WHERE 1'
-  const [rows, fields] = await db.query(sql);
+
+  const [rows] = await db.query('SELECT * FROM post');
   res.json(rows);
 })
 

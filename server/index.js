@@ -15,6 +15,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
+app.get('/',(req,res)=>{
+  res.render('main', {name: '陳小明'});
+});
+
 // user
 app.use('/api/user', user)
 
@@ -22,7 +26,7 @@ app.use('/api/user', user)
 app.post('/payment', paymentRoute)
 
 // blog
-app.post('/blog', blogRouter)
+app.use('/blog', blogRouter)
 
 const PORT = process.env.PORT || 8080
 

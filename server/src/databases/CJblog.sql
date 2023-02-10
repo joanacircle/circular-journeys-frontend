@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2023 年 02 月 09 日 13:07
+-- 產生時間： 2023 年 02 月 09 日 15:29
 -- 伺服器版本： 5.7.39
 -- PHP 版本： 7.4.33
 
@@ -18,8 +18,20 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `CJ-blog`
+-- 資料庫： `CJblog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `history_like`
+--
+
+CREATE TABLE `history_like` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -55,9 +67,105 @@ INSERT INTO `post` (`post_id`, `create_at`, `modify_at`, `member_id`, `post_titl
 ('p8', '2023-02-09 08:52:31', '2023-02-09 08:52:31', NULL, '高雄名產美食集合', '今天天氣太熱了，所以我們決定先去吃冰！\r\n散步路徑：\r\n左營區新庄仔路546巷4號, Kaohsiung, Taiwan\r\n07 556 1620\r\nfacebook.com/wpichsieh\r\n外出旅遊除了美好的回憶外，不免俗地會帶上在地的特產，讓出遊的喜悅在返家後還能細細品味！高雄除了烏魚子、旗山香蕉、美濃白蘿蔔……等生鮮外，還有老字號店家的糕餅，或是具有在地特色的文創品，都是相當推薦的紀念禮品，送禮自用兩相宜！\r\n吳記餅店\r\n綠豆椪\r\n創立自1937年，吳記餅店琢磨於糕餅的口感，創新卻仍保留傳統手藝的精髓，將味道和心意封存在糕點永流傳。綠豆椪、鴛鴦餅、蝦米肉餅是吳記餅舖的三大經典傳香糕點，用刀鋒劃開壓印著紅字的酥黃餅皮，豪放展現豐厚餡料的切面，富有層次的酥皮在口中散開，真材實料的內餡越嚼越香，將韻味嚼進記憶深處。\r\n\r\n07-746-2291\r\n高雄市鳳山區光遠路284之1號\r\n', '', 0, 0),
 ('p9', '2023-02-09 08:52:31', '2023-02-09 08:52:31', NULL, '夜間觀光 | 高雄夜景', '有別於白天的艷陽活力，夜晚的高雄有著人文、靜謐的氣息，暢遊高雄山海河港美景，可以從白天玩到晚上、從海邊玩到山上，體驗愛河灣、新光碼頭與旗津風車公園的海濱浪漫，大崗山風景區、壽山Love情人觀景台的繽紛夢幻，以及愛河畔異國風味的白色戀人貨櫃屋，12處越夜越美麗的景點不藏私推薦，與家人、情人伴侶、朋友，一起串起夜之高雄的旅行記憶。\r\n\r\n旗津風車公園它銜接旗津漁港的觀光步道，扮演過港隧道進入旗津門面的第一個海岸印象景點，旗津擁有豐沛的風力資源，七座造型獨特的三葉式風車面對遼闊的海面不停轉動，園區內有觀海看台及表演廣場，造型獨特又可愛的海洋生物拼貼創作，既生動又有趣，堪稱旗津最療癒的景點。\r\n\r\n大港橋\r\n是全臺首座水平旋轉景觀橋樑，也是亞洲最長的跨港旋轉橋，串連駁二藝術特區與棧貳庫2處熱門景點，是目前最新潮的旅遊路線，晚間橋身燈光點綴，景色格外迷人。\r\n\r\n住宿：\r\n城市商旅駁二館\r\n高雄市旅館491號\r\n高雄市鹽埕區公園二路83號\r\n', '', 0, 0);
 
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `post_tags_rel`
+--
+
+CREATE TABLE `post_tags_rel` (
+  `id` int(11) NOT NULL,
+  `category` text NOT NULL,
+  `product_tag_id` int(11) NOT NULL,
+  `tourist_tag_id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `product_tag_category`
+--
+
+CREATE TABLE `product_tag_category` (
+  `product_tag_id` int(11) NOT NULL,
+  `product` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 傾印資料表的資料 `product_tag_category`
+--
+
+INSERT INTO `product_tag_category` (`product_tag_id`, `product`) VALUES
+(1, '登山'),
+(2, '戶外');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `tourist_tag_category`
+--
+
+CREATE TABLE `tourist_tag_category` (
+  `tourist_tag_id` int(11) NOT NULL,
+  `tourist_spot` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 傾印資料表的資料 `tourist_tag_category`
+--
+
+INSERT INTO `tourist_tag_category` (`tourist_tag_id`, `tourist_spot`) VALUES
+(1, '駁二'),
+(2, '壽山'),
+(3, '澄清湖'),
+(4, '愛河'),
+(5, '美術館'),
+(6, '英國領事館'),
+(7, '中都溼地'),
+(8, '衛武營'),
+(9, '香蕉碼頭'),
+(10, '小崗山'),
+(11, '旗津'),
+(12, '西子灣'),
+(13, '巨蛋'),
+(14, '凹子底'),
+(15, '中央公園'),
+(16, '新崛江'),
+(17, '岡山老街'),
+(18, '高雄港'),
+(19, '大東'),
+(20, '瑞豐夜市'),
+(21, '流行音樂中心'),
+(22, '蓮池潭'),
+(24, '淨園農場'),
+(25, '忠烈祠'),
+(26, '動物園'),
+(27, '龍湖塔'),
+(28, '義大'),
+(29, '佛光山'),
+(30, '文化中心'),
+(31, '糖廠'),
+(32, '旗山'),
+(33, '英國領事館'),
+(34, '岡山之眼'),
+(35, '半屏山'),
+(36, '泥火山'),
+(37, '阿公店水庫'),
+(38, '興達港'),
+(39, '觀音山'),
+(40, '月世界');
+
 --
 -- 已傾印資料表的索引
 --
+
+--
+-- 資料表索引 `history_like`
+--
+ALTER TABLE `history_like`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `post_id` (`post_id`,`member_id`);
 
 --
 -- 資料表索引 `post`
@@ -65,6 +173,55 @@ INSERT INTO `post` (`post_id`, `create_at`, `modify_at`, `member_id`, `post_titl
 ALTER TABLE `post`
   ADD PRIMARY KEY (`post_id`),
   ADD KEY `member_id` (`member_id`);
+
+--
+-- 資料表索引 `post_tags_rel`
+--
+ALTER TABLE `post_tags_rel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_tag_id` (`product_tag_id`),
+  ADD KEY `tourist_tag_id` (`tourist_tag_id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
+-- 資料表索引 `product_tag_category`
+--
+ALTER TABLE `product_tag_category`
+  ADD PRIMARY KEY (`product_tag_id`);
+
+--
+-- 資料表索引 `tourist_tag_category`
+--
+ALTER TABLE `tourist_tag_category`
+  ADD PRIMARY KEY (`tourist_tag_id`) USING BTREE;
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `history_like`
+--
+ALTER TABLE `history_like`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `post_tags_rel`
+--
+ALTER TABLE `post_tags_rel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `product_tag_category`
+--
+ALTER TABLE `product_tag_category`
+  MODIFY `product_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `tourist_tag_category`
+--
+ALTER TABLE `tourist_tag_category`
+  MODIFY `tourist_tag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

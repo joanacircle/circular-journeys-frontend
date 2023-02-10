@@ -1,88 +1,39 @@
-// @import "../../../index.scss";
-// @import "../styles/styles.scss";
+@import 'index.scss';
 
-// .setting-place {
-//   box-shadow: 0px 0px 10px 0.8px $gray;
-//   background-color: #fff;
-//   border-radius: 6px;
-//   padding: 20px;
+.shipping {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-//   h3 {
-//     margin: 15px;
-//   }
+  .address-book{
+    width: 40px;
+    height: 70px;
+    margin: 20px;
+  }
 
-//   .setting-input-place {
-//     margin: 10px 20px;
+  .select-address{
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
 
-//     .input-place {
-//       @include flex("", "");
+  .address-boxes{
+    display: flex;
+    flex-direction: row;
 
-//       .label-place {
-//         display: flex;
-//         flex-direction: column;
-//         margin: 10px 25px;
+    .toggleEdit{
+      border: 1px solid black;
+    }
 
-//         label {
-//           font-size: 16px;
-//           font-weight: 300;
-//           margin-bottom: 5px;
-//         }
+    .address-box {
+      display: flex;
+      
 
-//         input {
-//           border-radius: 8px;
-//           border: 0.1px solid $gray;
-//           padding: 8px 15px;
-//         }
-
-//         select {
-//           margin: 5px 0px;
-//           text-align: center;
-//           min-width: 100px;
-
-//           &:focus {
-//             outline: none;
-//           }
-//         }
-
-//         #userEmail {
-//           min-width: 320px;
-//         }
-
-//         #userBirthday {
-//           min-width: 210px;
-//         }
-
-//         #userAddress {
-//           min-width: 350px;
-//         }
-
-//         #userTelephone {
-//           max-width: 180px;
-//         }
-//       }
-//     }
-
-//     .input-submit {
-//       @include flex(flex-end, "");
-
-//       .label-place {
-//         input {
-//           padding: 10px 30px;
-//           transition: 0.3s;
-//           letter-spacing: 2px;
-//           color: $white;
-//           background: $orange;
-//           border: 0.3px solid #fff;
-
-//           &:hover {
-//             background: $purple;
-//           // }
-
-//           &:active {
-//             background: #3f3875;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+      .radio-groups{
+        display: flex;
+        flex-direction: column;
+        
+      }
+    }
+  }
+ 
+}

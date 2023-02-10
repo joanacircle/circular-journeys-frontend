@@ -1,13 +1,24 @@
 import './CheckoutBar.scss'
+import Logo from 'images/Logo/Logo'
+import { BsFlagFill } from 'react-icons/bs'
 
-import React from 'react'
+export const CheckoutBar = ({ maxSteps, step, stepNames }) => {
 
-export const CheckoutBar = (props) => {
-  const { maxSteps, step, stepNames } = props
   return (
     <>
-      <div className="container">
-        <ul className="progressbar">
+      <div className="checkoutbar-container">
+        <ul className="checkoutbar">
+          <Logo
+            className={`car
+            ${step === 1
+                ? 'move'
+                : step === 2
+                  ? 'move2'
+                  : step === 3
+                    ? 'move3'
+                    : ''
+              }`}
+          />
           {Array(maxSteps)
             .fill(1) // 改變內容為1
             .map((v, i) => {
@@ -18,6 +29,7 @@ export const CheckoutBar = (props) => {
               )
             })
           }
+          <BsFlagFill className='flag' />
         </ul>
       </div>
     </>

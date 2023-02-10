@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { StripeContainer } from 'components/Stripe/StripeContainer'
+import './Payment.scss'
 
 
 const Payment = () => {
@@ -9,16 +10,12 @@ const Payment = () => {
 
   return (
     <>
-      <h1>付款資訊 - Payment</h1>
+      <div className='payment-container'>
+        <h5 className='payment-title'>付款資訊</h5>
 
-      <div className='pay'>
-
-        {showItem
-          ? <StripeContainer />
-          : <div>
-            <h3>$100.00</h3><button onClick={() => setShowItem(true)}>Purchase</button>
-          </div>
-        }
+        <div className='credit-info'>
+          <StripeContainer className='stripe-container' />
+        </div>
       </div>
     </>
   )

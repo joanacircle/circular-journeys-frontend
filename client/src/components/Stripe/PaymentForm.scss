@@ -1,0 +1,13 @@
+@import 'index.scss';
+
+.FormRow{
+  // display: flex;
+  // flex-direction: column;
+
+  .card-element {
+      display: flex;
+      flex-direction: column;
+      height: 200px;
+      width: 400px;
+    }
+}

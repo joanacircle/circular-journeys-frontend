@@ -21,7 +21,6 @@ router.get('/', (req, res, next) => {
   })
 })
 
-
 router.get('/', async (req, res)=>{
   // console.log(process.env.DATABASE_DEV);
   // res.send('blog-page');

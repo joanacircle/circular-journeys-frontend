@@ -20,7 +20,7 @@ app.get('/',(req,res)=>{
 });
 
 // user
-app.use('/api/user', user)
+app.use('/user', user)
 
 // payment
 app.post('/payment', paymentRoute)

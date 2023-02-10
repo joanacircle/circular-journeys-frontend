@@ -12,6 +12,16 @@ const router = express.Router();
 //   // res.json(rows);
 // })
 
+//http://localhost:3001/blog
+router.get('/', (req, res, next) => {
+  const sql = `SELECT * FROM post`
+  db.query(sql, (err, result) => {
+    if (err) throw err
+    res.json(result)
+  })
+})
+
+
 router.get('/', async (req, res)=>{
   // console.log(process.env.DATABASE_DEV);
   // res.send('blog-page');

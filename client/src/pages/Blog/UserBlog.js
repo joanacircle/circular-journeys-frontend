@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
@@ -10,26 +10,48 @@ import TagsCategory from 'components/TagsCategory'
 import B001 from 'images/Blog/B001.jpeg'
 
 const UserBlog = () => {
+  const [post, setPost] = useState([{}])
   const { memberId } = useParams()
+  const [url, setUrl] = useState(`http://localhost:3001/blog/${memberId}`)
+  useEffect(() => {
+    getData()
+  }, [url])
+  function getData() {
+    fetch(url)
+    .then(r => r.json())
+    .then((data) => {
+      setPost(data)
+    })
+    .catch(error => console.error(error))
+  }
+
+  console.log(post)
+
+  // http://localhost:3002/:member_id
+  // function GetData() {
+  //   fetch(`http://localhost:3001/blog/${memberId}`)
+  //   .then(r => r.json())
+  //   .then((data) => {
+  //     setPost(data)
+  //   })
+  //   .catch(error => console.error(error))
+  // }
+
   const memberName = 'CircleChang'
   // Card4 props:
   const tagId = 't123'
   const tags = '旅遊'
-  const title = '高雄一日遊-駁二、愛河、瑞豐夜市'
   const postId = 'p123'
   const imgSrc = B001
   const imgAlt = 'img'
-  const createAt = '2023/02/02'
-  const likes = '10k'
-  const postContent = `今天我們先去高雄的駁二藝術特區裡有許多精彩的藝術展覽，我們看了很久才走出來，我們沿著小路漫步，欣賞著各式各樣的藝術作品。接著，我們走到了愛河畔，沿著小徑悠閒地散步，看著河水悠悠地流過。
-  最後，我們到了瑞豐夜市，吃了許多美味的小吃。首先，我們品嘗了一道傳統的台灣小吃——臭豆腐。臭豆腐的味道香醇，口感酥脆，而且很有嚼勁。接著，我們點了一道高雄特色的海鮮炒麵，裡面有豐富的海鮮，搭配著Q彈的麵條，吃起來非常美味。最後，我們點了一杯珍珠奶茶，清新的口感搭配著珍珠的Q彈，讓我們在逛夜市的同時又能消暑。整個晚上，我們品嘗了許多美味的小吃，並且在瑞豐夜市的氣氛中度過了一個愉快的夜晚。`
   // TagsCategory props:
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
 
-
   return (
     <>
-    <div>
+    {!post
+    ? (<div>Loading...</div>)
+    : (<div>
       <div className='userblog-container'>
         <div className='page-body'>
           <div className='post-container'>
@@ -44,38 +66,21 @@ const UserBlog = () => {
                   </Link>
                 </ul>
               </div>
-              <Card4
-                tagId={tagId}
-                tags={tags}
-                title={title}
-                postId={postId}
-                imgSrc={imgSrc}
-                imgAlt={imgAlt}
-                createAt= {createAt}
-                likes={likes}
-                postContent={postContent}/>
-
-              <Card4
-                tagId={tagId}
-                tags={tags}
-                title={title}
-                postId={postId}
-                imgSrc={imgSrc}
-                imgAlt={imgAlt}
-                createAt= {createAt}
-                likes={likes}
-                postContent={postContent}/>
-
-              <Card4
-                tagId={tagId}
-                tags={tags}
-                title={title}
-                postId={postId}
-                imgSrc={imgSrc}
-                imgAlt={imgAlt}
-                createAt= {createAt}
-                likes={likes}
-                postContent={postContent}/>
+              {post.map((v, i) => {
+                return (
+                  <Card4
+                    key={v.post_id}
+                    tagId={tagId}
+                    tags={tags}
+                    title={v.post_title}
+                    postId={postId}
+                    imgSrc={imgSrc}
+                    imgAlt={imgAlt}
+                    createAt={v.create_at}
+                    likes={v.post_likes}
+                    postContent={v.post_content}/>
+                )
+              })}
 
               <div className='userblog-pagination'>
                 <Pagination />
@@ -108,8 +113,8 @@ const UserBlog = () => {
           </div>
         </div>
       </div>
-    </div>
-
+    </div>)
+    }
     </>
   )
 }

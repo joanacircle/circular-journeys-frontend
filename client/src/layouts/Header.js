@@ -89,6 +89,7 @@ const Header = () => {
           <LoginModal
             userState={userState}
             setUserState={setUserState}
+            loginModal={loginModal}
             handleToggleLoginModal={handleToggleLoginModal}
           />
         }

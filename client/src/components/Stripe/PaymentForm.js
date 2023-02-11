@@ -7,6 +7,7 @@ const CARD_OPTIONS = {
   iconStyle: "solid",
   style: {
     base: {
+
       iconColor: "#c4f0ff",
       color: "#000",
       fontWeight: 500,
@@ -24,6 +25,8 @@ const CARD_OPTIONS = {
 }
 
 export default function PaymentForm() {
+
+  const totalPrice = 888
   const [success, setSuccess] = useState(false)
   const stripe = useStripe()
   const elements = useElements()
@@ -65,8 +68,13 @@ export default function PaymentForm() {
           <fieldset className="FormGroup">
             <div className="FormRow">
               <CardElement className="card-element" options={CARD_OPTIONS} />
+
             </div>
           </fieldset>
+          <div>
+
+            <h4>金額小計 NT${totalPrice} 元</h4>
+          </div>
           <button>Pay</button>
         </form>
         : <div>

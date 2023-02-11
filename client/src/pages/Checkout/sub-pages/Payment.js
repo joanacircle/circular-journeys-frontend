@@ -1,9 +1,35 @@
 
+import { useState } from 'react'
 import { StripeContainer } from 'components/Stripe/StripeContainer'
 import './Payment.scss'
+import CardList from '../../../components/ShoppingCart/CartList'
 
+const sampleProductData = [
+  {
+    id: 1,
+    name: '白色T-shirt',
+    price: 100,
+    img: 'https://i.imgur.com/ba3tvGm.jpg'
+  },
+  {
+    id: 2,
+    name: '黑色T-shirt',
+    price: 200,
+    img: 'https://i.imgur.com/pHQ3xT3.jpg'
+  },
+  {
+    id: 3,
+    name: '咖啡色T-shirt',
+    price: 300,
+    img: 'https://i.imgur.com/1GrakTl.jpg'
+  }
+]
 
 const Payment = () => {
+
+  const [products, setProducts] = useState(sampleProductData.map((v, i) => ({
+    ...v, count: 1
+  })))
 
   const sampleData = {
     name: 'Kevin La',
@@ -35,7 +61,11 @@ const Payment = () => {
 
             </div>
             <div className="confirm-products">
+              <CardList
+                products={products}
+                setProducts={setProducts}
 
+              />
             </div>
           </div>
         </div>

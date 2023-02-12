@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import Shipping from './sub-pages/Shipping'
 import EditAddress from './sub-pages/EditAddress'
@@ -51,7 +52,10 @@ const Checkout = () => {
   return (
     <>
       <div className='checkout-container'>
-        <h3 className='title'>Circular Journeys</h3>
+        <Link to='/'>
+          <h3 className='title'>Circular Journeys</h3>
+        </Link>
+
 
         <div>
           <CheckoutBar

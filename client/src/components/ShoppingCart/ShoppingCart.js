@@ -45,7 +45,7 @@ export const ShoppingCart = (props) => {
   const totalQuantity = () => {
     let qty = 0
     for (let i = 0; i < products.length; i++) {
-      qty += products[i].count
+      qty += +products[i].count
     }
     return qty
   }

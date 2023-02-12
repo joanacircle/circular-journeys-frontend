@@ -2,8 +2,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
 import './Header.scss'
+
+// icons
 import { FaUserAlt } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
+import { BsCircleFill } from 'react-icons/bs'
+
+// components
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
@@ -59,8 +64,9 @@ const Header = () => {
                 </Link>
               </li>
               <li className='header-li'>
-                <button onClick={toggleModal}>
+                <button className='cart-button' onClick={toggleModal}>
                   <BiShoppingBag size={32} />
+                  <div className='bs-circle-fill'><BsCircleFill size={19} /></div>
                 </button>
                 <ul>
                   <li>

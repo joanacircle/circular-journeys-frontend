@@ -37,6 +37,30 @@ header {
         align-items: center;
         .header-li {
           margin: 0px 10px;
+
+          .cart-button{
+            position: relative;
+
+            .bs-circle-fill {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                // z-index: 1;
+                color: $purple;
+
+                &:before {
+                    content: "1";
+                    font-size: 12px;
+                    font-weight: bolder;
+                    color: white;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    // z-index: 10;
+              }
+            }
+          }
         }
         .links {
           white-space: nowrap;

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
+import './EditAddress.scss'
 
 
 const EditAddress = ({ showEditAddress, setShowEditAddress }) => {
@@ -54,10 +55,18 @@ const EditAddress = ({ showEditAddress, setShowEditAddress }) => {
                 required
               />
             </div>
+            <div className='label-place'>
+              <label htmlFor="userAddress">郵遞區號</label>
+              <input
+                type="text"
+                required
+              />
+            </div>
           </div>
           <div className='input-place'>
             {
               <DynamicSelect
+                className='d-select'
                 inputData={inputData}
                 handleInputChange={handleInputChange}
               />
@@ -81,8 +90,10 @@ const EditAddress = ({ showEditAddress, setShowEditAddress }) => {
 
         </form>
       </div >
-      <button onClick={() => setShowEditAddress(false)}>隱藏編輯地址</button>
-
+      <div className='button-group'>
+        <button className='address-cancel' onClick={() => setShowEditAddress(false)}>取消</button>
+        <button className='address-save' onClick={() => setShowEditAddress(false)}>儲存</button>
+      </div>
 
     </div >
   )

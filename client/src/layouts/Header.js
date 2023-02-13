@@ -54,7 +54,7 @@ const Header = () => {
               </li>
 
               <li className='header-li'>
-                <Link to='/'>
+                <Link to='/tour'>
                   <h5 className='links'>自由行</h5>
                 </Link>
               </li>

@@ -13,9 +13,26 @@ router.get('/userslist', async (req, res, next) => {
 
 //http://localhost:3001/user/login
 router.post('/login', async (req, res, next) => {
-  const { user_email, user_password } = req.body()
-  const sql = `SELECT * FROM users_information WHERE email `
-  
+  const { userEmail, userPassword } = req.body
+  const sql = `SELECT * FROM users_information WHERE email = ? AND password = ?`
+  try {
+    const results = await db.query(sql, [userEmail, userPassword])
+    const data = results[0][0]
+    if (data) {
+      res.json({
+        state: true,
+        message: `歡迎回來 ${data.first_name + data.last_name}`,
+        data
+      })
+    } else {
+      res.json({
+        state: false,
+        message: '信箱或密碼錯誤！'
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
 })
 
 //http://localhost:3002/api/user/signup

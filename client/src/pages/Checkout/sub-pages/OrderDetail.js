@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import './OrderDetail.scss'
 
 const OrderDetail = () => {
   const navigate = useNavigate()
@@ -10,10 +11,24 @@ const OrderDetail = () => {
 
   return (
     <>
-      <h5>完成付款</h5>
-      <p>您的購物單為 xxx</p>
-      <Link to='/shop' onClick={() => handleLinkClick('/shop')}>繼續購物</Link>
-      <Link to='/' onClick={() => handleLinkClick('/')}>回到Circular Circle 首頁</Link>
+      <div className='receipt'>
+        <h5>訂單已送出!</h5>
+        <h5>您的購物單號為 XXX000777888</h5>
+      </div>
+      <div className='home-links'>
+        <Link
+          className='home-link-button'
+          to='/'
+          onClick={() => handleLinkClick('/')}>回到首頁
+        </Link>
+        <Link
+          className='home-link-button'
+          to='/shop'
+          onClick={() => handleLinkClick('/shop')}>
+          繼續購物
+        </Link>
+
+      </div>
     </>
   )
 }

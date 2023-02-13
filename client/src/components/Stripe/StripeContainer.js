@@ -11,7 +11,7 @@ const PUBLIC_KEY = 'pk_test_51MVV2XL9vOMbHljwYxDpUN8irGCzLHgUXSxQamceHfPCY7BdMKV
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
 
 
-export function StripeContainer({ step, setStep }) {
+export function StripeContainer({ nextStep }) {
 
 
 
@@ -19,8 +19,7 @@ export function StripeContainer({ step, setStep }) {
     <Elements stripe={stripeTestPromise}>
       {/* <CardImage /> */}
       <PaymentForm
-        step={step}
-        setStep={setStep}
+        nextStep={nextStep}
       />
     </Elements>
   )

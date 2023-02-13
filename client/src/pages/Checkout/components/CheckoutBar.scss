@@ -2,40 +2,65 @@
 
 .checkoutbar-container {
   width: 100vw;
+  position: relative;
+
+  @keyframes move {
+      from {
+        transform: translateX(-80px);
+      }
+  
+      to {
+        transform: translateX(0px);
+      }
+    }
+  
+    .car {
+      position: absolute;
+      // top: 17px;
+      top: 0.5px;
+      left: 16px;
+      animation: move 1.5s ease-in-out;
+      height: 30px;
+    }
+  
+    .car.move2 {
+      transition: transform 2s ease-in-out;
+      transform: translateX(52vw);
+    }
+  
+    .car.move3 {
+      transition: transform 2s ease-in-out;
+      transform: translateX(86vw);
+    }
+
+    .flag {
+      color: $orange;
+      position: absolute;
+      // left: 49.5vw;
+      left: 53vw;
+      height: 30px;
+      top: 1px;
+    }
+    .home {
+      color: $orange;
+      position: absolute;
+      // left: 82.5vw;
+      left: 86.5vw;
+      font-size: 22px;
+      top: 4px;
+    }
 
   .checkoutbar {
       counter-reset: step;
 
-      @keyframes move {
-          from {
-            transform: translateX(-100%);
-          }
-      
-          to {
-            transform: translateX(4%);
-          }
-        }
-     
-      .car{
-        position: absolute;
-        animation: move 2s ease-in-out;
-        height: 30px; 
-      }
-            .car.move2 {
-              transition: transform 2s ease-in-out;
-              transform: translateX(800%);
-            }
-            .car.move3 {
-              transition: transform 1.5s ease-in-out;
-              transform: translateX(1600%);
-            }
-
       li {
         list-style: none;
+        font-weight: bold;
         display: inline-block;
         width: 33.33%;
-        position: relative;
+        // position: relative;
         text-align: center;
+        // padding-bottom: 16px;
         border-bottom: 1px solid $light-gray;        
       }
 
@@ -45,13 +70,7 @@
               
         }
 
-      .flag{
-        color: $orange;
-        position: absolute;
-        right: 50px;
-        height: 30px;
-        top: 18%;
-      }
+      
   }
 }
 

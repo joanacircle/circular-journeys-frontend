@@ -1,24 +1,28 @@
 import './CheckoutBar.scss'
 import Logo from 'images/Logo/Logo'
 import { BsFlagFill } from 'react-icons/bs'
+import { IoHomeSharp } from 'react-icons/io5'
 
 export const CheckoutBar = ({ maxSteps, step, stepNames }) => {
 
   return (
     <>
       <div className="checkoutbar-container">
-        <ul className="checkoutbar">
-          <Logo
-            className={`car
+        <Logo
+          className={`car
             ${step === 1
-                ? 'move'
-                : step === 2
-                  ? 'move2'
-                  : step === 3
-                    ? 'move3'
-                    : ''
-              }`}
-          />
+              ? 'move'
+              : step === 2
+                ? 'move2'
+                : step === 3
+                  ? 'move3'
+                  : ''
+            }`}
+        />
+        <BsFlagFill className='flag' />
+        <IoHomeSharp className='home' />
+        <ul className="checkoutbar">
+
           {Array(maxSteps)
             .fill(1) // 改變內容為1
             .map((v, i) => {
@@ -29,7 +33,7 @@ export const CheckoutBar = ({ maxSteps, step, stepNames }) => {
               )
             })
           }
-          <BsFlagFill className='flag' />
+
         </ul>
       </div>
     </>

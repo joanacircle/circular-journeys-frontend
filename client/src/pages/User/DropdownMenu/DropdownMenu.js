@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './DropdownMenu.scss'
 import 'animate.css'
@@ -8,8 +8,11 @@ import { HiOutlineTicket } from 'react-icons/hi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { BsPersonBadge } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
+import { UserContext } from 'hooks/UserContext'
 
 const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
+  const { context, setContext } = useContext(UserContext)
+  console.log(context)
   // handleClickOutside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -35,7 +38,6 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
       handleToggleLoginModal()
     }
   }
-
   return (
     <div className="user-dropdown-menu animate__animated animate__faster animate__fadeIn">
       <div className='menu-place'>
@@ -43,8 +45,7 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
           <div className='user-name'>
             <FaUserAlt size={35} />
             <div>
-              <h5>Alan Chou</h5>
-              <h6>管理者</h6>
+              <h5>{context.first_name + ' ' + context.last_name}</h5>
             </div>
           </div>
           <IoSettingsOutline size={20} />

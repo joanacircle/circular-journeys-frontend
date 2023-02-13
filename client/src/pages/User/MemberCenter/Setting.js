@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './Setting.scss'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
+import dayjs from 'dayjs'
 
 const SettingPage = () => {
   const [changeInputType, setChangeInputType] = useState('text')
   const [inputData, setInputData] = useState({})
+
 
   const handleInputChange = (event) => {
     setInputData({
@@ -66,9 +68,9 @@ const SettingPage = () => {
                 required
               >
                 <option>--- 請選擇 ---</option>
-                <option value="男">男</option>
-                <option value="女">女</option>
-                <option value="其他">其他</option>
+                <option value="m">男</option>
+                <option value="f">女</option>
+                <option value="o">其他</option>
               </select>
             </div>
           </div>

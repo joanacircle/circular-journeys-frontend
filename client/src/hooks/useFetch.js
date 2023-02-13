@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 
-export const useFetch = (initUrl, initData) => {
+export const useFetch = (initUrl, initData, { query }) => {
   const [state, setState] = useState({
     data: initData,
     url: initUrl,
+    query: { query },
     isError: false,
     isLoading: false
   })
@@ -17,7 +18,7 @@ export const useFetch = (initUrl, initData) => {
         isError: false
       })
       try {
-        const result = await axios.post(state.url)
+        const result = await axios.post(state.url, { query })
         setState({
           ...state,
           data: result.data

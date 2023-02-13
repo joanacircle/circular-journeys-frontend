@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './DropdownMenu.scss'
 import 'animate.css'
@@ -8,8 +8,11 @@ import { HiOutlineTicket } from 'react-icons/hi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { BsPersonBadge } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
+import { useData } from 'hooks/useData'
 
-const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState, userData }) => {
+const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
+  const { data } = useData()
+  console.log(data)
   // handleClickOutside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -35,7 +38,6 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState, userDat
       handleToggleLoginModal()
     }
   }
-
   return (
     <div className="user-dropdown-menu animate__animated animate__faster animate__fadeIn">
       <div className='menu-place'>
@@ -43,8 +45,7 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState, userDat
           <div className='user-name'>
             <FaUserAlt size={35} />
             <div>
-              <h5>{userData.first_name + ' ' + userData.last_name}</h5>
-              {/* <h6>管理者</h6> */}
+              <h5>{}</h5>
             </div>
           </div>
           <IoSettingsOutline size={20} />

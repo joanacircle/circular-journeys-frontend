@@ -79,8 +79,7 @@ const MemberCenterMenu = () => {
                 <AiFillCamera size={25} />
               </div>
             </div>
-            <h4 className="user-name">Alan Chou</h4>
-            <div className="user-information">管理者</div>
+            <h4 className="user-name">{}</h4>
             <div className="user-information user-point">$9,457</div>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>

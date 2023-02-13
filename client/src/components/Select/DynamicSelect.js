@@ -21,6 +21,7 @@ const DynamicSelect = ({ inputData, handleInputChange }) => {
             <select
               name={item.att}
               id={item.att}
+              // value={data.country && data.country}
               onChange={handleInputChange}
               required
             >

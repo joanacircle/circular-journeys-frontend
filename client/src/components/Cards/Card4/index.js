@@ -34,7 +34,7 @@ const Card4 = (props) => {
 
       <Link to={`/blog/${props.postId}`}>
         <div className="img-container">
-            <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
+          <img src={require(`images/Blog/${props.imgSrc}`)} className="card-img" alt={props.imgAlt} />
         </div>
       </Link>
 

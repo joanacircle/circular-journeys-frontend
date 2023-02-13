@@ -16,7 +16,7 @@ router.get('/', async (req, res)=>{
 // SELECT * FROM `post` WHERE `member_id=?`
 router.get('/:member_id', async (req, res) => {
   const member_id = req.params.member_id;
-  const sql = 'SELECT * FROM `post` WHERE member_id=? ORDER BY create_at DESC'
+  const sql = 'SELECT * FROM `posts` WHERE member_id=? ORDER BY create_at DESC'
   const [rows] = await db.query(sql, [member_id]);
   res.json(rows);
 })

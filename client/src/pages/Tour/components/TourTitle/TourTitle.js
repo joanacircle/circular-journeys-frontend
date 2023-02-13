@@ -5,7 +5,7 @@ const TourTitle = () => {
     <>
     <div>
       <label className='TourTitle'>
-      <img src={require("")} />
+      {/* <img src={require("")} /> */}
       <h1>TourBar</h1>
       </label>
     </div>

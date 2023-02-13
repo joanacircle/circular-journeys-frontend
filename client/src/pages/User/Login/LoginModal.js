@@ -8,13 +8,10 @@ import { FaFacebookSquare } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
+import axios from 'axios'
+import { useUserData } from 'hooks/useUserData'
 
-const data = {
-  testEmail: 'test@gmail.com',
-  testPassword: '123456'
-}
-
-const LoginModal = ({ handleToggleLoginModal, setUserState, userState }) => {
+const LoginModal = ({ handleToggleLoginModal, setUserState, userState, setUserData }) => {
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
@@ -26,14 +23,32 @@ const LoginModal = ({ handleToggleLoginModal, setUserState, userState }) => {
       [event.target.name]: event.target.value
     })
   }
-  const handleLoginButton = (event) => {
+
+  // Login
+  const handleLogin = async (event) => {
     event.preventDefault()
-    if (inputChange.userEmail === data.testEmail && inputChange.userPassword === data.testPassword) {
-      alert('登入成功')
+    const { userEmail, userPassword } = inputChange
+    if (userEmail === '' || userPassword === '') return
+    const response = await axios.post('http://localhost:3001/user/login',
+      {
+        userEmail,
+        userPassword
+      }
+    )
+    const [{ data }, setData] = useUserData(response.data)
+    console.log(data)
+    if (response.status === 200) {
+      console.log(response.data)
+      setUserData(response.data.data)
+      setUserState(response.data.state)
+      alert(response.data.message)
       handleToggleLoginModal()
-      setUserState(!userState)
+    } else {
+      setUserState(response.data.state)
+      alert(response.data.message)
     }
   }
+
   const handleCloseLoginModal = (event) => {
     if (event.target === event.currentTarget) {
       handleToggleLoginModal()
@@ -105,7 +120,7 @@ const LoginModal = ({ handleToggleLoginModal, setUserState, userState }) => {
                   : (
                     <div className="login-place">
                       <h1>Login</h1>
-                      <form className='form-place'>
+                      <form className='form-place' onSubmit={handleLogin}>
                         <input
                           className='input-box'
                           type="email"
@@ -156,7 +171,6 @@ const LoginModal = ({ handleToggleLoginModal, setUserState, userState }) => {
                             className='input-submit'
                             type="submit"
                             value="登入"
-                            onClick={handleLoginButton}
                           />
                           <a
                             className='text-style'

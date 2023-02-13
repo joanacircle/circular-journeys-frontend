@@ -9,7 +9,7 @@ import { MdOutlineAttachMoney } from 'react-icons/md'
 import { BsPersonBadge } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
 
-const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
+const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState, userData }) => {
   // handleClickOutside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,8 +43,8 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
           <div className='user-name'>
             <FaUserAlt size={35} />
             <div>
-              <h5>Alan Chou</h5>
-              <h6>管理者</h6>
+              <h5>{userData.first_name + ' ' + userData.last_name}</h5>
+              {/* <h6>管理者</h6> */}
             </div>
           </div>
           <IoSettingsOutline size={20} />

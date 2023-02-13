@@ -10,6 +10,7 @@ import Blog from 'pages/Blog'
 import UserBlog from 'pages/Blog/UserBlog'
 import SinglePost from 'pages/Blog/SinglePost'
 import SearchResult from 'pages/Blog/SearchResult'
+import Tour from 'pages/Tour/Tour'
 
 import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 import { NotFound } from './pages/NotFound'
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='/blog/t123' element={<SearchResult />} />
           <Route path='/blog/:memberId' element={<UserBlog />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/tour' element={<Tour />} />
 
           <Route path='/member' element={<MemberCenter />} />
           <Route path='*' element={<NotFound />} />

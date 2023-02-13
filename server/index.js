@@ -8,17 +8,25 @@ const cors = require('cors')
 // individual component
 const user = require('./src/route/user/users')
 const paymentRoute = require("./src/route/shop/payment")(cors)
+const blogRouter = require('./src/route/blog/blog')
 
 // general middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
+app.get('/',(req,res)=>{
+  res.render('main', {name: '陳小明'});
+});
+
 // user
 app.use('/api/user', user)
 
 // payment
 app.post('/payment', paymentRoute)
+
+// blog
+app.use('/blog', blogRouter)
 
 const PORT = process.env.PORT || 8080
 

@@ -7,7 +7,7 @@ import EditAddress from './EditAddress'
 import './Shipping.scss'
 
 
-const Shipping = ({ shippingDetail, setShippingDetail, step, setStep }) => {
+const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
 
   const [showEditAddress, setShowEditAddress] = useState(false)
 
@@ -22,9 +22,9 @@ const Shipping = ({ shippingDetail, setShippingDetail, step, setStep }) => {
     setSelectedIndex(event.target.value)
   }
 
-  const triggerStep = () => {
-    setStep(step += 1)
-  }
+  // const triggerStep = () => {
+  //   setStep(step += 1)
+  // }
 
 
   return (
@@ -78,7 +78,7 @@ const Shipping = ({ shippingDetail, setShippingDetail, step, setStep }) => {
 
               </div>
               <div className='confirm-button'>
-                <button onClick={triggerStep}>確認</button>
+                <button onClick={nextStep}>確認</button>
               </div>
             </div>
           )}

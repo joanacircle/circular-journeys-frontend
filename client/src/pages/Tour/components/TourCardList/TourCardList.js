@@ -9,8 +9,8 @@ const TourCardList = (props) => {
     <>
     <div className='tourCardList'>
       {
-        cards.map((card, id) => (
-          <TourCard key={id} card={card}/>
+        cards.map((card) => (
+          <TourCard key={card.id} card={card}/>
           ))
       }
     </div>

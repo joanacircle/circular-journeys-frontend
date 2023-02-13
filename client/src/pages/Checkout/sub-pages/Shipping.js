@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaRegAddressBook } from 'react-icons/fa'
 import { BsPlusSquareDotted } from 'react-icons/bs'
+import { VscEdit } from 'react-icons/vsc'
+import { RiDeleteBinFill } from 'react-icons/ri'
 import EditAddress from './EditAddress'
 import './Shipping.scss'
 
-const Shipping = ({ shippingDetail, setShippingDetail }) => {
 
-
+const Shipping = ({ shippingDetail, setShippingDetail, step, setStep }) => {
 
   const [showEditAddress, setShowEditAddress] = useState(false)
 
@@ -14,15 +15,17 @@ const Shipping = ({ shippingDetail, setShippingDetail }) => {
     setShowEditAddress(!showEditAddress)
   }
 
-  const [selectedShippingIndex, setSelectedShippingIndex] = useState(0)
-  const [selectedIndex, setSelectedIndex] = useState(null)
+  // const [selectedShippingIndex, setSelectedShippingIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
-  // const handleShippingSelection = (index) => {
-  //   setSelectedShippingIndex(index)
-  // }
   const handleShippingSelection = (event) => {
     setSelectedIndex(event.target.value)
   }
+
+  const triggerStep = () => {
+    setStep(step += 1)
+  }
+
 
   return (
     <>
@@ -35,32 +38,48 @@ const Shipping = ({ shippingDetail, setShippingDetail }) => {
             setShowEditAddress={setShowEditAddress}
           />
           : (
-            <div className='address-boxes'>
+            <div>
+              <div className='address-boxes'>
 
-              <div className='address-box'>
-                {shippingDetail.map((shipping, index) => (
-                  <div key={index} className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}>
-                    <input
-                      type='radio'
-                      name='shippingAddress'
-                      value={index}
-                      onChange={handleShippingSelection}
-                    />
+                <div className='address-box'>
+                  {shippingDetail.map((shipping, index) => (
 
-                    <div className='address-name'>{shipping.name}</div>
-                    <br />
-                    {Object.entries(shipping).map(([key, value], i) => {
-                      if (key === "name" || key === "province") return null
-                      if (key === "zip") return <div key={key}>{`${shipping.province} ${shipping.zip}`}</div>
-                      return <div key={key}>{value}</div>
-                    })}
 
-                  </div>
+                    <div key={index} className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}>
+                      {console.log({ index })}
+                      <input
 
-                ))}
+                        type='radio'
+                        name='shippingAddress'
+                        value={index}
+                        onChange={handleShippingSelection}
+                      />
+
+                      <div className='address-name'>{shipping.name}</div>
+                      <br />
+                      {Object.entries(shipping).map(([key, value], i) => {
+                        if (key === "name" || key === "province") return null
+                        if (key === "zip") return <div key={key}>{`${shipping.province} ${shipping.zip}`}</div>
+                        return <div key={key}>{value}</div>
+                      })}
+                      <div className='edit-delete'>
+                        <VscEdit />
+                        <RiDeleteBinFill />
+                      </div>
+                    </div>
+
+
+
+                  ))}
+                </div>
+                <div className='toggle-edit' >
+                  <button onClick={toggleEditAddress}><BsPlusSquareDotted className='toggle-edit-icon' /></button>
+                </div>
+
               </div>
-
-              <button className='toggle-edit' onClick={toggleEditAddress}><BsPlusSquareDotted className='toggle-edit-icon' /></button>
+              <div className='confirm-button'>
+                <button onClick={triggerStep}>確認</button>
+              </div>
             </div>
           )}
       </div>

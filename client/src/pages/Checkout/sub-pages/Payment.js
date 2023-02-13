@@ -25,7 +25,8 @@ const sampleProductData = [
   }
 ]
 
-const Payment = () => {
+const Payment = ({ step, setStep }) => {
+
 
   const [products, setProducts] = useState(sampleProductData.map((v, i) => ({
     ...v, count: 1
@@ -41,17 +42,36 @@ const Payment = () => {
     phone: '0917666666'
   }
 
+  const previousStep = () => {
+
+    setStep(step -= 1)
+  }
+
 
   return (
     <>
       <div className='payment-container'>
-        <h5 className='payment-title'>付款資訊</h5>
+        <h5 className='payment-title'>請輸入信用卡資訊</h5>
+
+
+        <div className='credit-info'>
+          <StripeContainer
+            className='stripe-container'
+            step={step}
+            setStep={setStep}
+          />
+        </div>
 
         <div className="confirm-container">
           <div className="confirm-info">
             <div className="confirm-address">
 
-              <div style={{ fontWeight: 'bold' }}>{sampleData.name}</div>
+              <div className='title-group'>
+                <div style={{ fontWeight: 'bold' }}>{sampleData.name}</div>
+                <div>
+                  <button className='previous-button' onClick={previousStep}>重選地址</button>
+                </div>
+              </div>
               <br />
               {Object.entries(sampleData).map(([key, value], i) => {
                 if (key === "name" || key === "province") return null
@@ -69,9 +89,7 @@ const Payment = () => {
             </div>
           </div>
         </div>
-        <div className='credit-info'>
-          <StripeContainer className='stripe-container' />
-        </div>
+
       </div>
     </>
   )

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import Shipping from './sub-pages/Shipping'
-import EditAddress from './sub-pages/EditAddress'
 import Payment from './sub-pages/Payment'
 import OrderDetail from './sub-pages/OrderDetail'
 
@@ -35,7 +34,7 @@ const Checkout = () => {
 
   const maxSteps = 3
   const [step, setStep] = useState(1)
-  const stepNames = ['產品確認', '付款方式', '訂單確認']
+  const stepNames = ['運送地址', '付款確認', '完成訂單!']
 
   const components = [Shipping, Payment, OrderDetail]
   const BlockComponent = components[step - 1]
@@ -69,9 +68,11 @@ const Checkout = () => {
           <BlockComponent
             shippingDetail={shippingDetail}
             setShippingDetail={setShippingDetail}
+            step={step}
+            setStep={setStep}
           />
         </div>
-        <div>
+        <div className='step-controller'>
           <button onClick={prevStep} disabled={step === 1}>
             上一步
           </button>

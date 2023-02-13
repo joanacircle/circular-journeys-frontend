@@ -76,8 +76,12 @@ const LoginModal = ({ handleToggleLoginModal, setUserState }) => {
       onClick={handleCloseLoginModal}
     >
       <div
-        className='login-modal-content animate__animated animate__faster animate__bounceIn
-        '>
+        className={
+          loginModal
+            ? 'login-modal-content animate__animated animate__faster animate__bounceIn'
+            : 'login-modal-content animate__animated animate__bounceOut animate__faster'
+        }
+      >
         <div className="login-modal-content-background">
           <div className="close-login-button">
             {

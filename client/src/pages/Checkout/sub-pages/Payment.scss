@@ -1,0 +1,45 @@
+@import 'index.scss';
+
+.payment-container{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .payment-title{
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .credit-info{
+    border-bottom: solid 1px $gray;
+    padding: 15px;
+  }
+
+  .confirm-info{
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+
+    .confirm-address{
+      width: 25%;
+
+      .title-group{
+        display: flex;
+
+        .previous-button{
+          margin-left: 25px;
+          font-size: 12px;
+          width: 60px;
+          color: $purple;
+          font-weight: bold;
+        }
+      }
+    }
+    .confirm-products{
+      display: flex;
+      flex-direction: column;
+      width: 35%;
+    }
+  }
+}

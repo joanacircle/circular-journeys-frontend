@@ -1,0 +1,23 @@
+.credit-card {
+  width: 400px;
+  height: 250px;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-number-container {
+  width: 80%;
+  text-align: center;
+
+  label {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  div {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+}

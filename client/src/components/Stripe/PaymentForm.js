@@ -1,16 +1,24 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
 import React, { useState } from 'react'
+import './PaymentForm.scss'
+
+
+import ssl from '../../images/payment/ssl.png'
+import stripe2 from '../../images/payment/stripe.png'
+import visa from '../../images/payment/visa.png'
+import master from '../../images/payment/master.png'
 
 const CARD_OPTIONS = {
   iconStyle: "solid",
   style: {
     base: {
+
       iconColor: "#c4f0ff",
       color: "#000",
       fontWeight: 500,
       fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-      fontSize: "16px",
+      fontSize: "20px",
       fontSmoothing: "antialiased",
       ":-webkit-autofill": { color: "#fce883" },
       "::placeholder": { color: "#87bbfd" }
@@ -22,7 +30,9 @@ const CARD_OPTIONS = {
   }
 }
 
-export default function PaymentForm() {
+export default function PaymentForm(step, setStep) {
+
+  const totalPrice = 888
   const [success, setSuccess] = useState(false)
   const stripe = useStripe()
   const elements = useElements()
@@ -57,19 +67,39 @@ export default function PaymentForm() {
     }
   }
 
+  const completePayment = () => {
+    setStep(step += 1)
+  }
+
   return (
     <>
       {!success
         ? <form onSubmit={handleSubmit}>
           <fieldset className="FormGroup">
             <div className="FormRow">
-              <CardElement options={CARD_OPTIONS} />
+              <CardElement className="card-element" options={CARD_OPTIONS} />
+
             </div>
           </fieldset>
-          <button>Pay</button>
+          <div className="certifications">
+            <div className="cert-img">
+              <img src={ssl} alt="ssl" />
+              {/* <img src={stripe2} alt="stripe" /> */}
+            </div>
+            <div className="cert-img">
+              <img src={visa} alt="visa" />
+              <img src={master} alt="master" />
+            </div>
+          </div>
+          <div className="payment-summary">
+
+            <h5>金額總計 NT ${totalPrice} 元</h5>
+            <button onClick={completePayment}>確認付費</button>
+          </div>
+
         </form>
         : <div>
-          <h2>Thank you for your purchase</h2>
+          {<h2>Thank you for your purchase</h2>}
         </div>
       }
 

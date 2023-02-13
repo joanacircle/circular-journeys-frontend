@@ -5,14 +5,14 @@ import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
 
 import './SinglePost.scss'
 import Card2 from 'components/Cards/Card2'
-import B001 from 'images/Blog/B001.jpeg'
+import B001 from 'images/Blog/B001.jpg'
 import B002 from 'images/Blog/B002.jpeg'
 import B003 from 'images/Blog/B003.jpeg'
 import B004 from 'images/Blog/B004.jpeg'
 
 const SinglePost = () => {
   const memberName = 'CircleChang'
-  const memberId = '123'
+  const memberId = '12348'
   const tags = ['旅遊', '旅遊', '旅遊']
   const tagId = 't123'
   const postContent = `高雄是位於台灣南部的現代化城市，這個城市同時融合了古老的歷史和現代的文化，還有全台灣最大的夜市。 千萬別錯過壯觀的佛光山，還有佛光山大佛堂。 統一夢時代購物中心是台灣最大的購物中心，購物中心的頂樓還有摩天輪。 你可驅車前往墾丁國家公園，一覽墾丁美麗的地形風景。 搭船到旗津吃海鮮。`
@@ -74,7 +74,7 @@ const SinglePost = () => {
             </p>
             <p>
               <Link to='#'>前一篇</Link>
-               ｜
+               |
               <Link to='#'>後一篇</Link>
             </p>
           </div>

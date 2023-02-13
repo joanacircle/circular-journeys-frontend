@@ -10,10 +10,10 @@ import Blog from 'pages/Blog'
 import UserBlog from 'pages/Blog/UserBlog'
 import SinglePost from 'pages/Blog/SinglePost'
 import SearchResult from 'pages/Blog/SearchResult'
+import Tour from 'pages/Tour/Tour'
 
 import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 import { NotFound } from './pages/NotFound'
-import { ShoppingCart } from 'pages/ShoppingCart/ShoppingCart'
 import MemberSetting from 'pages/User/MemberCenter/Setting'
 import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
@@ -32,7 +32,7 @@ const App = () => {
             <Route path='/blog/t123' element={<SearchResult />} />
             <Route path='/blog/:memberId' element={<UserBlog />} />
             <Route path='/shop' element={<Shop />} />
-            <Route path='/cart' element={<ShoppingCart />} />
+            <Route path='/tour' element={<Tour />} />
 
             <Route path='/member' element={<MemberCenter />} />
             <Route path='login' element={<LoginModal />} />
@@ -45,7 +45,6 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
-
   )
 }
 

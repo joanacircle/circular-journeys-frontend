@@ -1,70 +1,89 @@
-import { StripeContainer } from 'components/Stripe/StripeContainer'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { FaRegAddressBook } from 'react-icons/fa'
+import { BsPlusSquareDotted } from 'react-icons/bs'
+import { VscEdit } from 'react-icons/vsc'
+import { RiDeleteBinFill } from 'react-icons/ri'
+import EditAddress from './EditAddress'
+import './Shipping.scss'
 
-const Shipping = () => {
-  const [showItem, setShowItem] = useState(false)
+
+const Shipping = ({ shippingDetail, setShippingDetail, step, setStep }) => {
+
+  const [showEditAddress, setShowEditAddress] = useState(false)
+
+  const toggleEditAddress = () => {
+    setShowEditAddress(!showEditAddress)
+  }
+
+  // const [selectedShippingIndex, setSelectedShippingIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const handleShippingSelection = (event) => {
+    setSelectedIndex(event.target.value)
+  }
+
+  const triggerStep = () => {
+    setStep(step += 1)
+  }
+
+
   return (
     <>
-      <h1>訂購內容 + 運送地址</h1>
+      <div className='shipping'>
+        <FaRegAddressBook className='address-book' />
+        <h5 className='select-address'>請選擇運送地址</h5>
+        {showEditAddress
+          ? <EditAddress
+            showEditAddress={showEditAddress}
+            setShowEditAddress={setShowEditAddress}
+          />
+          : (
+            <div>
+              <div className='address-boxes'>
 
-      <div className='pay'>
+                <div className='address-box'>
+                  {shippingDetail.map((shipping, index) => (
 
-        {showItem
-          ? <StripeContainer />
-          : <div>
-            <h3>$100.00</h3><button onClick={() => setShowItem(true)}>Purchase</button>
-          </div>
-        }
+
+                    <div key={index} className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}>
+                      {console.log({ index })}
+                      <input
+
+                        type='radio'
+                        name='shippingAddress'
+                        value={index}
+                        onChange={handleShippingSelection}
+                      />
+
+                      <div className='address-name'>{shipping.name}</div>
+                      <br />
+                      {Object.entries(shipping).map(([key, value], i) => {
+                        if (key === "name" || key === "province") return null
+                        if (key === "zip") return <div key={key}>{`${shipping.province} ${shipping.zip}`}</div>
+                        return <div key={key}>{value}</div>
+                      })}
+                      <div className='edit-delete'>
+                        <VscEdit />
+                        <RiDeleteBinFill />
+                      </div>
+                    </div>
+
+
+
+                  ))}
+                </div>
+                <div className='toggle-edit' >
+                  <button onClick={toggleEditAddress}><BsPlusSquareDotted className='toggle-edit-icon' /></button>
+                </div>
+
+              </div>
+              <div className='confirm-button'>
+                <button onClick={triggerStep}>確認</button>
+              </div>
+            </div>
+          )}
       </div>
     </>
   )
 }
 export default Shipping
-
-
-
-// function Shipping(props) {
-//   const { shippingDetail, setShippingDetail } = props
-
-//   const handleFieldChange = (e) => {
-//     const newShipping = { ...shippingDetail, [e.target.name]: e.target.value }
-//     setShippingDetail(newShipping)
-
-//     console.log(newShipping)
-//   }
-
-//   return (
-//     <>
-//       <h1>運送資訊 - Shipping</h1>
-//       <div>
-//         <label>姓名</label>
-//         <input
-//           type='text'
-//           name='name'
-//           value={shippingDetail.name}
-//           onChange={handleFieldChange}
-//         />
-//       </div>
-//       <div>
-//         <label>住址</label>
-//         <input
-//           type='text'
-//           name='address'
-//           value={shippingDetail.address}
-//           onChange={handleFieldChange}
-//         />
-//       </div>
-//       <div>
-//         <label>電話</label>
-//         <input
-//           type='text'
-//           name='phone'
-//           value={shippingDetail.phone}
-//           onChange={handleFieldChange}
-//         />
-//       </div>
-//     </>
-//   )
-// }
-
-// export default Shipping

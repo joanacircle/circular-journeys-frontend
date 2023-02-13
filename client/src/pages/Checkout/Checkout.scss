@@ -1,6 +1,23 @@
-.order-steps {
-  min-height: 50vh;
-  
-  color: rgb(9, 9, 9);
-  padding: 10px;
+@import 'index.scss';
+
+.checkout-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .title {
+    margin: 40px;
+    color: $orange ;
+    white-space: nowrap;
+    font-family: Sigmar One;
+  }
+
+  .order-steps {
+    min-height: 50vh;
+  }
+
+  .step-controller{
+    display: none;
+  }
+
 }

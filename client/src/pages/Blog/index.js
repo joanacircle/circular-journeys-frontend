@@ -8,7 +8,7 @@ import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
-import B001 from 'images/Blog/B001.jpeg'
+import B001 from 'images/Blog/B001.jpg'
 
 
 const Blog = () => {
@@ -20,7 +20,7 @@ const Blog = () => {
   const imgSrc = B001
   const imgAlt = 'imgAlt'
   const tagId = 't123' // 先抓到 tag value 在找到該 tag 的 id
-  const memberId = '123'
+  const memberId = '12348'
   const avatar = 'CircleChang'
   const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
   const createAt = 'Feb 27, 2018 at 6:53pm'

@@ -3,10 +3,10 @@ import './Order.scss'
 
 const OrderPage = () => {
   return (
-    <div className="order-place animate__animated animate__fadeInLeft animate__faster">
+    <div className="top-place animate__animated animate__fadeInDown animate__faster">
       <h3>訂單管理</h3>
       <hr />
-      <div className='order-input-place'>
+      <div className='input-place'>
       </div >
     </div >
   )

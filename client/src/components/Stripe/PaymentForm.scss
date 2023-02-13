@@ -7,7 +7,45 @@
   .card-element {
       display: flex;
       flex-direction: column;
-      height: 200px;
+      height: 40px;
       width: 400px;
+      margin-bottom: 15px;
     }
+}
+
+.certifications {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px;
+  
+
+  .cert-img {
+    display: flex;  
+  }
+
+  img {   
+    height: 18px;
+  }
+}
+.payment-summary{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h5{
+    font-weight: bold ;
+  }
+  button {
+    padding: 5px;
+    width: 25%;
+    background-color: $orange;
+    color: white;
+    border-radius: $br2;
+    font-weight: bold;
+
+    &:hover{
+      // cursor: pointer;
+    }
+  }
 }

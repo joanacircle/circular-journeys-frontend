@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './Setting.scss'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
 import dayjs from 'dayjs'
+import { UserContext } from 'hooks/UserContext'
 
 const SettingPage = () => {
   const [changeInputType, setChangeInputType] = useState('text')
   const [inputData, setInputData] = useState({})
+  const { context, setContext } = useContext(UserContext)
 
 
   const handleInputChange = (event) => {
@@ -14,8 +16,20 @@ const SettingPage = () => {
       [event.target.name]: event.target.value
     })
   }
-
-  console.log(inputData)
+  useEffect(() => {
+    if (context) {
+      setInputData({
+        ...inputData,
+        userFirstName: context.first_name,
+        userLastName: context.last_name,
+        userBirthday: dayjs(context.birthday).format('YYYY-MM-DD'),
+        sex: context.sex,
+        userAddress: context.address,
+        userTelephone: context.telephone,
+        userEmail: context.email
+      })
+    }
+  }, [context])
 
   return (
     <div className="setting-place animate__animated animate__fadeInLeft animate__faster">
@@ -30,16 +44,18 @@ const SettingPage = () => {
                 type="text"
                 name='userFirstName'
                 id='userFirstName'
+                value={inputData.userFirstName}
                 onChange={handleInputChange}
                 placeholder='王'
               />
             </div>
-            <div className='label-place' >
+            <div className='label-place'>
               <label htmlFor="userLastName">名</label>
               <input
                 type="text"
                 name='userLastName'
                 id='userLastName'
+                value={inputData.userLastName}
                 onChange={handleInputChange}
                 placeholder='小明'
               />
@@ -53,6 +69,7 @@ const SettingPage = () => {
                 name='userBirthday'
                 id='userBirthday'
                 placeholder='YYYY-MM-DD'
+                value={inputData.userBirthday}
                 onFocus={() => setChangeInputType('date')}
                 onBlur={() => setChangeInputType()}
                 onChange={handleInputChange}
@@ -64,6 +81,7 @@ const SettingPage = () => {
               <select
                 name='sex'
                 id='sex'
+                value={inputData.sex}
                 onChange={handleInputChange}
                 required
               >
@@ -78,6 +96,8 @@ const SettingPage = () => {
             {
               <DynamicSelect
                 inputData={inputData}
+                setInputData={setInputData}
+                context={context}
                 handleInputChange={handleInputChange}
               />
             }
@@ -89,6 +109,7 @@ const SettingPage = () => {
                 type="text"
                 name="userAddress"
                 id="userAddress"
+                value={inputData.userAddress}
                 onChange={handleInputChange}
                 placeholder='忠孝東路一段101號'
                 required
@@ -102,6 +123,7 @@ const SettingPage = () => {
                 type="text"
                 name='userTelephone'
                 id='userTelephone'
+                value={inputData.userTelephone}
                 onChange={handleInputChange}
                 placeholder='0912345678'
                 required
@@ -113,6 +135,7 @@ const SettingPage = () => {
                 type="email"
                 name="userEmail"
                 id="userEmail"
+                value={inputData.userEmail}
                 onChange={handleInputChange}
                 placeholder='example@gmail.com'
                 required

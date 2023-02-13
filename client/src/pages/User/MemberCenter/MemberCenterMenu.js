@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './MemberCenterMenu.scss'
 import { AiFillCamera, AiOutlineLike } from 'react-icons/ai'
@@ -14,6 +14,7 @@ import TicketPage from './Ticket'
 import OrderPage from './Order'
 import ShopHistoryPage from './ShopHistory'
 import LikeHistoryPage from './LikeHistory'
+import { UserContext } from 'hooks/UserContext'
 
 const menuObj = {
   info: [
@@ -58,6 +59,7 @@ const menuObj = {
 
 const MemberCenterMenu = () => {
   const [changePage, setChangePage] = useState(menuObj)
+  const { context, setContext } = useContext(UserContext)
 
   const handleChangePage = (event) => {
     const newInfo = changePage.info.map(item => {
@@ -79,7 +81,7 @@ const MemberCenterMenu = () => {
                 <AiFillCamera size={25} />
               </div>
             </div>
-            <h4 className="user-name">{}</h4>
+            <h4 className="user-name">{context.first_name + ' ' + context.last_name}</h4>
             <div className="user-information user-point">$9,457</div>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>

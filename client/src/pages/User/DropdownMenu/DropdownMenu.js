@@ -8,11 +8,11 @@ import { HiOutlineTicket } from 'react-icons/hi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { BsPersonBadge } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
-import { useData } from 'hooks/useData'
+import { UserContext } from 'hooks/UserContext'
 
 const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
-  const { data } = useData()
-  console.log(data)
+  const { context, setContext } = useContext(UserContext)
+  console.log(context)
   // handleClickOutside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -45,7 +45,7 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
           <div className='user-name'>
             <FaUserAlt size={35} />
             <div>
-              <h5>{}</h5>
+              <h5>{context.first_name + ' ' + context.last_name}</h5>
             </div>
           </div>
           <IoSettingsOutline size={20} />

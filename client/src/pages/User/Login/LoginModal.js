@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './LoginModal.scss'
 import 'animate.css'
 import SignupModal from '../Signup/SignupModal'
@@ -9,7 +9,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
 import axios from 'axios'
-import { useData } from 'hooks/useData'
+import { UserContext } from 'hooks/UserContext'
 
 
 const LoginModal = ({ handleToggleLoginModal, setUserState }) => {
@@ -17,7 +17,7 @@ const LoginModal = ({ handleToggleLoginModal, setUserState }) => {
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
   const [inputChange, setInputChange] = useState({})
-  const { data, setData } = useData()
+  const { context, setContext } = useContext(UserContext)
 
   const handelInputChange = (event) => {
     setInputChange({
@@ -38,7 +38,7 @@ const LoginModal = ({ handleToggleLoginModal, setUserState }) => {
       }
     )
     if (response.status === 200) {
-      setData(response.data.data)
+      setContext(response.data.data)
       setUserState(response.data.state)
       alert(response.data.message)
       handleToggleLoginModal()

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import './LoginModal.scss'
 import 'animate.css'
 import SignupModal from '../Signup/SignupModal'
@@ -9,17 +9,14 @@ import { FcGoogle } from 'react-icons/fc'
 import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
 import axios from 'axios'
-import { UserContext } from 'hooks/UserContext'
-import { useIsLoggedIn } from 'hooks/useIsLoggedIn'
+import md5 from 'md5'
 
 
-const LoginModal = ({ handleToggleLoginModal, setUserState, loginModal }) => {
-  const { isLogin } = useIsLoggedIn()
+const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
   const [inputChange, setInputChange] = useState({})
-  const { context, setContext } = useContext(UserContext)
 
   const handelInputChange = (event) => {
     setInputChange({
@@ -32,22 +29,24 @@ const LoginModal = ({ handleToggleLoginModal, setUserState, loginModal }) => {
   const handleLogin = async (event) => {
     event.preventDefault()
     const { userEmail, userPassword } = inputChange
+    const encryption = md5(userPassword)
     if (userEmail === '' || userPassword === '') return
     const response = await axios.post('http://localhost:3001/user/login',
       {
         userEmail,
-        userPassword
+        userPassword: encryption
       }
     )
-    if (response.status === 200) {
+    if (response.data.state) {
       // TODO:
-      setContext(response.data.data.id)
-      setUserState(response.data.state)
       alert(response.data.message)
       handleToggleLoginModal()
+
+      // save token to localStorage
+      localStorage.setItem('token', response.data.token)
+      window.location = '/'
     } else {
-      setUserState(response.data.state)
-      alert(response.data.message)
+      return alert(response.data.message)
     }
   }
 

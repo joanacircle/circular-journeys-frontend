@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './MemberCenterMenu.scss'
 import { AiFillCamera, AiOutlineLike } from 'react-icons/ai'
@@ -15,7 +15,7 @@ import TicketPage from './Ticket'
 import OrderPage from './Order'
 import ShopHistoryPage from './ShopHistory'
 import LikeHistoryPage from './LikeHistory'
-import { UserContext } from 'hooks/UserContext'
+
 
 const menuObj = {
   info: [
@@ -61,11 +61,11 @@ const menuObj = {
 const MemberCenterMenu = () => {
   const [changePage, setChangePage] = useState(menuObj)
   const [userData, setUserData] = useState()
-  const { context } = useContext(UserContext)
+
   // TODO:
   const handleUserInfo = async () => {
-    const id = context
-    const response = await axios.post('http://localhost:3001/user/userinfo', { id })
+    const token = localStorage.getItem('token')
+    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
     if (response.status === 200) {
       setUserData(response.data)
     }

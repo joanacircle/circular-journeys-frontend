@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, Navigate } from 'react-router-dom'
 import './DropdownMenu.scss'
 import 'animate.css'
 import { FaUserAlt } from 'react-icons/fa'
@@ -8,19 +8,16 @@ import { HiOutlineTicket } from 'react-icons/hi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { BsPersonBadge } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
-import { UserContext } from 'hooks/UserContext'
 import axios from 'axios'
 
-const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
+const DropdownMenu = ({ handleToggleLoginModal }) => {
   const [userData, setUserData] = useState()
-  const { context, setContext } = useContext(UserContext)
   // TODO:
   const handleUserInfo = async () => {
-    const id = context
-    const response = await axios.post('http://localhost:3001/user/userinfo', { id })
+    const token = localStorage.getItem('token')
+    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
     if (response.status === 200) {
       setUserData(response.data)
-      console.log(response.data)
     }
   }
   // handleClickOutside
@@ -39,15 +36,11 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
       window.removeEventListener('click', handleClickOutside)
     }
   }, [])
-
   const handleLogoutButton = () => {
-    if (userState) {
-      alert('已登出')
-      setContext('')
-      setUserData('')
-      setUserState(!userState)
-      handleToggleLoginModal()
-    }
+    alert('已登出')
+    setUserData('')
+    localStorage.removeItem('token')
+    window.location = '/'
   }
   return (
     <div className="user-dropdown-menu animate__animated animate__faster animate__fadeIn">

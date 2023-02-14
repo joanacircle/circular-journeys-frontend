@@ -1,19 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Setting.scss'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
 import dayjs from 'dayjs'
-import { UserContext } from 'hooks/UserContext'
 import axios from 'axios'
 
 const SettingPage = () => {
   const [changeInputType, setChangeInputType] = useState('text')
   const [inputData, setInputData] = useState({})
-  const { context } = useContext(UserContext)
   const [userData, setUserData] = useState()
+
   // TODO:
   const handleUserInfo = async () => {
-    const id = context
-    const response = await axios.post('http://localhost:3001/user/userinfo', { id })
+    const token = localStorage.getItem('token')
+    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
     if (response.status === 200) {
       setUserData(response.data)
     }

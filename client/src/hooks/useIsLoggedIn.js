@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const useIsLoggedIn = () => {
-  const [isLogin, setIsLogin] = useState({
-    state: false,
-    token: ''
-  })
+  const [isLogin, setIsLogin] = useState()
   useEffect(() => {
     localStorage.getItem('token')
       ? setIsLogin({

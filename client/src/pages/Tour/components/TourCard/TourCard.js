@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './TourCard.scss'
 
 
-const TourCard = (p) => {
-  const { id, name, adress, img, tags } = p
+const TourCard = (props) => {
+  const { card } = props
+  const { id, name, adress, img, tags } = card
     return (
     <>
     <div className='TourCard'>
-    <img src={require(`images/Tour/${img}`)}
+    <img src={require(`images/Tour/${img}.jpg`)}
     className='TourCardImg' alt='TourCardImg'/>
       <span className='TourCardText'>
       <h3>{ name }</h3>

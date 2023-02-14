@@ -38,7 +38,6 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
       }
     )
     if (response.data.state) {
-      // TODO:
       alert(response.data.message)
       handleToggleLoginModal()
 
@@ -112,6 +111,8 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
                   setShowPassword={setShowPassword}
                   handleShowPasswordButton={handleShowPasswordButton}
                   handleToggleSignupModal={handleToggleSignupModal}
+                  setUserForgot={setUserForgot}
+                  userForgot={userForgot}
                 />
               )
               : (

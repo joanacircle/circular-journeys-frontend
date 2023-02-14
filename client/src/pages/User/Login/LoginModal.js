@@ -38,7 +38,8 @@ const LoginModal = ({ handleToggleLoginModal, setUserState, loginModal }) => {
       }
     )
     if (response.status === 200) {
-      setContext(response.data.data)
+      // TODO:
+      setContext(response.data.data.id)
       setUserState(response.data.state)
       alert(response.data.message)
       handleToggleLoginModal()

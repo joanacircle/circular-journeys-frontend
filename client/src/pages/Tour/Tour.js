@@ -4,7 +4,10 @@ import TourCardList from './components/TourCardList/index'
 const Tour = () => {
   return (
     <>
+    <div className='tour-page'>
+    <TourTitle />
     <TourCardList />
+    </div>
     </>
   )
 }

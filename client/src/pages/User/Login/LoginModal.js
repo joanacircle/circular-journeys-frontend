@@ -12,7 +12,7 @@ import axios from 'axios'
 import { UserContext } from 'hooks/UserContext'
 
 
-const LoginModal = ({ handleToggleLoginModal, setUserState }) => {
+const LoginModal = ({ handleToggleLoginModal, setUserState, loginModal }) => {
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)

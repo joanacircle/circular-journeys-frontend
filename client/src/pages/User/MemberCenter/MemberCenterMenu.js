@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './MemberCenterMenu.scss'
 import { AiFillCamera, AiOutlineLike } from 'react-icons/ai'
@@ -6,6 +6,7 @@ import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineTicket, HiOutlineShoppingCart } from 'react-icons/hi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { CgNotes } from 'react-icons/cg'
+import axios from 'axios'
 
 // page
 import SettingPage from './Setting'
@@ -59,7 +60,17 @@ const menuObj = {
 
 const MemberCenterMenu = () => {
   const [changePage, setChangePage] = useState(menuObj)
-  const { context, setContext } = useContext(UserContext)
+  const [userData, setUserData] = useState()
+  const { context } = useContext(UserContext)
+  // TODO:
+  const handleUserInfo = async () => {
+    const id = context
+    const response = await axios.post('http://localhost:3001/user/userinfo', { id })
+    if (response.status === 200) {
+      setUserData(response.data)
+    }
+  }
+
 
   const handleChangePage = (event) => {
     const newInfo = changePage.info.map(item => {
@@ -71,6 +82,9 @@ const MemberCenterMenu = () => {
     setChangePage({ ...changePage, info: newInfo })
   }
 
+  useEffect(() => {
+    handleUserInfo()
+  }, [])
   return (
     <div className="membercenter-place">
       <div className="membercenter-box">
@@ -81,7 +95,7 @@ const MemberCenterMenu = () => {
                 <AiFillCamera size={25} />
               </div>
             </div>
-            <h4 className="user-name">{context.first_name + ' ' + context.last_name}</h4>
+            <h4 className="user-name">{userData && userData.first_name + ' ' + userData.last_name}</h4>
             <div className="user-information user-point">$9,457</div>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>

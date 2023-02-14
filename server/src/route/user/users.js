@@ -11,6 +11,19 @@ router.get('/userslist', async (req, res, next) => {
   res.json(rows)
 })
 
+//http://localhost:3001/user/userinfo
+router.post('/userinfo', async (req, res, next) => {
+  const { id } = req.body
+  const sql = `SELECT * FROM users_information WHERE id = ?`
+  try {
+    const results = await db.query(sql, [id])
+    const data = results[0][0]
+    res.json(data)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //http://localhost:3001/user/login
 router.post('/login', async (req, res, next) => {
   const { userEmail, userPassword } = req.body

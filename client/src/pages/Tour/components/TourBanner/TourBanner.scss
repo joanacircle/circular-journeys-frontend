@@ -5,12 +5,11 @@
   width: fit-content;
   // max-height: 260px;
  
-
-  // max-width: 1920px;
   .tour-banner-img{
     object-fit: cover;
     max-height: 380px;
     width:1920px;
+    filter: brightness(0.9) saturate(0.7);
   }
   
   .title-section{
@@ -27,6 +26,7 @@
       border-bottom:solid orange 4px; 
       padding-bottom: 10px;
       margin: 15px;
+      cursor:default;
       
     }
     

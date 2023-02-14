@@ -13,10 +13,10 @@ router.get('/userslist', async (req, res, next) => {
 
 //http://localhost:3001/user/userinfo
 router.post('/userinfo', async (req, res, next) => {
-  const { id } = req.body
-  const sql = `SELECT * FROM users_information WHERE id = ?`
+  const { token } = req.body
+  const sql = `SELECT * FROM users_information WHERE token = ?`
   try {
-    const results = await db.query(sql, [id])
+    const results = await db.query(sql, [token])
     const data = results[0][0]
     res.json(data)
   } catch (err) {
@@ -27,20 +27,26 @@ router.post('/userinfo', async (req, res, next) => {
 //http://localhost:3001/user/login
 router.post('/login', async (req, res, next) => {
   const { userEmail, userPassword } = req.body
+  const token = uuid.v4()
   const sql = `SELECT * FROM users_information WHERE email = ? AND password = ?`
+  const updateSql = `UPDATE users_information SET token = ? WHERE email = ? AND password = ?`
   try {
     const results = await db.query(sql, [userEmail, userPassword])
     const data = results[0][0]
     if (data) {
+      await db.query(updateSql, [token, userEmail, userPassword])
       res.json({
         state: true,
         message: `歡迎回來 ${data.first_name + data.last_name}`,
-        data
+        data,
+        id: data.id,
+        token: token
       })
     } else {
       res.json({
         state: false,
-        message: '信箱或密碼錯誤！'
+        message: '信箱或密碼錯誤！',
+        token: ''
       })
     }
   } catch (err) {

@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { taiwan } from 'data/taiwan-data'
-import { UserContext } from 'hooks/UserContext'
 
 const DynamicSelect = ({ inputData, setInputData, handleInputChange }) => {
-  const { context, setContext } = useContext(UserContext)
   const options = taiwan
   const selectOptionsObj = {
     info: [

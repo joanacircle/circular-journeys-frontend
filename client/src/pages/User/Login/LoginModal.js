@@ -10,9 +10,11 @@ import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
 import axios from 'axios'
 import { UserContext } from 'hooks/UserContext'
+import { useIsLoggedIn } from 'hooks/useIsLoggedIn'
 
 
 const LoginModal = ({ handleToggleLoginModal, setUserState, loginModal }) => {
+  const { isLogin } = useIsLoggedIn()
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)

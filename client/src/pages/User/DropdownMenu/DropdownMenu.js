@@ -13,7 +13,7 @@ import axios from 'axios'
 
 const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
   const [userData, setUserData] = useState()
-  const { context } = useContext(UserContext)
+  const { context, setContext } = useContext(UserContext)
   // TODO:
   const handleUserInfo = async () => {
     const id = context
@@ -43,6 +43,8 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
   const handleLogoutButton = () => {
     if (userState) {
       alert('已登出')
+      setContext('')
+      setUserData('')
       setUserState(!userState)
       handleToggleLoginModal()
     }

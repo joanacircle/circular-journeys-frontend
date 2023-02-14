@@ -34,7 +34,7 @@ const Checkout = () => {
 
   const maxSteps = 3
   const [step, setStep] = useState(1)
-  const stepNames = ['運送地址', '付款確認', '完成訂單!']
+  const stepNames = ['運送地址', '付款確認', '下單完成!']
 
   const components = [Shipping, Payment, OrderDetail]
   const BlockComponent = components[step - 1]
@@ -68,8 +68,10 @@ const Checkout = () => {
           <BlockComponent
             shippingDetail={shippingDetail}
             setShippingDetail={setShippingDetail}
-            step={step}
-            setStep={setStep}
+            // step={step}
+            // setStep={setStep}
+            prevStep={prevStep}
+            nextStep={nextStep}
           />
         </div>
         <div className='step-controller'>
@@ -79,6 +81,9 @@ const Checkout = () => {
           <button onClick={nextStep} disabled={step === maxSteps}>
             下一步
           </button>
+        </div>
+        <div className='checkout-footer'>
+          <p>© 2023 Circular Journeys</p>
         </div>
       </div>
 

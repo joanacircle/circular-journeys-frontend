@@ -30,7 +30,7 @@ const CARD_OPTIONS = {
   }
 }
 
-export default function PaymentForm(step, setStep) {
+export default function PaymentForm({ nextStep }) {
 
   const totalPrice = 888
   const [success, setSuccess] = useState(false)
@@ -67,9 +67,9 @@ export default function PaymentForm(step, setStep) {
     }
   }
 
-  const completePayment = () => {
-    setStep(step += 1)
-  }
+  // const completePayment = () => {
+  //   setStep(step += 1)
+  // }
 
   return (
     <>
@@ -94,7 +94,7 @@ export default function PaymentForm(step, setStep) {
           <div className="payment-summary">
 
             <h5>金額總計 NT ${totalPrice} 元</h5>
-            <button onClick={completePayment}>確認付費</button>
+            <button onClick={nextStep}>確認付費</button>
           </div>
 
         </form>

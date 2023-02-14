@@ -1,0 +1,29 @@
+@import 'index.scss';
+
+.receipt{
+  margin: 40px;
+  font-weight: bold;
+  margin-bottom: 20%;
+}
+
+.home-links{
+  display: flex;
+  justify-content: space-around;
+  
+  
+  
+  .home-link-button{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $orange;
+    border-radius: $br2;
+    color: white;
+    font-weight: bold;
+    font-size: 22px ;
+    width: 45%;
+    height: 35px;
+    
+  }
+}

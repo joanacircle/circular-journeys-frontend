@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import './TourCard.scss'
+import './TourCard2.scss'
 
 
-const TourCard = (props) => {
+const TourCard2 = (props) => {
   const { card } = props
   const { id, name, adress, img, tags } = card
     return (
     <>
-    <div className='TourCard'>
+    <div className='TourCard2'>
     <img src={require(`images/Tour/${img}.jpg`)}
-    className='TourCardImg' alt='TourCardImg'/>
-      <span className='TourCardText'>
+    className='TourCard2Img' alt='TourCard2Img'/>
+      <span className='TourCard2Text'>
       <h4>{ name }</h4>
       <h6>{ adress }</h6>
       </span>
@@ -20,4 +20,4 @@ const TourCard = (props) => {
   }
 
 
-export default TourCard
+export default TourCard2

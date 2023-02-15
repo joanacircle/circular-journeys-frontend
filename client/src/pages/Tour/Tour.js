@@ -1,6 +1,6 @@
 import React from 'react'
 import TourBanner from './components/TourBanner/TourBanner'
-import TourCardList from './components/TourCardList/Tour-index'
+import TourCardList from './components/TourOverview/Tour-index'
 import './Tour.scss'
 const Tour = () => {
   return (

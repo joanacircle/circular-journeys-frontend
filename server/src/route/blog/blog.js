@@ -12,7 +12,7 @@ router.get('/', async (req, res)=>{
   res.json(rows);
 })
 
-// http://localhost:3001/:member_id // userBlog
+// http://localhost:3001/blog/:member_id // userBlog
 router.get('/:member_id', async (req, res) => {
   const member_id = req.params.member_id;
 
@@ -47,20 +47,49 @@ router.get('/:member_id', async (req, res) => {
       res.json(result)
     });
 
-    
   rows.forEach(row => {
     row.create_at = moment(row.create_at).format('YYYY/MM/DD');
   });
   res.json(rows);
 })
 
-// http://localhost:3002/:post_id // singlePost
-// router.get('/:member_id', async (req, res) => {
-//   const post_id = req.params.post_id;
-//   const sql = 'SELECT `post_title`, `post_content`, `post_img` FROM `post` WHERE post_id=?'
-//   const [rows, fields] = await db.query(sql, [post_id]);
-//   res.json(rows[0]);
+// http://localhost:3001/blog/post/:post_id // singlePost
+router.get('/post/:post_id', async (req, res) => {
+  const post_id = req.params.post_id;
+  const sql =`
+  SELECT 
+    posts.post_title, 
+    posts.member_id,
+    users_information.last_name,
+    post_imgs.img_id, 
+    posts.create_at,  
+    posts.total_likes,
+    posts.post_content, 
+    posts.post_id,  
+    (
+      SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+      FROM post_tags 
+      WHERE post_tags.post_id = posts.post_id
+    ) 
+    AS tag
+  FROM post_imgs 
+  JOIN posts 
+  ON posts.post_id = post_imgs.post_id && post_imgs.img_index = 1 
+  JOIN users_information 
+  ON posts.member_id = users_information.member_id
+  WHERE posts.post_id = ?
+  `
 
-// })
+  const [rows] = await db.query(sql, [post_id],
+    (err, result) => {
+      if (err) throw err
+      res.json(result)
+    });
+
+  rows.forEach(row => {
+    row.create_at = moment(row.create_at).format('YYYY/MM/DD');
+  });
+  res.json(rows);
+})
 
 module.exports = router;

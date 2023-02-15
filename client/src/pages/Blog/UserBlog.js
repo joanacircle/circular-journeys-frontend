@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
@@ -7,7 +7,6 @@ import './UserBlog.scss'
 import Card4 from 'components/Cards/Card4'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
-// import { IoLogoAlipay } from 'react-icons/io5'
 
 const UserBlog = () => {
   const [post, setPost] = useState([{}])
@@ -76,6 +75,7 @@ const UserBlog = () => {
               <div className="userblog-aside-item">
                 <div className='member-avatar'>
                   <img src="" alt="avatar" />
+                  {/* TODO: 如果會員沒有撰寫文章時 */}
                   <h4>{post[0].last_name}</h4>
                 </div>
               </div>
@@ -92,7 +92,6 @@ const UserBlog = () => {
                 <BlogCategory />
               </div>
               <div className='userblog-aside-item'>
-                {/* TODO key 重新定義 */}
                 <TagsCategory tags={tagsCategory}/>
               </div>
             </div>

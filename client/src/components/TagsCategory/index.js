@@ -8,6 +8,7 @@ const TagsCategory = (props) => {
     <>
     <h4>探索</h4>
     <ul className='blog-aside-tags'>
+      {/* TODO key 重新定義、增加 <Link> */}
       {value.map((v, i) => {
         return (
           <li key={i}>{v}</li>

@@ -25,9 +25,9 @@ const App = () => {
           <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path='/blog' element={<Blog />} />
-            <Route path='/blog/p123' element={<SinglePost />} />
-            <Route path='/blog/t123' element={<SearchResult />} />
             <Route path='/blog/:memberId' element={<UserBlog />} />
+            <Route path='/blog/post/:postId' element={<SinglePost />} />
+            <Route path='/blog/t123' element={<SearchResult />} />
             <Route path='/shop' element={<Shop />} />
             <Route path='/tour' element={<Tour />} />
 

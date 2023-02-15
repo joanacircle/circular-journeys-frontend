@@ -12,7 +12,7 @@
     gap: 30px;
     flex-direction: column;
     justify-content: center;
-    // text-align: center;
+    text-align: center; // TODO 可能會影響下面的card
     align-items: center;
     padding-top: 30px;
   }
@@ -75,24 +75,50 @@
     width: 100%;
     text-align: left;
 
-    .createAt{
+    .post-meta{
       display: flex;
-      gap: 5px;
-      color: $gray;
+      gap: 15px;
       align-items: center;
       
-      .icon{
-        height: 100%;
-        border-radius: 50%;
-        background: $gray;
-        color: $white;
-        padding: 3px;
+      .createAt{
+        display: flex;
+        gap: 5px;
+        color: $gray;
+        align-items: center;
+        
+        .icon{
+          height: 100%;
+          border-radius: 50%;
+          background: $gray;
+          color: $white;
+          padding: 3px;
+        }
+  
+        p{
+          font-size: 20px;
+        }
       }
-
-      p{
-        font-size: 20px;
+  
+      .post-likes-group{
+        display: flex;
+        gap: 5px;
+        color: $gray;
+        align-items: center;
+  
+        .heart-icon{
+          height: 100%;
+          border-radius: 50%;
+          background: $gray;
+          color: $white;
+          padding: 3px;
+        }
+  
+        p{
+          font-size: 19px;
+        }
       }
     }
+
 
     .post-content{
       font-size: 20px;

@@ -62,7 +62,7 @@ const ProductDetail = () => {
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0)
 
   const handleThumbnailClick = (index) => {
-    setSelectedThumbnailIndex(index)
+    // setSelectedThumbnailIndex(index)
 
     window.scrollTo({
       top: index * 150,

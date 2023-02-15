@@ -12,16 +12,15 @@ import { BsCircleFill } from 'react-icons/bs'
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
+import { useIsLoggedIn } from 'hooks/useIsLoggedIn'
 
 const Header = () => {
-  // for user state
-  const [userState, setUserState] = useState(false)
-
   // for drop down
   const [userMenu, setUserMenu] = useState(false)
 
   // for modals
   const [loginModal, setLoginModal] = useState(false)
+  const { isLogin } = useIsLoggedIn()
 
   // shopping cart
   const [modalVisibility, setModalVisibility] = useState(false)
@@ -31,9 +30,9 @@ const Header = () => {
 
 
   // Login modal
-  const handleToggleLoginModal = () => {
-    return userState ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
-  }
+  const handleToggleLoginModal = () => (
+    isLogin.state ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
+  )
 
   return (
     <>
@@ -71,11 +70,9 @@ const Header = () => {
                 <ul>
                   <li>
                     {
-                      useState && userMenu &&
+                      userMenu &&
                       <DropdownMenu
                         handleToggleLoginModal={handleToggleLoginModal}
-                        userState={userState}
-                        setUserState={setUserState}
                       />
                     }
                   </li>
@@ -93,8 +90,6 @@ const Header = () => {
         {
           loginModal &&
           <LoginModal
-            userState={userState}
-            setUserState={setUserState}
             loginModal={loginModal}
             handleToggleLoginModal={handleToggleLoginModal}
           />

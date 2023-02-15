@@ -17,12 +17,9 @@ import { NotFound } from './pages/NotFound'
 import MemberSetting from 'pages/User/MemberCenter/Setting'
 import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
-import { UserContext } from 'hooks/UserContext'
 
 const App = () => {
-  const [context, setContext] = useState()
   return (
-    <UserContext.Provider value={{ context, setContext }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<MainLayout />}>
@@ -44,7 +41,6 @@ const App = () => {
           <Route path='checkout' element={<Checkout />} />
         </Routes>
       </BrowserRouter>
-    </UserContext.Provider>
   )
 }
 

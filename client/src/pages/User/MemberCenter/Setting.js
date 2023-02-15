@@ -1,13 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Setting.scss'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
 import dayjs from 'dayjs'
-import { UserContext } from 'hooks/UserContext'
+import axios from 'axios'
 
 const SettingPage = () => {
   const [changeInputType, setChangeInputType] = useState('text')
   const [inputData, setInputData] = useState({})
-  const { context, setContext } = useContext(UserContext)
+  const [userData, setUserData] = useState()
+
+  // TODO:
+  const handleUserInfo = async () => {
+    const token = localStorage.getItem('token')
+    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
+    if (response.status === 200) {
+      setUserData(response.data)
+    }
+  }
 
 
   const handleInputChange = (event) => {
@@ -16,20 +25,10 @@ const SettingPage = () => {
       [event.target.name]: event.target.value
     })
   }
+
   useEffect(() => {
-    if (context) {
-      setInputData({
-        ...inputData,
-        userFirstName: context.first_name,
-        userLastName: context.last_name,
-        userBirthday: dayjs(context.birthday).format('YYYY-MM-DD'),
-        sex: context.sex,
-        userAddress: context.address,
-        userTelephone: context.telephone,
-        userEmail: context.email
-      })
-    }
-  }, [context])
+    handleUserInfo()
+  }, [])
 
   return (
     <div className="top-place animate__animated animate__fadeInDown animate__faster">
@@ -97,7 +96,6 @@ const SettingPage = () => {
               <DynamicSelect
                 inputData={inputData}
                 setInputData={setInputData}
-                context={context}
                 handleInputChange={handleInputChange}
               />
             }

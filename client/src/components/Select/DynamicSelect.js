@@ -1,27 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { taiwan } from 'data/taiwan-data'
-import { UserContext } from 'hooks/UserContext'
 
 const DynamicSelect = ({ inputData, setInputData, handleInputChange }) => {
-  const { context, setContext } = useContext(UserContext)
   const options = taiwan
   const selectOptionsObj = {
     info: [
-      { label: '國家', value: [inputData.nation], att: 'nation' },
-      { label: '城市', value: [inputData.city], att: 'city' },
-      { label: '區域', value: [inputData.districts], att: 'districts' }
+      { label: '國家', value: inputData.nation, att: 'nation' },
+      { label: '城市', value: inputData.city, att: 'city' },
+      { label: '區域', value: inputData.districts, att: 'districts' }
     ]
   }
-  useEffect(() => {
-    if (context) {
-      setInputData({
-        ...inputData,
-        [inputData.nation]: context.nation,
-        [inputData.city]: context.city,
-        [inputData.districts]: context.districts
-      })
-    }
-  }, [])
   return (
     <>
       {
@@ -30,7 +18,8 @@ const DynamicSelect = ({ inputData, setInputData, handleInputChange }) => {
             <label htmlFor={item.label}>{item.label}</label>
             <select
               name={item.att}
-              id={inputData[item.att]}
+              id={item.att}
+              value={inputData[item.att]}
               onChange={handleInputChange}
               required
             >

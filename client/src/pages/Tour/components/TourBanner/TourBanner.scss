@@ -5,12 +5,11 @@
   width: fit-content;
   // max-height: 260px;
  
-
-  // max-width: 1920px;
   .tour-banner-img{
     object-fit: cover;
     max-height: 380px;
     width:1920px;
+    filter: brightness(0.9) saturate(0.7);
   }
   
   .title-section{
@@ -21,27 +20,35 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    width: fit-content;
+    gap:15px;
     .tour-h1{
       width: fit-content;
       color: $white;
       border-bottom:solid orange 4px; 
       padding-bottom: 10px;
       margin: 15px;
+      cursor:default;
       
     }
-    
+    .tour-search-row{
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+    }
     .tour-search{
-      max-height: 60px;
+      max-height: 80px;
       height: 100%;
       background-color: $white;
       border-radius: $br2;
       display: flex;
-      margin-top: 10px;
       padding: 20px;
       width:30vw;
+      flex-direction:row;
+      gap: 30px;
       .tour-input{
         width: 100%;
-        padding: 10px;
+        padding-left: 15px;
         border-radius: $br2;
         font-size: large;
       }

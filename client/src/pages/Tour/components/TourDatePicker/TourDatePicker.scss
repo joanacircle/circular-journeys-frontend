@@ -1,0 +1,28 @@
+@import 'index.scss';
+.tour-datepicker{
+  gap: 20px;
+  display: flex;;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: white;
+  margin: 0px;
+  padding: 0px;
+  gap: 0px;
+}
+.tour-datepicker-radius{
+  max-height: 80px;
+  height: 100%;
+  background-color: $white;
+  border-radius: $br2;
+  min-width:fit-content;
+  padding: 10px;
+  padding-left: 20px;
+  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.tour-datepicker-title{
+  color:$dark-gray;
+}

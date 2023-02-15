@@ -2,9 +2,10 @@ const express = require('express')
 const db = require('../../model/connect-sql')
 const uuid = require('uuid')
 const shortid = require('shortid')
-
 const router = express.Router()
+const emailjs = require('emailjs-com')
 
+//user list
 //http://localhost:3001/user/userslist
 router.get('/userslist', async (req, res, next) => {
   const sql = `SELECT * FROM users_information ORDER BY id ASC`
@@ -12,6 +13,7 @@ router.get('/userslist', async (req, res, next) => {
   res.json(rows)
 })
 
+//find user token
 //http://localhost:3001/user/userinfo
 router.post('/userinfo', async (req, res, next) => {
   const { token } = req.body
@@ -25,6 +27,7 @@ router.post('/userinfo', async (req, res, next) => {
   }
 })
 
+//user login
 //http://localhost:3001/user/login
 router.post('/login', async (req, res, next) => {
   const { userEmail, userPassword } = req.body
@@ -55,6 +58,7 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
+//user signup
 //http://localhost:3001/user/signup
 router.post('/signup', async (req, res, next) => {
   const { userFirstName, userLastName, userEmail, userPassword } = req.body
@@ -67,7 +71,7 @@ router.post('/signup', async (req, res, next) => {
     if (check[0].length > 0) {
       res.json({
         state: false,
-        message: `此信箱以註冊過了！你忘記密碼了嗎？`
+        message: `此信箱已註冊過了！`
       })
     } else {
       const create = await db.query(sql, [id, userFirstName, userLastName, userEmail, userPassword, token])
@@ -88,5 +92,73 @@ router.post('/signup', async (req, res, next) => {
     next(err)
   }
 })
+
+//user forget password
+//http://localhost:3001/user/forget
+router.post('/forget', async (req, res, next) => {
+  const { userEmail } = req.body
+  const key = shortid.generate()
+  const checkUserEmailSql = `SELECT * FROM users_information WHERE email = ?`
+  const setKeySql = `UPDATE users_information SET verify = ? WHERE email = ?`
+  try {
+    const checkUserEmail = await db.query(checkUserEmailSql, [userEmail])
+    if (checkUserEmail[0].length > 0) {
+      res.json({
+        state: true,
+        message: '驗證碼已寄到您的信箱！',
+        userLastName: checkUserEmail[0][0].last_name,
+        key
+      })
+      await db.query(setKeySql, [key, userEmail])
+    } else {
+      res.json({
+        state: false,
+        message: '此信箱尚未註冊！'
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+//user check key
+//http://localhost:3001/user/forget/checkkey
+router.post('/forget/checkkey', async (req, res, next) => {
+  const { verify } = req.body
+  const checkUserKeySql = `SELECT * FROM users_information WHERE verify = ?`
+  try {
+    const checkKey = await db.query(checkUserKeySql, [verify])
+    if (checkKey[0].length > 0) {
+      res.json({
+        state: true,
+        message: '驗證成功！'
+      })
+    } else {
+      res.json({
+        state: false,
+        message: '驗證碼錯誤！'
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+//user change password
+//http://localhost:3001/user/changepassword
+router.post('/changepassword', async (req, res, next) => {
+  const { userPassword, userEmail } = req.body
+  const updateUserPasswordSql = `UPDATE users_information SET password = ? WHERE email = ?`
+  try {
+    await db.query(updateUserPasswordSql, [userPassword, userEmail])
+    res.json({
+      state: true,
+      message: '更改成功，請重新登入'
+    })
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 module.exports = router

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './SignupModal.scss'
 import { BiShow, BiHide } from 'react-icons/bi'
-import { useIsLoggedIn } from 'hooks/useIsLoggedIn'
 import axios from 'axios'
 import md5 from 'md5'
 

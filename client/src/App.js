@@ -16,29 +16,34 @@ import ProductDetail from 'pages/Shop/ProductDetail'
 import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 import { NotFound } from './pages/NotFound'
 import MemberSetting from 'pages/User/MemberCenter/Setting'
+import LoginModal from 'pages/User/Login/LoginModal'
+import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 
 const App = () => {
   return (
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path='/blog' element={<Blog />} />
+            <Route path='/blog/:memberId' element={<UserBlog />} />
+            <Route path='/blog/post/:postId' element={<SinglePost />} />
+            <Route path='/blog/t123' element={<SearchResult />} />
+            <Route path='/shop' element={<Shop />} />
+            <Route path='/shop/product/1' element={<ProductDetail />} />
+            <Route path='/tour' element={<Tour />} />
 
-    <BrowserRouter>
+            <Route path='/member' element={<MemberCenter />} />
+            <Route path='login' element={<LoginModal />} />
+            <Route path='dropdownMenu' element={<DropdownMenu />} />
+            <Route path='memberSetting' element={<MemberSetting />} />
 
-      <Routes>
-        <Route path='/' element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path='/blog' element={<Blog />} />
-          <Route path='/blog/p123' element={<SinglePost />} />
-          <Route path='/blog/t123' element={<SearchResult />} />
-          <Route path='/blog/:memberId' element={<UserBlog />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/shop/product/1' element={<ProductDetail />} />
-          <Route path='/tour' element={<Tour />} />
+            <Route path='*' element={<NotFound />} />
+          </Route>
+          <Route path='checkout' element={<Checkout />} />
+        </Routes>
+      </BrowserRouter>
 
-          <Route path='/member' element={<MemberCenter />} />
-          <Route path='*' element={<NotFound />} />
-        </Route>
-        <Route path='checkout' element={<Checkout />} />
-      </Routes>
-    </BrowserRouter>
   )
 }
 

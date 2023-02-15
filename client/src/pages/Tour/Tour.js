@@ -1,11 +1,14 @@
 import React from 'react'
-import TourTitle from './components/TourTitle/TourTitle'
-import TourCard from './components/TourCard/TourCard'
-import TourCardList from './components/TourCardList/TourCardList'
+import TourBanner from './components/TourBanner/TourBanner'
+import TourCardList from './components/TourOverview/Tour-index'
+import './tour.scss'
 const Tour = () => {
   return (
     <>
+    <div className='tour-page'>
+    <TourBanner />
     <TourCardList />
+    </div>
     </>
   )
 }

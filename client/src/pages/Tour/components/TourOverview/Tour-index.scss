@@ -1,0 +1,9 @@
+@import 'index.scss';
+
+.tour-main-list{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  color:$dark-gray;
+}

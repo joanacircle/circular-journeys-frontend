@@ -1,44 +1,51 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
-
 
 import './SinglePost.scss'
 import Card2 from 'components/Cards/Card2'
 import B001 from 'images/Blog/B001.jpg'
-import B002 from 'images/Blog/B002.jpeg'
-import B003 from 'images/Blog/B003.jpeg'
-import B004 from 'images/Blog/B004.jpeg'
 
 const SinglePost = () => {
-  const memberName = 'CircleChang'
-  const memberId = '12348'
-  const tags = ['旅遊', '旅遊', '旅遊']
-  const tagId = 't123'
-  const postContent = `高雄是位於台灣南部的現代化城市，這個城市同時融合了古老的歷史和現代的文化，還有全台灣最大的夜市。 千萬別錯過壯觀的佛光山，還有佛光山大佛堂。 統一夢時代購物中心是台灣最大的購物中心，購物中心的頂樓還有摩天輪。 你可驅車前往墾丁國家公園，一覽墾丁美麗的地形風景。 搭船到旗津吃海鮮。`
-  const postId = 'p123'
-  const imgSrc = [B001, B002, B003, B004]
-  const imgAlt = [B001, B002, B003, B004]
-  const likes = '10k'
-  const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
+  const [post, setPost] = useState([{}])
+  const { postId } = useParams()
+  const [url, setUrl] = useState(
+    `http://localhost:3001/blog/post/${postId}`
+  )
+  useEffect(() => {
+    getData()
+  }, [url])
+  function getData() {
+    fetch(url)
+    .then(r => r.json())
+    .then((data) => {
+      setPost(data)
+    })
+    .catch(error => console.log(error))
+  }
+
   return (
     <>
-    <div>
+    {!post
+    ? (<div>Loading...</div>)
+    : (
+      <div>
       <div className="post-container">
         <div className="page-body">
           <div className="post-header">
-            <h2>文章標題文章標題文章標題文章標題文章標題</h2>
+            <h2>{post[0].post_title}</h2>
             <ul className='tags-section'>
-              {tags.map((v, i) => {
-                return (
-                  <Link to={`/blog/${tagId}`} key={i}>
-                    <li># {v}</li>
-                  </Link>
-                )
-              })}
+              {!post[0].tag
+              ? <li>Loading...</li>
+              : Object.entries(post[0].tag).map(([key, value]) => (
+                <Link to={`/blog/tag/${key}`} key={key}>
+                  <li># {value}</li>
+                </Link>
+                ))
+              }
             </ul>
             <h5>BY:
-              <Link to={`/blog/${memberId}`}> {memberName}</Link>
+              <Link to={`/blog/${post[0].member_id}`}>{post[0].last_name}</Link>
             </h5>
             <div className='member-avatar'>
               <img src="" alt="avatar" />
@@ -48,23 +55,21 @@ const SinglePost = () => {
             <img src={B001} alt="" />
           </div>
           <div className="post-body">
-            <div className="createAt">
-              <AiOutlineCalendar size={25} className='icon'/>
-              <p>2023/02/07</p>
+            <div className='post-meta'>
+              <div className="createAt">
+                <AiOutlineCalendar size={25} className='icon'/>
+                <p>{post[0].create_at}</p>
+              </div>
+              <div className="post-likes-group">
+                  <AiOutlineHeart size={25} className='heart-icon'/>
+                  {post[0].total_likes === 0
+                  ? (<p>{''}</p>)
+                  : (<p>{post[0].total_likes}</p>)
+                  }
+              </div>
             </div>
             <p className='post-content'>
-              {postContent}
-              <br />
-              <br />
-              {postContent}
-              <br />
-              <br />
-              {postContent}
-              <br />
-              <br />
-              {postContent}
-              <br />
-              <br />
+              {post[0].post_content}
             </p>
           </div>
           <div className="post-footer">
@@ -72,13 +77,15 @@ const SinglePost = () => {
             <p>
               即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
             </p>
+            TODO
             <p>
-              <Link to='#'>前一篇</Link>
-               |
-              <Link to='#'>後一篇</Link>
+              <Link to='#'>前一篇 </Link>
+              |
+              <Link to='#'> 後一篇</Link>
             </p>
           </div>
-          <div className="related-post">
+          TODO
+          {/* <div className="related-post">
             <Card2
               tags={tags}
               postId={postId}
@@ -111,10 +118,12 @@ const SinglePost = () => {
               tagId={tagId}
               title={title}
               likes={likes}/>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
+    )
+    }
     </>
   )
 }

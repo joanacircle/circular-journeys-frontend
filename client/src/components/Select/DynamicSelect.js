@@ -1,27 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { taiwan } from 'data/taiwan-data'
-import { UserContext } from 'hooks/UserContext'
 
-const DynamicSelect = ({ inputData, setInputData, handleInputChange }) => {
-  const { context, setContext } = useContext(UserContext)
+const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
   const options = taiwan
   const selectOptionsObj = {
     info: [
-      { label: '國家', value: [inputData.nation], att: 'nation' },
-      { label: '城市', value: [inputData.city], att: 'city' },
-      { label: '區域', value: [inputData.districts], att: 'districts' }
+      { label: '國家', value: inputData.nation, att: 'nation' },
+      { label: '城市', value: inputData.city, att: 'city' },
+      { label: '區域', value: inputData.districts, att: 'districts' },
+      { label: '郵遞區號', value: inputData.postalCode, att: 'postalCode' }
     ]
   }
-  useEffect(() => {
-    if (context) {
-      setInputData({
-        ...inputData,
-        [inputData.nation]: context.nation,
-        [inputData.city]: context.city,
-        [inputData.districts]: context.districts
-      })
-    }
-  }, [])
+
   return (
     <>
       {
@@ -30,15 +20,15 @@ const DynamicSelect = ({ inputData, setInputData, handleInputChange }) => {
             <label htmlFor={item.label}>{item.label}</label>
             <select
               name={item.att}
-              id={inputData[item.att]}
+              id={item.att}
+              value={inputData[item.att]}
               onChange={handleInputChange}
               required
             >
-              <option value="">--- 請選擇 ---</option>
+              <option value=''>--- 請選擇 ---</option>
               {
                 item.att === 'nation' &&
                 <option value={options.label}>{options.label}</option>
-
               }
               {
                 item.att === 'city' &&
@@ -51,12 +41,26 @@ const DynamicSelect = ({ inputData, setInputData, handleInputChange }) => {
               }
               {
                 item.att === 'districts' &&
-                inputData.nation !== '' && inputData.city !== '' &&
+                inputData.nation !== undefined && inputData.nation !== '' &&
                 options.info.map(item => (
                   item.city === inputData.city &&
                   item.districts.map(item => (
                     <option key={item.name} value={item.name}>
                       {item.name}
+                    </option>
+                  ))
+                ))
+              }
+              {
+                item.att === 'postalCode' &&
+                inputData.nation !== undefined && inputData.nation !== '' &&
+                inputData.districts !== undefined && inputData.districts !== '' &&
+                options.info.map(item => (
+                  item.city === inputData.city &&
+                  item.districts.map(item => (
+                    item.name === inputData.districts &&
+                    <option key={item.postalCode} value={item.postalCode}>
+                      {item.postalCode}
                     </option>
                   ))
                 ))

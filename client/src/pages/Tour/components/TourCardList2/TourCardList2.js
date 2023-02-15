@@ -1,6 +1,6 @@
 import React from 'react'
-import TourCard from '../TourCard/TourCard'
-import './TourCardList.scss'
+import TourCard from '../TourCard2/TourCard2'
+import './TourCardList2.scss'
 
 
 const TourCardList = (props) => {

@@ -1,0 +1,79 @@
+@import 'index.scss';
+
+.tour-banner{
+  position: relative;
+  width: fit-content;
+  // max-height: 260px;
+ 
+  .tour-banner-img{
+    object-fit: cover;
+    max-height: 380px;
+    width:1920px;
+    filter: brightness(0.9) saturate(0.7);
+  }
+  
+  .title-section{
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: fit-content;
+    gap:15px;
+    .tour-h1{
+      width: fit-content;
+      color: $white;
+      border-bottom:solid orange 4px; 
+      padding-bottom: 10px;
+      margin: 15px;
+      cursor:default;
+      
+    }
+    .tour-search-row{
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+    }
+    .tour-search{
+      max-height: 80px;
+      height: 100%;
+      background-color: $white;
+      border-radius: $br2;
+      display: flex;
+      padding: 20px;
+      width:30vw;
+      flex-direction:row;
+      gap: 30px;
+      .tour-input{
+        width: 100%;
+        padding-left: 15px;
+        border-radius: $br2;
+        font-size: large;
+      }
+    
+      .tour-input::placeholder{
+        text-align: left;
+      }
+  
+      .tour-input:focus{
+        outline: none;
+      }
+  
+      .tour-button{
+        width: auto;
+        height: auto;
+        color: $orange;
+        border-radius: $br2;
+        
+        .tour-search-icon{
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+
+
+}

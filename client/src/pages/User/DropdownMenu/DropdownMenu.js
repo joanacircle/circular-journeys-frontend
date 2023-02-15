@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { Link, Navigate } from 'react-router-dom'
 import './DropdownMenu.scss'
 import 'animate.css'
 import { FaUserAlt } from 'react-icons/fa'
@@ -8,16 +8,22 @@ import { HiOutlineTicket } from 'react-icons/hi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 import { BsPersonBadge } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
-import { UserContext } from 'hooks/UserContext'
+import axios from 'axios'
 
-const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
-  const { context, setContext } = useContext(UserContext)
-  console.log(context)
+const DropdownMenu = ({ handleToggleLoginModal }) => {
+  const [userData, setUserData] = useState()
+  // TODO:
+  const handleUserInfo = async () => {
+    const token = localStorage.getItem('token')
+    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
+    if (response.status === 200) {
+      setUserData(response.data)
+    }
+  }
   // handleClickOutside
   useEffect(() => {
+    handleUserInfo()
     const handleClickOutside = (event) => {
-      // console.log(event.target.id)
-      // console.log(event.target.tagName)
       if (
         !(event.target.id === 'user-menu') &&
         !(event.target.tagName === 'path')
@@ -30,13 +36,11 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
       window.removeEventListener('click', handleClickOutside)
     }
   }, [])
-
   const handleLogoutButton = () => {
-    if (userState) {
-      alert('已登出')
-      setUserState(!userState)
-      handleToggleLoginModal()
-    }
+    alert('已登出')
+    setUserData('')
+    localStorage.removeItem('token')
+    window.location = '/'
   }
   return (
     <div className="user-dropdown-menu animate__animated animate__faster animate__fadeIn">
@@ -45,7 +49,7 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
           <div className='user-name'>
             <FaUserAlt size={35} />
             <div>
-              <h5>{context.first_name + ' ' + context.last_name}</h5>
+              <h5>{userData && userData.first_name + ' ' + userData.last_name}</h5>
             </div>
           </div>
           <IoSettingsOutline size={20} />
@@ -56,14 +60,14 @@ const DropdownMenu = ({ handleToggleLoginModal, userState, setUserState }) => {
             <MdOutlineAttachMoney size={20} />
             <p>Points</p>
           </div>
-          <div className='points'>$9,457</div>
+          <div className='points'>{userData && '$' + ' ' + userData.points}</div>
         </div>
         <div className='menu-option'>
           <div className='user-name'>
             <HiOutlineTicket size={20} />
             <p>折扣卷</p>
           </div>
-          <div className='ticket'>3</div>
+          <div className='ticket'>{userData && userData.ticket}</div>
         </div>
         <div className='divider'></div>
 

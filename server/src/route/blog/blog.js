@@ -34,7 +34,7 @@ router.get('/:member_id', async (req, res) => {
       FROM post_tags 
       WHERE post_tags.post_id = posts.post_id
     ) 
-  AS tag
+    AS tag
   FROM post_imgs 
   JOIN posts ON posts.post_id = post_imgs.post_id && post_imgs.img_index = 1 
   JOIN users_information ON users_information.member_id = ?

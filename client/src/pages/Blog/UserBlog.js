@@ -25,14 +25,8 @@ const UserBlog = () => {
     .catch(error => console.error(error))
   }
 
-  // console.log(post)
-
-  // 將 tag 轉成 array
 
   // Card4 props:
-  const tagId = 't123'
-  const tags = '旅遊'
-  const postId = 'p123'
   const imgSrc = 'p1i1.jpeg'
   const imgAlt = 'img'
   // TagsCategory props:
@@ -62,14 +56,13 @@ const UserBlog = () => {
                 return (
                   <Card4
                     key={v.post_id}
-                    tagId={tagId}
-                    tags={v.tag}
+                    tag={v.tag}
                     title={v.post_title}
-                    postId={postId}
+                    postId={v.post_id}
                     imgSrc={imgSrc}
                     imgAlt={imgAlt}
                     createAt={v.create_at}
-                    likes={v.post_likes}
+                    likes={v.total_likes}
                     postContent={v.post_content}/>
                 )
               })}

@@ -7,7 +7,7 @@ import './UserBlog.scss'
 import Card4 from 'components/Cards/Card4'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
-// import p101 from 'images/Blog/p1i1.jpeg'
+// import { IoLogoAlipay } from 'react-icons/io5'
 
 const UserBlog = () => {
   const [post, setPost] = useState([{}])
@@ -27,6 +27,8 @@ const UserBlog = () => {
 
   // console.log(post)
 
+  // 將 tag 轉成 array
+
   // Card4 props:
   const tagId = 't123'
   const tags = '旅遊'
@@ -41,66 +43,68 @@ const UserBlog = () => {
     {!post
     ? (<div>Loading...</div>)
     : (<div>
-      <div className='userblog-container'>
-        <div className='page-body'>
-          <div className='post-container'>
-            <h2 className='userblog-h2'>{post[0].member_id}</h2>
-            <div className='userblog-nav'>
-              <ul>
-                <Link to='#'>
-                  <li className='Active'>主頁</li>
-                </Link>
-                <Link to='#'>
-                  <li>喜歡的文章</li>
-                </Link>
-              </ul>
-            </div>
-            {post.map((v, i) => {
-              return (
-                <Card4
-                  key={v.post_id}
-                  tagId={tagId}
-                  tags={tags}
-                  title={v.post_title}
-                  postId={postId}
-                  imgSrc={imgSrc}
-                  imgAlt={imgAlt}
-                  createAt={v.create_at}
-                  likes={v.post_likes}
-                  postContent={v.post_content}/>
-              )
-            })}
+        <div className='userblog-container'>
+          <div className='page-body'>
+            <div className='post-container'>
+              <h2 className='userblog-h2'>{post[0].last_name}</h2>
+              <div className='userblog-nav'>
+                <ul>
+                  <Link to='#'>
+                    <li className='Active'>主頁</li>
+                  </Link>
+                  <Link to='#'>
+                    <li>喜歡的文章</li>
+                  </Link>
+                </ul>
+              </div>
+              {/* 問題 Warning: Each child in a list should have a unique "key" prop. */}
+              {post.map((v, i) => {
+                return (
+                  <Card4
+                    key={v.post_id}
+                    tagId={tagId}
+                    tags={v.tag}
+                    title={v.post_title}
+                    postId={postId}
+                    imgSrc={imgSrc}
+                    imgAlt={imgAlt}
+                    createAt={v.create_at}
+                    likes={v.post_likes}
+                    postContent={v.post_content}/>
+                )
+              })}
 
-            <div className='userblog-pagination'>
-              <Pagination />
-            </div>
-          </div>
-
-          <div className='userblog-aside'>
-            <div className="userblog-aside-item">
-              <div className='member-avatar'>
-                <img src="" alt="avatar" />
-                <h4>{post[0].member_id}</h4>
+              <div className='userblog-pagination'>
+                <Pagination />
               </div>
             </div>
-            <div className='userblog-aside-item'>
-              <form className='blog-search'>
-                <input className='blog-input' placeholder="Search">
-                </input>
-                <button className='blog-button' type="submit">
-                  <BiSearch className='search-icon'/>
-                </button>
-              </form>
-            </div>
-            <div className='userblog-aside-item'>
-              <BlogCategory />
-            </div>
-            <div className='userblog-aside-item'>
-              <TagsCategory tags={tagsCategory}/>
+
+            <div className='userblog-aside'>
+              <div className="userblog-aside-item">
+                <div className='member-avatar'>
+                  <img src="" alt="avatar" />
+                  <h4>{post[0].last_name}</h4>
+                </div>
+              </div>
+              <div className='userblog-aside-item'>
+                <form className='blog-search'>
+                  <input className='blog-input' placeholder="Search">
+                  </input>
+                  <button className='blog-button' type="submit">
+                    <BiSearch className='search-icon'/>
+                  </button>
+                </form>
+              </div>
+              <div className='userblog-aside-item'>
+                <BlogCategory />
+              </div>
+              <div className='userblog-aside-item'>
+                {/* TODO key 重新定義 */}
+                <TagsCategory tags={tagsCategory}/>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </div>)
     }
     </>

@@ -96,7 +96,7 @@ const MemberCenterMenu = () => {
               </div>
             </div>
             <h4 className="user-name">{userData && userData.first_name + ' ' + userData.last_name}</h4>
-            <div className="user-information user-point">$9,457</div>
+            <div className="user-information user-point">{userData && '$' + ' ' + userData.points}</div>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>
             {

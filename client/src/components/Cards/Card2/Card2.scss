@@ -1,9 +1,12 @@
 
   .card2{
     position: relative;
+    max-width: 278px;
+    width: 100%;
   
     .card-img{
-      max-height: 178px;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
       border-radius: var(--br1);
     }
   

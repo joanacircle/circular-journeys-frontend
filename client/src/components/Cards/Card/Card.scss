@@ -5,9 +5,11 @@
   transition: 0.3s;
   border: none;
   border-radius: var(--br1);
+  max-width: 278px;
+  width: 100%;
 
   .card-img{
-    max-height: 133px;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: var(--br1) var(--br1) 0 0;
   }

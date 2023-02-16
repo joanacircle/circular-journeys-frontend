@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import './Card.scss'
 
@@ -6,7 +5,7 @@ const Card = (props) => {
   return (
     <>
       <div className="card">
-        <Link to={`/blog/${props.postId}`}>
+        <Link to={`/blog/post/${props.postId}`}>
           <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
         </Link>
         <div className="card-body">

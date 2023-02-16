@@ -1,9 +1,8 @@
-@import 'index.scss';
 
 .card4{
-  background: $white;
-  border-radius: $br1;
-  border: 1px solid $gray;
+  background: var(--white);
+  border-radius: var(--br1);
+  border: 1px solid var(--gray);
   margin-bottom: 50px;
   
   .card-header{
@@ -25,12 +24,12 @@
           gap: 10px;
   
           li{
-            color: $orange;
+            color: var(--orange);
             padding: 2px 8px;
             font-size: 25px;
   
             &:hover{
-              color: $purple;
+              color: var(--purple);
             }
           }
         }
@@ -39,7 +38,7 @@
       .post-likes{
 
         .heart-icon{
-          color: $orange;
+          color: var(--orange);
           margin-right: 5px;
           cursor: pointer;
         }
@@ -59,14 +58,14 @@
       .create-at-group{
         display: flex;
         gap: 5px;
-        color: $gray;
+        color: var(--gray);
         align-items: center;
   
         .calendar-icon{
           height: '100%';
           border-radius: 50%;
-          background: $gray;
-          color: $white;
+          background: var(--gray);
+          color: var(--white);
           padding: 3px;
         }
         p{
@@ -77,14 +76,14 @@
       .post-likes-group{
         display: flex;
         gap: 5px;
-        color: $gray;
+        color: var(--gray);
         align-items: center;
 
         .heart-icon{
           height: 100%;
           border-radius: 50%;
-          background: $gray;
-          color: $white;
+          background: var(--gray);
+          color: var(--white);
           padding: 3px;
         }
 
@@ -117,16 +116,16 @@
       }
       
       .right-icon{
-        color: $orange;
+        color: var(--orange);
       }
 
       &:hover{
         p{
-          color: $purple;
+          color: var(--purple);
         }
         
         .right-icon{
-          color: $purple;
+          color: var(--purple);
         }
       }
     }

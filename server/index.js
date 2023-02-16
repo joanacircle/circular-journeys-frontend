@@ -6,6 +6,7 @@ const cors = require('cors')
 // require("dotenv").config()
 
 // individual component
+const homeRouter = require('./src/route/home/home')
 const user = require('./src/route/user/users')
 const paymentRoute = require("./src/route/shop/payment")(cors)
 const blogRouter = require('./src/route/blog/blog')
@@ -18,6 +19,9 @@ app.use(cors())
 app.get('/', (req, res) => {
   res.render('main', { name: '陳小明' });
 });
+
+// home
+app.use('/home', homeRouter)
 
 // user
 app.use('/user', user)

@@ -1,11 +1,13 @@
-@import 'index.scss';
 
   .card2{
     position: relative;
+    max-width: 278px;
+    width: 100%;
   
     .card-img{
-      max-height: 178px;
-      border-radius: $br1;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: var(--br1);
     }
   
     .card-body{
@@ -17,17 +19,17 @@
         li{
           margin-right: 5px;
           width: fit-content;
-          border-radius: $br2;
-          background-color: $orange;
-          color: $white;
+          border-radius: var(--br2);
+          background-color: var(--orange);
+          color: var(--white);
           padding: 2px 8px;
 
           &:hover{
-            background-color: $purple;
+            background-color: var(--purple);
           }
 
           a:hover{
-            color: $white;
+            color: var(--white);
           }
         }
       }
@@ -41,7 +43,7 @@
         .heart-icon{
           height: 100%;
           display: block;
-          color: $orange;
+          color: var(--orange);
           margin-right: 3px;
           cursor: pointer;
         }

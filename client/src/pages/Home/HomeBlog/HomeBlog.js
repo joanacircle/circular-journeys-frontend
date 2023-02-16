@@ -1,9 +1,8 @@
-import React from 'react'
-import './HomeBlog.scss'
-import { Container, Row, Col } from 'Styles/styled'
+import { useState, useEffect } from 'react'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import { BiSearch } from 'react-icons/bi'
 
+import './HomeBlog.scss'
 import Card from 'components/Cards/Card'
 import Card2 from 'components/Cards/Card2'
 import Banner from 'images/Blog/home-banner.jpg'
@@ -14,6 +13,19 @@ import B004 from 'images/Blog/B004.jpeg'
 
 
 const HomeBlog = () => {
+  const [post, setPost] = useState({
+    popular: [],
+    latest: []
+  })
+  const [url, setUrl] = useState(`http://localhost:3001/home`)
+  useEffect(() => { getData() }, [])
+  function getData() {
+    fetch(url)
+    .then(r => r.json())
+    .then((data) => { setPost(data) })
+    .catch(error => console.log(error))
+  }
+
   // Card props:
   const postId = 'p123'
   const imgSrc = [B001, B002, B003, B004]
@@ -46,26 +58,20 @@ const HomeBlog = () => {
         <h2>熱門文章</h2>
         <div className='card-container'>
           <BsFillArrowLeftCircleFill className='arrow-left' />
-            <Card
-              postId={postId}
-              imgSrc={imgSrc[0]}
-              imgAlt={imgAlt[0]}
-              title={title}/>
-            <Card
-              postId={postId}
-              imgSrc={imgSrc[1]}
-              imgAlt={imgAlt[1]}
-              title={title}/>
-            <Card
-              postId={postId}
-              imgSrc={imgSrc[2]}
-              imgAlt={imgAlt[2]}
-              title={title}/>
-            <Card
-              postId={postId}
-              imgSrc={imgSrc[3]}
-              imgAlt={imgAlt[3]}
-              title={title}/>
+          {console.log(post.popular)}
+          {post.popular.slice(0, 4).map((v, i) => {
+            return (
+              <>
+                <Card
+                  key={v.post_id}
+                  postId={v.post_id}
+                  imgSrc={imgSrc[i]}
+                  imgAlt={imgAlt[i]}
+                  title={v.post_title}
+                />
+              </>
+            )
+          })}
           <BsFillArrowRightCircleFill className='arrow-right'/>
         </div>
       </div>
@@ -74,30 +80,20 @@ const HomeBlog = () => {
         <h2>最新文章</h2>
         <div className='card-container'>
           <BsFillArrowLeftCircleFill className='arrow-left' />
-          <Card2
-            tags={tags}
-            postId={postId}
-            imgSrc={imgSrc[0]}
-            imgAlt={imgAlt[0]}
-            tagId={tagId}
-            title={title}
-            likes={likes}/>
-          <Card2
-            tags={tags}
-            postId={postId}
-            imgSrc={imgSrc[2]}
-            imgAlt={imgAlt[2]}
-            tagId={tagId}
-            title={title}
-            likes={likes}/>
-          <Card2
-            tags={tags}
-            postId={postId}
-            imgSrc={imgSrc[3]}
-            imgAlt={imgAlt[3]}
-            tagId={tagId}
-            title={title}
-            likes={likes}/>
+          {post.latest.slice(0, 4).map((v, i) => {
+            return (
+              <>
+                <Card2
+                  key={v.post_id}
+                  tags={v.tag}
+                  postId={v.post_id}
+                  imgSrc={imgSrc[i]}
+                  imgAlt={imgAlt[i]}
+                  title={v.post_title}
+                  likes={v.total_likes}/>
+              </>
+            )
+          })}
           <BsFillArrowRightCircleFill className='arrow-right'/>
         </div>
       </div>

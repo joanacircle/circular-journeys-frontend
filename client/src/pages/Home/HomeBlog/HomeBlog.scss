@@ -1,8 +1,8 @@
-@import 'index.scss';
 
 .home-banner{
   position: relative;
   width: 100vw;
+  margin-bottom: 30px;
 
   .home-banner-img{
     width: 100vw;
@@ -14,14 +14,14 @@
     right: calc(50% - 189px);
     
     .home-blog-h1{
-      color: $white;
+      color: var(--white);
     }
     
     .home-search{
       max-height: 60px;
       height: 100%;
-      background-color: $white;
-      border-radius: $br2;
+      background-color: var(--white);
+      border-radius: var(--br2);
       display: flex;
       margin-top: 10px;
       padding: 20px;
@@ -29,7 +29,7 @@
       .home-input{
         width: 100%;
         padding: 10px;
-        border-radius: $br2;
+        border-radius: var(--br2);
         font-size: large;
       }
     
@@ -44,8 +44,8 @@
       .home-button{
         width: auto;
         height: auto;
-        color: $orange;
-        border-radius: $br2;
+        color: var(--orange);
+        border-radius: var(--br2);
         
         .home-search-icon{
           display: block;
@@ -79,11 +79,11 @@
       height: 40px;
       top: calc(50% - 20px);
       left: calc(0% - 50px);
-      color: $orange;
+      color: var(--orange);
       cursor: pointer;
   
       &:hover{
-        color: $purple;
+        color: var(--purple);
       }
     }
     
@@ -93,11 +93,11 @@
       height: 40px;
       top: calc(50% - 20px);
       right: calc(0% - 50px);
-      color: $orange;
+      color: var(--orange);
       cursor: pointer;
   
       &:hover{
-        color: $purple;
+        color: var(--purple);
       }
     }
   }

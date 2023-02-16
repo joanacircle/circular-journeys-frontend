@@ -28,7 +28,7 @@ const App = () => {
             <Route path='/blog' element={<Blog />} />
             <Route path='/blog/:memberId' element={<UserBlog />} />
             <Route path='/blog/post/:postId' element={<SinglePost />} />
-            <Route path='/blog/t123' element={<SearchResult />} />
+            <Route path='/blog/tag/:tagId' element={<SearchResult />} />
             <Route path='/shop' element={<Shop />} />
             <Route path='/shop/product/1' element={<ProductDetail />} />
             <Route path='/tour' element={<Tour />} />

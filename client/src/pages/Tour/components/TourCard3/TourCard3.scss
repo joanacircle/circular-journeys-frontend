@@ -1,0 +1,66 @@
+@import 'index.scss';
+
+
+// .TourCard3{
+    
+//   display: flex;
+//   padding-bottom: 5px;
+//   position: relative;
+//   min-width: 280px;
+//   min-height: 400px;
+//   border-radius: 15px;
+//   box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+//   background: rgba(255, 255, 255, 0.1);
+//   overflow: hidden;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+//   border-top: 1px solid rgba(255, 255, 255, 0.5);
+//   border-left: 1px solid rgba(255, 255, 255, 0.5);
+//   backdrop-filter: blur(5px);
+//   cursor:pointer;
+// }
+// .TourCard3Img{  
+//   width: 20vw;
+//   height: 8vw;
+//   object-fit: cover; 
+  
+// }
+// .TourCard3Text{
+//   display: flexbox;
+//   position: absolute;
+//   top: 9vw;
+//   left: 0;
+//   right: 0;
+//   text-align: center;
+//   color:$dark-gray;
+
+//   h6{
+//     font-size: 0.6em;
+//   }
+//   .TourCard3Context{
+//   text-align: center;
+//   display: flexbox;
+//     width: 9vw;
+//     font-size: 0.8em;
+//   }
+// } 
+// .TourCard3Btn{
+//   display: flexbox;
+//   font-size: smaller;
+//   background: #fff;
+//   border-radius: 5px;
+//   padding: 5px;
+// }
+
+// .TourCard3:hover .TourCard3Img{
+//   background: linear-gradient(135deg, #f403d1, #64b5f6);
+//   background: linear-gradient(135deg, #24ff72, #2196f3);
+//   filter: blur(8px);
+//   // transform: translateY(30px) scale(0.9);
+// }
+// .TourCard3:hover .TourCard3Text{
+//   color:$dark-gray;
+//   background: linear-gradient(135deg, #ffec61, #f321d7);
+
+// }

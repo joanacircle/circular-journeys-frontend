@@ -36,6 +36,19 @@ router.get('/', async (req, res) => {
   res.json(rows);
 })
 
+router.get('/api', async (req, res) => {
+  const sql =`SELECT JSON_ARRAYAGG(post_id) AS post_id FROM posts WHERE 1`
+  const sql2 =`SELECT JSON_ARRAYAGG(member_id) AS member_id FROM users_information WHERE 1`
+
+  const sql3 =`SELECT JSON_ARRAYAGG(tag_id) AS tag_id FROM post_tags WHERE 1`
+
+  const [rows] = await db.query(sql)
+  const [rows2] = await db.query(sql2)
+  const [rows3] = await db.query(sql3)
+
+  res.json({post: rows, member: rows2, tag: rows3})
+})
+
 // http://localhost:3001/blog/:member_id // userBlog
 router.get('/:member_id', async (req, res) => {
   const member_id = req.params.member_id;

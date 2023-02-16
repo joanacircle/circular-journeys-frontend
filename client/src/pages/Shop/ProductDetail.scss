@@ -1,0 +1,62 @@
+@import 'index.scss';
+
+
+.product-image-gallery{
+  display: flex;
+  justify-content: center;
+
+  .thumbnails-container {
+      position: sticky;
+        top: 60px;
+        height: fit-content;
+        overflow: hidden;
+        align-self: start;
+      
+      // margin-right: 20px;
+  
+      .thumbnail {
+        width: 50px;
+        height: 60px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        
+      }
+      .selected {
+        opacity: 0.5;
+      }
+           
+    }
+
+  .main-image-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .image-list{
+      width: 150px;
+      
+      object-fit: contain;
+      
+    }
+  }
+  .product-info-container {
+    display: flex;
+    flex-direction: column;
+
+      .spec-buttons {
+          display: flex;
+          flex-direction: column;
+        }
+  }
+  
+
+}
+.recommend-list{
+  display: flex;
+  z-index: 10;
+
+  .rec-img {
+      width: 100px;
+      height: 120px;
+    }
+}

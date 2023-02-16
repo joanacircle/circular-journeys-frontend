@@ -8,11 +8,14 @@
     width: 100vw;
   }
 
-  .blog-h1{
+  .blog-title{
+    max-width: 400px;
+    width: 100%;
+    font-size: 60px;
     color: $white;
     position: absolute;
     top: 20%;
-    right: calc(50% - 126px);
+    right: calc(50% - (400px / 2));
   }
 }
 

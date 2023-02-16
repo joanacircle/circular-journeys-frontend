@@ -11,10 +11,10 @@ const BlogCategory = () => {
       <li>
         <Link to='#' title='熱門'>熱門</Link>
       </li>
-      <li>
+      <li >
         <Link to='#' title='最新'>最新</Link>
       </li>
-      <li>
+      <li >
         <Link to='#' title='美食'>美食</Link>
       </li>
       <li>

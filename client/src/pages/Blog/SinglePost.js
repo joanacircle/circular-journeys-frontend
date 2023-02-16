@@ -12,24 +12,17 @@ const SinglePost = () => {
   const [url, setUrl] = useState(
     `http://localhost:3001/blog/post/${postId}`
   )
-  useEffect(() => {
-    getData()
-  }, [url])
+  useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
     .then(r => r.json())
-    .then((data) => {
-      setPost(data)
-    })
+    .then((data) => { setPost(data) })
     .catch(error => console.log(error))
   }
 
   return (
     <>
-    {!post
-    ? (<div>Loading...</div>)
-    : (
-      <div>
+    <div>
       <div className="post-container">
         <div className="page-body">
           <div className="post-header">
@@ -45,7 +38,9 @@ const SinglePost = () => {
               }
             </ul>
             <h5>BY:
-              <Link to={`/blog/${post[0].member_id}`}>{post[0].last_name}</Link>
+              <Link to={`/blog/${post[0].member_id}`}>
+                {post[0].last_name}
+              </Link>
             </h5>
             <div className='member-avatar'>
               <img src="" alt="avatar" />
@@ -61,11 +56,11 @@ const SinglePost = () => {
                 <p>{post[0].create_at}</p>
               </div>
               <div className="post-likes-group">
-                  <AiOutlineHeart size={25} className='heart-icon'/>
-                  {post[0].total_likes === 0
-                  ? (<p>{''}</p>)
-                  : (<p>{post[0].total_likes}</p>)
-                  }
+                <AiOutlineHeart size={25} className='heart-icon'/>
+                {post[0].total_likes === 0
+                ? (<p>{''}</p>)
+                : (<p>{post[0].total_likes}</p>)
+                }
               </div>
             </div>
             <p className='post-content'>
@@ -121,9 +116,7 @@ const SinglePost = () => {
           </div> */}
         </div>
       </div>
-    </div>
-    )
-    }
+      </div>
     </>
   )
 }

@@ -15,17 +15,13 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
     setShowEditAddress(!showEditAddress)
   }
 
-  // const [selectedShippingIndex, setSelectedShippingIndex] = useState(0)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const handleShippingSelection = (event) => {
-    setSelectedIndex(event.target.value)
+    console.log(selectedIndex)
+    console.log(event.target.value)
+    setSelectedIndex(+event.target.value)
   }
-
-  // const triggerStep = () => {
-  //   setStep(step += 1)
-  // }
-
 
   return (
     <>
@@ -46,7 +42,8 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
 
 
                     <div key={index} className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}>
-                      {console.log({ index })}
+                      {/* {console.log({ index })}
+                      {console.log({ selectedIndex })} */}
                       <input
 
                         type='radio'
@@ -67,9 +64,6 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
                         <RiDeleteBinFill />
                       </div>
                     </div>
-
-
-
                   ))}
                 </div>
                 <div className='toggle-edit' >

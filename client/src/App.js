@@ -13,7 +13,7 @@ import SearchResult from 'pages/Blog/SearchResult'
 import Tour from 'pages/Tour/Tour'
 import ProductDetail from 'pages/Shop/ProductDetail'
 
-import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
+import Menu from 'pages/User/MemberCenter/Menu'
 import { NotFound } from './pages/NotFound'
 import MemberSetting from 'pages/User/MemberCenter/Setting'
 import LoginModal from 'pages/User/Login/LoginModal'
@@ -32,18 +32,15 @@ const App = () => {
             <Route path='/shop' element={<Shop />} />
             <Route path='/shop/product/1' element={<ProductDetail />} />
             <Route path='/tour' element={<Tour />} />
-
-            <Route path='/member' element={<MemberCenter />} />
-            <Route path='login' element={<LoginModal />} />
-            <Route path='dropdownMenu' element={<DropdownMenu />} />
-            <Route path='memberSetting' element={<MemberSetting />} />
-
+          <Route path='/member' element={<Menu />} />
+          <Route path='login' element={<LoginModal />} />
+          <Route path='dropdownMenu' element={<DropdownMenu />} />
+          <Route path='memberSetting' element={<MemberSetting />} />
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='checkout' element={<Checkout />} />
         </Routes>
       </BrowserRouter>
-
   )
 }
 

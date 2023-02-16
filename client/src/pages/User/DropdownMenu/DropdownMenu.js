@@ -1,17 +1,53 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import axios from 'axios'
 import './DropdownMenu.scss'
 import 'animate.css'
+
+// icon
 import { FaUserAlt } from 'react-icons/fa'
 import { IoSettingsOutline } from 'react-icons/io5'
-import { HiOutlineTicket } from 'react-icons/hi'
-import { MdOutlineAttachMoney } from 'react-icons/md'
-import { BsPersonBadge } from 'react-icons/bs'
+import { HiOutlineShoppingCart } from 'react-icons/hi'
+import { BsPersonBadge, BsCreditCard } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
-import axios from 'axios'
+import { AiOutlineLike } from 'react-icons/ai'
+import { TfiAnnouncement } from 'react-icons/tfi'
+import { CgNotes } from 'react-icons/cg'
+
+
+const DropdownMenuOptions = {
+  info: [
+    {
+      label: '最新消息',
+      icon: <TfiAnnouncement size={20} />
+    },
+    {
+      label: '我的收藏',
+      icon: <AiOutlineLike size={20} />
+    },
+    {
+      label: '訂單管理',
+      icon: <CgNotes size={20} />
+    },
+    {
+      label: '消費紀錄',
+      icon: <HiOutlineShoppingCart size={20} />
+    },
+    {
+      label: '付款設定',
+      icon: <BsCreditCard size={20} />
+    },
+    {
+      label: '帳號設定',
+      icon: <IoSettingsOutline size={20} />
+    }
+  ]
+}
 
 const DropdownMenu = ({ handleToggleLoginModal }) => {
+  const [dropdownOptions, setDropdownOptions] = useState(DropdownMenuOptions)
   const [userData, setUserData] = useState()
+
   // TODO:
   const handleUserInfo = async () => {
     const token = localStorage.getItem('token')
@@ -20,6 +56,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
       setUserData(response.data)
     }
   }
+
   // handleClickOutside
   useEffect(() => {
     handleUserInfo()
@@ -36,39 +73,55 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
       window.removeEventListener('click', handleClickOutside)
     }
   }, [])
+
+  // handle logout
   const handleLogoutButton = () => {
-    alert('已登出')
+    // alert('已登出')
     setUserData('')
     localStorage.removeItem('token')
     window.location = '/'
   }
+
+  // handle change page
+  const handleMenuLocation = (event) => {
+    localStorage.setItem('hoverLabel', event.target.id)
+  }
+
   return (
     <div className="user-dropdown-menu animate__animated animate__faster animate__fadeIn">
       <div className='menu-place'>
-        <Link className='menu-option' to='/member'>
+
+        <Link className='menu-option'>
           <div className='user-name'>
             <FaUserAlt size={35} />
-            <div>
+            <div className='user-info'>
               <h5>{userData && userData.first_name + ' ' + userData.last_name}</h5>
+              <div className='points'>{userData && '$' + ' ' + userData.points}</div>
             </div>
           </div>
-          <IoSettingsOutline size={20} />
         </Link>
+
         <div className='divider'></div>
-        <div className='menu-option'>
-          <div className='user-name'>
-            <MdOutlineAttachMoney size={20} />
-            <p>Points</p>
-          </div>
-          <div className='points'>{userData && '$' + ' ' + userData.points}</div>
+
+        <div>
+          {
+            dropdownOptions.info.map((item, index) => (
+              <Link
+                className='menu-option'
+                key={index}
+                id={item.label}
+                to='member'
+                onClick={handleMenuLocation}
+              >
+                <div className='user-name' id={item.label}>
+                  {item.icon}
+                  <p id={item.label}>{item.label}</p>
+                </div>
+              </Link>
+            ))
+          }
         </div>
-        <div className='menu-option'>
-          <div className='user-name'>
-            <HiOutlineTicket size={20} />
-            <p>折扣卷</p>
-          </div>
-          <div className='ticket'>{userData && userData.ticket}</div>
-        </div>
+
         <div className='divider'></div>
 
         {/* for ' circle circle ' */}
@@ -78,6 +131,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
             <p>個人首頁</p>
           </div>
         </Link>
+
         <Link className='menu-option'>
           <div className='user-name'>
             <CiEdit size={20} />
@@ -87,13 +141,15 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
         {/* ------------------ */}
 
         <div className='divider'></div>
+
         <Link className='menu-option logout-button' to='#' onClick={handleLogoutButton}>
           <div className='user-name'>
             <div>登出</div>
           </div>
         </Link>
+
       </div>
-    </div>
+    </div >
   )
 }
 

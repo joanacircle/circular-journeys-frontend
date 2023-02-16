@@ -11,6 +11,7 @@
   }
   .input-place {
     margin: 10px 20px;
+    font-size: 18px;
     .input-place {
       @include flex("", "");
       .label-place {

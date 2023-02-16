@@ -1,4 +1,4 @@
-export const taiwan = {
+const taiwan = {
   label: '臺灣',
   info: [
     {
@@ -482,3 +482,5 @@ export const taiwan = {
     }
   ]
 }
+
+module.exports = taiwan

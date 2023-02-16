@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { taiwan } from 'data/taiwan-data'
+import axios from 'axios'
 
 const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
-  const options = taiwan
+  const [options, setOptions] = useState({})
+
+  useEffect(() => {
+    handleGetOptionsApi()
+  }, [])
+
+  const handleGetOptionsApi = async () => {
+    const response = await axios.get('http://localhost:3001/user/select')
+    const data = response.data
+    setOptions(data)
+  }
+
   const selectOptionsObj = {
     info: [
       { label: '國家', value: inputData.nation, att: 'nation' },

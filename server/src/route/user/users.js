@@ -4,6 +4,17 @@ const uuid = require('uuid')
 const shortid = require('shortid')
 const router = express.Router()
 const request = require('request')
+const taiwan = require('../../data/taiwan-data')
+
+//select
+//http://localhost:3001/user/select
+router.get('/select', async (req, res, next) => {
+  try {
+    res.json(taiwan)
+  } catch (err) {
+    next(err)
+  }
+})
 
 //user list
 //http://localhost:3001/user/userslist
@@ -12,20 +23,6 @@ router.get('/userslist', async (req, res, next) => {
   const [rows] = await db.query(sql)
   res.json(rows)
 })
-
-// Taiwan select api
-// http://localhost:3001/user/twzipcode
-router.get('/twzipcode', async (req, res, next) => {
-  const url = 'https://api.opencube.tw/twzipcode';
-  request(url, (error, response, body) => {
-    if (error || response.statusCode !== 200) {
-      res.status(500).send({ error: 'Failed to fetch data from API' });
-    } else {
-      const data = JSON.parse(body);
-      res.status(200).json(data);
-    }
-  });
-});
 
 //find user token
 //http://localhost:3001/user/userinfo

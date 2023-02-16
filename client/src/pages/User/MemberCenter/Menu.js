@@ -1,41 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import './MemberCenterMenu.scss'
+import './Menu.scss'
+import axios from 'axios'
+
+// icon
 import { AiFillCamera, AiOutlineLike } from 'react-icons/ai'
 import { IoSettingsOutline } from 'react-icons/io5'
-import { HiOutlineTicket, HiOutlineShoppingCart } from 'react-icons/hi'
-import { MdOutlineAttachMoney } from 'react-icons/md'
+import { HiOutlineShoppingCart } from 'react-icons/hi'
+import { TfiAnnouncement } from 'react-icons/tfi'
+import { BsCreditCard } from 'react-icons/bs'
 import { CgNotes } from 'react-icons/cg'
-import axios from 'axios'
 
 // page
 import SettingPage from './Setting'
-import PointsPage from './Points'
-import TicketPage from './Ticket'
+import Card from './Card'
+import Announce from './Announce'
 import OrderPage from './Order'
 import ShopHistoryPage from './ShopHistory'
 import LikeHistoryPage from './LikeHistory'
 
-
-const menuObj = {
+const MenuOptions = {
   info: [
     {
-      state: true,
-      label: '帳號設定',
-      icon: < IoSettingsOutline />,
-      element: <SettingPage />
+      state: false,
+      label: '最新消息',
+      icon: <TfiAnnouncement />,
+      element: <Announce />
     },
     {
       state: false,
-      label: 'Points',
-      icon: <MdOutlineAttachMoney />,
-      element: <PointsPage />
-    },
-    {
-      state: false,
-      label: '折扣卷',
-      icon: <HiOutlineTicket />,
-      element: <TicketPage />
+      label: '我的收藏',
+      icon: <AiOutlineLike />,
+      element: <LikeHistoryPage />
     },
     {
       state: false,
@@ -51,16 +47,24 @@ const menuObj = {
     },
     {
       state: false,
-      label: '我的收藏',
-      icon: <AiOutlineLike />,
-      element: <LikeHistoryPage />
+      label: '付款設定',
+      icon: <BsCreditCard />,
+      element: <Card />
+    },
+    {
+      state: false,
+      label: '帳號設定',
+      icon: < IoSettingsOutline />,
+      element: <SettingPage />
     }
   ]
 }
 
-const MemberCenterMenu = () => {
-  const [changePage, setChangePage] = useState(menuObj)
+const Menu = () => {
+  const [changePage, setChangePage] = useState(MenuOptions)
   const [userData, setUserData] = useState()
+  const [localData, setLocalData] = useState(localStorage.getItem('hoverLabel'))
+
 
   // TODO:
   const handleUserInfo = async () => {
@@ -71,7 +75,18 @@ const MemberCenterMenu = () => {
     }
   }
 
+  // handle Menu state
+  const handleMenuState = () => {
+    const newInfo = changePage.info.map(item => {
+      if (localData === item.label) {
+        return { ...item, state: true }
+      }
+      return { ...item, state: false }
+    })
+    setChangePage({ ...changePage, info: newInfo })
+  }
 
+  // handle change page
   const handleChangePage = (event) => {
     const newInfo = changePage.info.map(item => {
       if (event.target.id === item.label) {
@@ -84,7 +99,9 @@ const MemberCenterMenu = () => {
 
   useEffect(() => {
     handleUserInfo()
+    handleMenuState()
   }, [])
+
   return (
     <div className="membercenter-place">
       <div className="membercenter-box">
@@ -126,4 +143,4 @@ const MemberCenterMenu = () => {
   )
 }
 
-export default MemberCenterMenu
+export default Menu

@@ -1,8 +1,7 @@
-@import 'index.scss';
 
 .post-container{
   width: 100vw;
-  background: $light-gray;
+  background: var(--light-gray);
   min-height: 100vh;
 
   .page-body{
@@ -29,11 +28,11 @@
       gap: 10px;
 
       li{
-        color: $orange;
+        color: var(--orange);
         font-size: 20px;
 
         &:hover{
-          color: $purple;
+          color: var(--purple);
         }
       }
     }
@@ -42,10 +41,10 @@
       text-align: center;
 
       a{
-        color: $orange;
+        color: var(--orange);
 
         a:hover{
-          color: $purple;
+          color: var(--purple);
         }
       }
     }
@@ -58,7 +57,7 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: $white;
+        background: var(--white);
       }
     }
   }
@@ -83,14 +82,14 @@
       .createAt{
         display: flex;
         gap: 5px;
-        color: $gray;
+        color: var(--gray);
         align-items: center;
         
         .icon{
           height: 100%;
           border-radius: 50%;
-          background: $gray;
-          color: $white;
+          background: var(--gray);
+          color: var(--white);
           padding: 3px;
         }
   
@@ -102,14 +101,14 @@
       .post-likes-group{
         display: flex;
         gap: 5px;
-        color: $gray;
+        color: var(--gray);
         align-items: center;
   
         .heart-icon{
           height: 100%;
           border-radius: 50%;
-          background: $gray;
-          color: $white;
+          background: var(--gray);
+          color: var(--white);
           padding: 3px;
         }
   
@@ -129,7 +128,7 @@
   .post-footer{
     .heart-icon{
       width: 100%;
-      color: $orange;
+      color: var(--orange);
       cursor: pointer;
     }
 
@@ -139,7 +138,7 @@
       text-align: center;
 
       a:hover{
-        color: $purple;
+        color: var(--purple);
       }
     }
   }
@@ -147,7 +146,7 @@
   .related-post{
     display: flex;
     gap: 15px;
-    border-top: 1px solid $gray;
+    border-top: 1px solid var(--gray);
     padding: 50px 0;
   }
 }

@@ -1,4 +1,3 @@
-@import 'index.scss';
 
 .blog-categories{
   margin-top: 15px;
@@ -10,7 +9,7 @@
       font-size: 20px;
       
       &:hover{
-        color: $purple;
+        color: var(--purple);
       }
     }
 }

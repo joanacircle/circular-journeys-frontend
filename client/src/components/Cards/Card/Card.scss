@@ -1,15 +1,14 @@
-@import 'index.scss';
 
 .card{
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   border: none;
-  border-radius: $br1;
+  border-radius: var(--br1);
 
   .card-img{
     max-height: 133px;
     object-fit: cover;
-    border-radius: $br1 $br1 0 0;
+    border-radius: var(--br1) var(--br1) 0 0;
   }
 }

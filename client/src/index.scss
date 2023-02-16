@@ -14,6 +14,22 @@ body {
   font-family: 'cwTeXYen', sans-serif;
   font-weight: 900;
   // height: 400vh;
+
+  // color
+  --white: #fff;
+  --light-gray: #F7F7F7;
+  --gray: #B7B7B7;
+  --dark-gray: #424242;
+  --orange: #F2AE3D;
+  --yellow: #F8DA95;
+  --eggyolk: #FCED53;
+  --purple: #514895;
+  --red:#9A4242;
+  --family: 'Sigmar One';
+
+  // border-radius
+  --br1: 15px; // card | image | ...
+  --br2: 35px; // button
 }
 
 h1,

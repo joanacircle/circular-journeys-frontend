@@ -1,16 +1,15 @@
-@import 'index.scss';
 
 .card3{
   text-align: center;
   border: none;
 
   .card-img{
-    border-radius: $br1 $br1 0 0;
+    border-radius: var(--br1) var(--br1) 0 0;
   }
 
   .card-caption{
-    background: $white;
-    border-radius: $br1;
+    background: var(--white);
+    border-radius: var(--br1);
     padding-top: 25px;
 
     .card-header{
@@ -23,18 +22,18 @@
           li{
             margin-right: 5px;
             width: fit-content;
-            border-radius: $br2;
-            background-color: $orange;
-            color: $white;
+            border-radius: var(--br2);
+            background-color: var(--orange);
+            color: var(--white);
             padding: 2px 8px;
             font-size: 20px;
   
             &:hover{
-              background-color: $purple;
+              background-color: var(--purple);
             }
   
             a:hover{
-              color: $white;
+              color: var(--white);
             }
           }
       }
@@ -52,14 +51,14 @@
   }
 
   .card-footer{
-    border-top: 1px solid $light-gray;
+    border-top: 1px solid var(--light-gray);
     padding: 20px 38px 20px 38px;
     justify-content: space-between;
 
     .heart-icon{
       height: 100%;
       display: block;
-      color: $orange;
+      color: var(--orange);
       margin-right: 3px;
       cursor: pointer;
     }

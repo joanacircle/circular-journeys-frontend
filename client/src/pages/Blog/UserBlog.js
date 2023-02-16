@@ -12,15 +12,11 @@ const UserBlog = () => {
   const [post, setPost] = useState([{}])
   const { memberId } = useParams()
   const [url, setUrl] = useState(`http://localhost:3001/blog/${memberId}`)
-  useEffect(() => {
-    getData()
-  }, [url])
+  useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
     .then(r => r.json())
-    .then((data) => {
-      setPost(data)
-    })
+    .then((data) => { setPost(data) })
     .catch(error => console.error(error))
   }
 
@@ -33,9 +29,7 @@ const UserBlog = () => {
 
   return (
     <>
-    {!post
-    ? (<div>Loading...</div>)
-    : (<div>
+    <div>
         <div className='userblog-container'>
           <div className='page-body'>
             <div className='post-container'>
@@ -54,7 +48,7 @@ const UserBlog = () => {
               {post.map((v, i) => {
                 return (
                   <Card4
-                    key={v.post_id}
+                    key={i + '-' + v.post_id}
                     tag={v.tag}
                     title={v.post_title}
                     postId={v.post_id}
@@ -65,12 +59,10 @@ const UserBlog = () => {
                     postContent={v.post_content}/>
                 )
               })}
-
               <div className='userblog-pagination'>
                 <Pagination />
               </div>
             </div>
-
             <div className='userblog-aside'>
               <div className="userblog-aside-item">
                 <div className='member-avatar'>
@@ -97,8 +89,7 @@ const UserBlog = () => {
             </div>
           </div>
         </div>
-    </div>)
-    }
+    </div>
     </>
   )
 }

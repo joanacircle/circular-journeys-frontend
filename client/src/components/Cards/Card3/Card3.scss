@@ -10,30 +10,37 @@
 
   .card-caption{
     background: $white;
-    border-radius: 0 0 $br1 $br1;
+    border-radius: $br1;
     padding-top: 25px;
 
     .card-header{
-      padding: 0 38px 0 38px;
+      padding: 0 38px;
       justify-content: space-between;
+      flex-wrap: wrap;
+      
       .blog-tags{
 
-        li{
-          margin-right: 5px;
-          width: fit-content;
-          border-radius: $br2;
-          background-color: $orange;
-          color: $white;
-          padding: 2px 8px;
-
-          &:hover{
-            background-color: $purple;
-          }
-
-          a:hover{
+          li{
+            margin-right: 5px;
+            width: fit-content;
+            border-radius: $br2;
+            background-color: $orange;
             color: $white;
+            padding: 2px 8px;
+            font-size: 20px;
+  
+            &:hover{
+              background-color: $purple;
+            }
+  
+            a:hover{
+              color: $white;
+            }
           }
-        }
+      }
+
+      .blog-avatar{
+        font-size: 20px;
       }
     }
 

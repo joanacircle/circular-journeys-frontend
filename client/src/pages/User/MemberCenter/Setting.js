@@ -12,12 +12,13 @@ const SettingPage = () => {
   // TODO:
   const handleUserInfo = async () => {
     const token = localStorage.getItem('token')
-    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
-    if (response.status === 200) {
+    try {
+      const response = await axios.post('http://localhost:3001/user/userinfo', { token })
       setUserData(response.data)
+    } catch (err) {
+      if (err) throw err
     }
   }
-
 
   const handleInputChange = (event) => {
     setInputData({
@@ -95,7 +96,6 @@ const SettingPage = () => {
             {
               <DynamicSelect
                 inputData={inputData}
-                setInputData={setInputData}
                 handleInputChange={handleInputChange}
               />
             }

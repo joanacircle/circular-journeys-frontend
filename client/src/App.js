@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import MainLayout from './layouts/MainLayout'
@@ -11,6 +11,7 @@ import UserBlog from 'pages/Blog/UserBlog'
 import SinglePost from 'pages/Blog/SinglePost'
 import SearchResult from 'pages/Blog/SearchResult'
 import Tour from 'pages/Tour/Tour'
+import ProductDetail from 'pages/Shop/ProductDetail'
 
 import MemberCenter from 'pages/User/MemberCenter/MemberCenterMenu'
 import { NotFound } from './pages/NotFound'
@@ -25,10 +26,11 @@ const App = () => {
           <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path='/blog' element={<Blog />} />
-            <Route path='/blog/p123' element={<SinglePost />} />
-            <Route path='/blog/t123' element={<SearchResult />} />
             <Route path='/blog/:memberId' element={<UserBlog />} />
+            <Route path='/blog/post/:postId' element={<SinglePost />} />
+            <Route path='/blog/t123' element={<SearchResult />} />
             <Route path='/shop' element={<Shop />} />
+            <Route path='/shop/product/1' element={<ProductDetail />} />
             <Route path='/tour' element={<Tour />} />
 
             <Route path='/member' element={<MemberCenter />} />
@@ -41,6 +43,7 @@ const App = () => {
           <Route path='checkout' element={<Checkout />} />
         </Routes>
       </BrowserRouter>
+
   )
 }
 

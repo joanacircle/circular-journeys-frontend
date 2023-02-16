@@ -11,8 +11,8 @@ import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
 import axios from 'axios'
 import md5 from 'md5'
 
-
 const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
+
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)

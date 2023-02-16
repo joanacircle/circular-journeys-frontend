@@ -1,31 +1,31 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import './Card3.scss'
 
 import { AiOutlineHeart } from 'react-icons/ai'
 
 const Card3 = (props) => {
-  const TagsValue = props.tags
+  const tag = props.tags // 傳入 object
   return (
     <>
       <div className="card3">
-        <Link to={`/blog/${props.postId}`}>
+        <Link to={`/blog/post/${props.postId}`}>
           <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
         </Link>
         <div className="card-caption">
           <div className='card-header d-flex'>
             <ul className='blog-tags d-flex'>
-              {TagsValue.map((v, i) => {
-                return (
-                  <li key={i}>
-                    <Link to={`/blog/${props.tagId}`}># {v}</Link>
-                  </li>
-                )
-              })}
+              {!tag
+              ? <li>Loading...</li>
+              : Object.entries(tag).slice(0, 2).map(([key, value]) => (
+                <Link to={`/blog/tag/${key}`} key={key}>
+                  <li># {value}</li>
+                </Link>
+              ))
+              }
             </ul>
-            <ul className='blog-avatar'>
+            <ul className='blog-avatar d-flex'>
               <Link to={`/blog/${props.memberId}`}>
-                <li>{props.avatar}</li>
+                <li>{props.memberName}</li>
               </Link>
             </ul>
           </div>
@@ -38,7 +38,10 @@ const Card3 = (props) => {
             </div>
             <div className='d-flex'>
               <AiOutlineHeart size={25} className='heart-icon'/>
-              <p>{props.likes}</p>
+              {props.likes === 0
+              ? <p></p>
+              : <p>{props.likes}</p>
+              }
             </div>
           </div>
         </div>

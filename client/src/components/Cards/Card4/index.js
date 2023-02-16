@@ -7,6 +7,7 @@ import './Card4.scss'
 
 const Card4 = (props) => {
   const tag = props.tag // 傳入 object
+
   return (
     <>
     <div className="card4">
@@ -17,11 +18,14 @@ const Card4 = (props) => {
             <ul>
               {!tag
               ? <li>Loading...</li>
-              : Object.entries(tag).slice(0, 3).map(([key, value]) => (
+              : Object.entries(tag).slice(0, 3).map(([key, value]) => {
+                return (
                   <Link to={`/blog/tag/${key}`} key={key}>
                     <li># {value}</li>
                   </Link>
-                ))
+                )
+              }
+                )
               }
             </ul>
           </div>

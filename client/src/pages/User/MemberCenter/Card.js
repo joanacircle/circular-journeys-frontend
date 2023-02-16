@@ -1,10 +1,10 @@
 import React from 'react'
-import './Points.scss'
+import './Card.scss'
 
-const PointsPage = () => {
+const CardPage = () => {
   return (
     <div className="top-place animate__animated animate__fadeInDown animate__faster">
-      <h3>Points</h3>
+      <h3>付款設定</h3>
       <hr />
       <div className='input-place'>
       </div >
@@ -12,4 +12,4 @@ const PointsPage = () => {
   )
 }
 
-export default PointsPage
+export default CardPage

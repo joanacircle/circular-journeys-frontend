@@ -18,6 +18,10 @@
   .form-place {
     @include flex(center, column);
     width: 80%;
+    .alert-place {
+      color: rgb(254, 71, 71);
+      font-size: 18px;
+    }
     .input-password {
       position: relative;
       background: $white;

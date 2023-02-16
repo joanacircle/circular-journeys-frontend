@@ -4,10 +4,9 @@ import 'animate.css'
 import SignupModal from '../Signup/SignupModal'
 import Forgot from './Forgot'
 import { IoCloseSharp } from 'react-icons/io5'
-import { FaFacebookSquare } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
-import { AiFillApple } from 'react-icons/ai'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
+import { useAlert } from 'hooks/useAlert'
 import axios from 'axios'
 import md5 from 'md5'
 
@@ -16,6 +15,7 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
+  const { alert, setAlert } = useAlert()
   const [inputChange, setInputChange] = useState({})
 
   const handelInputChange = (event) => {
@@ -38,14 +38,13 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
       }
     )
     if (response.data.state) {
-      alert(response.data.message)
       handleToggleLoginModal()
 
       // save token to localStorage
       localStorage.setItem('token', response.data.token)
       window.location = '/'
     } else {
-      return alert(response.data.message)
+      setAlert({ state: true, message: response.data.message })
     }
   }
 
@@ -72,127 +71,131 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
   }
 
   return (
-    <div
-      className="login-modal-background"
-      onClick={handleCloseLoginModal}
-    >
+    <>
       <div
-        className={
-          loginModal
-            ? 'login-modal-content animate__animated animate__faster animate__bounceIn'
-            : 'login-modal-content animate__animated animate__bounceOut animate__faster'
-        }
+        className="login-modal-background"
+        onClick={handleCloseLoginModal}
       >
-        <div className="login-modal-content-background">
-          <div className="close-login-button">
-            {
-              signupModal || userForgot
-                ? (
-                  <div
-                    onClick={handleToggleSignupModal}>
-                    <BiArrowBack size={30} />
-                  </div>
-                )
-                : (
-
-                  <div
-                    onClick={handleToggleLoginModal}>
-                    <IoCloseSharp size={30} />
-                  </div>
-                )
-            }
-          </div>
-          {
-            signupModal
-              ? (
-                <SignupModal
-                  setSignupModal={setSignupModal}
-                  showPassword={showPassword}
-                  setShowPassword={setShowPassword}
-                  handleShowPasswordButton={handleShowPasswordButton}
-                  handleToggleSignupModal={handleToggleSignupModal}
-                  setUserForgot={setUserForgot}
-                  userForgot={userForgot}
-                />
-              )
-              : (
-                userForgot
+        <div
+          className={
+            loginModal
+              ? 'login-modal-content animate__animated animate__faster animate__bounceIn'
+              : 'login-modal-content animate__animated animate__bounceOut animate__faster'
+          }
+        >
+          <div className="login-modal-content-background">
+            <div className="close-login-button">
+              {
+                signupModal || userForgot
                   ? (
-                    <Forgot
-                      showPassword={showPassword}
-                      handleShowPasswordButton={handleShowPasswordButton}
-                    />
+                    <div
+                      onClick={handleToggleSignupModal}>
+                      <BiArrowBack size={30} />
+                    </div>
                   )
                   : (
-                    <div className="login-place">
-                      <h1>Login</h1>
-                      <form className='form-place' onSubmit={handleLogin}>
-                        <input
-                          className='input-box'
-                          type="email"
-                          name="userEmail"
-                          id="userEmail"
-                          placeholder='Email'
-                          onChange={handelInputChange}
-                        />
-                        <div className='input-password'>
+
+                    <div
+                      onClick={handleToggleLoginModal}>
+                      <IoCloseSharp size={30} />
+                    </div>
+                  )
+              }
+            </div>
+            {
+              signupModal
+                ? (
+                  <SignupModal
+                    setSignupModal={setSignupModal}
+                    showPassword={showPassword}
+                    setShowPassword={setShowPassword}
+                    handleShowPasswordButton={handleShowPasswordButton}
+                    handleToggleSignupModal={handleToggleSignupModal}
+                    setUserForgot={setUserForgot}
+                    userForgot={userForgot}
+                  />
+                )
+                : (
+                  userForgot
+                    ? (
+                      <Forgot
+                        showPassword={showPassword}
+                        handleShowPasswordButton={handleShowPasswordButton}
+                      />
+                    )
+                    : (
+                      <div className="login-place">
+                        <h1>Login</h1>
+                        <form className='form-place' onSubmit={handleLogin}>
                           <input
                             className='input-box'
-                            type={showPassword ? 'text' : 'password'}
-                            name="userPassword"
-                            id="userPassword"
-                            placeholder='Password'
+                            type="email"
+                            name="userEmail"
+                            id="userEmail"
+                            placeholder='Email'
                             onChange={handelInputChange}
                           />
-                          {
-                            showPassword
-                              ? (
-                                <BiHide
-                                  className='show-password-icon'
-                                  size={25}
-                                  onClick={handleShowPasswordButton}
-                                />
-                              )
-                              : (
-                                <BiShow
-                                  className='show-password-icon'
-                                  size={25}
-                                  onClick={handleShowPasswordButton}
-                                />
-                              )
-                          }
-                        </div>
-                        <div className="login-option">
-                          <div>
+                          <div className='input-password'>
+                            <input
+                              className='input-box'
+                              type={showPassword ? 'text' : 'password'}
+                              name="userPassword"
+                              id="userPassword"
+                              placeholder='Password'
+                              onChange={handelInputChange}
+                            />
+                            {
+                              showPassword
+                                ? (
+                                  <BiHide
+                                    className='show-password-icon'
+                                    size={25}
+                                    onClick={handleShowPasswordButton}
+                                  />
+                                )
+                                : (
+                                  <BiShow
+                                    className='show-password-icon'
+                                    size={25}
+                                    onClick={handleShowPasswordButton}
+                                  />
+                                )
+                            }
+                          </div>
+                          <div className="login-option">
+                            <div className='alert-place'>
+                              {alert.state && alert.message}
+                            </div>
+                            <div>
+                              <a
+                                className='text-style'
+                                onClick={handleToggleForgotPage}
+                              >
+                                忘記密碼？
+                              </a>
+                            </div>
+                          </div>
+                          <div className="submit-place">
+                            <input
+                              className='input-submit'
+                              type="submit"
+                              value="登入"
+                            />
                             <a
                               className='text-style'
-                              onClick={handleToggleForgotPage}
+                              onClick={handleToggleSignupModal}
                             >
-                              忘記密碼？
+                              還未加入會員嗎？立即註冊！
                             </a>
-                          </div>
-                        </div>
-                        <div className="submit-place">
-                          <input
-                            className='input-submit'
-                            type="submit"
-                            value="登入"
-                          />
-                          <a
-                            className='text-style'
-                            onClick={handleToggleSignupModal}
-                          >
-                            還未加入會員嗎？立即註冊！
-                          </a>
-                          <p className='other-login-text'>其他登入方式</p>
-                          <div className='other-login-place'>
-                            <button
-                              className='other-login-btn btn-google'
-                              type="button"
-                            >
-                              <FcGoogle size={25} />
-                            </button>
-                            <button
+                            <p className='other-login-text'>其他登入方式</p>
+                            <div className='other-login-place'>
+                              <button
+                                className='other-login-btn btn-google'
+                                type="button"
+                              >
+                                <FcGoogle size={25} />
+                              </button>
+                              {/* <button
                               className='other-login-btn btn-facebook'
                               type="button"
                             >
@@ -203,17 +206,18 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
                               type="button"
                             >
                               <AiFillApple color='#fff' size={25} />
-                            </button>
+                            </button> */}
+                            </div>
                           </div>
-                        </div>
-                      </form>
-                    </div>
-                  )
-              )
-          }
+                        </form>
+                      </div>
+                    )
+                )
+            }
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -43,12 +43,16 @@
       }
     }
     .input-name-place {
-      @include flex(space-between,'');
+      @include flex(space-between, "");
       .input-name {
         width: 48%;
       }
     }
-    
+    .alert-place {
+      color: rgb(254, 71, 71);
+      font-size: 18px;
+    }
+
     .input-box {
       position: relative;
       border-radius: $br2;

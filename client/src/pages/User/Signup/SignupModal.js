@@ -3,8 +3,10 @@ import './SignupModal.scss'
 import { BiShow, BiHide } from 'react-icons/bi'
 import axios from 'axios'
 import md5 from 'md5'
+import { useAlert } from 'hooks/useAlert'
 
 const SignupModal = ({ showPassword, handleShowPasswordButton }) => {
+  const { alert, setAlert } = useAlert()
   const [inputData, setInputData] = useState({
     userFirstName: '',
     userLastName: '',
@@ -29,11 +31,10 @@ const SignupModal = ({ showPassword, handleShowPasswordButton }) => {
       userPassword: encryption
     })
     if (response.data.state) {
-      alert(response.data.message)
       localStorage.setItem('token', response.data.token)
       window.location = '/'
     } else {
-      alert(response.data.message)
+      setAlert({ state: true, message: response.data.message })
     }
   }
   return (
@@ -101,6 +102,7 @@ const SignupModal = ({ showPassword, handleShowPasswordButton }) => {
               )
           }
         </div>
+        <p className='alert-place'>{alert && alert.message}</p>
         <div className="submit-place">
           <input
             className='input-submit'

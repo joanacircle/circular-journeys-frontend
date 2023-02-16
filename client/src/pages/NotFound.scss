@@ -1,0 +1,27 @@
+// @import url('images/Logo/bg-03.jpg');
+.background{
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../images/Logo/bg-03.jpg');
+  text-align: center;
+
+  .words{
+    margin-top: 30px;
+    color: var(--white);
+    
+    h5{
+      margin-top: 30px;
+      
+      a{
+        background-color: var(--orange);
+        border-radius: var(--br2);
+        padding: 3px 8px;
+
+        &:hover{
+          background-color: var(--purple);
+          color: var(--white);
+        }
+      }
+    }
+  }
+}

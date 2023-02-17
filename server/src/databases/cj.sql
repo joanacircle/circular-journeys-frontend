@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2023 年 02 月 16 日 23:17
+-- 產生時間： 2023 年 02 月 17 日 02:15
 -- 伺服器版本： 5.7.39
 -- PHP 版本： 7.4.33
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `cj_wofk`
+-- 資料庫： `cj`
 --
 
 -- --------------------------------------------------------
@@ -214,17 +214,18 @@ CREATE TABLE `users_information` (
   `ticket` int(11) NOT NULL DEFAULT '0' COMMENT '折價卷',
   `first_name` varchar(25) NOT NULL COMMENT '姓',
   `last_name` varchar(25) NOT NULL COMMENT '名',
-  `birthday` date NOT NULL COMMENT '生日',
-  `sex` char(1) NOT NULL COMMENT '性別',
+  `birthday` date DEFAULT NULL COMMENT '生日',
+  `sex` char(1) DEFAULT NULL COMMENT '性別',
   `password` varchar(50) NOT NULL COMMENT '密碼',
-  `token` varchar(50) NOT NULL COMMENT '驗證碼',
-  `email` varchar(25) NOT NULL COMMENT '信箱',
-  `telephone` varchar(25) NOT NULL COMMENT '電話',
-  `nation` varchar(25) NOT NULL COMMENT '國家',
-  `city` varchar(30) NOT NULL COMMENT '城市',
+  `verify` varchar(50) DEFAULT NULL COMMENT '驗證碼 ',
+  `token` varchar(50) NOT NULL COMMENT '金鑰',
+  `email` varchar(50) NOT NULL COMMENT '信箱',
+  `telephone` varchar(25) DEFAULT NULL COMMENT '電話',
+  `nation` varchar(25) DEFAULT NULL COMMENT '國家',
+  `city` varchar(30) DEFAULT NULL COMMENT '城市',
   `districts` varchar(255) DEFAULT NULL COMMENT '區域',
   `postal_code` varchar(10) DEFAULT NULL COMMENT '郵遞區號',
-  `address` varchar(50) NOT NULL COMMENT '街/道',
+  `address` varchar(50) DEFAULT NULL COMMENT '街/道',
   `payment_type` varchar(25) DEFAULT NULL COMMENT '付款種類',
   `provider` varchar(25) DEFAULT NULL COMMENT '供應商',
   `account_no` varchar(25) DEFAULT NULL COMMENT '卡號',
@@ -235,10 +236,13 @@ CREATE TABLE `users_information` (
 -- 傾印資料表的資料 `users_information`
 --
 
-INSERT INTO `users_information` (`id`, `member_id`, `created_at`, `active_status`, `points`, `ticket`, `first_name`, `last_name`, `birthday`, `sex`, `password`, `token`, `email`, `telephone`, `nation`, `city`, `districts`, `postal_code`, `address`, `payment_type`, `provider`, `account_no`, `expiry`) VALUES
-(1, '123456', '2022-12-21 02:44:42', 1, 9457, 2, 'Chou', 'Alan', '1995-04-14', 'm', 'e10adc3949ba59abbe56e057f20f883e', '9994c615-f679-482b-8d4b-1c56db281f1b', 'alan@gmail.com', '0970688851', '臺灣', ' 臺中市', '太平區', '80711', '環中東路三段507號6樓之6', '信用卡', 'VISA', '1111 2222 3333 4444', '2022-12-21'),
-(2, '123457', '2022-12-21 02:56:42', 1, 8778, 1, 'La', 'Kevin', '0000-00-00', 'f', 'e10adc3949ba59abbe56e057f20f883e', '8aade3d7-b683-4348-adc9-1019d2c6b15d', 'kevin@gmail.com', '0900000000', '臺灣', '高雄市', NULL, '80711', '高雄市阿公店0號水庫', '信用卡', 'VISA', '1111 2222 3333 4444', '2022-12-21'),
-(4, '123458', '2022-12-21 02:58:19', 1, 8787, 8, '張', '圓圓', '1996-06-05', 'f', 'e10adc3949ba59abbe56e057f20f883e', '1edc2042-17f9-4470-b1dd-386b8823698b', 'circle@gmail.com', '0900000000', '臺灣', '高雄市', '鼓山區', '80711', '巨蛋路', '信用卡', 'VISA', '1111 2222 3333 4444', '2022-12-21');
+INSERT INTO `users_information` (`id`, `member_id`, `created_at`, `active_status`, `points`, `ticket`, `first_name`, `last_name`, `birthday`, `sex`, `password`, `verify`, `token`, `email`, `telephone`, `nation`, `city`, `districts`, `postal_code`, `address`, `payment_type`, `provider`, `account_no`, `expiry`) VALUES
+(1, '123456', '2022-12-21 02:44:42', 1, 9457, 2, 'Chou', 'Alan', '1995-04-14', 'm', 'e10adc3949ba59abbe56e057f20f883e', '3OQAJU-gx', 'fea9c433-bbe9-4bf4-a6a4-06aee2a2d505', 'alan@gmail.com', '0970688851', '臺灣', ' 臺中市', '太平區', '80711', '環中東路三段507號6樓之6', '信用卡', 'VISA', '1111 2222 3333 4444', '2022-12-21'),
+(2, '123457', '2022-12-21 02:56:42', 1, 8778, 1, 'La', 'Kevin', '0000-00-00', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'b3778d2a-a206-4982-a551-422658654f8d', 'kevin@gmail.com', '0900000000', '臺灣', '高雄市', NULL, '80711', '高雄市阿公店0號水庫', '信用卡', 'VISA', '1111 2222 3333 4444', '2022-12-21'),
+(4, '123458', '2022-12-21 02:58:19', 1, 8787, 8, '張', '圓圓', '1996-06-05', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'acb1857d-dcad-457f-852f-cd28349c8804', 'circle@gmail.com', '0900000000', '臺灣', '高雄市', '鼓山區', '80711', '巨蛋路', '信用卡', 'VISA', '1111 2222 3333 4444', '2022-12-21'),
+(55, 'PhZ0P9tmF', '2023-02-17 01:51:54', 1, 0, 0, '周', '聖倫', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '1535bd1c-09bd-4907-8d10-e70493736f5c', 'alanchou19950414@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(56, 'DUIXLRyIF', '2023-02-17 01:53:02', 1, 0, 0, '王', '小明', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '23c985e6-770f-49f0-be54-e5292bff0624', 'testerkem01@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(57, '0iMjC3UTP', '2023-02-17 01:54:53', 1, 0, 0, '張', '圓喬', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, 'd56ce311-b35f-43b9-ad17-0e11d060e3eb', 'ja95175@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- 已傾印資料表的索引
@@ -272,7 +276,8 @@ ALTER TABLE `post_tags`
 -- 資料表索引 `users_information`
 --
 ALTER TABLE `users_information`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `member_id` (`member_id`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
@@ -288,7 +293,7 @@ ALTER TABLE `post_like`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `users_information`
 --
 ALTER TABLE `users_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=58;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

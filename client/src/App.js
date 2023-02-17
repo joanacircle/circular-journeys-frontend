@@ -8,6 +8,7 @@ import Shop from './pages/Shop/Shop'
 
 import Blog from 'pages/Blog'
 import UserBlog from 'pages/Blog/UserBlog'
+import PostEditor from 'pages/Blog/PostEditor'
 import SinglePost from 'pages/Blog/SinglePost'
 import SearchResult from 'pages/Blog/SearchResult'
 import Tour from 'pages/Tour/Tour'
@@ -27,6 +28,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path='/blog' element={<Blog />} />
             <Route path='/blog/:memberId' element={<UserBlog />} />
+            <Route path='/blog/edit/:memberId' element={<PostEditor />} />
             <Route path='/blog/post/:postId' element={<SinglePost />} />
             <Route path='/blog/tag/:tagId' element={<SearchResult />} />
             <Route path='/shop' element={<Shop />} />

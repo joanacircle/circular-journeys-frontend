@@ -1,7 +1,6 @@
 @import 'index.scss';
 
 .TourCard{
-    
     border-radius: 15px;
     overflow: hidden;
     display: flexbox;
@@ -13,29 +12,38 @@
     
     min-width: 25.5vw;
     min-height: 16vw;
-
+    
     font-size: 16px;
     line-height: 19px;
     text-align: left;
     cursor:pointer;
-}
-.TourCardImg{
-    width: 25.5vw;
-    height: 16vw;
-    object-fit: cover;
-    
-}
-.TourCardText{
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    color:$white;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    font-weight: bolder;
-    
+  
+    .TourCardImg{
+        width: 25.5vw;
+        height: 16vw;
+        object-fit: cover;
+        
+    }
+    .TourCardText{
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        color:$white;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        font-weight: bolder;
+        .TourFavorite{
+            object-fit: cover;
+        }
+        .TourFavoriteLabel{
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+        }
+    }
+        
 }
 
 .TourCard:hover .TourCardImg{

@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 require('dotenv').config();
 const router = express.Router();
 
-// http://localhost:3001/blog  // blog
+// http://localhost:3001/blog  // Blog
 router.get('/', async (req, res) => {
   const sql = `
   SELECT
@@ -49,7 +49,7 @@ router.get('/api', async (req, res) => {
   res.json({post: rows, member: rows2, tag: rows3})
 })
 
-// http://localhost:3001/blog/:member_id // userBlog
+// http://localhost:3001/blog/:member_id // UserBlog
 router.get('/:member_id', async (req, res) => {
   const member_id = req.params.member_id;
 
@@ -92,7 +92,7 @@ router.get('/:member_id', async (req, res) => {
   res.json(rows);
 })
 
-// http://localhost:3001/blog/post/:post_id // singlePost
+// http://localhost:3001/blog/post/:post_id // SinglePost
 router.get('/post/:post_id', async (req, res) => {
   const post_id = req.params.post_id;
   const sql =`
@@ -130,5 +130,8 @@ router.get('/post/:post_id', async (req, res) => {
   });
   res.json(rows);
 })
+
+// http://localhost:3001/blog/post/:post_id // PostEditor
+
 
 module.exports = router;

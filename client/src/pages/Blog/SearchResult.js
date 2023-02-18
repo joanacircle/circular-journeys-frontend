@@ -11,7 +11,7 @@ const SearchResult = () => {
   // 驗證 parameter的 tagId是否存在於資料庫
   useEffect(() => { fetcher() }, [])
   function fetcher() {
-    fetch(`http://localhost:3001/blog/api`)
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
     .then(r => r.json())
     .then(data => {
       const tId = data.tag[0].tag_id

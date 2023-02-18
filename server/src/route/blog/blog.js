@@ -4,7 +4,7 @@ const moment = require("moment-timezone");
 require('dotenv').config();
 const router = express.Router();
 
-// http://localhost:3001/blog  // blog
+// http://localhost:3001/blog  // Blog
 router.get('/', async (req, res) => {
   const sql = `
   SELECT
@@ -36,6 +36,7 @@ router.get('/', async (req, res) => {
   res.json(rows);
 })
 
+// http://localhost:3001/blog/api // for
 router.get('/api', async (req, res) => {
   const sql =`SELECT JSON_ARRAYAGG(post_id) AS post_id FROM posts WHERE 1`
   const sql2 =`SELECT JSON_ARRAYAGG(member_id) AS member_id FROM users_information WHERE 1`
@@ -49,7 +50,12 @@ router.get('/api', async (req, res) => {
   res.json({post: rows, member: rows2, tag: rows3})
 })
 
-// http://localhost:3001/blog/:member_id // userBlog
+// http://localhost:3001/blog/edit/:member_id // PostEditor
+router.get('/edit/:member_id', (req, res) => {
+  res.status(200).json({ message: 'test'})
+})
+
+// http://localhost:3001/blog/:member_id // UserBlog
 router.get('/:member_id', async (req, res) => {
   const member_id = req.params.member_id;
 
@@ -92,7 +98,7 @@ router.get('/:member_id', async (req, res) => {
   res.json(rows);
 })
 
-// http://localhost:3001/blog/post/:post_id // singlePost
+// http://localhost:3001/blog/post/:post_id // SinglePost
 router.get('/post/:post_id', async (req, res) => {
   const post_id = req.params.post_id;
   const sql =`

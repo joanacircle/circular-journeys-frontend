@@ -24,7 +24,6 @@ const PostEditor = () => {
         <form className="edit-form-group"
           onSubmit={(e) => {
                 e.preventDefault()
-                console.log(form)
               }}>
           <div className="form-item">
             <label htmlFor="title">文章標題</label>

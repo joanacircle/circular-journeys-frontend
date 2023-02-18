@@ -36,6 +36,7 @@ router.get('/', async (req, res) => {
   res.json(rows);
 })
 
+// http://localhost:3001/blog/api // for
 router.get('/api', async (req, res) => {
   const sql =`SELECT JSON_ARRAYAGG(post_id) AS post_id FROM posts WHERE 1`
   const sql2 =`SELECT JSON_ARRAYAGG(member_id) AS member_id FROM users_information WHERE 1`

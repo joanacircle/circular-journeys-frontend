@@ -49,6 +49,11 @@ router.get('/api', async (req, res) => {
   res.json({post: rows, member: rows2, tag: rows3})
 })
 
+// http://localhost:3001/blog/edit/:member_id // PostEditor
+router.get('/edit/:member_id', (req, res) => {
+  res.status(200).json({ message: 'test'})
+})
+
 // http://localhost:3001/blog/:member_id // UserBlog
 router.get('/:member_id', async (req, res) => {
   const member_id = req.params.member_id;
@@ -130,8 +135,5 @@ router.get('/post/:post_id', async (req, res) => {
   });
   res.json(rows);
 })
-
-// http://localhost:3001/blog/post/:post_id // PostEditor
-
 
 module.exports = router;

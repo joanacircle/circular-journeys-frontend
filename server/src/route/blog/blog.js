@@ -3,6 +3,8 @@ const db = require('../../model/connect-sql');
 const moment = require("moment-timezone");
 require('dotenv').config();
 const router = express.Router();
+const multer = require('multer');
+const upload = multer({ dest: '../../images'})
 
 // http://localhost:3001/blog  // Blog
 router.get('/', async (req, res) => {
@@ -49,8 +51,8 @@ router.get('/api', async (req, res) => {
   res.json({post: rows, member: rows2, tag: rows3})
 })
 
-// http://localhost:3001/blog/edit/:member_id // PostEditor
-router.get('/edit/:member_id', (req, res) => {
+// http://localhost:3001/blog/newpost/:member_id // PostEditor
+router.get('/newpost/:member_id', (req, res) => {
   res.status(200).json({ message: 'test'})
 })
 

@@ -18,7 +18,6 @@ app.use(cors())
 
 app.get('/', (req, res) => {
   res.json('this is home page')
-  // res.render('main', { name: '陳小明' });
 });
 
 // home

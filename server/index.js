@@ -15,6 +15,8 @@ const blogRouter = require('./src/route/blog/blog')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
+app.use(express.static('public'))
+
 
 app.get('/', (req, res) => {
   res.json('this is home page')

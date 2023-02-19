@@ -12,7 +12,7 @@ const SinglePost = () => {
   const [id, setId] = useState([])
   const { postId } = useParams()
   const [url, setUrl] = useState(
-    `http://localhost:3001/blog/post/${postId}`
+    `${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`
   )
   useEffect(() => { getData() }, [])
   function getData() {
@@ -27,7 +27,7 @@ const SinglePost = () => {
     fetcher()
   }, [])
   function fetcher() {
-    fetch(`http://localhost:3001/blog/api`)
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
     .then(r => r.json())
     .then((data) => {
       const pId = data.post[0].post_id

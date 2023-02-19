@@ -17,7 +17,7 @@ const HomeBlog = () => {
     popular: [],
     latest: []
   })
-  const [url, setUrl] = useState(`http://localhost:3001/home`)
+  const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/home`)
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)

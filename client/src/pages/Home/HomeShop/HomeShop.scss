@@ -1,41 +1,60 @@
 .images-container {
-    margin: auto 10px;
+    max-width: 1160px;
+    margin: 0px auto;
+    margin-bottom: 40px;
     display: flex;
-    flex-direction: column;
+    max-width: 1160px;
     flex-wrap: wrap;
     justify-content: center;
-}
 
-.top-row {
-    max-width: 1024px;
-    display: flex;
-    grid-gap: 12px;
-    justify-content: center;
-    margin: 12px auto;
-}
+    h3 {
+        margin: 20px;
+    }
+    .bottom-row {
+        max-width: 1160px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 22px;
+            
+        .image-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            max-height: 172px;
+            min-width: 281px;
 
-.bottom-row {
-    max-width: 1024px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 9px;
-    
-}
+            .responsive-image {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+            &:hover {
+                cursor: pointer;
+                & .responsive-image {
+                    transform: scale(1.1);
+                    transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+                }
+            }
 
-.image-box{
-    overflow: hidden;
-    border-radius: 15px;
-    &:hover {
-            cursor: pointer;
-            & .responsive-image {
-                transform: scale(1.1);
-                transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+            .cate-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 30px;
+                font-weight: bold;
+                // line-height: 1.2em;
+                text-shadow: 4px 4px 4px rgba(0, 0, 0, 1);
+                color: white;
+                white-space: nowrap;
             }
         }
+    }
 }
 
-.responsive-image {
-    width: 100%;
-    
-}
+
+
+
+
+

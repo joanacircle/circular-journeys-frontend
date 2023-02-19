@@ -3,8 +3,6 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-// require("dotenv").config()
-
 // individual component
 const homeRouter = require('./src/route/home/home')
 const user = require('./src/route/user/users')
@@ -15,6 +13,7 @@ const blogRouter = require('./src/route/blog/blog')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.json('this is home page')

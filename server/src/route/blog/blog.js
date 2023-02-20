@@ -6,6 +6,7 @@ const router = express.Router();
 const multiparty = require('connect-multiparty')
 const path = require('path')
 const fs = require('fs')
+const uuid = require('uuid');
 
 const MultipartyMiddleWare = multiparty({uploadDir: path.join(__dirname, '../../../public')})
 
@@ -57,15 +58,16 @@ router.get('/api', async (req, res) => {
   res.json({post: rows, member: rows2, tag: rows3})
 })
 
-// TODO 1. 檔名稱使用uuid  2. 移除沒有使用的照片
-// http://localhost:3001/blog/newpost/:member_id // PostEditor
-router.post('/newpost/:member_id', MultipartyMiddleWare, (req, res) => {
+// TODO 移除沒有使用的照片
+// http://localhost:3001/blog/upload-img // PostEditor for upload img
+router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
   const TempFile = req.files.upload 
   const TempPathFile = TempFile.path // 照片第一次(暫時)上傳的位置('public')
-  const targetPathUrl = path.join(__dirname,"../../../public/blog/"+TempFile.name) // 照片驗證後最終儲存的位置('public/blog')與其名稱
+  const ext = path.extname(TempFile.originalFilename).toLowerCase() // path.extname() 會回傳檔案類型(ex.'.jpg')
+  const fileName = uuid.v4() + ext
+  const targetPathUrl = path.join(__dirname,"../../../public/blog/"+fileName) // 照片驗證後最終儲存的位置('public/blog')與其名稱
 
-  const ext = path.extname(TempFile.originalFilename).toLowerCase()
-  // path.extname() 會回傳檔案類型(ex.'.jpg')
+  
   // 先驗證是否為png或jpg檔
   if(ext === '.png' || '.jpg'){
     // fs.rename(原位置, 新位置, callback)
@@ -74,11 +76,39 @@ router.post('/newpost/:member_id', MultipartyMiddleWare, (req, res) => {
     fs.rename(TempPathFile, targetPathUrl, err=>{
       res.json({
         uploaded: true,
-        url: `http://localhost:${process.env.PORT}/blog/${TempFile.originalFilename}`
+        url: `http://localhost:${process.env.PORT}/blog/${fileName}`
       })
       if(err) return console.log(err)
     })
   }
+})
+
+// http://localhost:3001/newpost/:member_id // PostEditor
+router.post('/newpost/:member_id', async(req, res) => {
+  const { memberId, title, tag, content } = req.body
+  const post = req.body
+  // console.log(post)
+
+  const postId = 'p' + uuid.v4()
+
+  const sql = `
+  INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(), ?, ?, ?)
+  `
+  // const sql2 = `
+  // BEGIN;
+  // INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(), ?, ?, ?);
+
+  // SET @last_post_id = LAST_INSERT_ID();
+
+  // INSERT INTO post_imgs(img_id, img_index, img_url, post_id) VALUES ('[value-1]','1','[value-3]', @last_post_id);
+
+  // COMMIT;
+  // `
+
+  const [rows] = await db.query(sql, [postId, post.memberId, post.title, post.content], (err, result) => {
+    if(err) throw err
+    res.json(result)
+  })
 })
 
 // http://localhost:3001/blog/:member_id // UserBlog

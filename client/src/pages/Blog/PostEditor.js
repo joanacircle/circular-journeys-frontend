@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 import './PostEditor.scss'
 
 const PostEditor = () => {
   const { memberId } = useParams()
-  const [form, setForm] = useState({ title: '', tag: '', content: '' })
+  const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tag: '', content: '' })
   const handleChange = (e) => {
     // const name = e.target.name
     // const value = e.target.value
@@ -15,6 +16,12 @@ const PostEditor = () => {
 
     setForm({ ...form, [name]: value })
 
+  }
+  function handleSubmit(e) {
+    e.preventDefault()
+    axios.post(`${process.env.REACT_APP_DEV_URL}/blog/newpost/${memberId}`, form)
+    .then(r => console.log(r))
+    .catch(err => console.log(err))
   }
   console.log(form)
 
@@ -24,10 +31,7 @@ const PostEditor = () => {
       <div className="edit-wrapper">
         <h2>新增文章</h2>
         <form className="edit-form-group"
-          onSubmit={(e) => {
-                e.preventDefault()
-                console.log(form)
-              }}>
+          onSubmit={handleSubmit}>
           <div className="form-item">
             <label htmlFor="title">文章標題</label>
             <input
@@ -58,7 +62,7 @@ const PostEditor = () => {
               onChange={ (event, editor) => {
                 const data = editor.getData()
                 setForm({ ...form, content: [data] })
-                console.log({ event, editor, data })
+                // console.log({ event, editor, data })
                 // console.log(form)
               } }
               // onBlur={ (event, editor) => {
@@ -70,7 +74,7 @@ const PostEditor = () => {
               config={
                 {
                   ckfinder: {
-                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/newpost/${memberId}`
+                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
                   }
                   // toolbar: ['imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo']
                 }
@@ -82,7 +86,7 @@ const PostEditor = () => {
             <input
             type="submit"
             name='submit'
-            value={'完成'}
+            value='完成'
             className='submit-btn'/>
           </div>
         </form>

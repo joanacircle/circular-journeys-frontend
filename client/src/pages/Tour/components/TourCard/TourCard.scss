@@ -49,7 +49,7 @@
 .TourCard:hover .TourCardImg{
     background: linear-gradient(135deg, #f403d1, #64b5f6);
     background: linear-gradient(135deg, #24ff72, #2196f3);
-    filter: blur(8px);
+    filter: blur(0.5px);
     // transform: translateY(30px) scale(0.9);
 }
 .TourCard:hover .TourCardText{

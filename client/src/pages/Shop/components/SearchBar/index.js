@@ -11,13 +11,13 @@ const SearchBar = (props) => {
         <img src={Banner} className="banner-img" alt="banner" />
         <div className="input-group">
           <input type="search"
-            className="form-control"
+            className="shop-form-control"
             placeholder="找商品"
             value={searchWord}
             onChange={(e) => setSearchWord(e.target.value)}
           />
-          <button type="button" className="btn">
-            <BiSearch className='bi-search' />
+          <button type="button" className="shop-search-button">
+            <BiSearch className='shop-bi-search' />
           </button>
         </div>
       </div>

@@ -6,10 +6,8 @@ import FilterBar from './components/FilterBar/'
 import ProductList from './components/ProductList/'
 import SearchBar from './components/SearchBar/'
 import Placeholder from 'components/Placeholder/Placeholder'
-
 import SortBar from './components/SortBar/'
-// data
-// import { data } from './data/'
+
 
 const Shop = () => {
   const [products, setProducts] = useState([])
@@ -128,7 +126,7 @@ const Shop = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="shop-container">
 
         <div className='search-bar'>
           <SearchBar
@@ -137,7 +135,7 @@ const Shop = () => {
           />
         </div>
 
-        <div className="col-md-12">
+        <div className="col-md-12 shop-main-content">
           <div className="row">
 
             <div className="col-md-3">

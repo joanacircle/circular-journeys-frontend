@@ -2,17 +2,16 @@
 
 
 .banner-container {
-  margin: 30px 60px;
+
   position: relative;
-  height: 120px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+  height: 260px;
+  width: 100vw;
+  margin-bottom: 30px;
 
   .banner-img {
-    width: 100%;
+    width: 100vw;
     height: 100%;
-    object-fit: cover;
+    object-fit:cover;
   }
 
     .input-group {
@@ -22,15 +21,20 @@
       top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
-      border-radius: $br2;
+      border-radius: var(--br2);
       overflow: hidden;
       background: white;
+      padding: 13px;
+      display: flex;
+      justify-content: space-between;
       
   
-      .form-control {
-        
-        border-radius: $br2;
+      .shop-form-control {
+        width: 90%;
+        border-radius: var(--br2);
         border: none;
+        font-size: large;
+        text-indent: 10px;
       
         &:focus {
           outline: none;
@@ -38,13 +42,15 @@
         }
       }
 
-      button {
-        border-left: none;
-        background: transparent;
-        border-radius: $br2;
+      .shop-search-button {
+                width: auto;
+                  height: auto;
+                  color: var(--orange);
+                  border-radius: var(--br2);
 
-        .bi-search {
-            color: $orange;
+        .shop-bi-search {
+                      display: block;
+                        margin: 0 auto;
           }
       }
     }

@@ -19,8 +19,8 @@ const PriceRangeSlider = (props) => {
           arialabel="price range"
           aria-labelledby="range-slider"
           min={0}
-          max={10000}
-          step={500}
+          max={5000}
+          step={100}
           value={priceRange}
           onChange={handleChange}
           valueLabelDisplay="auto"

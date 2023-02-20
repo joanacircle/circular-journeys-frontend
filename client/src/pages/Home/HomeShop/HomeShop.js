@@ -15,7 +15,7 @@ const HomeShop = () => {
 
       <div className="images-container">
         <div>
-          <h3>在我們商城打開最佳冒險旅程!
+          <h3 className='image-banner-text'>在我們商城打開最佳冒險旅程!
           </h3>
         </div>
         <div className="bottom-row">

@@ -16,7 +16,7 @@ const Card2 = (props) => {
         {!tag
         ? <li>Loading...</li>
         : Object.entries(tag).slice(0, 2).map(([key, value]) => (
-          <Link to={`/blog/tag/${key}`} key={key}>
+          <Link to={`/blog/tag/${key}`} key={'k-' + key}>
             <li># {value}</li>
           </Link>
         ))

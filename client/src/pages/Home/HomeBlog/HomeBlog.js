@@ -58,12 +58,12 @@ const HomeBlog = () => {
         <h2>熱門文章</h2>
         <div className='card-container'>
           <BsFillArrowLeftCircleFill className='arrow-left' />
-          {console.log(post.popular)}
+          {/* {console.log(post.popular)} */}
           {post.popular.slice(0, 4).map((v, i) => {
             return (
               <>
                 <Card
-                  key={v.post_id}
+                  key={'c' + v.post_id}
                   postId={v.post_id}
                   imgSrc={imgSrc[i]}
                   imgAlt={imgAlt[i]}
@@ -84,7 +84,7 @@ const HomeBlog = () => {
             return (
               <>
                 <Card2
-                  key={v.post_id}
+                  key={'c2' + v.post_id}
                   tags={v.tag}
                   postId={v.post_id}
                   imgSrc={imgSrc[i]}

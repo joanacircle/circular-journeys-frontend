@@ -1,0 +1,28 @@
+.edit-container{
+
+  .edit-wrapper{
+    // 
+  }
+
+  .edit-form-group{
+      margin-top: 30px;
+
+    .form-item{
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+      
+      label{
+        // 
+      }
+
+      input{
+        border: 1px solid navy;
+      }
+
+      textarea{
+        border: 1px solid navy;
+      }
+    }
+  }
+}

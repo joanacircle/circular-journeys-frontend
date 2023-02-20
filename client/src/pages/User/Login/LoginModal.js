@@ -7,10 +7,13 @@ import { IoCloseSharp } from 'react-icons/io5'
 import { FcGoogle } from 'react-icons/fc'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
 import { useAlert } from 'hooks/useAlert'
+
+import firebase from '../../../components/Firebase/firebase'
+import 'firebase/compat/auth'
 import axios from 'axios'
 import md5 from 'md5'
 
-const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
+const LoginModal = ({ handleToggleLoginModal }) => {
 
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
@@ -18,9 +21,7 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
   const { alert, setAlert } = useAlert()
   const [inputChange, setInputChange] = useState({})
 
-  // animation
-
-
+  // handle input change
   const handelInputChange = (event) => {
     setInputChange({
       ...inputChange,
@@ -34,7 +35,7 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
     const { userEmail, userPassword } = inputChange
     const encryption = md5(userPassword)
     if (userEmail === '' || userPassword === '') return
-    const response = await axios.post('http://localhost:3001/user/login',
+    const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/login`,
       {
         userEmail,
         userPassword: encryption
@@ -52,6 +53,44 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
     }
   }
 
+  // Login witch google acc
+  const SignInWitchGoogle = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    const url = `${process.env.REACT_APP_DEV_URL}/user/google/signup`
+    try {
+      const result = await firebase.auth().signInWithPopup(provider)
+      const userProfile = result.additionalUserInfo.profile
+      const { name, email, picture, id } = userProfile
+      if (result.additionalUserInfo.isNewUser) {
+        const signupState = await axios.post(url, {
+          userEmail: email,
+          userName: name,
+          userPicture: picture,
+          userId: id
+        })
+        setTimeout(() => {
+          handleToggleLoginModal()
+          // save token to localStorage
+          localStorage.setItem('token', signupState.data.token)
+          window.location = '/'
+        }, 300)
+      } else {
+        const loginUrl = `${process.env.REACT_APP_DEV_URL}/user/google/login`
+        const response = await axios.post(loginUrl, { id })
+        setTimeout(() => {
+          handleToggleLoginModal()
+          // save token to localStorage
+          localStorage.setItem('token', response.data.token)
+          window.location = '/'
+        }, 300)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  // handle modal change
   const handleCloseLoginModal = (event) => {
     if (event.target === event.currentTarget) {
       handleToggleLoginModal()
@@ -192,6 +231,7 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
                               <button
                                 className='other-login-btn btn-google'
                                 type="button"
+                                onClick={SignInWitchGoogle}
                               >
                                 <FcGoogle size={25} />
                               </button>

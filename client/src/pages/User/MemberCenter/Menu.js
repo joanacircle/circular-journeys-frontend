@@ -5,6 +5,7 @@ import axios from 'axios'
 
 // components
 import CustomFileInput from 'components/Camera/Camera'
+import { userInfo } from 'components/userInfo/UserInfo'
 
 // icon
 import { AiOutlineLike } from 'react-icons/ai'
@@ -65,18 +66,9 @@ const MenuOptions = {
 
 const Menu = () => {
   const [changePage, setChangePage] = useState(MenuOptions)
-  const [userData, setUserData] = useState()
   const [localData, setLocalData] = useState(localStorage.getItem('hoverLabel'))
   const [picture, setPicture] = useState({})
-
-  // TODO:
-  const handleUserInfo = async () => {
-    const token = localStorage.getItem('token')
-    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
-    if (response.status === 200) {
-      setUserData(response.data)
-    }
-  }
+  const { userData } = userInfo()
 
   // handle Menu state
   const handleMenuState = () => {
@@ -101,7 +93,6 @@ const Menu = () => {
     localStorage.setItem('hoverLabel', event.target.id)
   }
   useEffect(() => {
-    handleUserInfo()
     handleMenuState()
   }, [])
 
@@ -115,7 +106,7 @@ const Menu = () => {
                 <CustomFileInput picture={picture} setPicture={setPicture} />
               </div>
             </div>
-            <h4 className="user-name">{userData && userData.first_name + ' ' + userData.last_name}</h4>
+            <h4 className="user-name">{userData && userData.user_name}</h4>
             <div className="user-information user-point">{userData && '$' + ' ' + userData.points}</div>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>

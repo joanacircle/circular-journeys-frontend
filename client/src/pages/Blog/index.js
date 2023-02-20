@@ -12,7 +12,8 @@ import B001 from 'images/Blog/B001.jpg'
 
 const Blog = () => {
   const [post, setPost] = useState([])
-  const [url, setUrl] = useState(`http://localhost:3001/blog`)
+  // const [url, setUrl] = useState(`http://localhost:3001/blog`)
+  const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/blog`)
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)

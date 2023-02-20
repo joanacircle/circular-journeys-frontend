@@ -27,7 +27,7 @@ const CustomFileInput = ({ picture, setPicture }) => {
     const token = localStorage.getItem('token')
     const imageData = new FormData()
     imageData.append('file', picture)
-    const req = await axios.post('http://localhost:3001/user/upload', { imageData, token })
+    const req = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/upload`, { imageData, token })
     const res = req.data
     console.log(res)
   }

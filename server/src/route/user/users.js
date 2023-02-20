@@ -9,7 +9,6 @@ const taiwan = require('../../data/taiwan-data')
 //library
 const shortid = require('shortid')
 const uuid = require('uuid')
-const { ImgurClient } = require('imgur');
 
 
 //select
@@ -78,10 +77,10 @@ router.post('/login', async (req, res, next) => {
 //user signup
 //http://localhost:3001/user/signup
 router.post('/signup', async (req, res, next) => {
-  const { userFirstName, userLastName, userEmail, userPassword } = req.body
+  const { userFirstName, userLastName, userName, userEmail, userPassword } = req.body
   const token = uuid.v4()
   const id = shortid.generate()
-  const sql = `INSERT INTO users_information (member_id, first_name, last_name, email, password, token) VALUES (?,?,?,?,?,?)`
+  const sql = `INSERT INTO users_information (member_id, first_name, last_name, user_name, email, password, token) VALUES (?,?,?,?,?,?,?)`
   const checkSql = `SELECT * FROM users_information WHERE email = ?`
   try {
     const check = await db.query(checkSql, [userEmail])
@@ -91,7 +90,7 @@ router.post('/signup', async (req, res, next) => {
         message: `此信箱已註冊過了！`
       })
     } else {
-      const create = await db.query(sql, [id, userFirstName, userLastName, userEmail, userPassword, token])
+      const create = await db.query(sql, [id, userFirstName, userLastName, userName, userEmail, userPassword, token])
       if (create) {
         res.json({
           state: true,
@@ -177,28 +176,71 @@ router.post('/changepassword', async (req, res, next) => {
   }
 })
 
+// //user upload picture
+// //http://localhost:3001/user/upload
+// router.post('/upload', async (req, res, next) => {
+//   const uploadPicture = `UPDATE users_information SET picture = ? WHERE token = ?`
+//   try {
+//     const { picture } = req.file
+//     // const { token } = req.body
+//     // const uploadedImage = await client.upload(imageFile);
+//     // res.send(uploadedImage);
+//     console.log(picture);
+//   } catch (err) {
+//     next(err)
+//     res.status(500).send('Error uploading image');
+//   }
+// });
 
-//imgur setting
-const client = new ImgurClient({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-});
-
-//user upload picture
-//http://localhost:3001/user/upload
-router.post('/upload', async (req, res, next) => {
-  const uploadPicture = `UPDATE users_information SET picture = ? WHERE token = ?`
+//google acc
+//http://localhost:3001/user/google/signup
+router.post('/google/signup', async (req, res, next) => {
+  const { userEmail, userName, userPicture, userId } = req.body
+  const token = uuid.v4()
+  const checkSql = `SELECT * FROM users_information WHERE member_id = ?`
+  const sql = `INSERT INTO users_information (member_id, user_name, email, picture, token) VALUES (?,?,?,?,?)`
   try {
-    const { picture } = req.file
-    // const { token } = req.body
-    // const uploadedImage = await client.upload(imageFile);
-    // res.send(uploadedImage);
-    console.log(picture);
+    const check = await db.query(checkSql, [userId])
+    if (check[0].length > 0) {
+      return
+    } else {
+      const createUser = await db.query(sql, [userId, userName, userEmail, userPicture, token])
+      if (createUser) {
+        res.json({
+          state: true,
+          token
+        })
+      } else {
+        res.json({
+          state: false,
+        })
+      }
+    }
   } catch (err) {
     next(err)
-    res.status(500).send('Error uploading image');
   }
-});
+})
+
+//http:localhost:3001/user/google/login
+router.post('/google/login', async (req, res, next) => {
+  const token = uuid.v4()
+  const { id } = req.body
+  const sql = `SELECT * FROM users_information WHERE member_id = ?`
+  const updateSql = `UPDATE users_information SET token = ? WHERE member_id = ?`
+  try {
+    const result = await db.query(sql, [id])
+    const data = result[0][0]
+    if (data) {
+      await db.query(updateSql, [token, id])
+      res.json({
+        state: true,
+        token: token
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 
 module.exports = router

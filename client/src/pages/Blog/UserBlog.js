@@ -13,7 +13,7 @@ const UserBlog = () => {
   const [post, setPost] = useState([{}])
   const [id, setId] = useState([])
   const { memberId } = useParams()
-  const [url, setUrl] = useState(`http://localhost:3001/blog/${memberId}`)
+  const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
@@ -25,7 +25,7 @@ const UserBlog = () => {
   // 驗證 parameter的 memberId是否存在於資料庫
   useEffect(() => { fetcher() }, [])
   function fetcher() {
-    fetch(`http://localhost:3001/blog/api`)
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
     .then(r => r.json())
     .then((data) => {
       const mId = data.member[0].member_id

@@ -9,7 +9,7 @@ const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
   }, [])
 
   const handleGetOptionsApi = async () => {
-    const response = await axios.get('http://localhost:3001/user/select')
+    const response = await axios.get(`${process.env.REACT_APP_DEV_URL}/user/select`)
     const data = response.data
     setOptions(data)
   }

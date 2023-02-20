@@ -39,7 +39,7 @@ const SignupModal = ({ showPassword, handleShowPasswordButton }) => {
   }
   return (
     <div className="signup-place">
-      <h1>Signup</h1>
+      <h1>註冊</h1>
       <form className='form-place' onSubmit={handleSignup}>
         <div className='input-name-place'>
           <input

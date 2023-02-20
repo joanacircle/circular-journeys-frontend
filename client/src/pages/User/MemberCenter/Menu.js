@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom'
 import './Menu.scss'
 import axios from 'axios'
 
+// components
+import CustomFileInput from 'components/Camera/Camera'
+
 // icon
-import { AiFillCamera, AiOutlineLike } from 'react-icons/ai'
+import { AiOutlineLike } from 'react-icons/ai'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { TfiAnnouncement } from 'react-icons/tfi'
@@ -64,7 +67,7 @@ const Menu = () => {
   const [changePage, setChangePage] = useState(MenuOptions)
   const [userData, setUserData] = useState()
   const [localData, setLocalData] = useState(localStorage.getItem('hoverLabel'))
-
+  const [picture, setPicture] = useState({})
 
   // TODO:
   const handleUserInfo = async () => {
@@ -95,8 +98,8 @@ const Menu = () => {
       return { ...item, state: false }
     })
     setChangePage({ ...changePage, info: newInfo })
+    localStorage.setItem('hoverLabel', event.target.id)
   }
-
   useEffect(() => {
     handleUserInfo()
     handleMenuState()
@@ -109,7 +112,7 @@ const Menu = () => {
           <div className="aside-box">
             <div className="user-img">
               <div className="camera-place">
-                <AiFillCamera size={25} />
+                <CustomFileInput picture={picture} setPicture={setPicture} />
               </div>
             </div>
             <h4 className="user-name">{userData && userData.first_name + ' ' + userData.last_name}</h4>

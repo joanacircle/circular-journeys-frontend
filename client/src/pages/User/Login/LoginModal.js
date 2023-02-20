@@ -18,6 +18,9 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
   const { alert, setAlert } = useAlert()
   const [inputChange, setInputChange] = useState({})
 
+  // animation
+
+
   const handelInputChange = (event) => {
     setInputChange({
       ...inputChange,
@@ -38,11 +41,12 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
       }
     )
     if (response.data.state) {
-      handleToggleLoginModal()
-
-      // save token to localStorage
-      localStorage.setItem('token', response.data.token)
-      window.location = '/'
+      setTimeout(() => {
+        handleToggleLoginModal()
+        // save token to localStorage
+        localStorage.setItem('token', response.data.token)
+        window.location = '/'
+      }, 300)
     } else {
       setAlert({ state: true, message: response.data.message })
     }
@@ -77,11 +81,7 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
         onClick={handleCloseLoginModal}
       >
         <div
-          className={
-            loginModal
-              ? 'login-modal-content animate__animated animate__faster animate__bounceIn'
-              : 'login-modal-content animate__animated animate__bounceOut animate__faster'
-          }
+          className='login-modal-content animate__animated animate__faster animate__bounceIn'
         >
           <div className="login-modal-content-background">
             <div className="close-login-button">
@@ -125,7 +125,7 @@ const LoginModal = ({ handleToggleLoginModal, loginModal }) => {
                     )
                     : (
                       <div className="login-place">
-                        <h1>Login</h1>
+                        <h1>登入</h1>
                         <form className='form-place' onSubmit={handleLogin}>
                           <input
                             className='input-box'

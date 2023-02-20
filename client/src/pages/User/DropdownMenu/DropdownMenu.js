@@ -76,10 +76,11 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
 
   // handle logout
   const handleLogoutButton = () => {
-    // alert('已登出')
-    setUserData('')
-    localStorage.removeItem('token')
-    window.location = '/'
+    setTimeout(() => {
+      setUserData('')
+      localStorage.removeItem('token')
+      window.location = '/'
+    }, 300)
   }
 
   // handle change page

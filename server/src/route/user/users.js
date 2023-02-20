@@ -1,10 +1,16 @@
 const express = require('express')
 const db = require('../../model/connect-sql')
-const uuid = require('uuid')
-const shortid = require('shortid')
 const router = express.Router()
-const request = require('request')
+require('dotenv').config()
+
+
+//data
 const taiwan = require('../../data/taiwan-data')
+//library
+const shortid = require('shortid')
+const uuid = require('uuid')
+const { ImgurClient } = require('imgur');
+
 
 //select
 //http://localhost:3001/user/select
@@ -170,6 +176,29 @@ router.post('/changepassword', async (req, res, next) => {
     next(err)
   }
 })
+
+
+//imgur setting
+const client = new ImgurClient({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+});
+
+//user upload picture
+//http://localhost:3001/user/upload
+router.post('/upload', async (req, res, next) => {
+  const uploadPicture = `UPDATE users_information SET picture = ? WHERE token = ?`
+  try {
+    const { picture } = req.file
+    // const { token } = req.body
+    // const uploadedImage = await client.upload(imageFile);
+    // res.send(uploadedImage);
+    console.log(picture);
+  } catch (err) {
+    next(err)
+    res.status(500).send('Error uploading image');
+  }
+});
 
 
 module.exports = router

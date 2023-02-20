@@ -80,7 +80,7 @@ const Forgot = ({ showPassword, handleShowPasswordButton }) => {
 
   return (
     <div className="forgot-place">
-      <h1>Forgot</h1>
+      <h1>忘記密碼</h1>
       <form className='form-place' autoComplete='off' onSubmit={handleForgetPassword}>
         <input
           className='input-box'

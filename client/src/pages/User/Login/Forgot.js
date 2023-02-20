@@ -6,9 +6,9 @@ import axios from 'axios'
 import md5 from 'md5'
 import { useAlert } from 'hooks/useAlert'
 
-const SERVICE_ID = 'service_5e8lybs'
-const TEMPLATE_ID = 'template_2lwe4ki'
-const USER_ID = '-vbZj77MLC0lL8jeQ'
+const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID
+const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID
+const USER_ID = process.env.REACT_APP_EMAILJS_USER_ID
 
 const Forgot = ({ showPassword, handleShowPasswordButton }) => {
   const { alert, setAlert } = useAlert()
@@ -34,7 +34,7 @@ const Forgot = ({ showPassword, handleShowPasswordButton }) => {
     const encryption = md5(userPassword)
     if (inputData.userEmail === '') return ''
     if (!showVerifyInput && !showChangePassword) {
-      const checkUserEmail = await axios.post('http://localhost:3001/user/forget', { userEmail })
+      const checkUserEmail = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/forget`, { userEmail })
       const { state, message, userLastName, key } = checkUserEmail.data
       if (state) {
         setAlert({ state: true, message })
@@ -45,7 +45,7 @@ const Forgot = ({ showPassword, handleShowPasswordButton }) => {
       }
     } else if (showVerifyInput && !showChangePassword) {
       if (inputData.verify === '') return ''
-      const checkKey = await axios.post('http://localhost:3001/user/forget/checkkey', { verify })
+      const checkKey = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/forget/checkkey`, { verify })
       const { state, message } = checkKey.data
       if (state) {
         setAlert({ state: true, message })
@@ -56,7 +56,7 @@ const Forgot = ({ showPassword, handleShowPasswordButton }) => {
       }
     } else if (!showVerifyInput && showChangePassword) {
       if (inputData.userPassword === '') return ''
-      const changeUserPassword = await axios.post('http://localhost:3001/user/changepassword', {
+      const changeUserPassword = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/changepassword`, {
         userEmail,
         userPassword: encryption
       })
@@ -80,7 +80,7 @@ const Forgot = ({ showPassword, handleShowPasswordButton }) => {
 
   return (
     <div className="forgot-place">
-      <h1>Forgot</h1>
+      <h1>忘記密碼</h1>
       <form className='form-place' autoComplete='off' onSubmit={handleForgetPassword}>
         <input
           className='input-box'

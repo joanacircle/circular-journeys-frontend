@@ -1,24 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import './Setting.scss'
-import DynamicSelect from '../../../components/Select/DynamicSelect'
 import dayjs from 'dayjs'
 import axios from 'axios'
 
+// components
+import DynamicSelect from '../../../components/Select/DynamicSelect'
+import { userInfo } from 'components/userInfo/UserInfo'
+
 const SettingPage = () => {
   const [changeInputType, setChangeInputType] = useState('text')
+  const { userData } = userInfo
   const [inputData, setInputData] = useState({})
-  const [userData, setUserData] = useState()
-
-  // TODO:
-  const handleUserInfo = async () => {
-    const token = localStorage.getItem('token')
-    try {
-      const response = await axios.post('http://localhost:3001/user/userinfo', { token })
-      setUserData(response.data)
-    } catch (err) {
-      if (err) throw err
-    }
-  }
+  console.log(inputData)
 
   const handleInputChange = (event) => {
     setInputData({
@@ -26,10 +19,6 @@ const SettingPage = () => {
       [event.target.name]: event.target.value
     })
   }
-
-  useEffect(() => {
-    handleUserInfo()
-  }, [])
 
   return (
     <div className="top-place animate__animated animate__fadeInDown animate__faster">
@@ -44,7 +33,6 @@ const SettingPage = () => {
                 type="text"
                 name='userFirstName'
                 id='userFirstName'
-                value={inputData.userFirstName}
                 onChange={handleInputChange}
                 placeholder='王'
               />

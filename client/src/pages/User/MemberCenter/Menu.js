@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom'
 import './Menu.scss'
 import axios from 'axios'
 
+// components
+import CustomFileInput from 'components/Camera/Camera'
+import { userInfo } from 'components/userInfo/UserInfo'
+
 // icon
-import { AiFillCamera, AiOutlineLike } from 'react-icons/ai'
+import { AiOutlineLike } from 'react-icons/ai'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { TfiAnnouncement } from 'react-icons/tfi'
@@ -62,18 +66,9 @@ const MenuOptions = {
 
 const Menu = () => {
   const [changePage, setChangePage] = useState(MenuOptions)
-  const [userData, setUserData] = useState()
   const [localData, setLocalData] = useState(localStorage.getItem('hoverLabel'))
-
-
-  // TODO:
-  const handleUserInfo = async () => {
-    const token = localStorage.getItem('token')
-    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
-    if (response.status === 200) {
-      setUserData(response.data)
-    }
-  }
+  const [picture, setPicture] = useState({})
+  const { userData } = userInfo()
 
   // handle Menu state
   const handleMenuState = () => {
@@ -95,10 +90,9 @@ const Menu = () => {
       return { ...item, state: false }
     })
     setChangePage({ ...changePage, info: newInfo })
+    localStorage.setItem('hoverLabel', event.target.id)
   }
-
   useEffect(() => {
-    handleUserInfo()
     handleMenuState()
   }, [])
 
@@ -109,10 +103,10 @@ const Menu = () => {
           <div className="aside-box">
             <div className="user-img">
               <div className="camera-place">
-                <AiFillCamera size={25} />
+                <CustomFileInput picture={picture} setPicture={setPicture} />
               </div>
             </div>
-            <h4 className="user-name">{userData && userData.first_name + ' ' + userData.last_name}</h4>
+            <h4 className="user-name">{userData && userData.user_name}</h4>
             <div className="user-information user-point">{userData && '$' + ' ' + userData.points}</div>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>

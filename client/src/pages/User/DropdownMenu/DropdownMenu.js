@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './DropdownMenu.scss'
 import 'animate.css'
+
+// components
+import { userInfo } from 'components/userInfo/UserInfo'
 
 // icon
 import { FaUserAlt } from 'react-icons/fa'
@@ -46,20 +49,10 @@ const DropdownMenuOptions = {
 
 const DropdownMenu = ({ handleToggleLoginModal }) => {
   const [dropdownOptions, setDropdownOptions] = useState(DropdownMenuOptions)
-  const [userData, setUserData] = useState()
-
-  // TODO:
-  const handleUserInfo = async () => {
-    const token = localStorage.getItem('token')
-    const response = await axios.post('http://localhost:3001/user/userinfo', { token })
-    if (response.status === 200) {
-      setUserData(response.data)
-    }
-  }
+  const { userData } = userInfo()
 
   // handleClickOutside
   useEffect(() => {
-    handleUserInfo()
     const handleClickOutside = (event) => {
       if (
         !(event.target.id === 'user-menu') &&
@@ -76,8 +69,6 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
 
   // handle logout
   const handleLogoutButton = () => {
-    // alert('已登出')
-    setUserData('')
     localStorage.removeItem('token')
     window.location = '/'
   }
@@ -95,7 +86,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
           <div className='user-name'>
             <FaUserAlt size={35} />
             <div className='user-info'>
-              <h5>{userData && userData.first_name + ' ' + userData.last_name}</h5>
+              <h5>{userData && userData.user_name}</h5>
               <div className='points'>{userData && '$' + ' ' + userData.points}</div>
             </div>
           </div>

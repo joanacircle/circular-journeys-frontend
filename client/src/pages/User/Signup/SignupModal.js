@@ -24,9 +24,10 @@ const SignupModal = ({ showPassword, handleShowPasswordButton }) => {
     const { userFirstName, userLastName, userEmail, userPassword } = inputData
     const encryption = md5(userPassword)
     if (userFirstName === '' || userLastName === '' || userEmail === '' || userPassword === '') return
-    const response = await axios.post('http://localhost:3001/user/signup', {
+    const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/signup`, {
       userFirstName,
       userLastName,
+      userName: userFirstName + userLastName,
       userEmail,
       userPassword: encryption
     })
@@ -39,7 +40,7 @@ const SignupModal = ({ showPassword, handleShowPasswordButton }) => {
   }
   return (
     <div className="signup-place">
-      <h1>Signup</h1>
+      <h1>註冊</h1>
       <form className='form-place' onSubmit={handleSignup}>
         <div className='input-name-place'>
           <input

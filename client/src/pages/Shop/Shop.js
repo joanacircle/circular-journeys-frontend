@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import './Shop.scss'
 
 import FilterBar from './components/FilterBar/'
@@ -10,6 +10,10 @@ import SortBar from './components/SortBar/'
 
 
 const Shop = () => {
+
+  const location = useLocation()
+  const preCate = location.state?.categoryTitle
+
   const [products, setProducts] = useState([])
   // 排序、搜尋後的資料
   const [displayProducts, setDisplayProducts] = useState([])
@@ -31,14 +35,13 @@ const Shop = () => {
     if (isLoading) {
       setTimeout(() => {
         setIsLoading(false)
-      }, 1000)
+      }, 500)
     }
   }, [isLoading])
 
   useEffect(() => {
     setIsLoading(true)
     getData()
-
   }, [])
 
   useEffect(() => {
@@ -127,7 +130,6 @@ const Shop = () => {
   return (
     <>
       <div className="shop-container">
-
         <div className='search-bar'>
           <SearchBar
             searchWord={searchWord}
@@ -145,18 +147,17 @@ const Shop = () => {
                 categoryMenu={categoryMenu}
                 categories={categories}
                 setCategories={setCategories}
+                preCate={preCate}
               />
             </div>
 
             <div className="col-md-9">
 
               <div className="d-flex justify-between">
-                <h5>商品列表</h5>
-
+                <h4>商品列表</h4>
                 <SortBar sortBy={sortBy} setSortBy={setSortBy} />
-
               </div>
-              <hr />
+
               <br />
               {isLoading
                 ? (

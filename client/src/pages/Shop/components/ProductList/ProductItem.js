@@ -11,7 +11,7 @@ const ProductItem = ({ product }) => {
 
       <div className='card-info'>
         <p className='card-title'>{product.title}</p>
-        <p className='card-price'>${product.price}</p>
+        <p className='card-price'>${parseFloat(product.price).toLocaleString('zh-TW')}</p>
       </div>
 
     </div>

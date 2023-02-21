@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PriceRangeSlider from './PriceRangeSlider'
 import CategoryCheckbox from './CategoryCheckbox'
 import './FilterBar.scss'
 
-const FilterBar = (props) => {
-  const {
-    categoryMenu,
-    categories,
-    setCategories,
-    priceRange,
-    setPriceRange
-  } = props
+const FilterBar = ({
+  categoryMenu,
+  categories,
+  setCategories,
+  priceRange,
+  setPriceRange,
+  preCate
+}) => {
 
-  const handleSelected = (e) => {
-    const value = e.target.value
+  const [preValue, setPreValue] = useState(preCate)
 
+  useEffect(() => {
+    handleInitialSelected()
+  }, [])
+
+  const handleInitialSelected = () => {
+    let value = ''
+    if (preValue) {
+      value = preValue
+      setPreValue('')
+    } else {
+      return
+    }
     if (!categories.includes(value)) return setCategories([...categories, value])
 
     if (categories.includes(value)) {
@@ -23,34 +34,52 @@ const FilterBar = (props) => {
     }
   }
 
+  const handleSelected = (e) => {
+
+    const value = e.target.value
+
+    if (!categories.includes(value)) return setCategories([...categories, value])
+    if (categories.includes(value)) {
+      const newCategories = categories.filter((v) => v !== value)
+      setCategories(newCategories)
+    }
+  }
+
   return (
     <>
-      <h5>
-        商品分類
-      </h5>
-
-      {categoryMenu.map((value, i) => (
-        <CategoryCheckbox
-          value={value}
-          key={i}
-          categories={categories}
-          handleSelected={handleSelected}
-        />
-      ))}
-      <button className="btn btn-link btn-sm" onClick={() => setCategories([])}>
-        重新選擇
-      </button>
-
-      <hr />
-      <h4>價格範圍</h4>
-      <div className='priceRange'>
-        <p>最少值$0</p><p>最大值$5000</p>
+      <div className='cate-title'>
+        <h4>
+          商品分類
+        </h4>
+        <button className="cate-clear-button" onClick={() => setCategories([])}>
+          清除選項
+        </button>
       </div>
 
-      <PriceRangeSlider
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-      />
+      <div className='cate-checkbox-component'>
+        {categoryMenu.map((value, i) => (
+          <CategoryCheckbox
+            value={value}
+            key={i}
+            categories={categories}
+            handleSelected={handleSelected}
+            preCate={preCate}
+          />
+        ))}
+      </div>
+
+      <div className='cate-range-component'>
+        <h4>價格範圍</h4>
+        <div className='priceRange'>
+          <p className='cate-range-p'>最少$0</p>
+          <p className='cate-range-p'>最大$5000</p>
+        </div>
+
+        <PriceRangeSlider
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
+        />
+      </div>
     </>
   )
 }

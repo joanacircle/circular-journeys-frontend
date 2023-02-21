@@ -1,11 +1,13 @@
-import React from 'react'
+import './CategoryCheckbox.scss'
 
-const CategoryCheckbox = (props) => {
-  const { value, handleSelected, categories } = props
+const CategoryCheckbox = ({ value, handleSelected, categories, preCate }) => {
+
+
   return (
     <>
-      <div className="checkbox">
-        <label>
+      <div className="checkbox-card">
+        {console.log(preCate)}
+        <label className='checkbox-label'>
           <input
             type="checkbox"
             className="icheck"
@@ -13,7 +15,7 @@ const CategoryCheckbox = (props) => {
             checked={categories.includes(value)}
             onChange={handleSelected}
           />{' '}
-          {value}
+          <h5 className='checkbox-h5'>{value}</h5>
         </label>
       </div>
     </>

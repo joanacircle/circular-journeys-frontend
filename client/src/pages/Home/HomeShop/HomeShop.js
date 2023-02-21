@@ -21,7 +21,10 @@ const HomeShop = () => {
         <div className="bottom-row">
           {categories.map((category, index) => (
             <div key={index} className="image-box">
-              <Link to='/shop'>
+              <Link
+                to='/shop'
+                state={{ categoryTitle: category.title }}
+              >
                 <img
                   src={category.image}
                   alt={category.title} className="responsive-image" />

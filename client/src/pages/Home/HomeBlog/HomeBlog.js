@@ -58,17 +58,16 @@ const HomeBlog = () => {
         <h2>熱門文章</h2>
         <div className='card-container'>
           <BsFillArrowLeftCircleFill className='arrow-left' />
-          {/* {console.log(post.popular)} */}
           {post.popular.slice(0, 4).map((v, i) => {
             return (
               <>
+              {console.log('c' + v.post_id)}
                 <Card
                   key={'c' + v.post_id}
                   postId={v.post_id}
                   imgSrc={imgSrc[i]}
                   imgAlt={imgAlt[i]}
-                  title={v.post_title}
-                />
+                  title={v.post_title}/>
               </>
             )
           })}
@@ -83,6 +82,7 @@ const HomeBlog = () => {
           {post.latest.slice(0, 4).map((v, i) => {
             return (
               <>
+              {console.log('c2' + v.post_id)}
                 <Card2
                   key={'c2' + v.post_id}
                   tags={v.tag}

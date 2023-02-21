@@ -7,7 +7,7 @@ import './PostEditor.scss'
 
 const PostEditor = () => {
   const { memberId } = useParams()
-  const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tags: '', tag1: '', tag2: '', tag3: '', content: '' })
+  const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tags: '', tag1: '', tag2: '', tag3: '', cover: '', content: '' })
   const category = ['美食', '景點', '住宿']
   const [ctag, setCtag] = useState(
     category.map((v, i) => {
@@ -108,32 +108,41 @@ const PostEditor = () => {
           </div>
 
           <div className="form-item">
-            <label htmlFor="content">文章內文</label>
+            <label>文章封面圖</label>
+            <CKEditor
+              editor={ ClassicEditor }
+              data=''
+              onChange={(event, editor) => {
+                  const cover = editor.getData()
+                  setForm({ ...form, cover: [cover] })
+                }
+              }
+              config={
+                {
+                  ckfinder: {
+                    // TODO: connect database
+                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
+                  },
+                  toolbar: ['imageUpload']
+                }
+              }
+            />
+          </div>
+
+          <div className="form-item">
+            <label>文章內文</label>
             <CKEditor
               editor={ ClassicEditor }
               data='<p>文章內文</p>'
-              // onReady={ editor => {
-              //     // You can store the "editor" and use when it is needed.
-              //     console.log('Editor is ready to use!', editor)
-              // } }
               onChange={ (event, editor) => {
                 const data = editor.getData()
                 setForm({ ...form, content: [data] })
-                // console.log({ event, editor, data })
-                // console.log(form)
               } }
-              // onBlur={ (event, editor) => {
-              //     console.log('Blur.', editor)
-              // } }
-              // onFocus={ (event, editor) => {
-              //     console.log('Focus.', editor)
-              // } }
               config={
                 {
                   ckfinder: {
                     uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
                   }
-                  // toolbar: ['imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo']
                 }
               }
             />

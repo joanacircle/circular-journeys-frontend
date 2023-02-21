@@ -89,47 +89,41 @@ router.post('/newpost/:member_id', async(req, res) => {
   const { memberId, title, tags, tag1, tag2, tag3, content } = req.body
   const postId = 'p' + uuid.v4()
   const totalTag = [tag1, tag2, tag3]
-  if(title.length>0){
-    title.map((v, i) => {totalTag.push(v)})
+  if(tags.length>0){
+    tags.map((v, i) => {totalTag.push(v)})
   }
   
-  const sql = `
+  const sqlInsertPost = `
   INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(),?,?,?)`
-  const sql2=`
+  const sqlSelectTag=`
   SELECT tag_id FROM post_tags WHERE tag = ? LIMIT 1`
-  const sql3 = `
+  const sqlInsertTag = `
   INSERT INTO post_tags(tag_id, tag, post_id) VALUES (?,?,?)`
 
 
   try{
-    const [rows] = await db.query(sql, [postId, memberId, title, content])
+    const [rows] = await db.query(sqlInsertPost, [postId, memberId, title, content])
     
-    for(const tag of [tag1, tag2, tag3]){
-      const [rows2] = await db.query(sql2, [tag])
-      if(rows2.length > 0){
+    for(const tag of totalTag){
+      const [rows2] = await db.query(sqlSelectTag, [tag]) // 確認有無一樣的 tag
+      if(rows2.length > 0){ // 如果有一樣的 tag，取出其 tag_id，再新增
         const existingTagId = rows2[0].tag_id
-        const [rows3] = await db.query(sql3, [existingTagId, tag, postId])
+        const [rows3] = await db.query(sqlInsertTag, [existingTagId, tag, postId])
       }else{
         const tagId = 't' + uuid.v4()
-        const [rows3] = await db.query(sql3, [tagId, tag, postId])
+        const [rows3] = await db.query(sqlInsertTag, [tagId, tag, postId])
       }
     }
-
-    res.status(200).send('Post created successfully')
+    res.send('success')
   }
   catch(err){
-    res.status(500).send(err)
+    res.send(err)
   }
-  
 })
 
 // http://localhost:3001/blog/:member_id // UserBlog
 router.get('/:member_id', async (req, res) => {
   const member_id = req.params.member_id;
-
-  // SELECT GROUP_CONCAT(tag SEPARATOR ',')
-  // SELECT JSON_ARRAYAGG(tag) 
-  // SELECT JSON_OBJECTAGG( key_column, value_column )
 
   const sql =`
   SELECT 

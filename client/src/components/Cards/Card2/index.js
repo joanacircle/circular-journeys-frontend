@@ -1,10 +1,13 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { AiOutlineHeart } from 'react-icons/ai'
+import shortid from 'shortid'
 import './Card2.scss'
 
 const Card2 = (props) => {
   const tag = props.tags // 傳入 object
+  const keyOne = shortid.generate()
+  const keyTwo = shortid.generate()
+  const mapKey = [keyOne, keyTwo]
   return (
     <>
     <div className="card2">
@@ -16,10 +19,10 @@ const Card2 = (props) => {
         {!tag
         ? <li>Loading...</li>
         : Object.entries(tag).slice(0, 2).map(([key, value]) => (
-          <Link to={`/blog/tag/${key}`} key={'k-' + key}>
-            <li># {value}</li>
-          </Link>
-        ))
+            <Link to={`/blog/tag/${key}`} key={key}>
+              <li># {value}</li>
+            </Link>
+          ))
         }
         </ul>
           <h5 className='card-title'>

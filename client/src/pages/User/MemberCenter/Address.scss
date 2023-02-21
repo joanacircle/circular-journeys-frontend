@@ -1,0 +1,18 @@
+@import "../../../index.scss";
+@import "../styles/styles.scss";
+
+.table-place {
+  @include flex(center, column);
+  .icon-place {
+    @include flex(center,'');
+    cursor: pointer;
+  }
+  table {
+    width: 100%;
+    text-align: center;
+    td {
+      padding: 10px;
+      margin: 5px;
+    }
+  }
+}

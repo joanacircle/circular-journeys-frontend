@@ -11,26 +11,20 @@ import { userInfo } from 'components/userInfo/UserInfo'
 import { AiOutlineLike } from 'react-icons/ai'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
-import { TfiAnnouncement } from 'react-icons/tfi'
 import { BsCreditCard } from 'react-icons/bs'
 import { CgNotes } from 'react-icons/cg'
+import { FaRegAddressBook } from 'react-icons/fa'
 
 // page
 import SettingPage from './Setting'
 import Card from './Card'
-import Announce from './Announce'
 import OrderPage from './Order'
 import ShopHistoryPage from './ShopHistory'
 import LikeHistoryPage from './LikeHistory'
+import Address from './Address'
 
 const MenuOptions = {
   info: [
-    {
-      state: false,
-      label: '最新消息',
-      icon: <TfiAnnouncement />,
-      element: <Announce />
-    },
     {
       state: false,
       label: '我的收藏',
@@ -51,10 +45,16 @@ const MenuOptions = {
     },
     {
       state: false,
-      label: '付款設定',
-      icon: <BsCreditCard />,
-      element: <Card />
+      label: '通訊地址',
+      icon: <FaRegAddressBook />,
+      element: <Address />
     },
+    // {
+    //   state: false,
+    //   label: '付款設定',
+    //   icon: <BsCreditCard />,
+    //   element: <Card />
+    // },
     {
       state: false,
       label: '帳號設定',
@@ -107,7 +107,6 @@ const Menu = () => {
               </div>
             </div>
             <h4 className="user-name">{userData && userData.user_name}</h4>
-            <div className="user-information user-point">{userData && '$' + ' ' + userData.points}</div>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>
             {

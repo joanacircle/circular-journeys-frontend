@@ -8,22 +8,17 @@ import 'animate.css'
 import { userInfo } from 'components/userInfo/UserInfo'
 
 // icon
-import { FaUserAlt } from 'react-icons/fa'
+import { FaUserAlt, FaRegAddressBook } from 'react-icons/fa'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { BsPersonBadge, BsCreditCard } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
 import { AiOutlineLike } from 'react-icons/ai'
-import { TfiAnnouncement } from 'react-icons/tfi'
 import { CgNotes } from 'react-icons/cg'
 
 
 const DropdownMenuOptions = {
   info: [
-    {
-      label: '最新消息',
-      icon: <TfiAnnouncement size={20} />
-    },
     {
       label: '我的收藏',
       icon: <AiOutlineLike size={20} />
@@ -36,9 +31,13 @@ const DropdownMenuOptions = {
       label: '消費紀錄',
       icon: <HiOutlineShoppingCart size={20} />
     },
+    // {
+    //   label: '付款設定',
+    //   icon: <BsCreditCard size={20} />
+    // },
     {
-      label: '付款設定',
-      icon: <BsCreditCard size={20} />
+      label: '通訊地址',
+      icon: <FaRegAddressBook size={20} />
     },
     {
       label: '帳號設定',
@@ -87,7 +86,6 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
             <FaUserAlt size={35} />
             <div className='user-info'>
               <h5>{userData && userData.user_name}</h5>
-              <div className='points'>{userData && '$' + ' ' + userData.points}</div>
             </div>
           </div>
         </Link>

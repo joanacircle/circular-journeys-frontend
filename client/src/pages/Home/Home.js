@@ -5,10 +5,10 @@ import { userInfo } from 'components/userInfo/UserInfo'
 
 const Home = () => {
   const { userData } = userInfo()
-  console.log(userData)
+  // console.log(userData)
   // user is login?
   const { isLogin } = useIsLoggedIn()
-  console.log(isLogin)
+  // console.log(isLogin)
   return (
     <div>
       <HomeBlog />

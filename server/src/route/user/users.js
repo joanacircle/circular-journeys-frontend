@@ -176,21 +176,62 @@ router.post('/changepassword', async (req, res, next) => {
   }
 })
 
-// //user upload picture
-// //http://localhost:3001/user/upload
-// router.post('/upload', async (req, res, next) => {
-//   const uploadPicture = `UPDATE users_information SET picture = ? WHERE token = ?`
-//   try {
-//     const { picture } = req.file
-//     // const { token } = req.body
-//     // const uploadedImage = await client.upload(imageFile);
-//     // res.send(uploadedImage);
-//     console.log(picture);
-//   } catch (err) {
-//     next(err)
-//     res.status(500).send('Error uploading image');
-//   }
-// });
+//user check address list
+//http://localhost:3001/user/address/list
+router.post('/address/list', async (req, res, next) => {
+  const { member_id } = req.body
+  const showList = `SELECT * FROM user_address WHERE member_id = ?`
+  try {
+    const show = await db.query(showList, [member_id])
+    const data = show[0]
+    res.json({
+      data
+    })
+  } catch (err) {
+    next(err)
+  }
+})
+
+//user change address
+//http://localhost:3001/user/address
+router.post('/address', async (req, res, next) => {
+  const { member_id, userAddress, userPostalCode, nation, city, districts } = req.body
+  const createAddress = `INSERT INTO user_address (member_id, address, postal_code, nation, city, districts) VALUES(?,?,?,?,?,?)`
+  const showList = `SELECT * FROM user_address WHERE member_id = ?`
+  try {
+    const check = await db.query(showList, [member_id])
+    if (check[0].length < 2) {
+      const result = await db.query(createAddress,
+        [
+          member_id, userAddress, userPostalCode, nation, city, districts
+        ]
+      )
+      if (result) {
+        const show = await db.query(showList, [member_id])
+        const data = show[0]
+        res.json({
+          state: true,
+          message: `新增地址成功！`,
+          data: data
+        })
+      } else {
+        res.json({
+          state: false
+        })
+      }
+    } else {
+      const show = await db.query(showList, [member_id])
+      const data = show[0]
+      res.json({
+        state: false,
+        message: `通訊地址最多三組！已達上限`,
+        data
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 //google acc
 //http://localhost:3001/user/google/signup

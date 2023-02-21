@@ -21,7 +21,7 @@ const Shop = () => {
   const [categories, setCategories] = useState([])
   const categoryMenu = ['戶外登山', '背包收納', '行動配備', '旅行配件']
 
-  const [priceRange, setPriceRange] = useState([0, 10000])
+  const [priceRange, setPriceRange] = useState([0, 5000])
 
 
   // 載入spinner
@@ -93,7 +93,7 @@ const Shop = () => {
 
     if (searchWord.length) {
       newProducts = products.filter((product) => {
-        return product.name.toLowerCase().includes(searchWord.toLowerCase())
+        return product.title.toLowerCase().includes(searchWord.toLowerCase())
       })
     }
     return newProducts

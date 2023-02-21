@@ -3,8 +3,8 @@ import './SearchBar.scss'
 import { BiSearch } from 'react-icons/bi'
 import Banner from 'images/shop/products/shop-banner.jpg'
 
-const SearchBar = (props) => {
-  const { searchWord, setSearchWord } = props
+const SearchBar = ({ searchWord, setSearchWord }) => {
+
   return (
     <>
       <div className='banner-container'>

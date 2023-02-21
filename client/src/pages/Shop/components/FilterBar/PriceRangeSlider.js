@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import Slider from '@mui/material/Slider'
 import { BiBorderAll } from 'react-icons/bi'
 
-const PriceRangeSlider = (props) => {
-
-  const { priceRange, setPriceRange } = props
+const PriceRangeSlider = ({ priceRange, setPriceRange }) => {
 
   const handleChange = (event, newValue) => {
     setPriceRange(newValue)

@@ -21,9 +21,9 @@ const HomeBlog = () => {
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
-    .then(r => r.json())
-    .then((data) => { setPost(data) })
-    .catch(error => console.log(error))
+      .then(r => r.json())
+      .then((data) => { setPost(data) })
+      .catch(error => console.log(error))
   }
 
   // Card props:
@@ -38,66 +38,66 @@ const HomeBlog = () => {
 
   return (
     <>
-    <div className='home-banner section'>
-      {/* alt 下關鍵字 */}
-      <img className='home-banner-img' src={Banner} alt="Banner"></img>
-      <div className='title-section'>
-        <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
-        <form className='home-search'>
-          <input className='home-input' placeholder="Search">
-          </input>
-          <button className='home-button' type="submit">
-            <BiSearch className='home-search-icon'/>
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div className='blog-section'>
-      <div className='post-section'>
-        <h2>熱門文章</h2>
-        <div className='card-container'>
-          <BsFillArrowLeftCircleFill className='arrow-left' />
-          {console.log(post.popular)}
-          {post.popular.slice(0, 4).map((v, i) => {
-            return (
-              <>
-                <Card
-                  key={v.post_id}
-                  postId={v.post_id}
-                  imgSrc={imgSrc[i]}
-                  imgAlt={imgAlt[i]}
-                  title={v.post_title}
-                />
-              </>
-            )
-          })}
-          <BsFillArrowRightCircleFill className='arrow-right'/>
+      <div className='home-banner section'>
+        {/* alt 下關鍵字 */}
+        <img className='home-banner-img' src={Banner} alt="Banner"></img>
+        <div className='title-section'>
+          <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
+          <form className='home-search'>
+            <input className='home-input' placeholder="Search">
+            </input>
+            <button className='home-button' type="submit">
+              <BiSearch className='home-search-icon' />
+            </button>
+          </form>
         </div>
       </div>
 
-      <div className='post-section'>
-        <h2>最新文章</h2>
-        <div className='card-container'>
-          <BsFillArrowLeftCircleFill className='arrow-left' />
-          {post.latest.slice(0, 4).map((v, i) => {
-            return (
-              <>
-                <Card2
-                  key={v.post_id}
-                  tags={v.tag}
-                  postId={v.post_id}
-                  imgSrc={imgSrc[i]}
-                  imgAlt={imgAlt[i]}
-                  title={v.post_title}
-                  likes={v.total_likes}/>
-              </>
-            )
-          })}
-          <BsFillArrowRightCircleFill className='arrow-right'/>
+      <div className='blog-section'>
+        <div className='post-section'>
+          <h2>熱門文章</h2>
+          <div className='card-container'>
+            <BsFillArrowLeftCircleFill className='arrow-left' />
+            {console.log(post.popular)}
+            {post.popular.slice(0, 4).map((v, i) => {
+              return (
+                <>
+                  <Card
+                    key={v.post_id}
+                    postId={v.post_id}
+                    imgSrc={imgSrc[i]}
+                    imgAlt={imgAlt[i]}
+                    title={v.post_title}
+                  />
+                </>
+              )
+            })}
+            <BsFillArrowRightCircleFill className='arrow-right' />
+          </div>
+        </div>
+
+        <div className='post-section'>
+          <h2>最新文章</h2>
+          <div className='card-container'>
+            <BsFillArrowLeftCircleFill className='arrow-left' />
+            {post.latest.slice(0, 4).map((v, i) => {
+              return (
+                <>
+                  <Card2
+                    key={v.post_id}
+                    tags={v.tag}
+                    postId={v.post_id}
+                    imgSrc={imgSrc[i]}
+                    imgAlt={imgAlt[i]}
+                    title={v.post_title}
+                    likes={v.total_likes} />
+                </>
+              )
+            })}
+            <BsFillArrowRightCircleFill className='arrow-right' />
+          </div>
         </div>
       </div>
-    </div>
     </>
   )
 }

@@ -26,6 +26,7 @@
     "padded-blocks": "off",
     "no-multiple-empty-lines": "off",
     "quotes": 0,
-    "no-use-before-define": 0
+    "no-use-before-define": 0,
+    "camelcase": "off"
   }
 }

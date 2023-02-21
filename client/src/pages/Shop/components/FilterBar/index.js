@@ -44,7 +44,7 @@ const FilterBar = (props) => {
       <hr />
       <h4>價格範圍</h4>
       <div className='priceRange'>
-        <p>$0</p><p>$10000</p>
+        <p>最少值$0</p><p>最大值$5000</p>
       </div>
 
       <PriceRangeSlider
@@ -57,13 +57,3 @@ const FilterBar = (props) => {
 
 export default FilterBar
 
-// {
-//   priceRangeMenu.map((value, i) => (
-//     <PriceRangeRadio
-//       key={i}
-//       value={value}
-//       priceRange={priceRange}
-//       setPriceRange={setPriceRange}
-//     />
-//   ))
-// }

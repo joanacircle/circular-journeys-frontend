@@ -27,14 +27,14 @@
           border: 1px solid #eee;
           position: relative;
           .camera-place {
-            text-align: center;
+            @include flex(center,'');
             position: absolute;
+            width: 35px;
+            height: 35px;
             bottom: 0;
             right: 0;
-            padding: 4px;
             background: #fff;
-            border-radius: 50%;
-            cursor: pointer;
+            border-radius: 100%;
           }
         }
         .user-name {

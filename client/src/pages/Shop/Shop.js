@@ -6,10 +6,8 @@ import FilterBar from './components/FilterBar/'
 import ProductList from './components/ProductList/'
 import SearchBar from './components/SearchBar/'
 import Placeholder from 'components/Placeholder/Placeholder'
-
 import SortBar from './components/SortBar/'
-// data
-import { data } from './data/'
+
 
 const Shop = () => {
   const [products, setProducts] = useState([])
@@ -17,7 +15,7 @@ const Shop = () => {
   const [displayProducts, setDisplayProducts] = useState([])
 
   const [categories, setCategories] = useState([])
-  const categoryMenu = ['戶外遠足', '登山露營', '背包收納', '電子類別', '旅行配件']
+  const categoryMenu = ['戶外登山', '背包收納', '行動配備', '旅行配件']
 
   const [priceRange, setPriceRange] = useState([0, 10000])
 
@@ -37,18 +35,10 @@ const Shop = () => {
     }
   }, [isLoading])
 
-  // Spinner
-  // const spinner = (
-  //   <div className="d-flex justify-content-center">
-  //     <div className="spinner-border text-warning" role="status" >
-  //       <span className="sr-only">Loading...</span>
-  //     </div>
-  //   </div>
-  // )
   useEffect(() => {
     setIsLoading(true)
-    setProducts(data)
-    setDisplayProducts(data)
+    getData()
+
   }, [])
 
   useEffect(() => {
@@ -65,7 +55,13 @@ const Shop = () => {
     setDisplayProducts(newProducts)
   }, [products, sortBy, searchWord, categories, priceRange])
 
-
+  // 取得資料
+  const getData = async () => {
+    const response = await fetch('http://localhost:3001/shop')
+    const data = await response.json()
+    setProducts(data)
+    setDisplayProducts(data)
+  }
   // 排序邏輯
   const handleSort = (products, sortBy) => {
     const newProducts = [...products]
@@ -122,8 +118,6 @@ const Shop = () => {
 
   const handlePriceRange = (products, priceRange) => {
     let newProducts = [...products]
-    console.log(products)
-
     newProducts = products.filter((p) => {
       return p.price >= priceRange[0] && p.price <= priceRange[1]
     })
@@ -132,7 +126,7 @@ const Shop = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="shop-container">
 
         <div className='search-bar'>
           <SearchBar
@@ -141,7 +135,7 @@ const Shop = () => {
           />
         </div>
 
-        <div className="col-md-12">
+        <div className="col-md-12 shop-main-content">
           <div className="row">
 
             <div className="col-md-3">
@@ -169,7 +163,7 @@ const Shop = () => {
                   <Placeholder />
                 )
                 : (
-                  <ProductList products={displayProducts} />
+                  <ProductList displayProducts={displayProducts} />
                 )}
             </div>
 
@@ -183,3 +177,13 @@ const Shop = () => {
 }
 
 export default Shop
+
+
+  // Spinner
+  // const spinner = (
+  //   <div className="d-flex justify-content-center">
+  //     <div className="spinner-border text-warning" role="status" >
+  //       <span className="sr-only">Loading...</span>
+  //     </div>
+  //   </div>
+  // )

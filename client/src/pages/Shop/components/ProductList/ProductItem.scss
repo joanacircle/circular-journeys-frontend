@@ -4,24 +4,35 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  // background-color: $gray;
-  // box-shadow: 2px 2px 0px 0px orange ;
-  border-radius: $br1;
+  border-radius: var(--br1);
+  margin: 5px;
 
-  .card-img {
-    border-radius: $br1;
+.card-img {
+    border-radius: var(--br1);
     margin: 5px;
-    width: 150px;
-    height: 150px;
+    position: relative;
     overflow: hidden;
+    padding-bottom: 100%;
+    /* Set the padding to create a square shape */
 
     img {
-        object-fit: cover;
-      }
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      object-fit:contain;
+    }
   }
 
   .card-info {
-      
+    .card-title{
+      display: inline-block;
+        height: 2.6em;
+        white-space: normal;
+    }
     .card-price {
       font-weight: bold;
     }

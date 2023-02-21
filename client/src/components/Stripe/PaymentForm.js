@@ -49,7 +49,7 @@ export default function PaymentForm({ nextStep }) {
       try {
         console.log('PaymentForm:' + paymentMethod)
         const { id } = paymentMethod
-        const response = await axios.post("http://localhost:8080/payment", {
+        const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/payment`, {
           amount: 10000,
           id
         })

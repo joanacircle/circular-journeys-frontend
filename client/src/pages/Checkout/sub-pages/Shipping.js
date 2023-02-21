@@ -18,8 +18,6 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
 
   const handleShippingSelection = (event) => {
-    console.log(selectedIndex)
-    console.log(event.target.value)
     setSelectedIndex(+event.target.value)
   }
 
@@ -42,8 +40,6 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
 
 
                     <div key={index} className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}>
-                      {/* {console.log({ index })}
-                      {console.log({ selectedIndex })} */}
                       <input
 
                         type='radio'

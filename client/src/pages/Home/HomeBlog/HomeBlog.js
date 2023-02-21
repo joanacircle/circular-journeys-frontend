@@ -21,9 +21,9 @@ const HomeBlog = () => {
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
-    .then(r => r.json())
-    .then((data) => { setPost(data) })
-    .catch(error => console.log(error))
+      .then(r => r.json())
+      .then((data) => { setPost(data) })
+      .catch(error => console.log(error))
   }
 
   // Card props:
@@ -38,21 +38,20 @@ const HomeBlog = () => {
 
   return (
     <>
-    <div className='home-banner section'>
-      {/* alt 下關鍵字 */}
-      <img className='home-banner-img' src={Banner} alt="Banner"></img>
-      <div className='title-section'>
-        <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
-        <form className='home-search'>
-          <input className='home-input' placeholder="Search">
-          </input>
-          <button className='home-button' type="submit">
-            <BiSearch className='home-search-icon'/>
-          </button>
-        </form>
+      <div className='home-banner section'>
+        {/* alt 下關鍵字 */}
+        <img className='home-banner-img' src={Banner} alt="Banner"></img>
+        <div className='title-section'>
+          <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
+          <form className='home-search'>
+            <input className='home-input' placeholder="Search">
+            </input>
+            <button className='home-button' type="submit">
+              <BiSearch className='home-search-icon' />
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-
     <div className='blog-section'>
       <div className='post-section'>
         <h2>熱門文章</h2>
@@ -61,7 +60,6 @@ const HomeBlog = () => {
           {post.popular.slice(0, 4).map((v, i) => {
             return (
               <>
-              {console.log('c' + v.post_id)}
                 <Card
                   key={'c' + v.post_id}
                   postId={v.post_id}
@@ -73,8 +71,6 @@ const HomeBlog = () => {
           })}
           <BsFillArrowRightCircleFill className='arrow-right'/>
         </div>
-      </div>
-
       <div className='post-section'>
         <h2>最新文章</h2>
         <div className='card-container'>
@@ -82,7 +78,6 @@ const HomeBlog = () => {
           {post.latest.slice(0, 4).map((v, i) => {
             return (
               <>
-              {console.log('c2' + v.post_id)}
                 <Card2
                   key={'c2' + v.post_id}
                   tags={v.tag}
@@ -95,9 +90,9 @@ const HomeBlog = () => {
             )
           })}
           <BsFillArrowRightCircleFill className='arrow-right'/>
+
         </div>
       </div>
-    </div>
     </>
   )
 }

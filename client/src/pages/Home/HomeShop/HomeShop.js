@@ -1,45 +1,39 @@
 import { Link } from 'react-router-dom'
-import image1 from '../../../images/shop/categories/shop1.jpg'
-import image2 from '../../../images/shop/categories/shop2.jpg'
-import image3 from '../../../images/shop/categories/shop3.jpg'
-import image4 from '../../../images/shop/categories/shop4.jpg'
-import image5 from '../../../images/shop/categories/shop5.jpg'
 import './HomeShop.scss'
 
 const HomeShop = () => {
+
+  const categories = [
+    { title: '戶外登山', image: `${process.env.REACT_APP_DEV_URL}/shop/shop-home/shop1.jpg` },
+    { title: '背包收納', image: `${process.env.REACT_APP_DEV_URL}/shop/shop-home/shop2.jpg` },
+    { title: '行動配備', image: `${process.env.REACT_APP_DEV_URL}/shop/shop-home/shop3.jpg` },
+    { title: '旅行配件', image: `${process.env.REACT_APP_DEV_URL}/shop/shop-home/shop4.jpg` }
+  ]
+
   return (
     <>
+
       <div className="images-container">
-        <div className="top-row">
-          <div className="image-box">
-            <Link to='/shop'>
-              <img src={image2} alt="" className="responsive-image" />
-            </Link>
-          </div>
-          <div className="image-box">
-            <Link to='/shop'>
-              <img src={image1} alt="" className="responsive-image" />
-            </Link>
-          </div>
+        <div>
+          <h3 className='image-banner-text'>在我們商城打開最佳冒險旅程!
+          </h3>
         </div>
-
         <div className="bottom-row">
-          <div className="image-box">
-            <Link to='/shop'>
-              <img src={image4} alt="" className="responsive-image" />
-            </Link>
-          </div>
-          <div className="image-box">
-            <Link to='/shop'>
-              <img src={image3} alt="" className="responsive-image" />
-            </Link>
-          </div>
-          <div className="image-box">
-            <Link to='/shop'>
-              <img src={image5} alt="" className="responsive-image" />
-            </Link>
-          </div>
-
+          {categories.map((category, index) => (
+            <div key={index} className="image-box">
+              <Link
+                to='/shop'
+                state={{ categoryTitle: category.title }}
+              >
+                <img
+                  src={category.image}
+                  alt={category.title} className="responsive-image" />
+                <p className='cate-text'>
+                  {category.title}
+                </p>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </>

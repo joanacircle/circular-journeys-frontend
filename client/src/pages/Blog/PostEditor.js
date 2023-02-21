@@ -7,8 +7,7 @@ import './PostEditor.scss'
 
 const PostEditor = () => {
   const { memberId } = useParams()
-  const [tag, setTag] = useState([])
-  const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tags: [], content: '' })
+  const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tags: '', tag1: '', tag2: '', tag3: '', content: '' })
   const category = ['美食', '景點', '住宿']
   const [ctag, setCtag] = useState(
     category.map((v, i) => {
@@ -16,27 +15,27 @@ const PostEditor = () => {
     })
   )
 
+  // 文章分類
+  useEffect(() => {
+    const newTags = ctag.filter((v) => v.checked).map((v) => v.value)
+    setForm({ ...form, tags: newTags })
+   }, [ctag])
+
+  // 關鍵字
   const handleChange = (e) => {
-    // const name = e.target.name
-    // const value = e.target.value
     const { name, value } = e.target
-
     setForm({ ...form, [name]: value })
-
   }
+
+  // 傳到後端
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post(`${process.env.REACT_APP_DEV_URL}/blog/newpost/${memberId}`, form)
     .then(r => console.log(r))
     .catch(err => console.log(err))
   }
-  useEffect(() => {
-    const newTags = ctag.filter((v) => v.checked).map((v) => v.value)
-    setTag(newTags)
-   }, [ctag]) // 勾選文章分類後，更新 tag
-  useEffect(() => { setForm({ ...form, tags: tag }) }, [tag]) // 只要tag更新，將tag值放入form裡面
 
-  // console.log(form)
+  console.log(form)
 
   return (
     <>
@@ -49,7 +48,8 @@ const PostEditor = () => {
             <label htmlFor="title">文章標題</label>
             <input
             type="text" name='title' className=''
-            value={form.title} onChange={handleChange}
+            value={form.title}
+            onChange={handleChange}
             placeholder='文章標題...' required/>
           </div>
 
@@ -61,10 +61,9 @@ const PostEditor = () => {
                 type='checkbox'
                 value={v.value}
                 checked={v.checked}
-                onChange={(e) => {
+                onChange={() => {
                   const newCtag = ctag.map((v2, i2) => {
                     if (v2.id === v.id) return { ...v2, checked: !v2.checked }
-
                     return { ...v2 }
                   })
                   setCtag(newCtag)
@@ -79,27 +78,33 @@ const PostEditor = () => {
             <label htmlFor="tag1">文章關鍵字1</label>
             <input
             type="text" name='tag1'
-            value={form.tag}
+            value={form.tag1}
             onChange={handleChange}
-            placeholder='文章關鍵字...' required/>
+            placeholder='#關鍵字'
+            required
+            />
           </div>
 
           <div className="form-item">
-            <label htmlFor="tag2">文章關鍵字2</label>
+            <label htmlFor="tags">文章關鍵字2</label>
             <input
             type="text" name='tag2'
-            value={form.tag}
+            value={form.tag2}
             onChange={handleChange}
-            placeholder='文章關鍵字...' required/>
+            placeholder='#關鍵字'
+            required
+            />
           </div>
 
           <div className="form-item">
             <label htmlFor="tag3">文章關鍵字3</label>
             <input
             type="text" name='tag3'
-            value={form.tag}
+            value={form.tag3}
             onChange={handleChange}
-            placeholder='文章關鍵字...' required/>
+            placeholder='#關鍵字'
+            required
+            />
           </div>
 
           <div className="form-item">

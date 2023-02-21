@@ -7,6 +7,7 @@ const multiparty = require('connect-multiparty')
 const path = require('path')
 const fs = require('fs')
 const uuid = require('uuid');
+const { exit } = require('process');
 
 const MultipartyMiddleWare = multiparty({uploadDir: path.join(__dirname, '../../../public')})
 
@@ -85,30 +86,41 @@ router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
 
 // http://localhost:3001/newpost/:member_id // PostEditor
 router.post('/newpost/:member_id', async(req, res) => {
-  const { memberId, title, tag, content } = req.body
-  const post = req.body
-  // console.log(post)
-
+  const { memberId, title, tags, tag1, tag2, tag3, content } = req.body
   const postId = 'p' + uuid.v4()
-
+  const totalTag = [tag1, tag2, tag3]
+  if(title.length>0){
+    title.map((v, i) => {totalTag.push(v)})
+  }
+  
   const sql = `
-  INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(), ?, ?, ?)
-  `
-  // const sql2 = `
-  // BEGIN;
-  // INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(), ?, ?, ?);
+  INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(),?,?,?)`
+  const sql2=`
+  SELECT tag_id FROM post_tags WHERE tag = ? LIMIT 1`
+  const sql3 = `
+  INSERT INTO post_tags(tag_id, tag, post_id) VALUES (?,?,?)`
 
-  // SET @last_post_id = LAST_INSERT_ID();
 
-  // INSERT INTO post_imgs(img_id, img_index, img_url, post_id) VALUES ('[value-1]','1','[value-3]', @last_post_id);
+  try{
+    const [rows] = await db.query(sql, [postId, memberId, title, content])
+    
+    for(const tag of [tag1, tag2, tag3]){
+      const [rows2] = await db.query(sql2, [tag])
+      if(rows2.length > 0){
+        const existingTagId = rows2[0].tag_id
+        const [rows3] = await db.query(sql3, [existingTagId, tag, postId])
+      }else{
+        const tagId = 't' + uuid.v4()
+        const [rows3] = await db.query(sql3, [tagId, tag, postId])
+      }
+    }
 
-  // COMMIT;
-  // `
-
-  const [rows] = await db.query(sql, [postId, post.memberId, post.title, post.content], (err, result) => {
-    if(err) throw err
-    res.json(result)
-  })
+    res.status(200).send('Post created successfully')
+  }
+  catch(err){
+    res.status(500).send(err)
+  }
+  
 })
 
 // http://localhost:3001/blog/:member_id // UserBlog

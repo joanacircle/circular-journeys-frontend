@@ -233,6 +233,19 @@ router.post('/address', async (req, res, next) => {
   }
 })
 
+//user delete address
+//http://localhost:3001/user/address/delete
+router.post('/address/delete', async (req, res, next) => {
+  const { id } = req.body
+  const sql = `DELETE FROM user_address WHERE id = ?`
+  try {
+    await db.query(sql, [id])
+  } catch (err) {
+    next(err)
+  }
+})
+
+
 //google acc
 //http://localhost:3001/user/google/signup
 router.post('/google/signup', async (req, res, next) => {

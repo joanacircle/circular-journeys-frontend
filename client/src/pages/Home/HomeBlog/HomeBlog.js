@@ -52,45 +52,46 @@ const HomeBlog = () => {
           </form>
         </div>
       </div>
-    <div className='blog-section'>
-      <div className='post-section'>
-        <h2>熱門文章</h2>
-        <div className='card-container'>
-          <BsFillArrowLeftCircleFill className='arrow-left' />
-          {post.popular.slice(0, 4).map((v, i) => {
-            return (
-              <>
-                <Card
-                  key={'c' + v.post_id}
-                  postId={v.post_id}
-                  imgSrc={imgSrc[i]}
-                  imgAlt={imgAlt[i]}
-                  title={v.post_title}/>
-              </>
-            )
-          })}
-          <BsFillArrowRightCircleFill className='arrow-right'/>
-        </div>
-      <div className='post-section'>
-        <h2>最新文章</h2>
-        <div className='card-container'>
-          <BsFillArrowLeftCircleFill className='arrow-left' />
-          {post.latest.slice(0, 4).map((v, i) => {
-            return (
-              <>
-                <Card2
-                  key={'c2' + v.post_id}
-                  tags={v.tag}
-                  postId={v.post_id}
-                  imgSrc={imgSrc[i]}
-                  imgAlt={imgAlt[i]}
-                  title={v.post_title}
-                  likes={v.total_likes}/>
-              </>
-            )
-          })}
-          <BsFillArrowRightCircleFill className='arrow-right'/>
-
+      <div className='blog-section'>
+        <div className='post-section'>
+          <h2>熱門文章</h2>
+          <div className='card-container'>
+            <BsFillArrowLeftCircleFill className='arrow-left' />
+            {post.popular.slice(0, 4).map((v, i) => {
+              return (
+                <>
+                  <Card
+                    key={'c' + v.post_id}
+                    postId={v.post_id}
+                    imgSrc={imgSrc[i]}
+                    imgAlt={imgAlt[i]}
+                    title={v.post_title} />
+                </>
+              )
+            })}
+            <BsFillArrowRightCircleFill className='arrow-right' />
+          </div>
+          <div className='post-section'>
+            <h2>最新文章</h2>
+            <div className='card-container'>
+              <BsFillArrowLeftCircleFill className='arrow-left' />
+              {post.latest.slice(0, 4).map((v, i) => {
+                return (
+                  <>
+                    <Card2
+                      key={'c2' + v.post_id}
+                      tags={v.tag}
+                      postId={v.post_id}
+                      imgSrc={imgSrc[i]}
+                      imgAlt={imgAlt[i]}
+                      title={v.post_title}
+                      likes={v.total_likes} />
+                  </>
+                )
+              })}
+              <BsFillArrowRightCircleFill className='arrow-right' />
+            </div>
+          </div>
         </div>
       </div>
     </>

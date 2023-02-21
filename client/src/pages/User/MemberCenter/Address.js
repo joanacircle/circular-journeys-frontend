@@ -17,6 +17,7 @@ const Address = () => {
   })
   const [addressList, setAddressList] = useState([])
 
+  // get address list
   useEffect(() => {
     const getAddressList = async () => {
       try {
@@ -43,6 +44,8 @@ const Address = () => {
       [event.target.name]: event.target.value
     })
   }
+
+  // handle submit
   const handelSubmit = async (event) => {
     event.preventDefault()
     const { userAddress, userPostalCode, nation, city, districts } = inputData
@@ -65,6 +68,24 @@ const Address = () => {
     }
   }
 
+  // handle delete
+  const handleDelete = async (id) => {
+    try {
+      await axios.post(`${process.env.REACT_APP_DEV_URL}/user/address/delete`, { id })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  // handle edit
+  // const handleEdit = async (id) => {
+  //   try {
+  //     console.log(id)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
   return (
     <div className="top-place animate__animated animate__fadeInDown animate__faster">
       <h3>通訊地址</h3>
@@ -83,7 +104,7 @@ const Address = () => {
             </div>
             <div className='input-place'>
               <div className='label-place'>
-                <label htmlFor="userAddress">街/道</label>
+                <label htmlFor="userAddress">街 / 道</label>
                 <input
                   type="text"
                   name="userAddress"
@@ -116,39 +137,52 @@ const Address = () => {
             </div>
           </form>
         }
-        <hr />
         <div className='table-place'>
           {
             addressList.length > 0 &&
-            <table>
-              <thead>
-                <tr>
-                  <td>操作</td>
-                  <td>國家</td>
-                  <td>城市</td>
-                  <td>區域</td>
-                  <td>街/道</td>
-                  <td>郵遞區號</td>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  addressList.map(address => (
-                    <tr key={address.id}>
-                      <td className='icon-place'>
-                        <CiTrash />
-                        <CiEdit />
-                      </td>
-                      <td>{address.nation}</td>
-                      <td>{address.city}</td>
-                      <td>{address.districts}</td>
-                      <td>{address.address}</td>
-                      <td>{address.postal_code}</td>
-                    </tr>
-                  ))
-                }
-              </tbody>
-            </table>
+            <>
+              <hr />
+              <table>
+                <thead>
+                  <tr>
+                    {/* <th colSpan="2">操作</th> */}
+                    <th></th>
+                    <th>國家</th>
+                    <th>城市</th>
+                    <th>區域</th>
+                    <th>街 / 道</th>
+                    <th>郵遞區號</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    addressList.map(address => (
+                      <tr className='tr-hover' key={address.id}>
+                        <td className='icon-place'>
+                          <button
+                            className='delete-btn'
+                            onClick={() => { handleDelete(address.id) }}>
+                            {/* <CiTrash /> */}
+                            DELETE
+                          </button>
+                        </td>
+                        {/* <td className='icon-place'>
+                          <button
+                            onClick={() => { handleEdit(address.id) }} >
+                            <CiEdit />
+                          </button>
+                        </td> */}
+                        <td>{address.nation}</td>
+                        <td>{address.city}</td>
+                        <td>{address.districts}</td>
+                        <td>{address.address}</td>
+                        <td>{address.postal_code}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </>
           }
         </div>
       </div >

@@ -1,13 +1,12 @@
-@import "../../../index.scss";
 @import "../styles/styles.scss";
 
 .user-dropdown-menu {
   position: fixed;
   margin-top: 10px;
   border-radius: 8px;
-  background: $white;
+  background: var(--white);
   min-width: 250px;
-  box-shadow: 0 0 10px 0.5px $gray;
+  box-shadow: 0 0 10px 0.5px var(--gray);
   .menu-place {
     width: 100%;
     height: 100%;

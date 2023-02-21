@@ -17,7 +17,6 @@ import { FaRegAddressBook } from 'react-icons/fa'
 
 // page
 import SettingPage from './Setting'
-import Card from './Card'
 import OrderPage from './Order'
 import ShopHistoryPage from './ShopHistory'
 import LikeHistoryPage from './LikeHistory'
@@ -49,12 +48,6 @@ const MenuOptions = {
       icon: <FaRegAddressBook />,
       element: <Address />
     },
-    // {
-    //   state: false,
-    //   label: '付款設定',
-    //   icon: <BsCreditCard />,
-    //   element: <Card />
-    // },
     {
       state: false,
       label: '帳號設定',

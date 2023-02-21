@@ -1,0 +1,35 @@
+@import "../styles/styles.scss";
+
+.table-place {
+  @include flex(center, column);
+  .icon-place {
+    padding: 2px;
+    cursor: pointer;
+  }
+  .delete-btn {
+    border:1px solid #ff4242;
+    border-radius: 10px;
+    padding: 5px 8px;
+    color: #ff4242;
+    transition: .3s;
+    font-size: 14px;
+    &:hover {
+      color: #fff;
+      background: #ff4242;
+    }
+  }
+  .tr-hover {
+    transition: .3s;
+    &:hover {
+      background: var(--light-gray);
+    }
+  }
+  table {
+    width: 100%;
+    text-align: center;
+    td {
+      padding: 10px;
+      margin: 5px;
+    }
+  }
+}

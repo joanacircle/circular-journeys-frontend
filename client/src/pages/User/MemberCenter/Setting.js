@@ -81,28 +81,6 @@ const SettingPage = () => {
             </div>
           </div>
           <div className='input-place'>
-            {
-              <DynamicSelect
-                inputData={inputData}
-                handleInputChange={handleInputChange}
-              />
-            }
-          </div>
-          <div className='input-place'>
-            <div className='label-place'>
-              <label htmlFor="userAddress">街/道</label>
-              <input
-                type="text"
-                name="userAddress"
-                id="userAddress"
-                value={inputData.userAddress}
-                onChange={handleInputChange}
-                placeholder='忠孝東路一段101號'
-                required
-              />
-            </div>
-          </div>
-          <div className='input-place'>
             <div className='label-place'>
               <label htmlFor="userTelephone">電話</label>
               <input

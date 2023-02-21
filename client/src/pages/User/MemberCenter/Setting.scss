@@ -1,8 +1,7 @@
-@import "../../../index.scss";
 @import "../styles/styles.scss";
 
 .top-place {
-  box-shadow: 0px 0px 10px 0.8px $gray;
+  box-shadow: 0px 0px 10px 0.8px var(--gray);
   background-color: #fff;
   border-radius: 6px;
   padding: 20px;
@@ -25,7 +24,7 @@
         }
         input {
           border-radius: 8px;
-          border: 0.1px solid $gray;
+          border: 0.1px solid var(--gray);
           padding: 8px 15px;
         }
         select {
@@ -42,7 +41,8 @@
         #userBirthday {
           min-width: 210px;
         }
-        #userAddress {
+        #userAddress,
+        #userAlternateAddress {
           min-width: 350px;
         }
         #userTelephone {
@@ -57,11 +57,11 @@
           padding: 10px 30px;
           transition: 0.3s;
           letter-spacing: 2px;
-          color: $white;
-          background: $orange;
+          color: var(--white);
+          background: var(--orange);
           border: 0.3px solid #fff;
           &:hover {
-            background: $purple;
+            background: var(--purple);
           }
           &:active {
             background: #3f3875;

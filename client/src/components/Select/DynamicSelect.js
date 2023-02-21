@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
+const DynamicSelect = ({ inputData, handleInputChange }) => {
   const [options, setOptions] = useState({})
 
   useEffect(() => {
@@ -16,10 +16,10 @@ const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
 
   const selectOptionsObj = {
     info: [
-      { label: '國家', value: inputData.nation, att: 'nation' },
-      { label: '城市', value: inputData.city, att: 'city' },
-      { label: '區域', value: inputData.districts, att: 'districts' },
-      { label: '郵遞區號', value: inputData.postalCode, att: 'postalCode' }
+      { label: '國家', att: 'nation' },
+      { label: '城市', att: 'city' },
+      { label: '區域', att: 'districts' }
+      // { label: '郵遞區號', value: inputData.postalCode, att: 'postalCode' }
     ]
   }
 
@@ -32,7 +32,7 @@ const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
             <select
               name={item.att}
               id={item.att}
-              value={inputData[item.att]}
+              value={inputData[item.att] || ''}
               onChange={handleInputChange}
               required
             >
@@ -62,7 +62,7 @@ const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
                   ))
                 ))
               }
-              {
+              {/* {
                 item.att === 'postalCode' &&
                 inputData.nation !== undefined && inputData.nation !== '' &&
                 inputData.districts !== undefined && inputData.districts !== '' &&
@@ -75,7 +75,7 @@ const DynamicSelect = ({ inputData, handleInputChange, userData }) => {
                     </option>
                   ))
                 ))
-              }
+              } */}
             </select>
           </div>
         ))

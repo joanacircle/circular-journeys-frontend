@@ -1,5 +1,4 @@
 @import "../styles/styles.scss";
-@import "../../../index.scss";
 
 .membercenter-place {
   width: 100%;
@@ -13,7 +12,7 @@
     .col-1 {
       width: 25%;
       .aside-box {
-        box-shadow: 0px 0px 10px 0.8px $gray;
+        box-shadow: 0px 0px 10px 0.8px var(--gray);
         padding: 15px;
         background-color: #fff;
         border-radius: 6px;
@@ -58,7 +57,7 @@
       }
       .page-menu {
         list-style: none;
-        box-shadow: 0px 0px 10px 0.8px $gray;
+        box-shadow: 0px 0px 10px 0.8px var(--gray);
         border-radius: 5px;
         margin-top: 30px;
         padding: 5px 15px;
@@ -71,8 +70,8 @@
             transition: 0.3s;
             &:hover {
               padding-left: 10px;
-              border-left: 5px solid $orange;
-              color: $orange;
+              border-left: 5px solid var(--orange);
+              color: var(--orange);
             }
             .link-content {
               margin: 5px 10px;
@@ -85,8 +84,8 @@
             opacity: 0.9;
             transition: 0.3s;
             padding-left: 10px;
-            border-left: 5px solid $orange;
-            color: $orange;
+            border-left: 5px solid var(--orange);
+            color: var(--orange);
             .link-content {
               margin: 5px 10px;
               font-size: 15px;

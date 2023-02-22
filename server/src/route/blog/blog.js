@@ -1,17 +1,13 @@
-const express = require('express');
-const db = require('../../model/connect-sql');
-const moment = require("moment-timezone");
-require('dotenv').config();
-const router = express.Router();
+const express = require('express')
+const db = require('../../model/connect-sql')
+const moment = require("moment-timezone")
+require('dotenv').config()
+const router = express.Router()
 const multiparty = require('connect-multiparty')
 const path = require('path')
 const fs = require('fs')
-const uuid = require('uuid');
-const { exit } = require('process');
-
+const uuid = require('uuid')
 const MultipartyMiddleWare = multiparty({uploadDir: path.join(__dirname, '../../../public')})
-
-// TODO 驗證 url
 
 // http://localhost:3001/blog  // Blog
 router.get('/', async (req, res) => {
@@ -45,6 +41,7 @@ router.get('/', async (req, res) => {
   res.json(rows);
 })
 
+// TODO 改用後端驗證
 // http://localhost:3001/blog/api
 router.get('/api', async (req, res) => {
   const sql =`SELECT JSON_ARRAYAGG(post_id) AS post_id FROM posts WHERE 1`
@@ -60,6 +57,25 @@ router.get('/api', async (req, res) => {
 })
 
 // TODO 移除沒有使用的照片
+// http://localhost:3001/blog/upload-cover // PostEditor for upload cover-pic
+router.post('/upload-cover', MultipartyMiddleWare, async (req, res) => {
+  const TempFile = req.files.upload 
+  const TempPathFile = TempFile.path 
+  const ext = path.extname(TempFile.originalFilename).toLowerCase()
+  const fileName = uuid.v4() + ext
+  const targetPathUrl = path.join(__dirname,"../../../public/blog/"+fileName)
+  
+  if(ext === '.png' || '.jpg' ){
+    fs.rename(TempPathFile, targetPathUrl, err=>{
+      res.json({
+        uploaded: true,
+        url: `http://localhost:${process.env.PORT}/blog/${fileName}`
+      })
+      if(err) return console.log(err)
+    })
+  }
+})
+
 // http://localhost:3001/blog/upload-img // PostEditor for upload img
 router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
   const TempFile = req.files.upload 
@@ -86,15 +102,17 @@ router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
 
 // http://localhost:3001/newpost/:member_id // PostEditor
 router.post('/newpost/:member_id', async(req, res) => {
-  const { memberId, title, tags, tag1, tag2, tag3, content } = req.body
+  const { memberId, title, tags, tag1, tag2, tag3, cover, content } = req.body
   const postId = 'p' + uuid.v4()
-  const totalTag = [tag1, tag2, tag3]
+  const totalTag = [tag1, tag2, tag3].filter((v)=>{
+    return (v.length>0)
+  })
   if(tags.length>0){
     tags.map((v, i) => {totalTag.push(v)})
   }
-  
+
   const sqlInsertPost = `
-  INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(),?,?,?)`
+  INSERT INTO posts(post_id, create_at, modify_at, member_id, post_title, cover, post_content) VALUES (?,NOW(),null,?,?,?,?)`
   const sqlSelectTag=`
   SELECT tag_id FROM post_tags WHERE tag = ? LIMIT 1`
   const sqlInsertTag = `
@@ -102,7 +120,7 @@ router.post('/newpost/:member_id', async(req, res) => {
 
 
   try{
-    const [rows] = await db.query(sqlInsertPost, [postId, memberId, title, content])
+    const [rows] = await db.query(sqlInsertPost, [postId, memberId, title, cover, content])
     
     for(const tag of totalTag){
       const [rows2] = await db.query(sqlSelectTag, [tag]) // 確認有無一樣的 tag
@@ -114,7 +132,10 @@ router.post('/newpost/:member_id', async(req, res) => {
         const [rows3] = await db.query(sqlInsertTag, [tagId, tag, postId])
       }
     }
-    res.send('success')
+    res.json({
+      message: 'success',
+      postId: `${postId}`
+    })
   }
   catch(err){
     res.send(err)
@@ -168,22 +189,20 @@ router.get('/post/:post_id', async (req, res) => {
     posts.post_title, 
     posts.member_id,
     users_information.last_name,
-    post_imgs.img_id, 
     posts.create_at,  
     posts.total_likes,
     posts.post_content, 
-    posts.post_id,  
+    posts.post_id, 
+    posts.cover, 
     (
       SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
       FROM post_tags 
       WHERE post_tags.post_id = posts.post_id
     ) 
     AS tag
-  FROM post_imgs 
+  FROM users_information 
   JOIN posts 
-  ON posts.post_id = post_imgs.post_id && post_imgs.img_index = 1 
-  JOIN users_information 
-  ON posts.member_id = users_information.member_id
+  ON posts.member_id = users_information.member_id 
   WHERE posts.post_id = ?
   `
 

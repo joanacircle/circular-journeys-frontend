@@ -31,11 +31,13 @@ const PostEditor = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post(`${process.env.REACT_APP_DEV_URL}/blog/newpost/${memberId}`, form)
-    .then(r => console.log(r))
+    .then(r => {
+      const { message, postId } = r.data
+      window.location = `http://localhost:3000/blog/post/${postId}`
+    }
+    )
     .catch(err => console.log(err))
   }
-
-  console.log(form)
 
   return (
     <>
@@ -81,7 +83,6 @@ const PostEditor = () => {
             value={form.tag1}
             onChange={handleChange}
             placeholder='#關鍵字'
-            required
             />
           </div>
 
@@ -92,7 +93,6 @@ const PostEditor = () => {
             value={form.tag2}
             onChange={handleChange}
             placeholder='#關鍵字'
-            required
             />
           </div>
 
@@ -103,25 +103,22 @@ const PostEditor = () => {
             value={form.tag3}
             onChange={handleChange}
             placeholder='#關鍵字'
-            required
             />
           </div>
 
           <div className="form-item">
-            <label>文章封面圖</label>
+            <label>文章首圖</label>
             <CKEditor
               editor={ ClassicEditor }
               data=''
               onChange={(event, editor) => {
-                  const cover = editor.getData()
-                  setForm({ ...form, cover: [cover] })
-                }
-              }
+                const cover = editor.getData()
+                setForm({ ...form, cover: [cover] })
+              }}
               config={
                 {
                   ckfinder: {
-                    // TODO: connect database
-                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
+                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-cover`
                   },
                   toolbar: ['imageUpload']
                 }

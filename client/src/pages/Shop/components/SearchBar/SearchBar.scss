@@ -1,5 +1,3 @@
-@import 'index.scss';
-
 
 .banner-container {
 
@@ -43,15 +41,15 @@
       }
 
       .shop-search-button {
-                width: auto;
-                  height: auto;
-                  color: var(--orange);
-                  border-radius: var(--br2);
+          width: auto;
+          height: auto;
+          color: var(--orange);
+          border-radius: var(--br2);
 
-        .shop-bi-search {
-                      display: block;
-                        margin: 0 auto;
-          }
+          .shop-bi-search {
+                  display: block;
+                  margin: 0 auto;
+            }
       }
     }
 }

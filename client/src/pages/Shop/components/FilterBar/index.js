@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PriceRangeSlider from './PriceRangeSlider'
 import CategoryCheckbox from './CategoryCheckbox'
+import { useLocation } from 'react-router-dom'
 import './FilterBar.scss'
 
 const FilterBar = ({
@@ -8,9 +9,11 @@ const FilterBar = ({
   categories,
   setCategories,
   priceRange,
-  setPriceRange,
-  preCate
+  setPriceRange
 }) => {
+
+  const location = useLocation()
+  const preCate = location.state?.categoryTitle
 
   const [preValue, setPreValue] = useState(preCate)
 
@@ -63,7 +66,6 @@ const FilterBar = ({
             key={i}
             categories={categories}
             handleSelected={handleSelected}
-            preCate={preCate}
           />
         ))}
       </div>

@@ -1,13 +1,12 @@
-@import 'index.scss';
-
 .shop-container{
  width: 100vw;
  display: flex;
  flex-direction: column;
  justify-content: center;
+
+ .shop-main-content {
+    margin: 0 auto;
+    max-width: 1160px;
+  }
 }
 
-.shop-main-content{
-  margin: 0 auto;
-  max-width: 1160px;
-}

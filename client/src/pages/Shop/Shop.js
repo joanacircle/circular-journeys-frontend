@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import './Shop.scss'
 
 import FilterBar from './components/FilterBar/'
@@ -11,9 +10,6 @@ import SortBar from './components/SortBar/'
 
 const Shop = () => {
 
-  const location = useLocation()
-  const preCate = location.state?.categoryTitle
-
   const [products, setProducts] = useState([])
   // 排序、搜尋後的資料
   const [displayProducts, setDisplayProducts] = useState([])
@@ -24,20 +20,11 @@ const Shop = () => {
   const [priceRange, setPriceRange] = useState([0, 5000])
 
 
-  // 載入spinner
+  // 載入Placeholder
   const [isLoading, setIsLoading] = useState(false)
 
   const [sortBy, setSortBy] = useState('')
   const [searchWord, setSearchWord] = useState('')
-
-  // x秒後自動關掉spinner(設定isLoading為false)
-  useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 500)
-    }
-  }, [isLoading])
 
   useEffect(() => {
     setIsLoading(true)
@@ -45,9 +32,15 @@ const Shop = () => {
   }, [])
 
   useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 400)
+    }
+  }, [isLoading])
 
+  useEffect(() => {
     setIsLoading(true)
-
     let newProducts = [...products]
 
     newProducts = handleSearch(newProducts, searchWord)
@@ -55,17 +48,19 @@ const Shop = () => {
     newProducts = handleCategories(newProducts, categories)
     newProducts = handlePriceRange(newProducts, priceRange)
 
-    setDisplayProducts(newProducts)
+    setDisplayProducts(newProducts) // setIsLoading(false) 造成問題, 列表不出來
   }, [products, sortBy, searchWord, categories, priceRange])
+
 
   // 取得資料
   const getData = async () => {
-    const response = await fetch('http://localhost:3001/shop')
+    const response = await fetch(`${process.env.REACT_APP_DEV_URL}/shop`)
     const data = await response.json()
     setProducts(data)
     setDisplayProducts(data)
   }
-  // 排序邏輯
+
+  // 排序
   const handleSort = (products, sortBy) => {
     const newProducts = [...products]
 
@@ -139,7 +134,6 @@ const Shop = () => {
 
         <div className="col-md-12 shop-main-content">
           <div className="row">
-
             <div className="col-md-3">
               <FilterBar
                 priceRange={priceRange}
@@ -147,17 +141,14 @@ const Shop = () => {
                 categoryMenu={categoryMenu}
                 categories={categories}
                 setCategories={setCategories}
-                preCate={preCate}
               />
             </div>
 
             <div className="col-md-9">
-
               <div className="d-flex justify-between">
                 <h4>商品列表</h4>
                 <SortBar sortBy={sortBy} setSortBy={setSortBy} />
               </div>
-
               <br />
               {isLoading
                 ? (
@@ -167,10 +158,8 @@ const Shop = () => {
                   <ProductList displayProducts={displayProducts} />
                 )}
             </div>
-
           </div>
         </div>
-
       </div>
     </>
   )

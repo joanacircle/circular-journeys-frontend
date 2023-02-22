@@ -1,53 +1,121 @@
-@import 'index.scss';
-
-
 .product-image-gallery{
   display: flex;
   justify-content: center;
-
+ 
   .thumbnails-container {
       position: sticky;
-        top: 60px;
-        height: fit-content;
-        overflow: hidden;
-        align-self: start;
+      top: 80px;
+      height: fit-content;
+      // overflow: hidden;
+      align-self: start;
+      margin: 10px;
+      padding: 10px;
       
-      // margin-right: 20px;
-  
       .thumbnail {
-        width: 50px;
-        height: 60px;
-        margin-bottom: 10px;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 15px;
         cursor: pointer;
         
       }
       .selected {
-        opacity: 0.5;
+        opacity: 0.4;
       }
            
     }
 
   .main-image-container{
+    
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    margin: 10px;
+    padding: 10px;
+    
     .image-list{
-      width: 150px;
-      
+      width: 450px;
       object-fit: contain;
-      
+      margin-bottom: 20px;
     }
   }
-  .product-info-container {
-    display: flex;
-    flex-direction: column;
 
-      .spec-buttons {
+  .info-container-parent{
+    width: 30%;
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    align-self: start;
+    
+    .product-info-container {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+        padding: 10px;
+        
+        .title-h3 {
+          font-size: 35px;
+          margin: 25px 25px;
+          text-align: center;
+          
+        }        
+        
+        .spec-buttons {
           display: flex;
           flex-direction: column;
+          width: 100%;
+          padding: 10px;
+
+          .desc-p {
+              margin: 25px 0;
+              margin-left: 10px;
+              font-size: 25px;
+              font-weight: 400;
+          
+          
+            }
+          
+          .price-p {
+            margin: 25px 0 50px 0;
+            text-align: end;
+            font-weight: 600;
+            font-size: 30px;
+
+          }
+                    
+          .put-kart {
+            font-size: 30px;
+            font-weight: 500;
+            height: 2em;
+            border-radius: var(--br1);
+            background-color: black;
+            color: white;
+            
+            margin: 8px 5px;
+            
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+    
+          .buy-now {
+            font-size: 30px;
+            font-weight: 600;
+            height: 2em;
+            border-radius: var(--br1);
+            color: white;
+            background-color: var(--orange);
+            margin: 8px 5px;
+    
+            &:hover {
+              opacity: 0.7;
+            }
+          }
         }
+      }
   }
+
   
 
 }

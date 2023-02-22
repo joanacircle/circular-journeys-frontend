@@ -9,11 +9,11 @@ const Placeholder = () => {
   return (
     <SkeletonTheme baseColor="#F7F7F7" highlightColor="#fff">
       <div className="grid-container">
-        {[...Array(9)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div key={i}>
-            <Skeleton height={150} width={150} style={{ margin: "2px" }} />
+            <Skeleton height={230} width={230} style={{ margin: "2px" }} />
             <Skeleton height={6} width={100} style={{ margin: "2px" }} />
-
+            <Skeleton height={6} width={70} style={{ margin: "2px" }} />
             <Skeleton height={6} width={140} style={{ margin: "2px" }} />
           </div>
         ))}

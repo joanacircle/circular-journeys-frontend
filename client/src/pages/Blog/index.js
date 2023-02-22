@@ -45,10 +45,9 @@ const Blog = () => {
                   return (
                     <div className='blog-post col-md-6' key={v.post_id}>
                       <Card3
-                        tags={v.tag}
                         postId={v.post_id}
-                        imgSrc={imgSrc}
-                        imgAlt={imgAlt}
+                        img={v.cover}
+                        tags={v.tag}
                         memberId={v.member_id}
                         memberName={v.last_name}
                         title={v.post_title}

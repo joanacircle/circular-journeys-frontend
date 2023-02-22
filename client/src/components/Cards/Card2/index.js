@@ -4,32 +4,36 @@ import shortid from 'shortid'
 import './Card2.scss'
 
 const Card2 = (props) => {
-  const tag = props.tags // 傳入 object
+  // props.tags 傳入 object
+  const { postId, img, tags, title, likes } = props
   return (
     <>
     <div className="card2">
-      <Link to={`/blog/post/${props.postId}`}>
-        <img src={props.imgSrc} className="card-img" alt={props.imgAlt} />
+      <Link to={`/blog/post/${postId}`}>
+        <div className="card-img" dangerouslySetInnerHTML={{
+          __html: img
+        }} />
       </Link>
       <div className="card-body">
         <ul className='blog-tags'>
-        {!tag
-        ? <li>Loading...</li>
-        : Object.entries(tag).slice(0, 2).map(([key, value]) => (
-            <Link to={`/blog/tag/${key}`} key={key}>
+        {/* 問題:Warning: Each child in a list should have a unique "key" prop. */}
+        {!tags
+        ? <div></div>
+        : Object.entries(tags).slice(0, 2).map(([key, value]) => (
+            <Link to={`/blog/tag/${key}`} key={shortid.generate()}>
               <li># {value}</li>
             </Link>
           ))
         }
         </ul>
           <h5 className='card-title'>
-            {props.title}
+            {title}
           </h5>
         <div className='card-likes d-flex'>
           <AiOutlineHeart size={25} className='heart-icon'/>
           {props.likes === 0
           ? <p></p>
-          : <p>{props.likes}</p>
+          : <p>{likes}</p>
           }
         </div>
       </div>

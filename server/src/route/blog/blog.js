@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     posts.member_id,
     posts.post_title,
     posts.total_likes,
-    post_imgs.img_id,
+    posts.cover,
     users_information.last_name,
     (
       SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
@@ -26,10 +26,8 @@ router.get('/', async (req, res) => {
       WHERE post_tags.post_id = posts.post_id
     )
     AS tag
-  FROM post_imgs
+  FROM users_information
   JOIN posts
-  ON posts.post_id = post_imgs.post_id && post_imgs.img_index = 1
-  JOIN users_information
   ON posts.member_id = users_information.member_id
   WHERE 1
   `
@@ -153,18 +151,16 @@ router.get('/:member_id', async (req, res) => {
     posts.post_title, 
     posts.post_content, 
     posts.total_likes,
-    post_imgs.img_id, 
+    posts.cover, 
     users_information.last_name,
     (
       SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
       FROM post_tags 
       WHERE post_tags.post_id = posts.post_id
     ) 
-    AS tag
-  FROM post_imgs 
+    AS tag 
+  FROM users_information 
   JOIN posts 
-  ON posts.post_id = post_imgs.post_id && post_imgs.img_index = 1 
-  JOIN users_information 
   ON users_information.member_id = ?
   WHERE posts.member_id = ?
   ORDER BY create_at DESC

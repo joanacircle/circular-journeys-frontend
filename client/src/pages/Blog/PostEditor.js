@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import './PostEditor.scss'
 
 const PostEditor = () => {
   const { memberId } = useParams()
-  const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tags: '', tag1: '', tag2: '', tag3: '', content: '' })
+  const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tags: '', tag1: '', tag2: '', tag3: '', cover: '', content: '' })
   const category = ['美食', '景點', '住宿']
   const [ctag, setCtag] = useState(
     category.map((v, i) => {
@@ -31,7 +31,10 @@ const PostEditor = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post(`${process.env.REACT_APP_DEV_URL}/blog/newpost/${memberId}`, form)
-    .then(r => console.log(r))
+    .then(r =>
+      console.log(r)
+      // Navigate
+    )
     .catch(err => console.log(err))
   }
 
@@ -104,8 +107,7 @@ const PostEditor = () => {
             />
           </div>
 
-          {/* TODO post cover */}
-          {/* <div className="form-item">
+          <div className="form-item">
             <label>文章首圖</label>
             <CKEditor
               editor={ ClassicEditor }
@@ -117,13 +119,13 @@ const PostEditor = () => {
               config={
                 {
                   ckfinder: {
-                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-cover/${form.postId}`
+                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-cover`
                   },
                   toolbar: ['imageUpload']
                 }
               }
             />
-          </div> */}
+          </div>
 
           <div className="form-item">
             <label>文章內文</label>

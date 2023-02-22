@@ -20,7 +20,10 @@ const SinglePost = () => {
   function getData() {
     fetch(url)
     .then(r => r.json())
-    .then((data) => { setPost(data) })
+    .then((data) => {
+      console.log(data)
+      setPost(data)
+    })
     .catch(error => console.log(error))
   }
 

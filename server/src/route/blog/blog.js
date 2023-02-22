@@ -58,7 +58,7 @@ router.get('/api', async (req, res) => {
 
 // TODO 移除沒有使用的照片
 // http://localhost:3001/blog/upload-cover // PostEditor for upload cover-pic
-router.post('/upload-cover/:postId', MultipartyMiddleWare, async (req, res) => {
+router.post('/upload-cover', MultipartyMiddleWare, async (req, res) => {
   const TempFile = req.files.upload 
   const TempPathFile = TempFile.path 
   const ext = path.extname(TempFile.originalFilename).toLowerCase()
@@ -102,7 +102,7 @@ router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
 
 // http://localhost:3001/newpost/:member_id // PostEditor
 router.post('/newpost/:member_id', async(req, res) => {
-  const { memberId, title, tags, tag1, tag2, tag3, content } = req.body
+  const { memberId, title, tags, tag1, tag2, tag3, cover, content } = req.body
   const postId = 'p' + uuid.v4()
   const totalTag = [tag1, tag2, tag3].filter((v)=>{
     return (v.length>0)
@@ -112,7 +112,7 @@ router.post('/newpost/:member_id', async(req, res) => {
   }
 
   const sqlInsertPost = `
-  INSERT INTO posts(post_id, create_at, member_id, post_title, post_content) VALUES (?, NOW(),?,?,?)`
+  INSERT INTO posts(post_id, create_at, modify_at, member_id, post_title, cover, post_content) VALUES (?,NOW(),null,?,?,?,?)`
   const sqlSelectTag=`
   SELECT tag_id FROM post_tags WHERE tag = ? LIMIT 1`
   const sqlInsertTag = `
@@ -120,7 +120,7 @@ router.post('/newpost/:member_id', async(req, res) => {
 
 
   try{
-    const [rows] = await db.query(sqlInsertPost, [postId, memberId, title, content])
+    const [rows] = await db.query(sqlInsertPost, [postId, memberId, title, cover, content])
     
     for(const tag of totalTag){
       const [rows2] = await db.query(sqlSelectTag, [tag]) // 確認有無一樣的 tag

@@ -4,13 +4,12 @@ import dayjs from 'dayjs'
 import axios from 'axios'
 
 // components
-import DynamicSelect from '../../../components/Select/DynamicSelect'
 import { userInfo } from 'components/userInfo/UserInfo'
 
 const SettingPage = () => {
   const [changeInputType, setChangeInputType] = useState('text')
-  const { userData } = userInfo
   const [inputData, setInputData] = useState({})
+  const { userData } = userInfo
   console.log(inputData)
 
   const handleInputChange = (event) => {

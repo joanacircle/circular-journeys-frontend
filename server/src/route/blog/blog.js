@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     posts.post_title,
     posts.total_likes,
     posts.cover,
-    users_information.last_name,
+    users_information.user_nickname,
     (
       SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
       FROM post_tags
@@ -152,7 +152,7 @@ router.get('/:member_id', async (req, res) => {
     posts.post_content, 
     posts.total_likes,
     posts.cover, 
-    users_information.last_name,
+    users_information.user_nickname,
     (
       SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
       FROM post_tags 
@@ -184,7 +184,7 @@ router.get('/post/:post_id', async (req, res) => {
   SELECT 
     posts.post_title, 
     posts.member_id,
-    users_information.last_name,
+    users_information.user_nickname,
     posts.create_at,  
     posts.total_likes,
     posts.post_content, 

@@ -17,9 +17,9 @@ const Blog = () => {
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
-    .then(r => r.json())
-    .then((data) => { setPost(data) })
-    .catch(error => console.log(error))
+      .then(r => r.json())
+      .then((data) => { setPost(data) })
+      .catch(error => console.log(error))
   }
 
   // 從 database 取得
@@ -30,7 +30,7 @@ const Blog = () => {
 
   return (
     <>
-     <div>
+      <div>
         <div className='blog-banner'>
           <img className='blog-banner-img' src={Banner} alt="Banner"></img>
           <h2 className='blog-title'>
@@ -49,10 +49,10 @@ const Blog = () => {
                         img={v.cover}
                         tags={v.tag}
                         memberId={v.member_id}
-                        memberName={v.last_name}
+                        memberName={v.user_nickname}
                         title={v.post_title}
                         createAt={v.create_at}
-                        likes={v.total_likes}/>
+                        likes={v.total_likes} />
                     </div>
                   )
                 })}
@@ -67,7 +67,7 @@ const Blog = () => {
                   <input className='blog-input' placeholder="Search">
                   </input>
                   <button className='blog-button' type="submit">
-                    <BiSearch className='search-icon'/>
+                    <BiSearch className='search-icon' />
                   </button>
                 </form>
               </div>
@@ -75,7 +75,7 @@ const Blog = () => {
                 <BlogCategory />
               </div>
               <div className='blog-aside-item'>
-                <TagsCategory tags={tagsCategory}/>
+                <TagsCategory tags={tagsCategory} />
               </div>
             </div>
           </div>

@@ -35,8 +35,8 @@
             outline: none;
           }
         }
-        #userEmail {
-          min-width: 320px;
+        #userContactEmail {
+          min-width: 350px;
         }
         #userBirthday {
           min-width: 210px;
@@ -70,4 +70,12 @@
       }
     }
   }
+}
+.alert-style {
+  border: 0.5px solid rgba(255, 0, 0, 0.456) !important;
+}
+.alert {
+  color: green;
+  font-weight: 800;
+  font-size: 24px;
 }

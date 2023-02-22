@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import './Address.scss'
 import axios from 'axios'
+import validator from 'validator'
 
 // components
 import DynamicSelect from '../../../components/Select/DynamicSelect'
 import { userInfo } from 'components/userInfo/UserInfo'
 
-// icon
-import { CiTrash, CiEdit } from 'react-icons/ci'
 
 const Address = () => {
   const [inputData, setInputData] = useState({
@@ -16,6 +15,9 @@ const Address = () => {
     userPostalCode: ''
   })
   const [addressList, setAddressList] = useState([])
+  const [animation, setAnimation] = useState({
+    userEmail: ''
+  })
 
   // get address list
   useEffect(() => {
@@ -48,11 +50,13 @@ const Address = () => {
   // handle submit
   const handelSubmit = async (event) => {
     event.preventDefault()
-    const { userAddress, userPostalCode, nation, city, districts } = inputData
+    const { userName, userAddress, userContact, userPostalCode, nation, city, districts } = inputData
     try {
       const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/address`,
         {
           member_id: userData.member_id,
+          userName,
+          userContact,
           userAddress,
           userPostalCode,
           nation,
@@ -77,14 +81,32 @@ const Address = () => {
     }
   }
 
-  // handle edit
-  // const handleEdit = async (id) => {
-  //   try {
-  //     console.log(id)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+  // validator
+  const handlePostalCodeIsTrue = (event) => {
+    const postalCode = event.target.value
+    !validator.isPostalCode(postalCode, 'TW') &&
+      setAnimation({
+        ...animation,
+        [event.currentTarget.id]: 'animate__animated animate__shakeX alert-style'
+      })
+  }
+  const handleContactIsTrue = (event) => {
+    const contact = event.target.value
+    !validator.isMobilePhone(contact, 'zh-TW') &&
+      setAnimation({
+        ...animation,
+        [event.currentTarget.id]: 'animate__animated animate__shakeX alert-style'
+      })
+  }
+  const handleFocus = (event, id) => {
+    event.currentTarget.id === id &&
+      setAnimation({
+        ...animation,
+        [event.currentTarget.id]: ''
+      })
+  }
+
+
 
   return (
     <div className="top-place animate__animated animate__fadeInDown animate__faster">
@@ -123,9 +145,41 @@ const Address = () => {
                   type="text"
                   name="userPostalCode"
                   id="userPostalCode"
+                  className={animation.userPostalCode}
                   value={inputData.userPostalCode || ''}
                   onChange={handleInputChange}
+                  onBlur={handlePostalCodeIsTrue}
+                  onFocus={(event) => handleFocus(event, event.currentTarget.id)}
                   placeholder='100'
+                  required
+                />
+              </div>
+              <div className='label-place'>
+                <label htmlFor="userName">收件人姓名</label>
+                <input
+                  type="text"
+                  name="userName"
+                  id="userName"
+                  value={inputData.userName || ''}
+                  onChange={handleInputChange}
+                  placeholder='王小明'
+                  required
+                />
+              </div>
+            </div>
+            <div className='input-place'>
+              <div className='label-place'>
+                <label htmlFor="userContact">收件人電話</label>
+                <input
+                  type="text"
+                  name="userContact"
+                  id="userContact"
+                  className={animation.userContact}
+                  value={inputData.userContact || ''}
+                  onChange={handleInputChange}
+                  onBlur={handleContactIsTrue}
+                  onFocus={(event) => handleFocus(event, event.currentTarget.id)}
+                  placeholder='0912345678'
                   required
                 />
               </div>
@@ -145,8 +199,9 @@ const Address = () => {
               <table>
                 <thead>
                   <tr>
-                    {/* <th colSpan="2">操作</th> */}
                     <th></th>
+                    <th>收件人</th>
+                    <th>電話</th>
                     <th>國家</th>
                     <th>城市</th>
                     <th>區域</th>
@@ -166,12 +221,8 @@ const Address = () => {
                             DELETE
                           </button>
                         </td>
-                        {/* <td className='icon-place'>
-                          <button
-                            onClick={() => { handleEdit(address.id) }} >
-                            <CiEdit />
-                          </button>
-                        </td> */}
+                        <td>{address.user_name}</td>
+                        <td>{address.user_contact}</td>
                         <td>{address.nation}</td>
                         <td>{address.city}</td>
                         <td>{address.districts}</td>

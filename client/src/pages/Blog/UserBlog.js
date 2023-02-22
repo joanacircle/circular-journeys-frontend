@@ -16,33 +16,33 @@ const UserBlog = () => {
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
-    .then(r => r.json())
-    .then((data) => { setPost(data) })
-    .catch(error => console.error(error))
+      .then(r => r.json())
+      .then((data) => { setPost(data) })
+      .catch(error => console.error(error))
   }
 
   // 驗證 parameter的 memberId是否存在於資料庫
   useEffect(() => { fetcher() }, [])
   function fetcher() {
     fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
-    .then(r => r.json())
-    .then((data) => {
-      const mId = data.member[0].member_id
-      setId(mId)
-    })
+      .then(r => r.json())
+      .then((data) => {
+        const mId = data.member[0].member_id
+        setId(mId)
+      })
   }
 
   // TagsCategory props:
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
 
   if (id.includes(memberId)) {
-  return (
+    return (
       <>
-      <div>
+        <div>
           <div className='userblog-container'>
             <div className='page-body'>
               <div className='post-container'>
-                <h2 className='userblog-h2'>{post[0].last_name}</h2>
+                <h2 className='userblog-h2'>{post[0].user_nickname}</h2>
                 <div className='userblog-nav'>
                   <ul>
                     <Link to='#'>
@@ -63,7 +63,7 @@ const UserBlog = () => {
                       img={v.cover}
                       createAt={v.create_at}
                       likes={v.total_likes}
-                      postContent={v.post_content}/>
+                      postContent={v.post_content} />
                   )
                 })}
                 <div className='userblog-pagination'>
@@ -75,7 +75,7 @@ const UserBlog = () => {
                   <div className='member-avatar'>
                     <img src="" alt="avatar" />
                     {/* TODO: 如果會員沒有撰寫文章時 */}
-                    <h4>{post[0].last_name}</h4>
+                    <h4>{post[0].user_nickname}</h4>
                   </div>
                 </div>
                 <div className='userblog-aside-item'>
@@ -83,7 +83,7 @@ const UserBlog = () => {
                     <input className='blog-input' placeholder="Search">
                     </input>
                     <button className='blog-button' type="submit">
-                      <BiSearch className='search-icon'/>
+                      <BiSearch className='search-icon' />
                     </button>
                   </form>
                 </div>
@@ -91,12 +91,12 @@ const UserBlog = () => {
                   <BlogCategory />
                 </div>
                 <div className='userblog-aside-item'>
-                  <TagsCategory tags={tagsCategory}/>
+                  <TagsCategory tags={tagsCategory} />
                 </div>
               </div>
             </div>
           </div>
-      </div>
+        </div>
       </>
     )
   } else {

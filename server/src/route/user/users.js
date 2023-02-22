@@ -57,7 +57,7 @@ router.post('/login', async (req, res, next) => {
       await db.query(updateSql, [token, userEmail, userPassword])
       res.json({
         state: true,
-        message: `歡迎回來 ${data.first_name + data.last_name}`,
+        message: `歡迎回來 ${data.user_name}`,
         data,
         id: data.id,
         token: token
@@ -122,7 +122,7 @@ router.post('/forget', async (req, res, next) => {
       res.json({
         state: true,
         message: '驗證碼已寄到您的信箱！',
-        userLastName: checkUserEmail[0][0].last_name,
+        userLastName: checkUserEmail[0][0].user_nickname,
         key
       })
       await db.query(setKeySql, [key, userEmail])

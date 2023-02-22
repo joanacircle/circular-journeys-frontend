@@ -99,7 +99,7 @@ const Menu = () => {
                 <CustomFileInput picture={picture} setPicture={setPicture} />
               </div>
             </div>
-            <h4 className="user-name">{userData && userData.user_name}</h4>
+            <h4 className="user-name">{userData && userData.user_nickname}</h4>
           </div>
           <ul className="page-menu" onClick={handleChangePage}>
             {

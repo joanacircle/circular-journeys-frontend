@@ -85,7 +85,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
           <div className='user-name'>
             <FaUserAlt size={35} />
             <div className='user-info'>
-              <h5>{userData && userData.user_name}</h5>
+              <h5>{userData && userData.user_nickname}</h5>
             </div>
           </div>
         </Link>

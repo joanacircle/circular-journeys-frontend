@@ -5,12 +5,12 @@
   .membercenter-box {
     display: flex;
     justify-content: center;
-    margin: 20px;
+    margin-top: 20px;
     .col {
       margin: 0 5px;
     }
     .col-1 {
-      width: 25%;
+      width: 20%;
       .aside-box {
         box-shadow: 0px 0px 10px 0.8px var(--gray);
         padding: 15px;
@@ -95,8 +95,8 @@
       }
     }
     .col-2 {
-      width: 70%;
-      margin-left: 15px;
+      width: 75%;
+      margin-left: 20px;
     }
   }
 }

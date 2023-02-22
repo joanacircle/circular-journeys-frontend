@@ -12,6 +12,7 @@ import firebase from '../../../components/Firebase/firebase'
 import 'firebase/compat/auth'
 import axios from 'axios'
 import md5 from 'md5'
+import validator from 'validator'
 
 const LoginModal = ({ handleToggleLoginModal }) => {
 
@@ -20,6 +21,10 @@ const LoginModal = ({ handleToggleLoginModal }) => {
   const [userForgot, setUserForgot] = useState(false)
   const { alert, setAlert } = useAlert()
   const [inputChange, setInputChange] = useState({})
+  const [animation, setAnimation] = useState({
+    postalCode: '',
+    contact: ''
+  })
 
   // handle input change
   const handelInputChange = (event) => {
@@ -89,6 +94,25 @@ const LoginModal = ({ handleToggleLoginModal }) => {
     }
   }
 
+  // validator
+  const handleEmailIsTrue = (event) => {
+    const email = event.target.value
+    if (!validator.isEmail(email)) {
+      setAnimation({
+        ...animation,
+        [event.currentTarget.id]: 'animate__animated animate__shakeX alert-style'
+      })
+      setAlert({ state: true, message: `信箱格式錯誤！` })
+    }
+  }
+
+  const handleFocus = (event, id) => {
+    event.currentTarget.id === id &&
+      setAnimation({
+        ...animation,
+        [event.currentTarget.id]: ''
+      })
+  }
 
   // handle modal change
   const handleCloseLoginModal = (event) => {
@@ -167,16 +191,18 @@ const LoginModal = ({ handleToggleLoginModal }) => {
                         <h1>登入</h1>
                         <form className='form-place' onSubmit={handleLogin}>
                           <input
-                            className='input-box'
+                            className={`input-box ${animation.userEmail}`}
                             type="email"
                             name="userEmail"
                             id="userEmail"
                             placeholder='Email'
                             onChange={handelInputChange}
+                            onBlur={handleEmailIsTrue}
+                            onFocus={(event) => handleFocus(event, event.currentTarget.id)}
                           />
                           <div className='input-password'>
                             <input
-                              className='input-box'
+                              className={`input-box ${animation.userPassword}`}
                               type={showPassword ? 'text' : 'password'}
                               name="userPassword"
                               id="userPassword"
@@ -235,18 +261,6 @@ const LoginModal = ({ handleToggleLoginModal }) => {
                               >
                                 <FcGoogle size={25} />
                               </button>
-                              {/* <button
-                              className='other-login-btn btn-facebook'
-                              type="button"
-                            >
-                              <FaFacebookSquare color='#fff' size={25} />
-                            </button>
-                            <button
-                              className='other-login-btn btn-apple'
-                              type="button"
-                            >
-                              <AiFillApple color='#fff' size={25} />
-                            </button> */}
                             </div>
                           </div>
                         </form>

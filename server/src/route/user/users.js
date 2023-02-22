@@ -77,10 +77,10 @@ router.post('/login', async (req, res, next) => {
 //user signup
 //http://localhost:3001/user/signup
 router.post('/signup', async (req, res, next) => {
-  const { userFirstName, userLastName, userName, userEmail, userPassword } = req.body
+  const { userName, userNickName, userEmail, userPassword } = req.body
   const token = uuid.v4()
   const id = shortid.generate()
-  const sql = `INSERT INTO users_information (member_id, first_name, last_name, user_name, email, password, token) VALUES (?,?,?,?,?,?,?)`
+  const sql = `INSERT INTO users_information (member_id, user_name, user_nickname, email, password, token) VALUES (?,?,?,?,?,?)`
   const checkSql = `SELECT * FROM users_information WHERE email = ?`
   try {
     const check = await db.query(checkSql, [userEmail])
@@ -90,7 +90,7 @@ router.post('/signup', async (req, res, next) => {
         message: `此信箱已註冊過了！`
       })
     } else {
-      const create = await db.query(sql, [id, userFirstName, userLastName, userName, userEmail, userPassword, token])
+      const create = await db.query(sql, [id, userName, userNickName, userEmail, userPassword, token])
       if (create) {
         res.json({
           state: true,
@@ -195,15 +195,15 @@ router.post('/address/list', async (req, res, next) => {
 //user change address
 //http://localhost:3001/user/address
 router.post('/address', async (req, res, next) => {
-  const { member_id, userAddress, userPostalCode, nation, city, districts } = req.body
-  const createAddress = `INSERT INTO user_address (member_id, address, postal_code, nation, city, districts) VALUES(?,?,?,?,?,?)`
+  const { member_id, userName, userContact, userAddress, userPostalCode, nation, city, districts } = req.body
+  const createAddress = `INSERT INTO user_address (member_id, user_name, user_contact, address, postal_code, nation, city, districts) VALUES(?,?,?,?,?,?,?,?)`
   const showList = `SELECT * FROM user_address WHERE member_id = ?`
   try {
     const check = await db.query(showList, [member_id])
     if (check[0].length < 2) {
       const result = await db.query(createAddress,
         [
-          member_id, userAddress, userPostalCode, nation, city, districts
+          member_id, userName, userContact, userAddress, userPostalCode, nation, city, districts
         ]
       )
       if (result) {
@@ -252,13 +252,13 @@ router.post('/google/signup', async (req, res, next) => {
   const { userEmail, userName, userPicture, userId } = req.body
   const token = uuid.v4()
   const checkSql = `SELECT * FROM users_information WHERE member_id = ?`
-  const sql = `INSERT INTO users_information (member_id, user_name, email, picture, token) VALUES (?,?,?,?,?)`
+  const sql = `INSERT INTO users_information (member_id, user_name, user_nickname, email, picture, token) VALUES (?,?,?,?,?,?)`
   try {
     const check = await db.query(checkSql, [userId])
     if (check[0].length > 0) {
       return
     } else {
-      const createUser = await db.query(sql, [userId, userName, userEmail, userPicture, token])
+      const createUser = await db.query(sql, [userId, userName, userName, userEmail, userPicture, token])
       if (createUser) {
         res.json({
           state: true,
@@ -274,7 +274,6 @@ router.post('/google/signup', async (req, res, next) => {
     next(err)
   }
 })
-
 //http:localhost:3001/user/google/login
 router.post('/google/login', async (req, res, next) => {
   const token = uuid.v4()
@@ -289,6 +288,26 @@ router.post('/google/login', async (req, res, next) => {
       res.json({
         state: true,
         token: token
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+//user setting info update
+//http://localhost:3001/user/setting
+router.post('/setting', async (req, res, next) => {
+  const { member_id, userName, userNickName, userBirthday, sex, userTelephone, userContactEmail } = req.body
+  const sql = `SELECT * FROM users_information WHERE member_id = ?`
+  const updateSql = `UPDATE users_information SET user_name = ?, user_nickname = ?, birthday = ?, sex = ?, telephone = ?, contact_email = ?  WHERE member_id = ?`
+  try {
+    const check = await db.query(sql, [member_id])
+    if (check[0][0]) {
+      await db.query(updateSql, [userName, userNickName, userBirthday, sex, userTelephone, userContactEmail, member_id])
+      res.json({
+        state: true,
+        message: `更新成功！`
       })
     }
   } catch (err) {

@@ -2,7 +2,6 @@ import './CategoryCheckbox.scss'
 
 const CategoryCheckbox = ({ value, handleSelected, categories }) => {
 
-
   return (
     <>
       <div className="checkbox-card">

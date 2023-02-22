@@ -5,7 +5,6 @@ const SortBar = (props) => {
   return (
     <>
       <div className="row">
-        {/* <div className="col-sm-12"> */}
         <div className="btn-group">
           <select
             className="sortbar-select form-select form-select-sm"
@@ -18,7 +17,6 @@ const SortBar = (props) => {
             <option value="2">價格排序-由多至少</option>
           </select>
         </div>
-        {/* </div> */}
       </div>
     </>
 

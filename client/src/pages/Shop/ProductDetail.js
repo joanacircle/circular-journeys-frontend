@@ -8,31 +8,36 @@ const ProductDetail = () => {
   const location = useLocation()
   const product = location.state?.product
 
-  const img = [
-    `${process.env.REACT_APP_DEV_URL}/shop/products/${product.path1}.jpg`,
-    `${process.env.REACT_APP_DEV_URL}/shop/products/${product.path2}.jpg`,
-    `${process.env.REACT_APP_DEV_URL}/shop/products/${product.path3}.jpg`,
-    `${process.env.REACT_APP_DEV_URL}/shop/products/${product.path4}.jpg`
-  ]
+  const getImgPath = () => {
+    const paths = []
+    for (let i = 1; i <= 6; i++) {
+      const path = product[`path${i}`]
+      if (path !== null) {
+        paths.push(`${process.env.REACT_APP_DEV_URL}/shop/products/${path}.jpg`)
+      }
+    }
+    return paths
+  }
+
+  const img = getImgPath(product)
 
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0)
 
   const handleThumbnailClick = (index) => {
-    // setSelectedThumbnailIndex(index)
 
     window.scrollTo({
-      top: index * 150,
+      top: index * 450,
       behavior: 'smooth'
     })
   }
 
   useEffect(() => {
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY
-      const index = Math.floor(scrollPosition / 150)
+      const index = Math.floor(scrollPosition / 400)
       setSelectedThumbnailIndex(index)
     }
-
     window.addEventListener('scroll', handleScroll)
 
     return () => {
@@ -40,45 +45,49 @@ const ProductDetail = () => {
     }
   }, [])
 
+
   return (
     <>
       <div className='product-detail-page'>
-        <div className="product-detail">
-          <div className="product-image-gallery">
-            <div className="thumbnails-container">
+        <div className="product-image-gallery">
+          <div className="thumbnails-container">
+            {img.map((pic, index) => (
 
-              {img.map((pic, index) => (
-                <img
-                  className={`thumbnail ${selectedThumbnailIndex === index ? 'selected' : ''}`}
-                  src={pic}
-                  alt=""
-                  key={index}
-                  onClick={() => handleThumbnailClick(index)}
-                />
-              ))}
+              <img
+                className={`thumbnail ${selectedThumbnailIndex === index ? 'selected' : ''}`}
+                src={pic}
+                alt=""
+                key={index}
+                onClick={() => handleThumbnailClick(index)}
+              />
+            ))}
 
-            </div>
-            <div className="main-image-container" >
+          </div>
 
-              {img.map((pic, index) => (
-                <img className='image-list' src={pic} alt="" key={index} />
-              ))}
+          <div className="main-image-container" >
+            {img.map((pic, index) => (
+              <img className='image-list' src={pic} alt="" key={index} />
+            ))}
+          </div>
 
-
-            </div>
+          <div className='info-container-parent'>
             <div className='product-info-container'>
               <div className='product-spec'>
-                <h2>{product.title}</h2>
-                <p>Price: ${product.price}</p>
-                <p>{product.desc}</p>
+                <h3 className='title-h3'>{product.title}</h3>
+
               </div>
               <div className='spec-buttons'>
+                <hr />
+                <p className='desc-p'>{product.product_desc}</p>
+                <hr />
+                <p className='price-p'>限定價: ${parseFloat(product.price).toLocaleString('zh-TW')}</p>
                 <button className='put-kart'>加入購物袋</button>
                 <button className='buy-now'>立即購買</button>
               </div>
             </div>
           </div>
         </div>
+
         <div className='recommendations'>
           <div className='recommend-list'>
             {/* {sampleData.map((item) => (

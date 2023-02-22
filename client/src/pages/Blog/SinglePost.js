@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 import './SinglePost.scss'
 import { NotFound } from 'pages/NotFound'
@@ -72,30 +74,34 @@ const SinglePost = () => {
                   <p>{post[0].create_at}</p>
                 </div>
                 <div className="post-likes-group">
-                  <AiOutlineHeart size={25} className='heart-icon'/>
                   {post[0].total_likes === 0
                   ? (<p>{''}</p>)
-                  : (<p>{post[0].total_likes}</p>)
+                  : (<>
+                    <AiOutlineHeart size={25} className='heart-icon'/>
+                    <p>{post[0].total_likes}</p>
+                    </>)
                   }
                 </div>
               </div>
-              <p className='post-content'>
-                {post[0].post_content}
-              </p>
+              <div className='post-content'>
+                <div dangerouslySetInnerHTML={{
+                  __html: post[0].post_content
+                }} />
+              </div>
             </div>
             <div className="post-footer">
               <AiOutlineHeart className='heart-icon' size={40}/>
               <p>
                 即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
               </p>
-              TODO
+              {/* TODO */}
               <p>
                 <Link to='#'>前一篇 </Link>
                 |
                 <Link to='#'> 後一篇</Link>
               </p>
             </div>
-            TODO
+            {/* TODO */}
             {/* <div className="related-post">
               <Card2
                 tags={tags}

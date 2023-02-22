@@ -5,9 +5,6 @@ import './Card2.scss'
 
 const Card2 = (props) => {
   const tag = props.tags // 傳入 object
-  const keyOne = shortid.generate()
-  const keyTwo = shortid.generate()
-  const mapKey = [keyOne, keyTwo]
   return (
     <>
     <div className="card2">

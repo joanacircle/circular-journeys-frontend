@@ -4,7 +4,13 @@
   border: none;
 
   .card-img{
-    border-radius: var(--br1) var(--br1) 0 0;
+    .image{
+      img{
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: var(--br1) var(--br1) 0 0;
+      }
+    }
   }
 
   .card-caption{

@@ -1,16 +1,10 @@
 import { useState, useEffect } from 'react'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import { BiSearch } from 'react-icons/bi'
-
 import './HomeBlog.scss'
 import Card from 'components/Cards/Card'
 import Card2 from 'components/Cards/Card2'
 import Banner from 'images/Blog/home-banner.jpg'
-import B001 from 'images/Blog/B001.jpg'
-import B002 from 'images/Blog/B002.jpeg'
-import B003 from 'images/Blog/B003.jpeg'
-import B004 from 'images/Blog/B004.jpeg'
-
 
 const HomeBlog = () => {
   const [post, setPost] = useState({
@@ -25,16 +19,6 @@ const HomeBlog = () => {
       .then((data) => { setPost(data) })
       .catch(error => console.log(error))
   }
-
-  // Card props:
-  const postId = 'p123'
-  const imgSrc = [B001, B002, B003, B004]
-  const imgAlt = [B001, B002, B003, B004]
-  const title = '假設文章標題上限為二十個字應該可以吧嗎吧'
-  // Card2 props:
-  const tags = ['旅遊', '旅遊']
-  const tagId = 't123'
-  const likes = '10k'
 
   return (
     <>
@@ -63,8 +47,7 @@ const HomeBlog = () => {
                   <Card
                     key={'c' + v.post_id}
                     postId={v.post_id}
-                    imgSrc={imgSrc[i]}
-                    imgAlt={imgAlt[i]}
+                    img={v.cover}
                     title={v.post_title} />
                 </>
               )
@@ -80,10 +63,9 @@ const HomeBlog = () => {
                   <>
                     <Card2
                       key={'c2' + v.post_id}
-                      tags={v.tag}
                       postId={v.post_id}
-                      imgSrc={imgSrc[i]}
-                      imgAlt={imgAlt[i]}
+                      img={v.cover}
+                      tags={v.tag}
                       title={v.post_title}
                       likes={v.total_likes} />
                   </>

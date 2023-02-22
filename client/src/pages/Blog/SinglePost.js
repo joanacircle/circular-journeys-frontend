@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
-import { CKEditor } from '@ckeditor/ckeditor5-react'
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 import './SinglePost.scss'
 import { NotFound } from 'pages/NotFound'

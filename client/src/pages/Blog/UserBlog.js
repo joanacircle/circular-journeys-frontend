@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
-
 import './UserBlog.scss'
 import Card4 from 'components/Cards/Card4'
 import BlogCategory from 'components/BlogCategory'
@@ -33,9 +32,6 @@ const UserBlog = () => {
     })
   }
 
-  // Card4 props:
-  const imgSrc = 'p1i1.jpeg'
-  const imgAlt = 'img'
   // TagsCategory props:
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
 
@@ -57,16 +53,14 @@ const UserBlog = () => {
                     </Link>
                   </ul>
                 </div>
-                {/* 問題 Warning: Each child in a list should have a unique "key" prop. */}
                 {post.map((v, i) => {
                   return (
                     <Card4
-                      key={i + '-' + v.post_id}
-                      tag={v.tag}
+                      key={'c4' + v.post_id}
+                      tags={v.tag}
                       title={v.post_title}
                       postId={v.post_id}
-                      imgSrc={imgSrc}
-                      imgAlt={imgAlt}
+                      img={v.cover}
                       createAt={v.create_at}
                       likes={v.total_likes}
                       postContent={v.post_content}/>

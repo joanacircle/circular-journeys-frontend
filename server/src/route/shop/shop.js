@@ -8,4 +8,6 @@ router.get('/', async (req, res) => {
   res.json(data)
 })
 
+// router.get('/product/:P_id')
+
 module.exports = router

@@ -1,12 +1,11 @@
 import './CategoryCheckbox.scss'
 
-const CategoryCheckbox = ({ value, handleSelected, categories, preCate }) => {
+const CategoryCheckbox = ({ value, handleSelected, categories }) => {
 
 
   return (
     <>
       <div className="checkbox-card">
-        {console.log(preCate)}
         <label className='checkbox-label'>
           <input
             type="checkbox"

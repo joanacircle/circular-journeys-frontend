@@ -10,6 +10,10 @@ const HomeShop = () => {
     { title: '旅行配件', image: `${process.env.REACT_APP_DEV_URL}/shop/shop-home/shop4.jpg` }
   ]
 
+  const handleLink = () => {
+    window.scrollTo(0, 0)
+  }
+
   return (
     <>
 
@@ -24,6 +28,7 @@ const HomeShop = () => {
               <Link
                 to='/shop'
                 state={{ categoryTitle: category.title }}
+                onClick={handleLink}
               >
                 <img
                   src={category.image}

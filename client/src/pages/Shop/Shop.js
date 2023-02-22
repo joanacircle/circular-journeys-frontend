@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import './Shop.scss'
 
 import FilterBar from './components/FilterBar/'
@@ -10,9 +9,6 @@ import SortBar from './components/SortBar/'
 
 
 const Shop = () => {
-
-  const location = useLocation()
-  const preCate = location.state?.categoryTitle
 
   const [products, setProducts] = useState([])
   // 排序、搜尋後的資料
@@ -30,12 +26,11 @@ const Shop = () => {
   const [sortBy, setSortBy] = useState('')
   const [searchWord, setSearchWord] = useState('')
 
-  // x秒後自動關掉spinner(設定isLoading為false)
   useEffect(() => {
     if (isLoading) {
       setTimeout(() => {
         setIsLoading(false)
-      }, 500)
+      }, 400)
     }
   }, [isLoading])
 
@@ -43,6 +38,15 @@ const Shop = () => {
     setIsLoading(true)
     getData()
   }, [])
+
+
+  // 取得資料
+  const getData = async () => {
+    const response = await fetch('http://localhost:3001/shop')
+    const data = await response.json()
+    setProducts(data)
+    setDisplayProducts(data)
+  }
 
   useEffect(() => {
 
@@ -56,15 +60,12 @@ const Shop = () => {
     newProducts = handlePriceRange(newProducts, priceRange)
 
     setDisplayProducts(newProducts)
+    // setIsLoading(false) 造成問題, 列表不出來
+
+
   }, [products, sortBy, searchWord, categories, priceRange])
 
-  // 取得資料
-  const getData = async () => {
-    const response = await fetch('http://localhost:3001/shop')
-    const data = await response.json()
-    setProducts(data)
-    setDisplayProducts(data)
-  }
+
   // 排序邏輯
   const handleSort = (products, sortBy) => {
     const newProducts = [...products]
@@ -147,7 +148,6 @@ const Shop = () => {
                 categoryMenu={categoryMenu}
                 categories={categories}
                 setCategories={setCategories}
-                preCate={preCate}
               />
             </div>
 

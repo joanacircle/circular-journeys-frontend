@@ -68,7 +68,9 @@ const SinglePost = () => {
               </div>
             </div>
             <div className="head-img">
-              <img src={B001} alt="" />
+              <div dangerouslySetInnerHTML={{
+                  __html: post[0].cover
+                }} />
             </div>
             <div className="post-body">
               <div className='post-meta'>

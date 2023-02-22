@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { Navigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './PostEditor.scss'
 
@@ -31,14 +31,13 @@ const PostEditor = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     axios.post(`${process.env.REACT_APP_DEV_URL}/blog/newpost/${memberId}`, form)
-    .then(r =>
-      console.log(r)
-      // Navigate
+    .then(r => {
+      const { message, postId } = r.data
+      window.location = `http://localhost:3000/blog/post/${postId}`
+    }
     )
     .catch(err => console.log(err))
   }
-
-  console.log(form)
 
   return (
     <>

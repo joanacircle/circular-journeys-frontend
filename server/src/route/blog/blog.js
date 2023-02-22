@@ -132,7 +132,10 @@ router.post('/newpost/:member_id', async(req, res) => {
         const [rows3] = await db.query(sqlInsertTag, [tagId, tag, postId])
       }
     }
-    res.send('success')
+    res.json({
+      message: 'success',
+      postId: `${postId}`
+    })
   }
   catch(err){
     res.send(err)
@@ -186,22 +189,20 @@ router.get('/post/:post_id', async (req, res) => {
     posts.post_title, 
     posts.member_id,
     users_information.last_name,
-    post_imgs.img_id, 
     posts.create_at,  
     posts.total_likes,
     posts.post_content, 
-    posts.post_id,  
+    posts.post_id, 
+    posts.cover, 
     (
       SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
       FROM post_tags 
       WHERE post_tags.post_id = posts.post_id
     ) 
     AS tag
-  FROM post_imgs 
+  FROM users_information 
   JOIN posts 
-  ON posts.post_id = post_imgs.post_id && post_imgs.img_index = 1 
-  JOIN users_information 
-  ON posts.member_id = users_information.member_id
+  ON posts.member_id = users_information.member_id 
   WHERE posts.post_id = ?
   `
 

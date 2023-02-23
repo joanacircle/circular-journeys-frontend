@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './Menu.scss'
-import axios from 'axios'
 
 // components
 import CustomFileInput from 'components/Camera/Camera'
@@ -60,7 +59,7 @@ const MenuOptions = {
 const Menu = () => {
   const [changePage, setChangePage] = useState(MenuOptions)
   const [localData, setLocalData] = useState(localStorage.getItem('hoverLabel'))
-  const [picture, setPicture] = useState({})
+  const [picture, setPicture] = useState(null)
   const { userData } = userInfo()
 
   // handle Menu state
@@ -89,15 +88,24 @@ const Menu = () => {
     handleMenuState()
   }, [])
 
+
   return (
     <div className="membercenter-place">
       <div className="membercenter-box">
         <div className="col col-1">
           <div className="aside-box">
-            <div className="user-img">
-              <div className="camera-place">
-                <CustomFileInput picture={picture} setPicture={setPicture} />
-              </div>
+            <div className='user-img-place'>
+              <img
+                className="user-img"
+                src={
+                  picture
+                    ? URL.createObjectURL(picture)
+                    : 'https://react.semantic-ui.com/images/wireframe/image.png'
+                }
+              />
+            </div>
+            <div className="camera-place">
+              <CustomFileInput picture={picture} setPicture={setPicture} />
             </div>
             <h4 className="user-name">{userData && userData.user_nickname}</h4>
           </div>

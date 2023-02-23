@@ -3,53 +3,57 @@ import './CartList.scss'
 import { RxCrossCircled } from 'react-icons/rx'
 
 
-const CartList = ({ products, setProducts }) => {
+const CartList = ({ cartItems, setCartItems }) => {
 
-  const deleteProduct = (id) => {
-    setProducts(products.filter((toDelete, i2) => id !== toDelete.id))
+  const deleteProduct = (p_id) => {
+    setCartItems(cartItems.filter((toDelete, i2) => p_id !== toDelete.p_id))
+    localStorage.setItem(cartItems)
   }
 
   return (
     <>
-      {products.map((v, i) => {
-        const { id, name, price, img, count } = v
+      {cartItems.map((v, i) => {
+        const { p_id, title, price, img, count } = v
 
         const handleChange = (event) => {
-          const updatedProducts = [...products]
+          const updatedProducts = [...cartItems]
           updatedProducts[i].count = event.target.value
-          setProducts(updatedProducts)
+          setCartItems(updatedProducts)
         }
 
         return (
-          <div key={id}>
-
+          <div key={p_id}>
             <div className='itemImage'>
               <RxCrossCircled
                 className="deleteItem"
                 onClick={() => {
-                  deleteProduct(id)
+                  deleteProduct(p_id)
                 }} />
+              <img className='cart-img' src={img} alt="product image" />
 
-              <img src={img} alt="product image" />
             </div>
-            <div>
-              <h5>{name}</h5>
-              <div className='itemDetail'>
-                <p>數量: </p>
-                <select value={count} onChange={handleChange}>
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                    <option key={num} value={num}>
-                      {num}
-                    </option>
-                  ))}
-                </select>
+            <div className='itemDetail'>
+              <p className='cart-title'>{title}</p>
+
+              <div className='cart-subtotal'>
+                <div className='cart-qty'>
+
+                  <p className='qty-qty'>數量<span className='white-space'></span></p>
+
+                  <select className='cart-select' value={count} onChange={handleChange}>
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <p className='itemTotal-p'>$ {parseFloat(price).toLocaleString('zh-TW')}</p>
               </div>
-            </div>
-            <div className='itemTotal'>
-              <p>$ {price * count}</p>
-            </div>
 
+            </div>
           </div>
+
         )
       })}
     </>

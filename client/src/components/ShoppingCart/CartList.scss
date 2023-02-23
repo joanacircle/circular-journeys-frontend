@@ -13,14 +13,41 @@
   }
 }
 .itemDetail {
-  float: left;
-  width: 60%;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+
+  .cart-subtotal{
+    display: flex;
+    justify-content: space-between;
+
+    .cart-qty{
+      display: flex;
+    
+      .qty-qty{
+        font-weight: 400;
+        .white-space {
+            padding-right: 5px;
+          }
+      }
+      .cart-select{
+        font-weight: 600;
+        &:focus{
+          outline: none;
+            box-shadow: 0 0 4px 1px var(--orange);
+            border-radius: 8px;
+        }
+      }
+    }
+    .itemTotal-p {
+        white-space: nowrap;       
+      }
+  }
   
-}
 .itemTotal {
   float: right;
   width: 20%;
   padding: 10px;
   
+  }
 }

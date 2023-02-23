@@ -120,6 +120,7 @@ const SettingPage = () => {
                 value={inputData.userName || ''}
                 onChange={handleInputChange}
                 placeholder='王小明'
+                maxLength={10}
               />
             </div>
             <div className='label-place'>
@@ -131,6 +132,7 @@ const SettingPage = () => {
                 value={inputData.userNickName || ''}
                 onChange={handleInputChange}
                 placeholder='阿明'
+                maxLength={10}
               />
             </div>
           </div>

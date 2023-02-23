@@ -7,6 +7,8 @@ import validator from 'validator'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
 import { userInfo } from 'components/userInfo/UserInfo'
 
+// icon
+import { TfiTrash } from 'react-icons/tfi'
 
 const Address = () => {
   const [inputData, setInputData] = useState({
@@ -214,12 +216,7 @@ const Address = () => {
                     addressList.map(address => (
                       <tr className='tr-hover' key={address.id}>
                         <td className='icon-place'>
-                          <button
-                            className='delete-btn'
-                            onClick={() => { handleDelete(address.id) }}>
-                            {/* <CiTrash /> */}
-                            DELETE
-                          </button>
+                          {<TfiTrash color='red' onClick={() => { handleDelete(address.id) }} />}
                         </td>
                         <td>{address.user_name}</td>
                         <td>{address.user_contact}</td>

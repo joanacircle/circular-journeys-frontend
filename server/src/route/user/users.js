@@ -247,16 +247,21 @@ router.post('/address/delete', async (req, res, next) => {
 
 
 //google acc
-//http://localhost:3001/user/google/signup
-router.post('/google/signup', async (req, res, next) => {
+//http://localhost:3001/user/google/acc
+router.post('/google/acc', async (req, res, next) => {
   const { userEmail, userName, userPicture, userId } = req.body
   const token = uuid.v4()
   const checkSql = `SELECT * FROM users_information WHERE member_id = ?`
   const sql = `INSERT INTO users_information (member_id, user_name, user_nickname, email, picture, token) VALUES (?,?,?,?,?,?)`
+  const updateSql = `UPDATE users_information SET token = ? WHERE member_id = ?`
   try {
     const check = await db.query(checkSql, [userId])
     if (check[0].length > 0) {
-      return
+      await db.query(updateSql, [token, userId])
+      res.json({
+        state: true,
+        token
+      })
     } else {
       const createUser = await db.query(sql, [userId, userName, userName, userEmail, userPicture, token])
       if (createUser) {
@@ -274,26 +279,26 @@ router.post('/google/signup', async (req, res, next) => {
     next(err)
   }
 })
-//http:localhost:3001/user/google/login
-router.post('/google/login', async (req, res, next) => {
-  const token = uuid.v4()
-  const { id } = req.body
-  const sql = `SELECT * FROM users_information WHERE member_id = ?`
-  const updateSql = `UPDATE users_information SET token = ? WHERE member_id = ?`
-  try {
-    const result = await db.query(sql, [id])
-    const data = result[0][0]
-    if (data) {
-      await db.query(updateSql, [token, id])
-      res.json({
-        state: true,
-        token: token
-      })
-    }
-  } catch (err) {
-    next(err)
-  }
-})
+// //http:localhost:3001/user/google/login
+// router.post('/google/login', async (req, res, next) => {
+//   const token = uuid.v4()
+//   const { id } = req.body
+//   const sql = `SELECT * FROM users_information WHERE member_id = ?`
+//   const updateSql = `UPDATE users_information SET token = ? WHERE member_id = ?`
+//   try {
+//     const result = await db.query(sql, [id])
+//     const data = result[0][0]
+//     if (data) {
+//       await db.query(updateSql, [token, id])
+//       res.json({
+//         state: true,
+//         token: token
+//       })
+//     }
+//   } catch (err) {
+//     next(err)
+//   }
+// })
 
 //user setting info update
 //http://localhost:3001/user/setting

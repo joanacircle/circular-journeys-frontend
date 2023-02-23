@@ -68,6 +68,7 @@ const Forgot = ({ showPassword, handleShowPasswordButton }) => {
       const { state, message } = changeUserPassword.data
       if (state) {
         setAlert({ state: true, message })
+        location.reload()
         window.location = '/'
         localStorage.removeItem('token')
       }

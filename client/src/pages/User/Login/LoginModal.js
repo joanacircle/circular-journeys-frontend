@@ -61,31 +61,35 @@ const LoginModal = ({ handleToggleLoginModal }) => {
   // Login witch google acc
   const SignInWitchGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider()
-    const url = `${process.env.REACT_APP_DEV_URL}/user/google/signup`
+    const url = `${process.env.REACT_APP_DEV_URL}/user/google/acc`
     try {
       const result = await firebase.auth().signInWithPopup(provider)
       const userProfile = result.additionalUserInfo.profile
       const { name, email, picture, id } = userProfile
+      console.log(result.additionalUserInfo)
       if (result.additionalUserInfo.isNewUser) {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
         const signupState = await axios.post(url, {
           userEmail: email,
           userName: name,
           userPicture: picture,
           userId: id
         })
+        const { token } = signupState.data
         setTimeout(() => {
           handleToggleLoginModal()
           // save token to localStorage
-          localStorage.setItem('token', signupState.data.token)
+          localStorage.setItem('token', token)
           window.location = '/'
         }, 300)
       } else {
-        const loginUrl = `${process.env.REACT_APP_DEV_URL}/user/google/login`
-        const response = await axios.post(loginUrl, { id })
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+        const loginState = await axios.post(url, { userId: id })
+        const { token } = loginState.data
         setTimeout(() => {
           handleToggleLoginModal()
           // save token to localStorage
-          localStorage.setItem('token', response.data.token)
+          localStorage.setItem('token', token)
           window.location = '/'
         }, 300)
       }

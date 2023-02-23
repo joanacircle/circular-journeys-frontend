@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import firebase from '../../../components/Firebase/firebase'
+import 'firebase/compat/auth'
 import './DropdownMenu.scss'
 import 'animate.css'
 
@@ -8,10 +9,11 @@ import 'animate.css'
 import { userInfo } from 'components/userInfo/UserInfo'
 
 // icon
-import { FaUserAlt, FaRegAddressBook } from 'react-icons/fa'
+import { FaRegAddressBook } from 'react-icons/fa'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { BsPersonBadge, BsCreditCard } from 'react-icons/bs'
+import { BiUser } from 'react-icons/bi'
 import { CiEdit } from 'react-icons/ci'
 import { AiOutlineLike } from 'react-icons/ai'
 import { CgNotes } from 'react-icons/cg'
@@ -68,8 +70,15 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
 
   // handle logout
   const handleLogoutButton = () => {
-    localStorage.removeItem('token')
-    window.location = '/'
+    firebase.auth().signOut()
+      .then(() => (
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+      ))
+      .then(() => {
+        localStorage.removeItem('token')
+        window.location = '/'
+      })
+      .catch(error => console.log(error))
   }
 
   // handle change page
@@ -83,7 +92,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
 
         <Link className='menu-option'>
           <div className='user-name'>
-            <FaUserAlt size={35} />
+            <BiUser size={35} />
             <div className='user-info'>
               <h5>{userData && userData.user_nickname}</h5>
             </div>

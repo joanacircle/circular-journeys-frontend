@@ -4,7 +4,7 @@ import Logo from '../images/Logo/Logo'
 import './Header.scss'
 
 // icons
-import { FaUserAlt } from 'react-icons/fa'
+import { FaUserCircle } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 import { BsCircleFill } from 'react-icons/bs'
 
@@ -81,7 +81,7 @@ const Header = () => {
               <li className='header-li'>
                 <button
                   onClick={handleToggleLoginModal}>
-                  <FaUserAlt id='user-menu' size={30} />
+                  <FaUserCircle id='user-menu' size={30} />
                 </button>
               </li>
             </ul>

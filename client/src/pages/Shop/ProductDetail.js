@@ -7,6 +7,20 @@ const ProductDetail = () => {
 
   const location = useLocation()
   const product = location.state?.product
+  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY
+      const index = Math.floor(scrollPosition / 400)
+      setSelectedThumbnailIndex(index)
+    }
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   const getImgPath = () => {
     const paths = []
@@ -21,29 +35,38 @@ const ProductDetail = () => {
 
   const img = getImgPath(product)
 
-  const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0)
-
   const handleThumbnailClick = (index) => {
-
     window.scrollTo({
       top: index * 450,
       behavior: 'smooth'
     })
   }
 
-  useEffect(() => {
+  const handleAddToCart = () => {
+    const existingCartItems = JSON.parse(localStorage.getItem('cart')) || []
 
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY
-      const index = Math.floor(scrollPosition / 400)
-      setSelectedThumbnailIndex(index)
-    }
-    window.addEventListener('scroll', handleScroll)
+    let cartItemExist = false
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
+    const updatedCartItems = existingCartItems.map((item) => {
+      if (item.p_id === product.p_id) {
+        item.count += 1
+        cartItemExist = true
+      }
+      return item
+    })
+
+    if (!cartItemExist) {
+      const cartItem = {
+        p_id: product.p_id,
+        title: product.title,
+        price: product.price,
+        img: img[0],
+        count: 1
+      }
+      updatedCartItems.push(cartItem)
     }
-  }, [])
+    localStorage.setItem('cart', JSON.stringify(updatedCartItems))
+  }
 
 
   return (
@@ -81,7 +104,7 @@ const ProductDetail = () => {
                 <p className='desc-p'>{product.product_desc}</p>
                 <hr />
                 <p className='price-p'>限定價: ${parseFloat(product.price).toLocaleString('zh-TW')}</p>
-                <button className='put-kart'>加入購物袋</button>
+                <button className='put-kart' onClick={handleAddToCart}>加入購物袋</button>
                 <button className='buy-now'>立即購買</button>
               </div>
             </div>

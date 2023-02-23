@@ -71,10 +71,13 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
   // handle logout
   const handleLogoutButton = () => {
     firebase.auth().signOut()
-      .then(() => (
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
-      ))
       .then(() => {
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
+        document.cookie.split(";").forEach(function (c) {
+          document.cookie = c
+            .replace(/^ +/, "")
+            .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/")
+        })
         localStorage.removeItem('token')
         window.location = '/'
       })

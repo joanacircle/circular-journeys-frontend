@@ -216,10 +216,7 @@ const Address = () => {
                     addressList.map(address => (
                       <tr className='tr-hover' key={address.id}>
                         <td className='icon-place'>
-                          <button
-                            onClick={() => { handleDelete(address.id) }}>
-                            {<TfiTrash />}
-                          </button>
+                          {<TfiTrash color='red' onClick={() => { handleDelete(address.id) }} />}
                         </td>
                         <td>{address.user_name}</td>
                         <td>{address.user_contact}</td>

@@ -21,6 +21,7 @@ const CartList = ({ cartItems, setCartItems }) => {
           const updatedProducts = [...cartItems]
           updatedProducts[i].count = event.target.value
           setCartItems(updatedProducts)
+          localStorage.setItem('cart', JSON.stringify(updatedProducts))
         }
 
         return (

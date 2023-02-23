@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
 import './Header.scss'
@@ -6,7 +6,6 @@ import './Header.scss'
 // icons
 import { FaUserCircle } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
-import { BsCircleFill } from 'react-icons/bs'
 
 // components
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
@@ -16,7 +15,6 @@ import { useIsLoggedIn } from 'hooks/useIsLoggedIn'
 
 const Header = () => {
 
-
   // for drop down
   const [userMenu, setUserMenu] = useState(false)
 
@@ -24,12 +22,23 @@ const Header = () => {
   const [loginModal, setLoginModal] = useState(false)
   const { isLogin } = useIsLoggedIn()
 
-  // shopping cart
-  const [modalVisibility, setModalVisibility] = useState(false)
+  // shopping cart modal
+  const [cartVisibility, setCartVisibility] = useState(false)
   const toggleModal = () => {
-    setModalVisibility(!modalVisibility)
+    setCartVisibility(!cartVisibility)
   }
 
+  // const [cartCount, setCartCount] = useState(localStorage.getItem('cart-count') || 0)
+
+  // useEffect(() => {
+  //   const handleCartCountChange = () => {
+  //     setCartCount(localStorage.getItem('cart-count') || 0)
+  //   }
+  //   window.addEventListener('storage', handleCartCountChange)
+  //   return () => {
+  //     window.removeEventListener('storage', handleCartCountChange)
+  //   }
+  // }, [])
 
   // Login modal
   const handleToggleLoginModal = () => (
@@ -67,7 +76,7 @@ const Header = () => {
               <li className='header-li'>
                 <button className='cart-button' onClick={toggleModal}>
                   <BiShoppingBag size={32} />
-                  <div className='bs-circle-fill'><BsCircleFill size={19} /></div>
+                  <div className='cart-count'>{localStorage.getItem('cart-count') || 0}</div>
                 </button>
                 <ul>
                   <li>
@@ -97,10 +106,8 @@ const Header = () => {
           />
         }
         {
-          modalVisibility &&
+          cartVisibility &&
           <ShoppingCart
-            modalVisibility={modalVisibility}
-            setModalVisibility={setModalVisibility}
             toggleModal={toggleModal}
           />
         }

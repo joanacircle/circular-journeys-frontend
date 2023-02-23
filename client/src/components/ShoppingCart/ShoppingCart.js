@@ -26,6 +26,8 @@ export const ShoppingCart = ({ toggleModal }) => {
     for (let i = 0; i < cartItems.length; i++) {
       qty += +cartItems[i].count
     }
+    localStorage.setItem('cart-count', qty)
+
     return qty
   }
 

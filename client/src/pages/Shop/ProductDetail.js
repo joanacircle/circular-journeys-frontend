@@ -49,7 +49,7 @@ const ProductDetail = () => {
 
     const updatedCartItems = existingCartItems.map((item) => {
       if (item.p_id === product.p_id) {
-        item.count += 1
+        item.count = parseInt(item.count) + 1
         cartItemExist = true
       }
       return item
@@ -66,6 +66,7 @@ const ProductDetail = () => {
       updatedCartItems.push(cartItem)
     }
     localStorage.setItem('cart', JSON.stringify(updatedCartItems))
+    // window.dispatchEvent(new Event("storage"))
   }
 
 

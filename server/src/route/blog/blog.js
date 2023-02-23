@@ -98,7 +98,7 @@ router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
   }
 })
 
-// http://localhost:3001/newpost/:member_id // PostEditor
+// http://localhost:3001/blog/newpost/:member_id // PostEditor
 router.post('/newpost/:member_id', async(req, res) => {
   const { memberId, title, tags, tag1, tag2, tag3, cover, content } = req.body
   const postId = 'p' + uuid.v4()
@@ -136,64 +136,33 @@ router.post('/newpost/:member_id', async(req, res) => {
     })
   }
   catch(err){
-    res.send(err)
+    res.json({message: err})
   }
 })
 
-// http://localhost:3001/blog/:member_id // UserBlog
-router.get('/:member_id', async (req, res) => {
-  const member_id = req.params.member_id;
+// http://localhost:3001/blog/postdata/:postId // EditPost
+router.delete('/post/:postId', async(req, res)=>{
 
-  const sql =`
-  SELECT 
-    posts.post_id,  
-    posts.create_at,  
-    posts.post_title, 
-    posts.post_content, 
-    posts.total_likes,
-    posts.cover, 
-    users_information.user_nickname,
-    (
-      SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
-      FROM post_tags 
-      WHERE post_tags.post_id = posts.post_id
-    ) 
-    AS tag 
-  FROM users_information 
-  JOIN posts 
-  ON users_information.member_id = ?
-  WHERE posts.member_id = ?
-  ORDER BY create_at DESC
-  `
-  const [rows] = await db.query(sql, [member_id, member_id],
-    (err, result) => {
-      if (err) throw err
-      res.json(result)
-    });
-
-  rows.forEach(row => {
-    row.create_at = moment(row.create_at).format('YYYY/MM/DD');
-  });
-  res.json(rows);
 })
 
-// http://localhost:3001/blog/post/:post_id // SinglePost
+// http://localhost:3001/blog/post/:post_id // SinglePost, EditPost
 router.get('/post/:post_id', async (req, res) => {
   const post_id = req.params.post_id;
   const sql =`
   SELECT 
-    posts.post_title, 
-    posts.member_id,
-    users_information.user_nickname,
-    posts.create_at,  
-    posts.total_likes,
-    posts.post_content, 
-    posts.post_id, 
-    posts.cover, 
-    (
-      SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
-      FROM post_tags 
-      WHERE post_tags.post_id = posts.post_id
+  posts.post_id,
+  posts.post_title, 
+  posts.member_id,
+  users_information.user_nickname,
+  posts.create_at,  
+  posts.total_likes,
+  posts.post_content, 
+  posts.post_id, 
+  posts.cover, 
+  (
+    SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+    FROM post_tags 
+    WHERE post_tags.post_id = posts.post_id
     ) 
     AS tag
   FROM users_information 
@@ -201,17 +170,96 @@ router.get('/post/:post_id', async (req, res) => {
   ON posts.member_id = users_information.member_id 
   WHERE posts.post_id = ?
   `
-
+    
   const [rows] = await db.query(sql, [post_id],
     (err, result) => {
       if (err) throw err
       res.json(result)
     });
-
-  rows.forEach(row => {
-    row.create_at = moment(row.create_at).format('YYYY/MM/DD');
-  });
-  res.json(rows);
+    
+    rows.forEach(row => {
+      row.create_at = moment(row.create_at).format('YYYY/MM/DD');
+      if(row.tag === null){
+        row.tag = []
+      }
+    });
+    res.json(rows);
 })
+
+// http://localhost:3001/blog/post/:postId // EditPost
+router.put('/post/:post_id', async(req, res)=>{
+  const postId = req.params
+  const {title, tags, tag1, tag2, tag3, cover, content} = req.body
+  const totalTag = [tag1, tag2, tag3].filter((v)=>{
+    return (v.length>0)
+  })
+  if(tags.length>0){
+    tags.map((v, i) => {totalTag.push(v)})
+  }
+
+  const sqlUpdatePost = `
+  UPDATE posts SET post_id=?,modify_at=now(), post_title=?,post_content=?,cover=? WHERE 1`
+  const sqlSelectTag=`
+  SELECT tag_id FROM post_tags WHERE tag = ? LIMIT 1`
+  const sqlUpdateTag=`
+  UPDATE post_tags SET tag_id=?, tag=? WHERE post_id=?`
+  
+  try{
+    const [result1] = await db.query(sqlUpdatePost, [postId, title, content, cover])
+
+    for(const tag of totalTag){
+      const [result2] = await db.query(sqlSelectTag, [tag])
+      if(result2.length>0){
+        const exisitTagId = result2[0].tag_id
+        const [result2] = await db.query(sqlUpdateTag, [exisitTagId, tag, postId])
+      }else{
+        const tagId = 't'+uuid.v4()
+        const [result3] = await db.query(sqlUpdateTag, [tagId, tag, postId])
+      }
+    }
+    res.json({message: 'success'})
+  }
+  catch(err){
+    res.send(err)
+  }
+})
+
+// http://localhost:3001/blog/:member_id // UserBlog
+router.get('/:member_id', async (req, res) => {
+const member_id = req.params.member_id;
+
+const sql =`
+SELECT 
+  posts.post_id,  
+  posts.create_at,  
+  posts.post_title, 
+  posts.post_content, 
+  posts.total_likes,
+  posts.cover, 
+  users_information.user_nickname,
+  (
+    SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+    FROM post_tags 
+    WHERE post_tags.post_id = posts.post_id
+  ) 
+  AS tag 
+FROM users_information 
+JOIN posts 
+ON users_information.member_id = ?
+WHERE posts.member_id = ?
+ORDER BY create_at DESC
+`
+const [rows] = await db.query(sql, [member_id, member_id],
+  (err, result) => {
+    if (err) throw err
+    res.json(result)
+  });
+
+rows.forEach(row => {
+  row.create_at = moment(row.create_at).format('YYYY/MM/DD');
+});
+res.json(rows);
+})
+
 
 module.exports = router;

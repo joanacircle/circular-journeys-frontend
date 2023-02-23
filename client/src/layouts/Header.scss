@@ -49,15 +49,15 @@ header {
                 color: $purple;
 
                 &:before {
-                    content: "1";
+                    content: "20";
                     font-size: 12px;
                     font-weight: bolder;
                     color: white;
                     position: absolute;
-                    top: 50%;
+                    top: 60%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    // z-index: 10;
+                    
               }
             }
           }

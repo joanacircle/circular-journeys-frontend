@@ -6,8 +6,10 @@ import { RxCrossCircled } from 'react-icons/rx'
 const CartList = ({ cartItems, setCartItems }) => {
 
   const deleteProduct = (p_id) => {
-    setCartItems(cartItems.filter((toDelete, i2) => p_id !== toDelete.p_id))
-    localStorage.setItem(cartItems)
+    const updatedCartItems = cartItems.filter((item, i2) => p_id !== item.p_id)
+    setCartItems(updatedCartItems)
+
+    localStorage.setItem('cart', JSON.stringify(updatedCartItems))
   }
 
   return (

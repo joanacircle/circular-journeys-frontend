@@ -60,6 +60,19 @@
         background: var(--white);
       }
     }
+
+    .post-editor{
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      color: var(--dark-gray);
+      align-items: center;
+      justify-content: center;
+
+      &:hover{
+        color: var(--purple);
+      }
+    }
   }
 
   .head-img{
@@ -118,7 +131,6 @@
       }
     }
 
-
     .post-content{
       font-size: 20px;
       margin-top: 10px;
@@ -126,10 +138,20 @@
   }
 
   .post-footer{
-    .heart-icon{
-      width: 100%;
-      color: var(--orange);
-      cursor: pointer;
+    .tags-section{
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      li{
+        color: var(--orange);
+        font-size: 20px;
+
+        &:hover{
+          color: var(--purple);
+        }
+      }
     }
 
     p{
@@ -140,6 +162,12 @@
       a:hover{
         color: var(--purple);
       }
+    }
+
+    .heart-icon{
+      width: 100%;
+      color: var(--orange);
+      cursor: pointer;
     }
   }
 

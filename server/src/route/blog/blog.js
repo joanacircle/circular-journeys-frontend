@@ -188,8 +188,7 @@ router.get('/post/:post_id', async (req, res) => {
 
 // http://localhost:3001/blog/post/:postId // EditPost
 router.put('/post/:post_id', async(req, res)=>{
-  const postId = req.params
-  const {title, tags, tag1, tag2, tag3, cover, content} = req.body
+  const {postId, title, tags, tag1, tag2, tag3, coverPath, content} = req.body
   const totalTag = [tag1, tag2, tag3].filter((v)=>{
     return (v.length>0)
   })
@@ -198,29 +197,32 @@ router.put('/post/:post_id', async(req, res)=>{
   }
 
   const sqlUpdatePost = `
-  UPDATE posts SET post_id=?,modify_at=now(), post_title=?,post_content=?,cover=? WHERE 1`
+  UPDATE posts SET modify_at=now(), post_title=?,post_content=?,cover=? WHERE post_id=?`
+  const sqlDeleteTag=`
+  DELETE FROM post_tags WHERE post_id=?`
   const sqlSelectTag=`
   SELECT tag_id FROM post_tags WHERE tag = ? LIMIT 1`
-  const sqlUpdateTag=`
-  UPDATE post_tags SET tag_id=?, tag=? WHERE post_id=?`
+  const sqlInsertTag = `
+  INSERT INTO post_tags(tag_id, tag, post_id) VALUES (?,?,?)`
   
   try{
-    const [result1] = await db.query(sqlUpdatePost, [postId, title, content, cover])
+    const [result1] = await db.query(sqlUpdatePost, [title, content, coverPath, postId])
+    const [result2] = await db.query(sqlDeleteTag, [postId])
 
     for(const tag of totalTag){
-      const [result2] = await db.query(sqlSelectTag, [tag])
-      if(result2.length>0){
-        const exisitTagId = result2[0].tag_id
-        const [result2] = await db.query(sqlUpdateTag, [exisitTagId, tag, postId])
+      const [result3] = await db.query(sqlSelectTag, [tag])
+      if(result3.length > 0){
+        const exisitTagId = result3[0].tag_id
+        const [result4] = await db.query(sqlInsertTag, [exisitTagId, tag, postId])
       }else{
-        const tagId = 't'+uuid.v4()
-        const [result3] = await db.query(sqlUpdateTag, [tagId, tag, postId])
+        const tagId = 't'+ uuid.v4()
+        const [result4] = await db.query(sqlInsertTag, [tagId, tag, postId])
       }
     }
     res.json({message: 'success'})
   }
   catch(err){
-    res.send(err)
+    res.json({message: err})
   }
 })
 

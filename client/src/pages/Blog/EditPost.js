@@ -77,8 +77,9 @@ const EditPost = () => {
     e.preventDefault()
     axios.put(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`, form)
     .then(r => {
-      console.log(r.data)
-      // window.location = `http://localhost:3000/blog/post/${postId}`
+      if (r.data.message === 'success') {
+        window.location = `http://localhost:3000/blog/post/${postId}`
+      }
     }
     )
     .catch(err => console.log(err))

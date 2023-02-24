@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { StripeContainer } from 'components/Stripe/StripeContainer'
 import './Payment.scss'
-import CardList from '../../../components/ShoppingCart/CartList'
+import CartList from '../../../components/ShoppingCart/CartList'
 
 const sampleProductData = [
   {
@@ -79,10 +79,9 @@ const Payment = ({ prevStep, nextStep }) => {
 
             </div>
             <div className="confirm-products">
-              <CardList
-                products={products}
-                setProducts={setProducts}
-
+              <CartList
+                cartItems={products}
+                setCartItems={setProducts}
               />
             </div>
           </div>

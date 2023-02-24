@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
-
+import { FiEdit, FiTrash } from 'react-icons/fi'
 import './SinglePost.scss'
 import { NotFound } from 'pages/NotFound'
 import Card2 from 'components/Cards/Card2'
-import B001 from 'images/Blog/B001.jpg'
 
 const SinglePost = () => {
   const [post, setPost] = useState([{}])
@@ -64,6 +63,10 @@ const SinglePost = () => {
                 <div className='member-avatar'>
                   <img src="" alt="avatar" />
                 </div>
+                <div className='post-editor'>
+                  <Link to={`/blog/edit/${postId}`} title='編輯文章'><FiEdit size={25}/></Link>
+                  <Link to={'#'} title='刪除文章'><FiTrash size={25}/></Link>
+                </div>
               </div>
               <div className="head-img">
                 <div dangerouslySetInnerHTML={{
@@ -93,10 +96,20 @@ const SinglePost = () => {
                 </div>
               </div>
               <div className="post-footer">
-                <AiOutlineHeart className='heart-icon' size={40} />
+                <ul className='tags-section'>
+                    {!post[0].tag
+                      ? <li>Loading...</li>
+                      : Object.entries(post[0].tag).map(([key, value]) => (
+                        <Link to={`/blog/tag/${key}`} key={key}>
+                          <li># {value}</li>
+                        </Link>
+                      ))
+                    }
+                  </ul>
                 <p>
                   即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
                 </p>
+                <AiOutlineHeart className='heart-icon' size={40} />
                 {/* TODO */}
                 <p>
                   <Link to='#'>前一篇 </Link>

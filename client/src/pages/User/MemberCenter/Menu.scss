@@ -12,28 +12,40 @@
     .col-1 {
       width: 20%;
       .aside-box {
+        @include flex(center, column);
+        position: relative;
         box-shadow: 0px 0px 10px 0.8px var(--gray);
         padding: 15px;
         background-color: #fff;
         border-radius: 6px;
         margin-bottom: 15px;
-        .user-img {
+        .camera-place {
+          @include flex(center, "");
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 10px;
+          background: #fff;
+          border-radius: 100%;
+        }
+        .user-img-place {
+          position: relative;
+          overflow: hidden;
           width: 120px;
           height: 120px;
           margin: 0 auto;
           background: #eaeaea;
           border-radius: 100%;
           border: 1px solid #eee;
-          position: relative;
-          .camera-place {
-            @include flex(center,'');
+          .user-img {
             position: absolute;
-            width: 35px;
-            height: 35px;
-            bottom: 0;
-            right: 0;
-            background: #fff;
-            border-radius: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            object-position: center;
+            min-width: 100%;
+            min-height: 100%;
           }
         }
         .user-name {
@@ -99,4 +111,9 @@
       margin-left: 20px;
     }
   }
+}
+
+.picture-option {
+  cursor: pointer;
+  margin-right: 4px;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
 import './Header.scss'
@@ -11,7 +11,8 @@ import { BiShoppingBag } from 'react-icons/bi'
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
-import { useIsLoggedIn } from 'hooks/useIsLoggedIn'
+import { userInfo } from 'components/userInfo/UserInfo'
+import { useIsLoggedIn } from '../hooks/useIsLoggedIn'
 
 const Header = () => {
 
@@ -20,13 +21,15 @@ const Header = () => {
 
   // for modals
   const [loginModal, setLoginModal] = useState(false)
-  const { isLogin } = useIsLoggedIn()
 
   // shopping cart modal
   const [cartVisibility, setCartVisibility] = useState(false)
   const toggleModal = () => {
     setCartVisibility(!cartVisibility)
   }
+
+  const { userData } = userInfo()
+  const { isLogin } = useIsLoggedIn()
 
   // const [cartCount, setCartCount] = useState(localStorage.getItem('cart-count') || 0)
 
@@ -44,7 +47,6 @@ const Header = () => {
   const handleToggleLoginModal = () => (
     isLogin.state ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
   )
-
   return (
     <>
       <header>
@@ -90,9 +92,23 @@ const Header = () => {
                 </ul>
               </li>
               <li className='header-li'>
-                <button
-                  onClick={handleToggleLoginModal}>
-                  <FaUserCircle id='user-menu' size={30} />
+                <button onClick={handleToggleLoginModal}>
+                  {
+                    !userData.member_id
+                      ? <FaUserCircle id='user-menu' size={40} />
+                      : (
+                        <img
+                          id='user-menu'
+                          className="user-img"
+                          src={
+                            userData.picture
+                              ? userData.picture
+                              : 'https://react.semantic-ui.com/images/wireframe/image.png'
+                          }
+                          title='User-Picture'
+                        />
+                      )
+                  }
                 </button>
               </li>
             </ul>

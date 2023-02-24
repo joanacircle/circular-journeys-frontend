@@ -13,7 +13,6 @@ import { FaRegAddressBook } from 'react-icons/fa'
 import { IoSettingsOutline } from 'react-icons/io5'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import { BsPersonBadge, BsCreditCard } from 'react-icons/bs'
-import { BiUser } from 'react-icons/bi'
 import { CiEdit } from 'react-icons/ci'
 import { AiOutlineLike } from 'react-icons/ai'
 import { CgNotes } from 'react-icons/cg'
@@ -56,7 +55,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        !(event.target.id === 'user-menu') &&
+        !(event.target.id === 'user-menu' && 'user-img') &&
         !(event.target.tagName === 'path')
       ) {
         handleToggleLoginModal()
@@ -95,7 +94,14 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
 
         <Link className='menu-option'>
           <div className='user-name'>
-            <BiUser size={35} />
+            <img
+              className="user-name-photo"
+              src={
+                userData.picture
+                  ? userData.picture
+                  : 'https://react.semantic-ui.com/images/wireframe/image.png'
+              }
+            />
             <div className='user-info'>
               <h5>{userData && userData.user_nickname}</h5>
             </div>

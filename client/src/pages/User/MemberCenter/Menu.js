@@ -88,7 +88,6 @@ const Menu = () => {
     handleMenuState()
   }, [])
 
-
   return (
     <div className="membercenter-place">
       <div className="membercenter-box">
@@ -98,8 +97,8 @@ const Menu = () => {
               <img
                 className="user-img"
                 src={
-                  picture
-                    ? URL.createObjectURL(picture)
+                  userData.picture
+                    ? (picture ? URL.createObjectURL(picture) : userData.picture)
                     : 'https://react.semantic-ui.com/images/wireframe/image.png'
                 }
               />

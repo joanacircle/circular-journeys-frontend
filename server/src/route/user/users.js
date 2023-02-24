@@ -279,26 +279,26 @@ router.post('/google/acc', async (req, res, next) => {
     next(err)
   }
 })
-// //http:localhost:3001/user/google/login
-// router.post('/google/login', async (req, res, next) => {
-//   const token = uuid.v4()
-//   const { id } = req.body
-//   const sql = `SELECT * FROM users_information WHERE member_id = ?`
-//   const updateSql = `UPDATE users_information SET token = ? WHERE member_id = ?`
-//   try {
-//     const result = await db.query(sql, [id])
-//     const data = result[0][0]
-//     if (data) {
-//       await db.query(updateSql, [token, id])
-//       res.json({
-//         state: true,
-//         token: token
-//       })
-//     }
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+
+//user update picture
+//http://localhost:3001/user/picture
+router.post('/picture', async (req, res, next) => {
+  const { imageUrl, member_id } = req.body
+  const checkUser = `SELECT * FROM users_information WHERE member_id = ?`
+  const updatePicture = `UPDATE users_information SET picture = ? WHERE member_id = ?`
+  try {
+    const check = await db.query(checkUser, [member_id])
+    if (check[0].length > 0) {
+      await db.query(updatePicture, [imageUrl, member_id])
+      res.json({
+        state: true,
+        message: `更新成功！`
+      })
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 //user setting info update
 //http://localhost:3001/user/setting

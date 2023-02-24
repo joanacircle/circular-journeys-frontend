@@ -8,6 +8,7 @@ import 'firebase/compat/firestore'
 // icon
 import { HiOutlinePhoto } from 'react-icons/hi2'
 import { MdDone, MdClear } from 'react-icons/md'
+import { userInfo } from 'components/userInfo/UserInfo'
 
 const FileInput = styled.input`
   display:none;
@@ -20,15 +21,7 @@ const CustomButton = styled.button`
 `
 const CustomFileInput = ({ picture, setPicture }) => {
   const fileInputRef = useRef(null)
-
-  // TODO:
-  useEffect(() => {
-    firebase.firestore().collection('picture').get()
-      .then(collectionSnapshot => {
-        const data = collectionSnapshot.docs
-        console.log(data)
-      })
-  }, [])
+  const { userData } = userInfo()
 
   const handleButtonClick = () => {
     fileInputRef.current.click()
@@ -44,10 +37,13 @@ const CustomFileInput = ({ picture, setPicture }) => {
     const documentRef = firebase.firestore().collection('picture').doc()
     const fileRef = firebase.storage().ref('user-images/' + documentRef.id)
     const metadata = { contentType: picture.type }
+    const url = `${process.env.REACT_APP_DEV_URL}/user/picture`
+    const { member_id } = userData
     fileRef.put(picture, metadata)
       .then(() => {
         fileRef.getDownloadURL()
-          .then(imageUrl => {
+          .then(async imageUrl => {
+            await axios.post(url, { imageUrl, member_id })
             documentRef.set({
               imageUrl,
               createdAt: firebase.firestore.Timestamp.now()

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './LoginModal.scss'
 import 'animate.css'
 import SignupModal from '../Signup/SignupModal'
@@ -7,6 +7,7 @@ import { IoCloseSharp } from 'react-icons/io5'
 import { FcGoogle } from 'react-icons/fc'
 import { BiShow, BiHide, BiArrowBack } from 'react-icons/bi'
 import { useAlert } from 'hooks/useAlert'
+import { useNavigate } from 'react-router-dom'
 
 import firebase from '../../../components/Firebase/firebase'
 import 'firebase/compat/auth'
@@ -16,6 +17,7 @@ import validator from 'validator'
 
 const LoginModal = ({ handleToggleLoginModal }) => {
 
+  const navigate = useNavigate()
   const [signupModal, setSignupModal] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [userForgot, setUserForgot] = useState(false)
@@ -52,6 +54,7 @@ const LoginModal = ({ handleToggleLoginModal }) => {
         // save token to localStorage
         localStorage.setItem('token', response.data.token)
         window.location = '/'
+        navigate('/')
       }, 300)
     } else {
       setAlert({ state: true, message: response.data.message })
@@ -81,6 +84,7 @@ const LoginModal = ({ handleToggleLoginModal }) => {
           // save token to localStorage
           localStorage.setItem('token', token)
           window.location = '/'
+          navigate('/')
         }, 300)
       } else {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
@@ -91,6 +95,7 @@ const LoginModal = ({ handleToggleLoginModal }) => {
           // save token to localStorage
           localStorage.setItem('token', token)
           window.location = '/'
+          navigate('/')
         }, 300)
       }
     } catch (err) {

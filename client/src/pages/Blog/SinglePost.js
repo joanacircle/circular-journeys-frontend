@@ -2,32 +2,35 @@ import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
 import { FiEdit, FiTrash } from 'react-icons/fi'
+import axios from 'axios'
 import './SinglePost.scss'
 import { NotFound } from 'pages/NotFound'
+import Alert from 'components/Alert'
 import Card2 from 'components/Cards/Card2'
+import { userInfo } from 'components/userInfo/UserInfo'
 
 const SinglePost = () => {
-  const [post, setPost] = useState([{}])
+  const [post, setPost] = useState({})
   const [id, setId] = useState([])
   const { postId } = useParams()
   const [url, setUrl] = useState(
     `${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`
   )
+  const [alert, setAlert] = useState(false)
+  const { userData } = userInfo()
+
   useEffect(() => { getData() }, [])
   function getData() {
     fetch(url)
       .then(r => r.json())
       .then((data) => {
-        console.log(data)
-        setPost(data)
+        setPost(data[0])
       })
       .catch(error => console.log(error))
   }
 
   // 驗證 parameter的 postId是否存在於資料庫
-  useEffect(() => {
-    fetcher()
-  }, [])
+  useEffect(() => { fetcher() }, [])
   function fetcher() {
     fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
       .then(r => r.json())
@@ -37,18 +40,34 @@ const SinglePost = () => {
       })
   }
 
+  console.log(userData)
+
+  // Alert
+  function handelClick () {
+    setAlert(!alert)
+  }
+  function deletePost() {
+    axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/post/${post.post_id}`)
+    .then(r => {
+      console.log(r.data)
+      window.location = `http://localhost:3000/blog/${post.member_id}`
+    })
+    .catch(err => console.log(err))
+  }
+
   if (id.includes(postId)) {
     return (
       <>
         <div>
           <div className="post-container">
+            {alert ? <Alert message='是否要刪除此篇文章' cancel={handelClick} confirm={deletePost}/> : <></>}
             <div className="page-body">
               <div className="post-header">
-                <h2>{post[0].post_title}</h2>
+                <h2>{post.post_title}</h2>
                 <ul className='tags-section'>
-                  {!post[0].tag
+                  {!post.tag
                     ? <li>Loading...</li>
-                    : Object.entries(post[0].tag).map(([key, value]) => (
+                    : Object.entries(post.tag).map(([key, value]) => (
                       <Link to={`/blog/tag/${key}`} key={key}>
                         <li># {value}</li>
                       </Link>
@@ -56,8 +75,8 @@ const SinglePost = () => {
                   }
                 </ul>
                 <h5>BY:
-                  <Link to={`/blog/${post[0].member_id}`}>
-                    {post[0].user_nickname}
+                  <Link to={`/blog/${post.member_id}`}>
+                    {post.user_nickname}
                   </Link>
                 </h5>
                 <div className='member-avatar'>
@@ -65,41 +84,43 @@ const SinglePost = () => {
                 </div>
                 <div className='post-editor'>
                   <Link to={`/blog/edit/${postId}`} title='編輯文章'><FiEdit size={25}/></Link>
-                  <Link to={'#'} title='刪除文章'><FiTrash size={25}/></Link>
+                  <div onClick={handelClick}>
+                    <FiTrash size={25}/>
+                  </div>
                 </div>
               </div>
               <div className="head-img">
                 <div dangerouslySetInnerHTML={{
-                  __html: post[0].cover
+                  __html: post.cover
                 }} />
               </div>
               <div className="post-body">
                 <div className='post-meta'>
                   <div className="createAt">
                     <AiOutlineCalendar size={25} className='icon' />
-                    <p>{post[0].create_at}</p>
+                    <p>{post.create_at}</p>
                   </div>
                   <div className="post-likes-group">
-                    {post[0].total_likes === 0
+                    {post.total_likes === 0
                       ? (<p>{''}</p>)
                       : (<>
                         <AiOutlineHeart size={25} className='heart-icon' />
-                        <p>{post[0].total_likes}</p>
+                        <p>{post.total_likes}</p>
                       </>)
                     }
                   </div>
                 </div>
                 <div className='post-content'>
                   <div dangerouslySetInnerHTML={{
-                    __html: post[0].post_content
+                    __html: post.post_content
                   }} />
                 </div>
               </div>
               <div className="post-footer">
                 <ul className='tags-section'>
-                    {!post[0].tag
+                    {!post.tag
                       ? <li>Loading...</li>
-                      : Object.entries(post[0].tag).map(([key, value]) => (
+                      : Object.entries(post.tag).map(([key, value]) => (
                         <Link to={`/blog/tag/${key}`} key={key}>
                           <li># {value}</li>
                         </Link>

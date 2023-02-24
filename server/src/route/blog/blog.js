@@ -140,9 +140,25 @@ router.post('/newpost/:member_id', async(req, res) => {
   }
 })
 
-// http://localhost:3001/blog/postdata/:postId // EditPost
-router.delete('/post/:postId', async(req, res)=>{
+// http://localhost:3001/blog/post/:postId // EditPost
+router.delete('/post/:post_id', async(req, res)=>{
+  const postId = req.params.post_id
+  const sqlDeletePosts = `DELETE FROM posts WHERE post_id=?`
+  const sqlDeleteTags = `DELETE FROM post_tags WHERE post_id=?`
+  const sqlDeleteLike = `DELETE FROM post_like WHERE post_id=?`
 
+  try{
+    const [result1] = await db.query(sqlDeletePosts, [postId])
+    const [result2] = await db.query(sqlDeleteTags, [postId])
+    const [result3] = await db.query(sqlDeleteLike, [postId])
+
+    res.json({
+      message: 'success',
+    })
+  }
+  catch{
+    res.json({message: err})
+  }
 })
 
 // http://localhost:3001/blog/post/:post_id // SinglePost, EditPost

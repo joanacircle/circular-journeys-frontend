@@ -84,26 +84,27 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
   }
 
   // handle change page
-  const handleMenuLocation = (event) => {
+  const handleMenuLocation = (event) => (
     localStorage.setItem('hoverLabel', event.target.id)
-  }
+  )
 
   return (
     <div className="user-dropdown-menu animate__animated animate__faster animate__fadeIn">
       <div className='menu-place'>
 
-        <Link className='menu-option'>
-          <div className='user-name'>
+        <Link className='menu-option' id='帳號設定' to={'member'} onClick={handleMenuLocation}>
+          <div className='user-name' id='帳號設定'>
             <img
               className="user-name-photo"
+              id='帳號設定'
               src={
                 userData.picture
                   ? userData.picture
                   : 'https://react.semantic-ui.com/images/wireframe/image.png'
               }
             />
-            <div className='user-info'>
-              <h5>{userData && userData.user_nickname}</h5>
+            <div className='user-info' id='帳號設定'>
+              <h5 id='帳號設定'>{userData && userData.user_nickname}</h5>
             </div>
           </div>
         </Link>

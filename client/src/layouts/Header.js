@@ -95,7 +95,7 @@ const Header = () => {
                 <button onClick={handleToggleLoginModal}>
                   {
                     !userData.member_id
-                      ? <FaUserCircle id='user-menu' size={40} />
+                      ? <FaUserCircle id='user-menu' color='#555' size={40} />
                       : (
                         <img
                           id='user-menu'

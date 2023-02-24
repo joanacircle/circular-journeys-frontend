@@ -62,16 +62,17 @@ const LoginModal = ({ handleToggleLoginModal }) => {
   }
 
   // Login witch google acc
+
   const SignInWitchGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider()
     const url = `${process.env.REACT_APP_DEV_URL}/user/google/acc`
     try {
       const result = await firebase.auth().signInWithPopup(provider)
       const userProfile = result.additionalUserInfo.profile
+      console.log(userProfile)
+      console.log(result.additionalUserInfo.isNewUser)
       const { name, email, picture, id } = userProfile
-      console.log(result.additionalUserInfo)
       if (result.additionalUserInfo.isNewUser) {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
         const signupState = await axios.post(url, {
           userEmail: email,
           userName: name,
@@ -87,7 +88,6 @@ const LoginModal = ({ handleToggleLoginModal }) => {
           navigate('/')
         }, 300)
       } else {
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE)
         const loginState = await axios.post(url, { userId: id })
         const { token } = loginState.data
         setTimeout(() => {

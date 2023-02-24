@@ -15,10 +15,13 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
     setShowEditAddress(!showEditAddress)
   }
 
-  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const handleShippingSelection = (event) => {
     setSelectedIndex(+event.target.value)
+  }
+  const handleRadioSelection = (index) => {
+    setSelectedIndex(index)
   }
 
   return (
@@ -39,12 +42,17 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
                   {shippingDetail.map((shipping, index) => (
 
 
-                    <div key={index} className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}>
+                    <div
+                      key={index}
+                      className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}
+                      onClick={() => handleRadioSelection(index)}
+                    >
                       <input
 
                         type='radio'
                         name='shippingAddress'
                         value={index}
+                        checked={index === selectedIndex}
                         onChange={handleShippingSelection}
                       />
 

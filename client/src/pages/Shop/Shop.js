@@ -35,20 +35,18 @@ const Shop = () => {
     if (isLoading) {
       setTimeout(() => {
         setIsLoading(false)
-      }, 400)
+      }, 300)
     }
   }, [isLoading])
 
   useEffect(() => {
     setIsLoading(true)
     let newProducts = [...products]
-
     newProducts = handleSearch(newProducts, searchWord)
     newProducts = handleSort(newProducts, sortBy)
     newProducts = handleCategories(newProducts, categories)
     newProducts = handlePriceRange(newProducts, priceRange)
-
-    setDisplayProducts(newProducts) // setIsLoading(false) 造成問題, 列表不出來
+    setDisplayProducts(newProducts)
   }, [products, sortBy, searchWord, categories, priceRange])
 
 

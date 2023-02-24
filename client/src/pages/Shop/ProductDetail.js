@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import './ProductDetail.scss'
 
 
@@ -106,7 +106,11 @@ const ProductDetail = () => {
                 <hr />
                 <p className='price-p'>限定價: ${parseFloat(product.price).toLocaleString('zh-TW')}</p>
                 <button className='put-kart' onClick={handleAddToCart}>加入購物袋</button>
-                <button className='buy-now'>立即購買</button>
+                <Link
+                  to='/checkout'
+                >
+                  <p className='buy-now'>立即購買</p>
+                </Link>
               </div>
             </div>
           </div>

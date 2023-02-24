@@ -6,8 +6,9 @@ const cors = require('cors')
 // individual component
 const homeRouter = require('./src/route/home/home')
 const user = require('./src/route/user/users')
-const shop = require('./src/route/shop/shop')
-const paymentRoute = require("./src/route/shop/payment")(cors)
+const shopRouter = require('./src/route/shop/shop')
+const checkoutRouter = require('./src/route/shop/checkout')
+const paymentRouter = require("./src/route/shop/payment")(cors)
 const blogRouter = require('./src/route/blog/blog')
 
 // general middleware
@@ -30,8 +31,9 @@ app.use('/user', user)
 
 // shop
 // payment
-app.use('/shop', shop)
-app.post('/checkout', paymentRoute)
+app.use('/shop', shopRouter)
+app.use('/checkout', checkoutRouter)
+app.post('/checkout', paymentRouter)
 
 // blog
 app.use('/blog', blogRouter)

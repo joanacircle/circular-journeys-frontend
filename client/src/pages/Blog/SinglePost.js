@@ -66,7 +66,7 @@ const SinglePost = () => {
                 <h2>{post.post_title}</h2>
                 <ul className='tags-section'>
                   {!post.tag
-                    ? <li>Loading...</li>
+                    ? <></>
                     : Object.entries(post.tag).map(([key, value]) => (
                       <Link to={`/blog/tag/${key}`} key={key}>
                         <li># {value}</li>
@@ -119,7 +119,7 @@ const SinglePost = () => {
               <div className="post-footer">
                 <ul className='tags-section'>
                     {!post.tag
-                      ? <li>Loading...</li>
+                      ? <></>
                       : Object.entries(post.tag).map(([key, value]) => (
                         <Link to={`/blog/tag/${key}`} key={key}>
                           <li># {value}</li>

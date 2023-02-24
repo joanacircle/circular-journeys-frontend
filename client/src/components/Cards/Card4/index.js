@@ -16,7 +16,7 @@ const Card4 = (props) => {
           <div className="post-tags">
             <ul>
               {!tags
-              ? <li>Loading...</li>
+              ? <></>
               : Object.entries(tags).map(([key, value]) => {
                 return (
                   <Link to={`/blog/tag/${key}`} key={shortid.generate()}>

@@ -18,7 +18,7 @@ const Card2 = (props) => {
         <ul className='blog-tags'>
         {/* 問題:Warning: Each child in a list should have a unique "key" prop. */}
         {!tags
-        ? <div></div>
+        ? <></>
         : Object.entries(tags).slice(0, 2).map(([key, value]) => (
             <Link to={`/blog/tag/${key}`} key={shortid.generate()}>
               <li># {value}</li>

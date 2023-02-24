@@ -1,8 +1,7 @@
-@import 'index.scss';
 @import "../../User/styles/styles.scss";
 
 .setting-place {
-  box-shadow: 0px 0px 10px 0.8px $gray;
+  box-shadow: 0px 0px 10px 0.8px var(--gray);
   background-color: #fff;
   border-radius: 6px;
   padding: 20px;
@@ -30,7 +29,7 @@
 
         input {
           border-radius: 8px;
-          border: 0.1px solid $gray;
+          border: 0.1px solid var(--gray);
           padding: 8px 15px;
         }
 
@@ -53,16 +52,14 @@
         }
       }
     }
-
   }
 }
 
 .button-group{
  
-
   .address-cancel {
-    background-color: $gray;
-    border-radius: $br2;
+    background-color: var(--gray);
+    border-radius: var(--br1);
     width: 25vw;
     padding: 5px;
     margin: 5px;
@@ -71,8 +68,8 @@
   }
 
   .address-save {
-    background-color: $orange;
-    border-radius: $br2;
+    background-color: var(--orange);
+    border-radius: var(--br1);
     width: 25vw;
     padding: 5px;
     margin: 5px;

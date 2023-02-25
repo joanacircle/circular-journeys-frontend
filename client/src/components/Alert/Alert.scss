@@ -14,31 +14,36 @@
     position: absolute;
     overflow-y: auto;
     margin: 0 auto;
-    padding: 30px;
+    padding: 50px 20px;
     width: fit-content;
     height: fit-content;
     border-radius: var(--br1);
-    background: var(--yellow);
-    color: black;
-    border: 5px solid var(--orange);
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--dark-gary);
+    box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.2);
 
-    .message{
-      font-size: 25px;
-      margin-bottom: 10px;
+    .message-grop{
+      display: flex;
+      .message{
+        margin-bottom: 10px;
+      }
     }
 
     .alert-footer{
-      font-size: 20px;
       text-align: center;
       justify-content: center;
       display: flex;
       flex-direction: row;
       gap: 20px;
-      border-top: 2px solid black;
       padding-top: 10px;
 
       li{
         cursor: pointer;
+        font-size: 25px;
+
+        &:hover{
+          color: var(--purple)
+        }
       }
     }
   }

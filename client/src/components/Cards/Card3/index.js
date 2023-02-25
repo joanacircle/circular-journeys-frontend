@@ -3,7 +3,6 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import shortid from 'shortid'
 import './Card3.scss'
 
-
 const Card3 = (props) => {
   // props.tags 傳入 object
   const { postId, img, tags, memberId, memberName, title, createAt, likes } = props
@@ -19,7 +18,7 @@ const Card3 = (props) => {
           <div className='card-header d-flex'>
             <ul className='blog-tags d-flex'>
               {!tags
-              ? <div></div>
+              ? <></>
               : Object.entries(tags).slice(0, 2).map(([key, value]) => (
                 <Link to={`/blog/tag/${key}`} key={shortid.generate()}>
                   <li># {value}</li>

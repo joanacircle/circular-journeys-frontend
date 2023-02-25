@@ -25,7 +25,7 @@
           width: fit-content;
           border-radius: var(--br2);
           background-color: var(--orange);
-          color: var(--white);
+          color: white;
           padding: 2px 8px;
 
           &:hover{
@@ -33,7 +33,7 @@
           }
 
           a:hover{
-            color: var(--white);
+            color: white;
           }
         }
       }

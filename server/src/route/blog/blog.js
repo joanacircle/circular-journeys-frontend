@@ -9,7 +9,7 @@ const fs = require('fs')
 const uuid = require('uuid')
 const MultipartyMiddleWare = multiparty({uploadDir: path.join(__dirname, '../../../public')})
 
-// http://localhost:3001/blog  // Blog
+// http://localhost:3001/blog  -> Blog
 router.get('/', async (req, res) => {
   const sql = `
   SELECT
@@ -54,8 +54,40 @@ router.get('/api', async (req, res) => {
   res.json({post: rows, member: rows2, tag: rows3})
 })
 
+// http://localhost:3001/blog/like -> HomeBlog
+router.post('/like', async (req, res) => {
+  const output = { success: false }
+  const {userMemberId, postId} = req.body
+  const sql = `
+  INSERT INTO post_like(post_id, member_id) VALUES (?,?)`
+
+  const [rows] = await db.query(sql, [postId, userMemberId])
+
+  output.success = !! rows.affectedRows;
+
+  res.json(output)
+})
+
+// http://localhost:3001/blog/unlike/:post_id -> HomeBlog
+router.delete('/unlike/:post_id', async (req, res) => {
+  const output = { success: false, errors: '' }
+  const postId = req.params.post_id
+  const sql = `
+  DELETE FROM post_like WHERE post_id = ?`
+
+  try {
+    const [rows] = await db.query(sql, [postId])
+    output.success = !! rows.affectedRows;
+    res.json(output);
+  } catch (error) {
+    output.errors = error;
+    res.json(output);
+  }
+})
+
+
 // TODO 移除沒有使用的照片
-// http://localhost:3001/blog/upload-cover // PostEditor for upload cover-pic
+// http://localhost:3001/blog/upload-cover -> PostEditor for upload cover-pic
 router.post('/upload-cover', MultipartyMiddleWare, async (req, res) => {
   const TempFile = req.files.upload 
   const TempPathFile = TempFile.path 
@@ -74,7 +106,7 @@ router.post('/upload-cover', MultipartyMiddleWare, async (req, res) => {
   }
 })
 
-// http://localhost:3001/blog/upload-img // PostEditor for upload img
+// http://localhost:3001/blog/upload-img -> PostEditor for upload img
 router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
   const TempFile = req.files.upload 
   const TempPathFile = TempFile.path // 照片第一次(暫時)上傳的位置('public')
@@ -98,7 +130,7 @@ router.post('/upload-img', MultipartyMiddleWare, (req, res) => {
   }
 })
 
-// http://localhost:3001/blog/newpost/:member_id // PostEditor
+// http://localhost:3001/blog/newpost/:member_id -> PostEditor
 router.post('/newpost/:member_id', async(req, res) => {
   const { memberId, title, tags, tag1, tag2, tag3, cover, content } = req.body
   const postId = 'p' + uuid.v4()
@@ -140,7 +172,7 @@ router.post('/newpost/:member_id', async(req, res) => {
   }
 })
 
-// http://localhost:3001/blog/post/:postId // EditPost
+// http://localhost:3001/blog/post/:postId -> EditPost
 router.delete('/post/:post_id', async(req, res)=>{
   const postId = req.params.post_id
   const sqlDeletePosts = `DELETE FROM posts WHERE post_id=?`
@@ -161,7 +193,7 @@ router.delete('/post/:post_id', async(req, res)=>{
   }
 })
 
-// http://localhost:3001/blog/post/:post_id // SinglePost, EditPost
+// http://localhost:3001/blog/post/:post_id -> SinglePost, EditPost
 router.get('/post/:post_id', async (req, res) => {
   const post_id = req.params.post_id;
   const sql =`
@@ -203,7 +235,7 @@ router.get('/post/:post_id', async (req, res) => {
     res.json(rows);
 })
 
-// http://localhost:3001/blog/post/:postId // EditPost
+// http://localhost:3001/blog/post/:postId -> EditPost
 router.put('/post/:post_id', async(req, res)=>{
   const {postId, title, tags, tag1, tag2, tag3, coverPath, content} = req.body
   const totalTag = [tag1, tag2, tag3].filter((v)=>{
@@ -243,7 +275,7 @@ router.put('/post/:post_id', async(req, res)=>{
   }
 })
 
-// http://localhost:3001/blog/:member_id // UserBlog
+// http://localhost:3001/blog/:member_id -> UserBlog
 router.get('/:member_id', async (req, res) => {
 const member_id = req.params.member_id;
 

@@ -4,10 +4,9 @@ require('dotenv').config()
 const router = express.Router()
 
 router.get('/', async (req, res) => {
-  const latestSql = `SELECT post_id, post_title, create_at, cover FROM posts ORDER BY create_at DESC`
-
-  const popularSql = `
+  const sql = `
   SELECT
+    posts.member_id,
     posts.post_id,
     posts.post_title,
     posts.total_likes,
@@ -19,11 +18,11 @@ router.get('/', async (req, res) => {
     ) 
     AS tag
   FROM posts
-  ORDER BY total_likes DESC
+  ORDER BY ? DESC
   `
 
-  const [rows] = await db.query(latestSql)
-  const [rows2] = await db.query(popularSql)
+  const [rows] = await db.query(sql, ['create_at'])
+  const [rows2] = await db.query(sql, ['total_likes'])
 
 
   res.json({

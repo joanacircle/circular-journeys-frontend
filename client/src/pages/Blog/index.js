@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
-
+import { userInfo } from 'components/userInfo/UserInfo'
 import './Blog.scss'
 import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
@@ -12,10 +12,11 @@ import B001 from 'images/Blog/B001.jpg'
 
 const Blog = () => {
   const [post, setPost] = useState([])
-  const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/blog`)
+  const { userData } = userInfo()
+
   useEffect(() => { getData() }, [])
   function getData() {
-    fetch(url)
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog`)
       .then(r => r.json())
       .then((data) => { setPost(data) })
       .catch(error => console.log(error))
@@ -23,6 +24,8 @@ const Blog = () => {
 
   // 從 database 取得
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
+
+  console.log(userData)
 
   return (
     <>
@@ -42,6 +45,7 @@ const Blog = () => {
                     <div className='blog-post col-md-6' key={v.post_id}>
                       <Card3
                         postId={v.post_id}
+                        userMemberId={userData.member_id}
                         img={v.cover}
                         tags={v.tag}
                         memberId={v.member_id}

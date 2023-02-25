@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
+import { AiOutlineHeart, AiFillHeart, AiOutlineCalendar } from 'react-icons/ai'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import axios from 'axios'
 import './SinglePost.scss'
@@ -13,15 +13,13 @@ const SinglePost = () => {
   const [post, setPost] = useState({})
   const [id, setId] = useState([])
   const { postId } = useParams()
-  const [url, setUrl] = useState(
-    `${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`
-  )
   const [alert, setAlert] = useState(false)
+  const [like, setLike] = useState(false)
   const { userData } = userInfo()
 
   useEffect(() => { getData() }, [])
   function getData() {
-    fetch(url)
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`)
       .then(r => r.json())
       .then((data) => {
         setPost(data[0])
@@ -38,6 +36,19 @@ const SinglePost = () => {
         const pId = data.post[0].post_id
         setId(pId)
       })
+  }
+
+  function handleClickLike () {
+    setLike(!like)
+    if (!like) {
+      axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId: userData.member_id, postId })
+      .then(r => console.log(r.data))
+      .catch(err => console.log(err))
+    } else {
+      axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+      .then(r => console.log(r.data))
+      .catch(err => console.log(err))
+    }
   }
 
   console.log(post)
@@ -138,7 +149,10 @@ const SinglePost = () => {
                 <p>
                   即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
                 </p>
-                <AiOutlineHeart className='heart-icon' size={40} />
+                {!like
+                ? <AiOutlineHeart size={40} className='heart-icon' onClick={handleClickLike}/>
+                : <AiFillHeart size={40} className='heart-icon' onClick={handleClickLike}/>
+                }
                 {/* TODO */}
                 <p>
                   <Link to='#'>前一篇 </Link>

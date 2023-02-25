@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
 import './UserBlog.scss'
+import { userInfo } from 'components/userInfo/UserInfo'
 import Card4 from 'components/Cards/Card4'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
@@ -12,10 +13,11 @@ const UserBlog = () => {
   const [post, setPost] = useState({})
   const [id, setId] = useState([])
   const { memberId } = useParams()
-  const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
+  const { userData } = userInfo()
+
   useEffect(() => { getData() }, [])
   function getData() {
-    fetch(url)
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
       .then(r => r.json())
       .then((data) => { setPost(data[0]) })
       .catch(error => console.error(error))
@@ -58,6 +60,7 @@ const UserBlog = () => {
                   return (
                     <Card4
                       key={'c4' + v.post_id}
+                      userMemberId={userData.member_id}
                       tags={v.tag}
                       title={v.post_title}
                       postId={v.post_id}

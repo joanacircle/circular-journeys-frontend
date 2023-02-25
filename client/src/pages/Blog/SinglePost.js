@@ -40,7 +40,7 @@ const SinglePost = () => {
       })
   }
 
-  console.log(userData)
+  console.log(post)
 
   // Alert
   function handelClick () {
@@ -82,7 +82,7 @@ const SinglePost = () => {
                   </Link>
                 </h5>
                 <div className='member-avatar'>
-                  <img src={''} alt="avatar" />
+                  <img src={post.picture} alt="fr" />
                 </div>
                 <div className='post-editor'>
                 {post.member_id === userData.member_id && (

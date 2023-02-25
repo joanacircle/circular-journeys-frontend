@@ -9,7 +9,7 @@ import TagsCategory from 'components/TagsCategory'
 import { NotFound } from 'pages/NotFound'
 
 const UserBlog = () => {
-  const [post, setPost] = useState([{}])
+  const [post, setPost] = useState({})
   const [id, setId] = useState([])
   const { memberId } = useParams()
   const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
@@ -17,7 +17,7 @@ const UserBlog = () => {
   function getData() {
     fetch(url)
       .then(r => r.json())
-      .then((data) => { setPost(data) })
+      .then((data) => { setPost(data[0]) })
       .catch(error => console.error(error))
   }
 
@@ -31,6 +31,7 @@ const UserBlog = () => {
         setId(mId)
       })
   }
+  console.log(post)
 
   // TagsCategory props:
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
@@ -42,7 +43,7 @@ const UserBlog = () => {
           <div className='userblog-container'>
             <div className='page-body'>
               <div className='post-container'>
-                <h2 className='userblog-h2'>{post[0].user_nickname}</h2>
+                <h2 className='userblog-h2'>{post.user_nickname}</h2>
                 <div className='userblog-nav'>
                   <ul>
                     <Link to='#'>
@@ -53,7 +54,7 @@ const UserBlog = () => {
                     </Link>
                   </ul>
                 </div>
-                {post.map((v, i) => {
+                {[post].map((v, i) => {
                   return (
                     <Card4
                       key={'c4' + v.post_id}
@@ -73,9 +74,9 @@ const UserBlog = () => {
               <div className='userblog-aside'>
                 <div className="userblog-aside-item">
                   <div className='member-avatar'>
-                    <img src="" alt="avatar" />
+                    <img src={post.picture} alt="avatar" />
                     {/* TODO: 如果會員沒有撰寫文章時 */}
-                    <h4>{post[0].user_nickname}</h4>
+                    <h4>{post.user_nickname}</h4>
                   </div>
                 </div>
                 <div className='userblog-aside-item'>

@@ -11,14 +11,16 @@ const Card2 = (props) => {
   const [like, setLike] = useState(false)
   function handleClickLike () {
     setLike(!like)
-    if (!like) {
-      axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId, postId })
-      .then(r => console.log(r.data))
-      .catch(err => console.log(err))
-    } else {
-      axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
-      .then(r => console.log(r.data))
-      .catch(err => console.log(err))
+    if (userMemberId) {
+      if (!like) {
+        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId, postId })
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      } else {
+        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      }
     }
   }
 

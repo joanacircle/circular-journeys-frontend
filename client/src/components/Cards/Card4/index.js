@@ -6,21 +6,22 @@ import { HiOutlineArrowLongRight } from 'react-icons/hi2'
 import shortid from 'shortid'
 import './Card4.scss'
 
-
 const Card4 = (props) => {
   // props.tag 傳入 object
   const { userMemberId, tags, title, postId, img, createAt, likes, postContent } = props
   const [like, setLike] = useState(false)
   function handleClickLike () {
     setLike(!like)
-    if (!like) {
-      axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId, postId })
-      .then(r => console.log(r.data))
-      .catch(err => console.log(err))
-    } else {
-      axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
-      .then(r => console.log(r.data))
-      .catch(err => console.log(err))
+    if (userMemberId) {
+      if (!like) {
+        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId, postId })
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      } else {
+        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      }
     }
   }
 

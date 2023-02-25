@@ -40,23 +40,24 @@ const SinglePost = () => {
 
   function handleClickLike () {
     setLike(!like)
-    if (!like) {
-      axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId: userData.member_id, postId })
-      .then(r => console.log(r.data))
-      .catch(err => console.log(err))
-    } else {
-      axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
-      .then(r => console.log(r.data))
-      .catch(err => console.log(err))
+    if (userData) {
+      if (!like) {
+        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId: userData.member_id, postId })
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      } else {
+        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      }
     }
   }
 
-  console.log(post)
-
   // Alert
-  function handelClick () {
+  function handleClick () {
     setAlert(!alert)
   }
+
   function deletePost() {
     axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/post/${post.post_id}`)
     .then(r => {
@@ -71,9 +72,9 @@ const SinglePost = () => {
       <>
         <div>
           <div className="post-container">
-              {alert
-              ? <Alert message='是否要刪除此篇文章' cancel={handelClick} confirm={deletePost}/>
-              : <></>}
+            {alert
+            ? <Alert message='是否要刪除此篇文章' cancel={handleClick} confirm={deletePost}/>
+            : <></>}
             <div className="page-body">
               <div className="post-header">
                 <h2>{post.post_title}</h2>
@@ -99,7 +100,7 @@ const SinglePost = () => {
                 {post.member_id === userData.member_id && (
                   <>
                   <Link to={`/blog/edit/${postId}`} title='編輯文章'><FiEdit size={25}/></Link>
-                  <div onClick={handelClick}>
+                  <div onClick={handleClick}>
                     <Link>
                       <FiTrash size={25}/>
                     </Link>

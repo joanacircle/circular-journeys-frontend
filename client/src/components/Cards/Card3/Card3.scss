@@ -14,7 +14,7 @@
   }
 
   .card-caption{
-    background: var(--white);
+    background: white;
     border-radius: var(--br1);
     padding-top: 25px;
 
@@ -30,7 +30,7 @@
             width: fit-content;
             border-radius: var(--br2);
             background-color: var(--orange);
-            color: var(--white);
+            color: white;
             padding: 2px 8px;
             font-size: 20px;
   
@@ -39,7 +39,7 @@
             }
   
             a:hover{
-              color: var(--white);
+              color: white;
             }
           }
       }

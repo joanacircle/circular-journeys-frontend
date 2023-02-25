@@ -6,8 +6,8 @@ import axios from 'axios'
 import './SinglePost.scss'
 import { NotFound } from 'pages/NotFound'
 import Alert from 'components/Alert'
-import Card2 from 'components/Cards/Card2'
 import { userInfo } from 'components/userInfo/UserInfo'
+import Card2 from 'components/Cards/Card2'
 
 const SinglePost = () => {
   const [post, setPost] = useState({})
@@ -60,7 +60,9 @@ const SinglePost = () => {
       <>
         <div>
           <div className="post-container">
-            {alert ? <Alert message='是否要刪除此篇文章' cancel={handelClick} confirm={deletePost}/> : <></>}
+              {alert
+              ? <Alert message='是否要刪除此篇文章' cancel={handelClick} confirm={deletePost}/>
+              : <></>}
             <div className="page-body">
               <div className="post-header">
                 <h2>{post.post_title}</h2>
@@ -80,13 +82,19 @@ const SinglePost = () => {
                   </Link>
                 </h5>
                 <div className='member-avatar'>
-                  <img src="" alt="avatar" />
+                  <img src={''} alt="avatar" />
                 </div>
                 <div className='post-editor'>
+                {post.member_id === userData.member_id && (
+                  <>
                   <Link to={`/blog/edit/${postId}`} title='編輯文章'><FiEdit size={25}/></Link>
                   <div onClick={handelClick}>
-                    <FiTrash size={25}/>
+                    <Link>
+                      <FiTrash size={25}/>
+                    </Link>
                   </div>
+                  </>
+                )}
                 </div>
               </div>
               <div className="head-img">

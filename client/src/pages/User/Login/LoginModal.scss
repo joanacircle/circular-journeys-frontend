@@ -21,7 +21,7 @@
     background: #bac1b8;
     .close-login-button {
       position: absolute;
-      color: var(--white);
+      color: white;
       top: 15px;
       left: 15px;
       background-color: transparent;
@@ -44,7 +44,7 @@
         font-size: 40px;
         text-transform: uppercase;
         font-family: "Oswald", Helvetica, Arial, sans-serif;
-        color: var(--white);
+        color: white;
         text-shadow: 0px 5px 5px var(--gray);
       }
       .form-place {
@@ -52,7 +52,7 @@
         width: 80%;
         .input-password {
           position: relative;
-          background: var(--white);
+          background: white;
           border-radius: var(--br2);
           margin: 10px 0px;
           width: 100%;
@@ -137,10 +137,10 @@
               transition: 0.3s;
             }
             .btn-google {
-              background: var(--white);
+              background: white;
               opacity: 0.8;
               &:hover {
-                background: var(--white);
+                background: white;
                 opacity: 1;
               }
               &:active {

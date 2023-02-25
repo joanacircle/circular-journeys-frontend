@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { HiExclamationCircle } from 'react-icons/hi'
 import 'animate.css'
 import './Alert.scss'
 
@@ -11,7 +12,10 @@ const Alert = (props) => {
   return (
       <div className='alert-background' onClick={handelClick}>
         <div className='alert-container'>
-          <p className='message'>{message}</p>
+          <div className="message-grop">
+            <HiExclamationCircle className='alert-icon' size={45}/>
+            <h2 className='message'>{message}</h2>
+          </div>
           <ul className='alert-footer'>
             <li onClick={cancel}>取消</li>
             <li onClick={confirm}>確定</li>

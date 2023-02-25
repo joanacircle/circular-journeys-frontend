@@ -170,6 +170,7 @@ router.get('/post/:post_id', async (req, res) => {
   posts.post_title, 
   posts.member_id,
   users_information.user_nickname,
+  users_information.picture,
   posts.create_at,  
   posts.total_likes,
   posts.post_content, 
@@ -255,6 +256,7 @@ SELECT
   posts.total_likes,
   posts.cover, 
   users_information.user_nickname,
+  users_information.picture,
   (
     SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
     FROM post_tags 

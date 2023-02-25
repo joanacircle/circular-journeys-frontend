@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Feb 22, 2023 at 03:42 PM
--- Server version: 5.7.34
--- PHP Version: 7.4.21
+-- 主機： localhost:8889
+-- 產生時間： 2023 年 02 月 25 日 03:28
+-- 伺服器版本： 5.7.39
+-- PHP 版本： 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `circular-journeys`
+-- 資料庫： `cj`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- 資料表結構 `orders`
 --
 
 CREATE TABLE `orders` (
@@ -38,7 +38,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_detail`
+-- 資料表結構 `order_detail`
 --
 
 CREATE TABLE `order_detail` (
@@ -51,7 +51,7 @@ CREATE TABLE `order_detail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- 資料表結構 `posts`
 --
 
 CREATE TABLE `posts` (
@@ -66,7 +66,7 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `posts`
+-- 傾印資料表的資料 `posts`
 --
 
 INSERT INTO `posts` (`post_id`, `create_at`, `modify_at`, `member_id`, `post_title`, `post_content`, `total_likes`, `cover`) VALUES
@@ -79,12 +79,13 @@ INSERT INTO `posts` (`post_id`, `create_at`, `modify_at`, `member_id`, `post_tit
 ('p7879f16e-76a4-4767-97f8-dde83551e1b2', '2023-02-22 13:58:40', NULL, '123456', '高雄名產美食集合', '<p>今天天氣太熱了，所以我們決定先去吃冰！<br>散步路徑：<br>左營區新庄仔路546巷4號, Kaohsiung, Taiwan<br>07 556 1620<br><a href=\"https://www.facebook.com/wpichsieh\">facebook.com/wpichsieh</a></p><p><img src=\"http://localhost:3001/blog/838d083c-e0be-4271-b8fd-2ccf8263a78c.jpeg\"><br>外出旅遊除了美好的回憶外，不免俗地會帶上在地的特產，讓出遊的喜悅在返家後還能細細品味！高雄除了烏魚子、旗山香蕉、美濃白蘿蔔……等生鮮外，還有老字號店家的糕餅，或是具有在地特色的文創品，都是相當推薦的紀念禮品，送禮自用兩相宜！<br>吳記餅店<br>綠豆椪</p><p><img src=\"http://localhost:3001/blog/a3b2049f-7e83-4f2b-9033-349602c24202.jpeg\"><br>創立自1937年，吳記餅店琢磨於糕餅的口感，創新卻仍保留傳統手藝的精髓，將味道和心意封存在糕點永流傳。綠豆椪、鴛鴦餅、蝦米肉餅是吳記餅舖的三大經典傳香糕點，用刀鋒劃開壓印著紅字的酥黃餅皮，豪放展現豐厚餡料的切面，富有層次的酥皮在口中散開，真材實料的內餡越嚼越香，將韻味嚼進記憶深處。</p><p>07-746-2291<br>高雄市鳳山區光遠路284之1號<br>&nbsp;</p>', 0, '<figure class=\"image\"><img src=\"http://localhost:3001/blog/a53a58f3-1dd1-4423-a14c-7a3b88612826.jpeg\"></figure>'),
 ('pa4b04397-85ac-489b-8a38-0d88272cd0fb', '2023-02-22 13:54:19', NULL, '123456', '大岡山登山', '<p>大崗山範圍橫跨岡山、燕巢、阿蓮和田寮四區，幅員遼闊廣大，海拔最高312公尺，居高臨下的地勢優勢，在過去曾為封閉的軍事重鎮，入山還得經過申請；現在的大崗山風景區，不僅遍佈古剎名塔，亦為登山步道熱門景點，更有神秘的石灰岩地形值得一探究竟。</p><p>風景區內林蔭茂密，有著原始的生態景觀，地質屬珊瑚礁石灰岩，加上其特殊的階梯斷層構造，形成多樣且迷人的自然景觀，在清代就以「崗山樹色」名列「鳳山八景」。</p><p><img src=\"http://localhost:3001/blog/2d35614e-e62a-4d9f-ad47-571046d592a6.jpeg\"><br>大崗山自然生態區<br>生態園區面積八十公頃，園區中有多條曲折通幽的林蔭步道連結，以造形各異的美麗涼亭、平台提供遊客休憩賞景。挺拔的綠竹、相思樹林、羊蹄甲、櫻花道、黃金風鈴木…在步道旁依四季時序開放，沿途觀賞大崗山生態之美，荷花點點的生態池則是觀察鳥類及水中生物最佳的地點。</p><p>大崗山自然生態園區沿途可見豐富的自然生態及人文景觀，如詩如畫般的景緻宛如世外桃源，夜間遠眺山下如繁星點點的燈火，又有另一番風情。</p><p>石母乳與一線天<br>石母乳與一線天位於大崗山後山，可由田寮區的朝元寺方向進入，後山少了大批的遊客、多了原始天然的綠意。大崗山屬於珊瑚礁石灰岩地型，步道沿途可見不少山洞溝槽，為原始山林增添不少神秘氣息。</p><p>山區的石灰岩壁千百年來經過岩融過程，岩壁的紋理如同飛瀑流動，景緻奇幻，碧水洞後的石灰岩沈積物經過漫長歲月形成鐘乳石，終年滴水不斷的奇特景觀被當地人稱之為石母乳。</p><p>走過石母乳旁的山中棧道，像劈裂天地般的高達二至三公尺的峽谷聳立眼前，頗有大自然開天闢地的壯闊感。相傳在明朝年間大崗山忽然發出「山鳴」，山脊自南向北龜裂，形成這道長約百米的山溝，由於入內仰望可見天空自成一線，故名「一線天」。</p><p>一線天地處石灰岩地質斷層溝谷構造，山壁上處處可見溶蝕地形，看似流動實為岩石的地型，是觀察大自然鬼斧神工地質的踏青好去處。</p><p>晚上我們住在冒煙的喬就是公寓旅店</p><p><img src=\"http://localhost:3001/blog/f860ca23-5ebb-48b1-ac2d-7eb5aef7df2e.jpeg\"><br>&nbsp;</p>', 0, '<figure class=\"image\"><img src=\"http://localhost:3001/blog/42663c16-1fcf-42dd-9753-444757e91617.jpeg\"></figure>'),
 ('pb4ca266a-1dd8-41be-b439-151c7ed3b960', '2023-02-22 13:46:44', NULL, '123458', '壽山賞猴子', '<p>今天我和朋友登上壽山，海拔約三百多公尺，是一座非常美麗的山。</p><p>我們從下午出發了，一路上看到許多不同的植物和鳥類。爬山的道路有很多可愛的猴子，達到山頂時，美麗的風景讓我們把疲憊忘得一乾二淨，美景令我們流連忘返。</p><figure class=\"image\"><img src=\"http://localhost:3001/blog/337c71de-c367-4e55-9e13-d7d3a66d7353.jpeg\"></figure><figure class=\"image\"><img src=\"http://localhost:3001/blog/a80e85cd-ad59-4a75-8438-c891b3a6f8f9.jpeg\"></figure><p>回程的路程比較輕鬆，我們在山腳下的小店休息了一下，享用著美味的在地小吃。</p><p>整個爬山之旅讓我們收穫頗多，也讓我們更加親近大自然。我們期待下一次登山的挑戰！</p>', 0, '<figure class=\"image\"><img src=\"http://localhost:3001/blog/ff54df45-c6f0-43a0-a52b-9a16d9fc722a.jpeg\"></figure>'),
+('pe7a', '2023-02-22 14:03:06', NULL, '123458', '高雄燈會', '<p>2023高雄燈會回歸地區燈會，首度移師至左營蓮池潭風景區辦理，結合在地文化地景特色並呼應兔年童趣元素，讓可愛的兔子們在蓮池潭陪伴大家共度春節，以小而美的療癒燈會，讓國內外遊客以不同的角度家認識蓮池潭這個國際知名的高雄景點，為高雄觀光產業注入新活水，也為高雄燈會歷史寫下創新的一頁。<br>活動時間：112年1月26日(初五)至2月6日(初十五)，每日18:00亮燈</p><p>巨蛋旅店</p><p><img src=\"http://localhost:3001/blog/2a2c529c-29ff-4bcf-98ba-0f453b7aa9e4.jpeg\"><br>高雄市旅館495號<br>高雄市鼓山區文忠路1號<br>&nbsp;</p>', 0, '<figure class=\"image\"><img src=\"http://localhost:3001/blog/f6d5f852-ee2a-4274-8e9a-87833b838daa.jpeg\"></figure>'),
 ('pe7a0507c-54a1-4f63-99f4-bf7e04de6d0c', '2023-02-22 14:03:06', NULL, '123458', '高雄燈會', '<p>2023高雄燈會回歸地區燈會，首度移師至左營蓮池潭風景區辦理，結合在地文化地景特色並呼應兔年童趣元素，讓可愛的兔子們在蓮池潭陪伴大家共度春節，以小而美的療癒燈會，讓國內外遊客以不同的角度家認識蓮池潭這個國際知名的高雄景點，為高雄觀光產業注入新活水，也為高雄燈會歷史寫下創新的一頁。<br>活動時間：112年1月26日(初五)至2月6日(初十五)，每日18:00亮燈</p><p>巨蛋旅店</p><p><img src=\"http://localhost:3001/blog/2a2c529c-29ff-4bcf-98ba-0f453b7aa9e4.jpeg\"><br>高雄市旅館495號<br>高雄市鼓山區文忠路1號<br>&nbsp;</p>', 0, '<figure class=\"image\"><img src=\"http://localhost:3001/blog/f6d5f852-ee2a-4274-8e9a-87833b838daa.jpeg\"></figure>');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_like`
+-- 資料表結構 `post_like`
 --
 
 CREATE TABLE `post_like` (
@@ -96,7 +97,7 @@ CREATE TABLE `post_like` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_tags`
+-- 資料表結構 `post_tags`
 --
 
 CREATE TABLE `post_tags` (
@@ -106,7 +107,7 @@ CREATE TABLE `post_tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `post_tags`
+-- 傾印資料表的資料 `post_tags`
 --
 
 INSERT INTO `post_tags` (`tag_id`, `tag`, `post_id`) VALUES
@@ -157,7 +158,7 @@ INSERT INTO `post_tags` (`tag_id`, `tag`, `post_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- 資料表結構 `products`
 --
 
 CREATE TABLE `products` (
@@ -177,7 +178,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `products`
+-- 傾印資料表的資料 `products`
 --
 
 INSERT INTO `products` (`p_id`, `title`, `product_desc`, `price`, `categories`, `inventory`, `unit_sold`, `path1`, `path2`, `path3`, `path4`, `path5`, `path6`) VALUES
@@ -228,7 +229,7 @@ INSERT INTO `products` (`p_id`, `title`, `product_desc`, `price`, `categories`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_information`
+-- 資料表結構 `users_information`
 --
 
 CREATE TABLE `users_information` (
@@ -236,74 +237,42 @@ CREATE TABLE `users_information` (
   `member_id` varchar(225) NOT NULL COMMENT '會員編號',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '註冊日期',
   `active_status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '狀態',
-  `picture` varchar(255) DEFAULT NULL COMMENT '照片',
-  `user_name` varchar(255) NOT NULL COMMENT '全名',
+  `picture` varchar(10000) DEFAULT NULL COMMENT '照片',
+  `user_name` varchar(255) DEFAULT NULL COMMENT '全名',
   `user_nickname` varchar(25) DEFAULT NULL COMMENT '暱稱',
   `birthday` date DEFAULT NULL COMMENT '生日',
   `sex` char(1) DEFAULT NULL COMMENT '性別',
   `password` varchar(50) DEFAULT NULL COMMENT '密碼',
   `verify` varchar(50) DEFAULT NULL COMMENT '驗證碼 ',
-  `token` varchar(50) NOT NULL COMMENT '金鑰',
-  `email` varchar(50) NOT NULL COMMENT '信箱',
+  `token` varchar(50) DEFAULT NULL COMMENT '金鑰',
+  `email` varchar(50) DEFAULT NULL COMMENT '信箱',
   `contact_email` varchar(50) DEFAULT NULL COMMENT '聯絡信箱',
   `telephone` varchar(25) DEFAULT NULL COMMENT '電話'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='user_databases';
 
 --
--- Dumping data for table `users_information`
+-- 傾印資料表的資料 `users_information`
 --
 
 INSERT INTO `users_information` (`id`, `member_id`, `created_at`, `active_status`, `picture`, `user_name`, `user_nickname`, `birthday`, `sex`, `password`, `verify`, `token`, `email`, `contact_email`, `telephone`) VALUES
-(1, '123456', '2022-12-21 02:44:42', 1, NULL, '周聖倫', 'AlanChou', '1995-04-14', 'm', 'e10adc3949ba59abbe56e057f20f883e', '3OQAJU-gx', 'fea9c433-bbe9-4bf4-a6a4-06aee2a2d505', 'alan@gmail.com', NULL, '0970688851'),
-(2, '123457', '2022-12-21 02:56:42', 1, NULL, '陳家禾', 'Kevin', '0000-00-00', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'b3778d2a-a206-4982-a551-422658654f8d', 'kevin@gmail.com', NULL, '0900000000'),
-(4, '123458', '2022-12-21 02:58:19', 1, NULL, '張圓喬', '圓圓', '1996-06-05', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'acb1857d-dcad-457f-852f-cd28349c8804', 'circle@gmail.com', NULL, '0900000000'),
-(55, 'PhZ0P9tmF', '2023-02-17 01:51:54', 1, 'IMG_3940.JPG', '周聖倫', 'Alan', '1995-04-14', 'm', '4f42142df925126c6bdfd337b6716cba', 'HCg75haDk', 'ba466869-449f-4b27-8f79-34a7c769f35b', 'alanchou19950414@gmail.com', 'alah0414@gmail.com', '0912345678'),
-(56, 'DUIXLRyIF', '2023-02-17 01:53:02', 1, NULL, '王小明', '小明', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, '23c985e6-770f-49f0-be54-e5292bff0624', 'testerkem01@gmail.com', NULL, NULL),
-(57, '0iMjC3UTP', '2023-02-17 01:54:53', 1, NULL, '張圓喬', '圓圓', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, 'd56ce311-b35f-43b9-ad17-0e11d060e3eb', 'ja95175@gmail.com', NULL, NULL),
-(58, 'ZGK-esrax', '2023-02-20 05:47:25', 1, NULL, '王八蛋', '小蛋', NULL, NULL, 'e10adc3949ba59abbe56e057f20f883e', NULL, 'e7d7ad05-17e8-4d65-b007-5b9baee06d6c', 'test001@gmail.com', NULL, NULL),
-(59, '104709174078800080046', '2023-02-20 07:15:53', 1, 'https://lh3.googleusercontent.com/a/AEdFTp6qSD4FKDCbB4JK8nwiv4bJuSx9u8A9KkZlFncW=s96-c', '周聖倫', 'Alan', '1995-04-14', 'm', '4f42142df925126c6bdfd337b6716cba', 'HCg75haDk', 'bc84f9ab-ebab-4cfe-b75b-1144ea9dee06', 'alanchou19950414@gmail.com', 'choushenglun0414@gmail.com', '0970688851'),
-(60, 'CY7h32GdX', '2023-02-22 05:58:08', 1, NULL, '周聖倫', 'Alan', NULL, NULL, '4f42142df925126c6bdfd337b6716cba', NULL, '2e726c55-e3af-4f2b-b057-69d59610c9eb', 'test11@gmail.com', NULL, NULL);
-
--- --------------------------------------------------------
+(1, '123456', '2022-12-21 02:44:42', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FB1xV83xf149BztxaB533?alt=media&token=905e6830-ff11-462f-89d2-a07dbeeb5ade', '周聖倫', 'AlanChou', '1995-04-14', 'm', 'e10adc3949ba59abbe56e057f20f883e', '3OQAJU-gx', '8a2f28e2-e411-46bc-96f7-cbc582f451bd', 'alan@gmail.com', NULL, '0970688851'),
+(2, '123457', '2022-12-21 02:56:42', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FUNiFjV0eKGdUMGduaMUU?alt=media&token=76f79b08-96c8-49ed-aa46-a2c53b2f4731', '陳家禾', 'Kevin', '0000-00-00', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, '6fb5ab20-5221-4649-8c1a-8cd797dfa134', 'kevin@gmail.com', NULL, '0900000000'),
+(4, '123458', '2022-12-21 02:58:19', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FLj15qeMjiU3CsbeewuVz?alt=media&token=71a89110-107e-4ae8-9167-6a1f6f5ea79e', '張圓喬', '圓圓', '1996-06-05', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'e34b6d7e-46c3-4511-9cf3-cb4c936c0734', 'circle@gmail.com', NULL, '0900000000'),
+(71, '104709174078800080046', '2023-02-24 08:49:55', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FB1xV83xf149BztxaB533?alt=media&token=905e6830-ff11-462f-89d2-a07dbeeb5ade', '周聖倫', 'Alan', '1995-04-14', 'm', NULL, NULL, '57cac94b-e2d7-4382-814a-356b788212ce', 'alanchou19950414@gmail.com', 'choushenglun0414@gmail.com', '0970688851');
 
 --
--- Table structure for table `user_address`
---
-
-CREATE TABLE `user_address` (
-  `id` int(11) NOT NULL COMMENT '編號',
-  `member_id` varchar(225) CHARACTER SET utf8mb4 NOT NULL COMMENT '會員編號',
-  `user_name` varchar(25) DEFAULT NULL COMMENT '姓名',
-  `user_contact` varchar(25) DEFAULT NULL COMMENT '電話',
-  `nation` varchar(25) DEFAULT NULL COMMENT '國家',
-  `city` varchar(25) DEFAULT NULL COMMENT '城市',
-  `districts` varchar(25) DEFAULT NULL COMMENT '區域',
-  `address` varchar(25) DEFAULT NULL COMMENT '街道',
-  `postal_code` varchar(25) DEFAULT NULL COMMENT '郵遞區號'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通訊地址';
-
---
--- Dumping data for table `user_address`
---
-
-INSERT INTO `user_address` (`id`, `member_id`, `user_name`, `user_contact`, `nation`, `city`, `districts`, `address`, `postal_code`) VALUES
-(53, '104709174078800080046', '周聖倫', '0970688851', '臺灣', '臺中市', '太平區', '環中東路三段507號6樓之6', '411'),
-(55, '104709174078800080046', '周聖倫', '0970688851', '臺灣', '高雄市', '仁武區', '永新三街8號', '800'),
-(56, 'PhZ0P9tmF', '周聖倫', '0970688851', '臺灣', '臺北市', '大安區', '忠孝東路走九遍', '111');
-
---
--- Indexes for dumped tables
+-- 已傾印資料表的索引
 --
 
 --
--- Indexes for table `orders`
+-- 資料表索引 `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`o_id`),
   ADD KEY `member_id` (`member_id`);
 
 --
--- Indexes for table `order_detail`
+-- 資料表索引 `order_detail`
 --
 ALTER TABLE `order_detail`
   ADD PRIMARY KEY (`d_id`),
@@ -311,14 +280,14 @@ ALTER TABLE `order_detail`
   ADD KEY `p_id` (`p_id`);
 
 --
--- Indexes for table `posts`
+-- 資料表索引 `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`post_id`),
   ADD KEY `posts_ibfk_1` (`member_id`);
 
 --
--- Indexes for table `post_like`
+-- 資料表索引 `post_like`
 --
 ALTER TABLE `post_like`
   ADD PRIMARY KEY (`id`),
@@ -326,93 +295,74 @@ ALTER TABLE `post_like`
   ADD KEY `post_id` (`post_id`);
 
 --
--- Indexes for table `post_tags`
+-- 資料表索引 `post_tags`
 --
 ALTER TABLE `post_tags`
   ADD PRIMARY KEY (`tag_id`,`post_id`) USING BTREE,
   ADD KEY `post_tags_ibfk_1` (`post_id`);
 
 --
--- Indexes for table `products`
+-- 資料表索引 `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`p_id`);
 
 --
--- Indexes for table `users_information`
+-- 資料表索引 `users_information`
 --
 ALTER TABLE `users_information`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `member_id` (`member_id`);
 
 --
--- Indexes for table `user_address`
---
-ALTER TABLE `user_address`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `member_id` (`member_id`);
-
---
--- AUTO_INCREMENT for dumped tables
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
 --
--- AUTO_INCREMENT for table `orders`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `orders`
 --
 ALTER TABLE `orders`
   MODIFY `o_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `order_detail`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `order_detail`
 --
 ALTER TABLE `order_detail`
   MODIFY `d_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `post_like`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `post_like`
 --
 ALTER TABLE `post_like`
   MODIFY `id` int(250) NOT NULL AUTO_INCREMENT COMMENT '編號';
 
 --
--- AUTO_INCREMENT for table `products`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `products`
 --
 ALTER TABLE `products`
   MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
--- AUTO_INCREMENT for table `users_information`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `users_information`
 --
 ALTER TABLE `users_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=74;
 
 --
--- AUTO_INCREMENT for table `user_address`
---
-ALTER TABLE `user_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=57;
-
---
--- Constraints for dumped tables
+-- 已傾印資料表的限制式
 --
 
 --
--- Constraints for table `orders`
+-- 資料表的限制式 `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `users_information` (`member_id`);
 
 --
--- Constraints for table `posts`
+-- 資料表的限制式 `posts`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `users_information` (`member_id`);
-
---
--- Constraints for table `user_address`
---
-ALTER TABLE `user_address`
-  ADD CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `users_information` (`member_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

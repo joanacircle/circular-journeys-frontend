@@ -235,11 +235,12 @@ router.post('/address', async (req, res, next) => {
 
 //user delete address
 //http://localhost:3001/user/address/delete
-router.post('/address/delete', async (req, res, next) => {
-  const { id } = req.body
+router.delete('/address/delete/:id', async (req, res, next) => {
+  const id = req.params.id
   const sql = `DELETE FROM user_address WHERE id = ?`
   try {
     await db.query(sql, [id])
+    res.send('User address deleted successfully')
   } catch (err) {
     next(err)
   }

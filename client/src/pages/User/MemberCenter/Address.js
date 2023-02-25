@@ -77,7 +77,7 @@ const Address = () => {
   // handle delete
   const handleDelete = async (id) => {
     try {
-      await axios.post(`${process.env.REACT_APP_DEV_URL}/user/address/delete`, { id })
+      await axios.delete(`${process.env.REACT_APP_DEV_URL}/user/address/delete/${id}`)
     } catch (err) {
       console.log(err)
     }

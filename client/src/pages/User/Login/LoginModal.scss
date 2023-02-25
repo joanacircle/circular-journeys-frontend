@@ -17,8 +17,8 @@
     margin: 0 auto;
     width: 500px;
     height: 550px;
-    border-radius: 20px;
-    background: #bac1b8;
+    border-radius: var(--br2);
+    background: var(--gray);
     .close-login-button {
       position: absolute;
       color: var(--white);

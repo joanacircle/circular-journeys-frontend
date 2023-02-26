@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import { BiSearch } from 'react-icons/bi'
 import { userInfo } from 'components/userInfo/UserInfo'
@@ -22,6 +23,8 @@ const HomeBlog = () => {
       .then((data) => { setPost(data) })
       .catch(error => console.log(error))
   }
+
+  // console.log(postLike)
 
   return (
     <>

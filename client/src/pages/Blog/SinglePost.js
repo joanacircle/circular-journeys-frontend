@@ -15,9 +15,24 @@ const SinglePost = () => {
   const { postId } = useParams()
   const [alert, setAlert] = useState(false)
   const [like, setLike] = useState(false)
+  const [postLike, setPostLike] = useState()
   const { userData } = userInfo()
 
-  useEffect(() => { getData() }, [])
+  useEffect(() => {
+    fetcher() // 驗證 parameter的 postId是否存在於資料庫
+    getData()
+  }, [])
+  useEffect(() => { getPostLike() }, [userData])
+  useEffect(() => { fillHeart() }, [postLike])
+
+  function fetcher() {
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
+      .then(r => r.json())
+      .then((data) => {
+        const pId = data.post[0].post_id
+        setId(pId)
+      })
+  }
   function getData() {
     fetch(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`)
       .then(r => r.json())
@@ -27,17 +42,20 @@ const SinglePost = () => {
       .catch(error => console.log(error))
   }
 
-  // 驗證 parameter的 postId是否存在於資料庫
-  useEffect(() => { fetcher() }, [])
-  function fetcher() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
-      .then(r => r.json())
-      .then((data) => {
-        const pId = data.post[0].post_id
-        setId(pId)
+  function getPostLike() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/postLike/${userData.member_id}`)
+    .then(
+      r => {
+        r.data &&
+        setPostLike(r.data)
       })
+    .catch(err => console.log(err))
   }
-
+  function fillHeart () {
+    postLike &&
+    postLike.includes(postId) &&
+    setLike(true)
+  }
   function handleClickLike () {
     setLike(!like)
     if (userData) {
@@ -67,6 +85,7 @@ const SinglePost = () => {
     .catch(err => console.log(err))
   }
 
+  console.log(postLike)
   if (id.includes(postId)) {
     return (
       <>

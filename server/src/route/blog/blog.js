@@ -54,7 +54,22 @@ router.get('/api', async (req, res) => {
   res.json({post: rows, member: rows2, tag: rows3})
 })
 
-// http://localhost:3001/blog/like -> HomeBlog
+// http://localhost:3001/blog/postLike/:member_id
+router.get('/postLike/:member_id', async(req, res)=>{
+  const userMemberId = req.params.member_id
+  const sql = `SELECT post_id FROM post_like WHERE member_id=?`
+  try{
+    const [rows] = await db.query(sql, [userMemberId])
+    const result = rows.map((v)=>(
+      v.post_id
+    ))
+    res.json(result)
+  } catch (err) {
+    res.json(err)
+  }
+})
+
+// http://localhost:3001/blog/like
 router.post('/like', async (req, res) => {
   const output = { success: false }
   const {userMemberId, postId} = req.body
@@ -68,7 +83,7 @@ router.post('/like', async (req, res) => {
   res.json(output)
 })
 
-// http://localhost:3001/blog/unlike/:post_id -> HomeBlog
+// http://localhost:3001/blog/unlike/:post_id
 router.delete('/unlike/:post_id', async (req, res) => {
   const output = { success: false, errors: '' }
   const postId = req.params.post_id
@@ -84,7 +99,6 @@ router.delete('/unlike/:post_id', async (req, res) => {
     res.json(output);
   }
 })
-
 
 // TODO 移除沒有使用的照片
 // http://localhost:3001/blog/upload-cover -> PostEditor for upload cover-pic

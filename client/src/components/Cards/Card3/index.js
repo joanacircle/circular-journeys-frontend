@@ -1,11 +1,29 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AiOutlineHeart } from 'react-icons/ai'
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
+import axios from 'axios'
 import shortid from 'shortid'
 import './Card3.scss'
 
 const Card3 = (props) => {
   // props.tags 傳入 object
-  const { postId, img, tags, memberId, memberName, title, createAt, likes } = props
+  const { userMemberId, postId, img, tags, memberId, memberName, title, createAt, likes } = props
+  const [like, setLike] = useState(false)
+  function handleClickLike () {
+    setLike(!like)
+    if (userMemberId) {
+      if (!like) {
+        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId, postId })
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      } else {
+        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      }
+    }
+  }
+
   return (
     <>
       <div className="card3">
@@ -40,7 +58,10 @@ const Card3 = (props) => {
               {createAt}
             </div>
             <div className='d-flex'>
-              <AiOutlineHeart size={25} className='heart-icon'/>
+            {!like
+            ? <AiOutlineHeart size={25} className='heart-icon' onClick={handleClickLike}/>
+            : <AiFillHeart size={25} className='heart-icon' onClick={handleClickLike}/>
+            }
               {props.likes === 0
               ? <p></p>
               : <p>{likes}</p>

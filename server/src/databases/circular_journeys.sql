@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2023 年 02 月 25 日 03:28
+-- 產生時間： 2023 年 02 月 25 日 15:29
 -- 伺服器版本： 5.7.39
 -- PHP 版本： 7.4.33
 
@@ -257,8 +257,36 @@ CREATE TABLE `users_information` (
 INSERT INTO `users_information` (`id`, `member_id`, `created_at`, `active_status`, `picture`, `user_name`, `user_nickname`, `birthday`, `sex`, `password`, `verify`, `token`, `email`, `contact_email`, `telephone`) VALUES
 (1, '123456', '2022-12-21 02:44:42', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FB1xV83xf149BztxaB533?alt=media&token=905e6830-ff11-462f-89d2-a07dbeeb5ade', '周聖倫', 'AlanChou', '1995-04-14', 'm', 'e10adc3949ba59abbe56e057f20f883e', '3OQAJU-gx', '8a2f28e2-e411-46bc-96f7-cbc582f451bd', 'alan@gmail.com', NULL, '0970688851'),
 (2, '123457', '2022-12-21 02:56:42', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FUNiFjV0eKGdUMGduaMUU?alt=media&token=76f79b08-96c8-49ed-aa46-a2c53b2f4731', '陳家禾', 'Kevin', '0000-00-00', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, '6fb5ab20-5221-4649-8c1a-8cd797dfa134', 'kevin@gmail.com', NULL, '0900000000'),
-(4, '123458', '2022-12-21 02:58:19', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FLj15qeMjiU3CsbeewuVz?alt=media&token=71a89110-107e-4ae8-9167-6a1f6f5ea79e', '張圓喬', '圓圓', '1996-06-05', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, 'e34b6d7e-46c3-4511-9cf3-cb4c936c0734', 'circle@gmail.com', NULL, '0900000000'),
+(4, '123458', '2022-12-21 02:58:19', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FLj15qeMjiU3CsbeewuVz?alt=media&token=71a89110-107e-4ae8-9167-6a1f6f5ea79e', '張圓喬', '圓圓', '1996-06-05', 'f', 'e10adc3949ba59abbe56e057f20f883e', NULL, '6ce7995f-9a23-40aa-9128-927e0da505a9', 'circle@gmail.com', NULL, '0900000000'),
 (71, '104709174078800080046', '2023-02-24 08:49:55', 1, 'https://firebasestorage.googleapis.com/v0/b/circular-journeys.appspot.com/o/user-images%2FB1xV83xf149BztxaB533?alt=media&token=905e6830-ff11-462f-89d2-a07dbeeb5ade', '周聖倫', 'Alan', '1995-04-14', 'm', NULL, NULL, '57cac94b-e2d7-4382-814a-356b788212ce', 'alanchou19950414@gmail.com', 'choushenglun0414@gmail.com', '0970688851');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `user_address`
+--
+
+CREATE TABLE `user_address` (
+  `id` int(11) NOT NULL COMMENT '編號',
+  `member_id` varchar(225) CHARACTER SET utf8mb4 NOT NULL COMMENT '會員編號',
+  `user_name` varchar(25) DEFAULT NULL COMMENT '姓名',
+  `user_contact` varchar(25) DEFAULT NULL COMMENT '電話',
+  `nation` varchar(25) DEFAULT NULL COMMENT '國家',
+  `city` varchar(25) DEFAULT NULL COMMENT '城市',
+  `districts` varchar(25) DEFAULT NULL COMMENT '區域',
+  `address` varchar(25) DEFAULT NULL COMMENT '街道',
+  `postal_code` varchar(25) DEFAULT NULL COMMENT '郵遞區號'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通訊地址';
+
+--
+-- 傾印資料表的資料 `user_address`
+--
+
+INSERT INTO `user_address` (`id`, `member_id`, `user_name`, `user_contact`, `nation`, `city`, `districts`, `address`, `postal_code`) VALUES
+(65, '104709174078800080046', '周聖倫', '0970688851', '臺灣', '臺中市', '太平區', '環中東路三段507號6樓之6', '411'),
+(66, '104709174078800080046', '周聖倫', '0970688851', '臺灣', '高雄市', '左營區', '榮德街89號6樓之一', '814'),
+(67, '123456', '周聖倫', '0970688851', '臺灣', '台北市', '大安區', '新生南路二段1號', '106'),
+(68, '123458', '張圓喬', '0905333555', '臺灣', '高雄市', '左營區', '博愛二路777號', '813');
 
 --
 -- 已傾印資料表的索引
@@ -315,6 +343,13 @@ ALTER TABLE `users_information`
   ADD UNIQUE KEY `member_id` (`member_id`);
 
 --
+-- 資料表索引 `user_address`
+--
+ALTER TABLE `user_address`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
@@ -334,7 +369,7 @@ ALTER TABLE `order_detail`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `post_like`
 --
 ALTER TABLE `post_like`
-  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT COMMENT '編號';
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=20;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `products`
@@ -347,6 +382,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `users_information`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=74;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `user_address`
+--
+ALTER TABLE `user_address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '編號', AUTO_INCREMENT=69;
 
 --
 -- 已傾印資料表的限制式
@@ -363,6 +404,12 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `posts`
   ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `users_information` (`member_id`);
+
+--
+-- 資料表的限制式 `user_address`
+--
+ALTER TABLE `user_address`
+  ADD CONSTRAINT `user_address_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `users_information` (`member_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

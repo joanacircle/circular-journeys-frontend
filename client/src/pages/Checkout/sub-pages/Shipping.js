@@ -5,23 +5,67 @@ import { VscEdit } from 'react-icons/vsc'
 import { RiDeleteBinFill } from 'react-icons/ri'
 import EditAddress from './EditAddress'
 import './Shipping.scss'
+import { userInfo } from 'components/userInfo/UserInfo'
 
 
 const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
 
   const [showEditAddress, setShowEditAddress] = useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  // user data
+  const { userData } = userInfo()
+  const [userAddresses, setUserAddresses] = useState([])
+
+  useEffect(() => {
+
+    const fetchAddress = async () => {
+      try {
+        const memberId = userData.member_id
+
+        // const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=${memberId}`)
+        const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=104709174078800080046`)
+        const data = await response.json()
+        console.log(`user data is ${data}`)
+        setUserAddresses(data)
+      } catch (error) {
+        console.log(`address responded with ${error}`)
+      }
+    }
+    fetchAddress()
+  }, [userData.member_id])
 
   const toggleEditAddress = () => {
     setShowEditAddress(!showEditAddress)
   }
-
-  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const handleShippingSelection = (event) => {
     setSelectedIndex(+event.target.value)
   }
   const handleRadioSelection = (index) => {
     setSelectedIndex(index)
+  }
+
+  const handleDelete = async () => {
+    try {
+      // const memberId = userData.member_id
+      const memberId = '104709174078800080046'
+      const selectedAddress = userAddresses[selectedIndex]
+
+      await fetch(`${process.env.REACT_APP_DEV_URL}/checkout/${selectedAddress.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ member_id: memberId })
+      })
+      setUserAddresses(userAddresses.filter((address, index) =>
+        index !== selectedIndex
+      ))
+      setSelectedIndex(0)
+    } catch (error) {
+      console.log(`Error deleting address: ${error}`)
+    }
   }
 
   return (
@@ -39,11 +83,11 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
               <div className='address-boxes'>
 
                 <div className='address-box'>
-                  {shippingDetail.map((shipping, index) => (
+                  {userAddresses.map((shipping, index) => (
 
 
                     <div
-                      key={index}
+                      key={shipping.id}
                       className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}
                       onClick={() => handleRadioSelection(index)}
                     >
@@ -56,16 +100,16 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
                         onChange={handleShippingSelection}
                       />
 
-                      <div className='address-name'>{shipping.name}</div>
+                      <div className='address-name'>{shipping.user_name}</div>
                       <br />
-                      {Object.entries(shipping).map(([key, value], i) => {
-                        if (key === "name" || key === "province") return null
-                        if (key === "zip") return <div key={key}>{`${shipping.province} ${shipping.zip}`}</div>
-                        return <div key={key}>{value}</div>
-                      })}
+                      <div>{shipping.address}</div>
+                      <div>{shipping.city}</div>
+                      <div>{shipping.district}</div>
+                      <div>{shipping.nation}</div>
+                      <div>{shipping.postal_code}</div>
                       <div className='edit-delete'>
                         <VscEdit />
-                        <RiDeleteBinFill />
+                        <RiDeleteBinFill onClick={handleDelete} />
                       </div>
                     </div>
                   ))}

@@ -10,6 +10,36 @@ router.get('/', async (req, res) => {
   res.json(data)
 })
 
+router.put('/:id', async (req, res) => {
+  const { id } = req.params
+  const {
+    member_id,
+    user_name,
+    user_contact,
+    nation,
+    city,
+    district,
+    address,
+    postal_code
+  } = req.body
+
+  try {
+    const sql = `UPDATE user_address SET user_name=?, user_contact=?, nation=?, city=?, district=?, address=?, postal_code=? WHERE id=? AND member_id=?`
+
+    const [result, index] = await db.query(sql, [user_name, user_contact, nation, city, district, address, postal_code, id, member_id])
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Address not found' })
+    }
+
+    res.json({ message: 'address updated' })
+
+  } catch (error) {
+    console.log(`Error updating address: ${error}`)
+    res.status(500).json({ message: 'Server error' })
+  }
+})
+
 router.delete('/:id', async (req, res) => {
   const { id } = req.params
   const { member_id } = req.body

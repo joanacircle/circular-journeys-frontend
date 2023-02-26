@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { AiOutlineHeart, AiFillHeart, AiOutlineCalendar } from 'react-icons/ai'
@@ -10,6 +10,23 @@ const Card4 = (props) => {
   // props.tag 傳入 object
   const { userMemberId, tags, title, postId, img, createAt, likes, postContent } = props
   const [like, setLike] = useState(false)
+  const [postLike, setPostLike] = useState()
+  useEffect(() => { getPostLike() }, [])
+  useEffect(() => { fillHeart() }, [postLike])
+  function getPostLike() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/postLike/${userMemberId}`)
+    .then(
+      r => {
+        r.data &&
+        setPostLike(r.data)
+      })
+    .catch(err => console.log(err))
+  }
+  function fillHeart () {
+    postLike &&
+    postLike.includes(postId) &&
+    setLike(true)
+  }
   function handleClickLike () {
     setLike(!like)
     if (userMemberId) {

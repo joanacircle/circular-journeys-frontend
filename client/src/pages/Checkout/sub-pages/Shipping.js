@@ -4,14 +4,17 @@ import { BsPlusSquareDotted } from 'react-icons/bs'
 import { VscEdit } from 'react-icons/vsc'
 import { RiDeleteBinFill } from 'react-icons/ri'
 import EditAddress from './EditAddress'
+import AddAddress from './AddAddress'
 import './Shipping.scss'
 import { userInfo } from 'components/userInfo/UserInfo'
 
 
-const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
+const Shipping = ({ nextStep }) => {
 
+  const [showAddAddress, setShowAddAddress] = useState(false)
   const [showEditAddress, setShowEditAddress] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [addresses, setAddresses] = useState([])
 
   // user data
   const { userData } = userInfo()
@@ -33,10 +36,18 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
       }
     }
     fetchAddress()
-  }, [userData.member_id])
+  }, [userData.member_id, addresses])
+
+  // useEffect(() => {
+  //   setUserAddresses([...userAddresses, ...addresses])
+  // }, [addresses])
 
   const toggleEditAddress = () => {
     setShowEditAddress(!showEditAddress)
+  }
+
+  const toggleAddAddress = () => {
+    setShowAddAddress(!showAddAddress)
   }
 
   const handleShippingSelection = (event) => {
@@ -45,6 +56,9 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
   const handleRadioSelection = (index) => {
     setSelectedIndex(index)
   }
+  // const handleAddAddress = (newAddress) => {
+  //   setAddresses([...addresses, newAddress])
+  // }
 
   const handleDelete = async () => {
     try {
@@ -73,57 +87,66 @@ const Shipping = ({ shippingDetail, setShippingDetail, nextStep }) => {
       <div className='shipping'>
         <FaRegAddressBook className='address-book' />
         <h5 className='select-address'>請選擇運送地址</h5>
-        {showEditAddress
-          ? <EditAddress
-            showEditAddress={showEditAddress}
-            setShowEditAddress={setShowEditAddress}
+        {showAddAddress
+          ? <AddAddress
+            showAddAddress={showAddAddress}
+            setShowAddAddress={setShowAddAddress}
+            userId={userData.member_id}
+            setAddresses={setAddresses}
+          // handleAddAddress={handleAddAddress}
           />
-          : (
-            <div>
-              <div className='address-boxes'>
+          : showEditAddress
+            ? <EditAddress
+              showEditAddress={showEditAddress}
+              setShowEditAddress={setShowEditAddress}
+            />
+            : (
+              <div>
+                <div className='address-boxes'>
 
-                <div className='address-box'>
-                  {userAddresses.map((shipping, index) => (
+                  <div className='address-box'>
+                    {userAddresses.map((shipping, index) => (
 
 
-                    <div
-                      key={shipping.id}
-                      className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}
-                      onClick={() => handleRadioSelection(index)}
-                    >
-                      <input
+                      <div
+                        key={shipping.id}
+                        className={`radio-groups ${selectedIndex === index ? 'selected' : ''}`}
+                        onClick={() => handleRadioSelection(index)}
+                      >
+                        <input
 
-                        type='radio'
-                        name='shippingAddress'
-                        value={index}
-                        checked={index === selectedIndex}
-                        onChange={handleShippingSelection}
-                      />
+                          type='radio'
+                          name='shippingAddress'
+                          value={index}
+                          checked={index === selectedIndex}
+                          onChange={handleShippingSelection}
+                        />
 
-                      <div className='address-name'>{shipping.user_name}</div>
-                      <br />
-                      <div>{shipping.address}</div>
-                      <div>{shipping.city}</div>
-                      <div>{shipping.district}</div>
-                      <div>{shipping.nation}</div>
-                      <div>{shipping.postal_code}</div>
-                      <div className='edit-delete'>
-                        <VscEdit />
-                        <RiDeleteBinFill onClick={handleDelete} />
+                        <div className='address-name'>{shipping.user_name}</div>
+                        <br />
+                        <div>{shipping.address}</div>
+                        <div>{shipping.city}</div>
+                        <div>{shipping.district}</div>
+                        <div>{shipping.nation}</div>
+                        <div>{shipping.postal_code}</div>
+                        <div>{shipping.user_contact}</div>
+                        <div className='edit-delete'>
+                          <VscEdit onClick={toggleEditAddress} />
+                          <RiDeleteBinFill onClick={handleDelete} />
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                <div className='toggle-edit' >
-                  <button onClick={toggleEditAddress}><BsPlusSquareDotted className='toggle-edit-icon' /></button>
-                </div>
+                    ))}
+                  </div>
+                  <div className='toggle-edit' >
+                    <BsPlusSquareDotted className='toggle-edit-icon' onClick={toggleAddAddress} />
+                  </div>
 
+                </div>
+                <div className='confirm-button'>
+                  <button onClick={nextStep}>確認</button>
+                </div>
               </div>
-              <div className='confirm-button'>
-                <button onClick={nextStep}>確認</button>
-              </div>
-            </div>
-          )}
+            )}
       </div>
     </>
   )

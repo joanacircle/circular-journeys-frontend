@@ -48,9 +48,6 @@ const UserBlog = () => {
     .catch(err => console.log(err))
   }
 
-
-  console.log(post)
-
   // TagsCategory props:
   const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
 
@@ -77,7 +74,8 @@ const UserBlog = () => {
                   </ul>
                 </div>
                 {main
-                ? post.map((v, i) => (
+                ? post &&
+                  post.map((v, i) => (
                     <Card4
                       key={'c4' + v.post_id}
                       userMemberId={userData.member_id}

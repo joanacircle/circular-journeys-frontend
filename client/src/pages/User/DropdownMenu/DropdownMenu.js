@@ -133,14 +133,14 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
         <div className='divider'></div>
 
         {/* for ' circle circle ' */}
-        <Link className='menu-option'>
+        <Link className='menu-option' to={`/blog/${userData.member_id}`}>
           <div className='user-name'>
             <BsPersonBadge size={20} />
             <p>個人首頁</p>
           </div>
         </Link>
 
-        <Link className='menu-option'>
+        <Link className='menu-option' to={`/blog/editor/${userData.member_id}`}>
           <div className='user-name'>
             <CiEdit size={20} />
             <p>撰寫日誌</p>

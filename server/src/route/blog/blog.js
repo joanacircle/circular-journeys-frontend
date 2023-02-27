@@ -35,8 +35,8 @@ router.get('/', async (req, res) => {
   
   rows.forEach(row => {
     row.create_at = moment(row.create_at).format('YYYY/MM/DD')
-  });
-  res.json(rows);
+  })
+  res.json(rows)
 })
 
 // TODO 改用後端驗證
@@ -363,5 +363,74 @@ router.get('/articleLike/:member_id', async (req, res)=>{
   res.json(rows);
 })
 
+// http://localhost:3001/blog/tag/:tag_id -> NavResult
+router.get('/tag/:tag_id', async (req, res)=>{
+  const tagId = req.params.tag_id
+  const sql = `
+    SELECT
+      posts.post_id,
+      posts.create_at,
+      posts.member_id,
+      posts.post_title,
+      posts.total_likes,
+      posts.cover,
+      users_information.user_nickname,
+      (
+        SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+        FROM post_tags
+        WHERE post_tags.post_id = posts.post_id
+      )
+      AS tags
+    FROM users_information
+    JOIN posts
+    ON posts.member_id = users_information.member_id
+    ORDER BY ? DESC
+    `
+
+  const sqlTag = `
+    SELECT
+      posts.post_id,
+      posts.create_at,
+      posts.member_id,
+      posts.post_title,
+      posts.total_likes,
+      posts.cover,
+      users_information.user_nickname,
+      post_tags.tag,
+      (
+        SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+        FROM post_tags
+        WHERE post_tags.post_id = posts.post_id
+      )
+      AS tags
+    FROM users_information
+    JOIN posts
+    ON posts.member_id = users_information.member_id
+    JOIN post_tags
+    ON posts.post_id = post_tags.post_id
+    WHERE post_tags.tag_id =?
+    `
+
+  try{
+    let rows
+    if(tagId==='popular'){
+      [rows] = await db.query(sql, ['posts.total_likes'])
+    }
+    else if(tagId==='latest'){ 
+      // 問題：無法依照時間正確排序
+      [rows] = await db.query(sql, ['posts.create_at'])
+    }
+    else{
+      [rows] = await db.query(sqlTag, [tagId])
+    }
+    rows.forEach(row => {
+      row.create_at = moment(row.create_at).format('YYYY/MM/DD')
+    })
+    res.json(rows)
+  }
+  catch(err){
+    res.json(err)
+  }
+})
 
 module.exports = router;

@@ -22,7 +22,7 @@ const UserBlog = () => {
     fetcher() // 驗證 parameter的 memberId是否存在於資料庫
     getData()
     getArticle()
-}, [])
+  }, [memberId])
 
   function fetcher() {
     fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)

@@ -291,7 +291,7 @@ router.put('/post/:post_id', async(req, res)=>{
 
 // http://localhost:3001/blog/:member_id -> UserBlog
 router.get('/:member_id', async (req, res) => {
-const member_id = req.params.member_id;
+const memberId = req.params.member_id;
 
 const sql =`
 SELECT 
@@ -315,16 +315,52 @@ ON users_information.member_id = ?
 WHERE posts.member_id = ?
 ORDER BY create_at DESC
 `
-const [rows] = await db.query(sql, [member_id, member_id],
-  (err, result) => {
-    if (err) throw err
-    res.json(result)
-  });
 
-rows.forEach(row => {
-  row.create_at = moment(row.create_at).format('YYYY/MM/DD');
-});
-res.json(rows);
+try{
+  const [rows] = await db.query(sql, [memberId, memberId])
+  
+  rows.forEach(rows => {
+    rows.create_at = moment(rows.create_at).format('YYYY/MM/DD');
+  })
+
+  res.json(rows)
+}
+catch(err) {
+  res.json(err)
+}
+})
+
+// http://localhost:3001/blog/articleLike/:member_id -> UserBlog(tab)
+router.get('/articleLike/:member_id', async (req, res)=>{
+  const memberId = req.params.member_id
+  const sql2 = `
+  SELECT 
+    post_like.post_id,  
+    posts.create_at,  
+    posts.post_title, 
+    posts.post_content, 
+    posts.total_likes,
+    posts.cover, 
+  (
+    SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+    FROM post_tags 
+    WHERE post_tags.post_id = posts.post_id
+  ) 
+  AS tag 
+  FROM users_information 
+  JOIN posts 
+  ON users_information.member_id = ?
+  JOIN post_like
+  ON post_like.post_id = posts.post_id
+  WHERE post_like.member_id = ?
+  ORDER BY create_at DESC
+  `
+
+  const [rows] = await db.query(sql2, [memberId, memberId])
+  rows.forEach(row => {
+    row.create_at = moment(row.create_at).format('YYYY/MM/DD');
+  });
+  res.json(rows);
 })
 
 

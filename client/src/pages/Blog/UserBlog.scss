@@ -40,6 +40,10 @@
             }
             .Active{
               border-bottom: 2px solid var(--dark-gray);
+            }
+
+            .Inactive{
+              cursor: pointer;
 
               &:hover{
                 border-bottom: 2px solid var(--purple);

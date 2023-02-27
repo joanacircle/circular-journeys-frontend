@@ -3,6 +3,7 @@ import TourCardList from '../TourCardList/TourCardList'
 import TourCardList2 from '../TourCardList2/TourCardList2'
 import TourCardList3 from '../TourCardList3/TourCardList3'
 import TourFavoriteList2 from '../TourFavoriteList/TourFavoriteList2'
+import TourFavoriteList from '../TourFavoriteList/TourFavoriteList'
 import { data as TourCards } from '../../data/index'
 import './TourOverview.scss'
 

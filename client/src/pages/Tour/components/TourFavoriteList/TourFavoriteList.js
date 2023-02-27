@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import TourCard from '../TourCard/TourCard'
 
-export default function TourFavoriteList({ id, cardList }) {
+export default function TourFavoriteListA(props) {
+     const { cards } = props
     const [TourFavoriteList, setTourFavoriteList] = useState([])
       useEffect(() => {
         for (let i = 0; i < localStorage.length; i++) {
@@ -8,18 +10,27 @@ export default function TourFavoriteList({ id, cardList }) {
           if (key.startsWith("TourFavorite-")) {
             const id = key.substring("TourFavorite-".length)
             const Favorite = JSON.parse(localStorage.getItem(key))
-
-            const favoriteCard = cardList.find(card => card.id === id)
+            const favoriteCard = cards.find(card => card.id === id)
             if (favoriteCard) {
             setTourFavoriteList(prevTourFavoriteList => [...prevTourFavoriteList, { id, Favorite }])
             }
           }
         }
-      }, [cardList])
+      }, [])
   return (
     <>
-    <div>
-    </div>
+    {
+      TourFavoriteList.length > 0
+? (
+        TourFavoriteList.map(({ id }) => {
+          const favoriteCard = cards.find(card => card.id === id)
+          return (<TourCard key={`${favoriteCard.id}Like`} card={favoriteCard} />)
+        })
+      )
+: (
+        (<div><h1>您還沒有收藏任何景點</h1></div>)
+      )
+    }
     </>
   )
 }

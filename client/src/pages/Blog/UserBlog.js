@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
@@ -12,19 +13,17 @@ import { NotFound } from 'pages/NotFound'
 const UserBlog = () => {
   const [post, setPost] = useState({})
   const [id, setId] = useState([])
+  const [main, setMain] = useState(true)
+  const [likePost, setLikePost] = useState({})
   const { memberId } = useParams()
   const { userData } = userInfo()
 
-  useEffect(() => { getData() }, [])
-  function getData() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
-      .then(r => r.json())
-      .then((data) => { setPost(data[0]) })
-      .catch(error => console.error(error))
-  }
+  useEffect(() => {
+    fetcher() // 驗證 parameter的 memberId是否存在於資料庫
+    getData()
+    getArticle()
+}, [])
 
-  // 驗證 parameter的 memberId是否存在於資料庫
-  useEffect(() => { fetcher() }, [])
   function fetcher() {
     fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
       .then(r => r.json())
@@ -33,6 +32,23 @@ const UserBlog = () => {
         setId(mId)
       })
   }
+  function getData() {
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
+      .then(r => r.json())
+      .then((data) => { setPost(data) })
+      .catch(error => console.error(error))
+  }
+
+  function handleClick () {
+    setMain(!main)
+  }
+  function getArticle () {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/articleLike/${memberId}`)
+    .then(r => { setLikePost(r.data) })
+    .catch(err => console.log(err))
+  }
+
+
   console.log(post)
 
   // TagsCategory props:
@@ -45,19 +61,23 @@ const UserBlog = () => {
           <div className='userblog-container'>
             <div className='page-body'>
               <div className='post-container'>
-                <h2 className='userblog-h2'>{post.user_nickname}</h2>
+                <h2 className='userblog-h2'>{post && post[0].user_nickname}</h2>
                 <div className='userblog-nav'>
                   <ul>
-                    <Link to='#'>
-                      <li className='Active'>主頁</li>
-                    </Link>
-                    <Link to='#'>
-                      <li>喜歡的文章</li>
-                    </Link>
+                      {main
+                      ? <>
+                        <li className='Active'>主頁</li>
+                        <li className='Inactive' onClick={handleClick}>喜歡的文章</li>
+                        </>
+                      : <>
+                        <li className='Inactive' onClick={handleClick}>主頁</li>
+                        <li className='Active'>喜歡的文章</li>
+                        </>
+                      }
                   </ul>
                 </div>
-                {[post].map((v, i) => {
-                  return (
+                {main
+                ? post.map((v, i) => (
                     <Card4
                       key={'c4' + v.post_id}
                       userMemberId={userData.member_id}
@@ -68,8 +88,21 @@ const UserBlog = () => {
                       createAt={v.create_at}
                       likes={v.total_likes}
                       postContent={v.post_content} />
-                  )
-                })}
+                  ))
+                : likePost &&
+                  likePost.map((v, i) => (
+                    <Card4
+                    key={'c4' + v.post_id}
+                    userMemberId={userData.member_id}
+                    tags={v.tag}
+                    title={v.post_title}
+                    postId={v.post_id}
+                    img={v.cover}
+                    createAt={v.create_at}
+                    likes={v.total_likes}
+                    postContent={v.post_content} />
+                  ))
+                }
                 <div className='userblog-pagination'>
                   <Pagination />
                 </div>
@@ -77,9 +110,9 @@ const UserBlog = () => {
               <div className='userblog-aside'>
                 <div className="userblog-aside-item">
                   <div className='member-avatar'>
-                    <img src={post.picture} alt="avatar" />
+                    <img src={post && post[0].picture} alt="avatar" />
                     {/* TODO: 如果會員沒有撰寫文章時 */}
-                    <h4>{post.user_nickname}</h4>
+                    <h4>{post && post[0].user_nickname}</h4>
                   </div>
                 </div>
                 <div className='userblog-aside-item'>

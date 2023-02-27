@@ -10,8 +10,10 @@ const Card2 = (props) => {
   const { userMemberId, postId, img, tags, title, likes } = props
   const [like, setLike] = useState(false)
   const [postLike, setPostLike] = useState()
+
   useEffect(() => { getPostLike() }, [])
   useEffect(() => { fillHeart() }, [postLike])
+
   function getPostLike() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/postLike/${userMemberId}`)
     .then(
@@ -40,8 +42,6 @@ const Card2 = (props) => {
       }
     }
   }
-
-  console.log(postLike)
 
   return (
     <>

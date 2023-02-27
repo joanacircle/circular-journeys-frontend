@@ -14,6 +14,7 @@ const Shipping = ({ nextStep }) => {
   const [showAddAddress, setShowAddAddress] = useState(false)
   const [showEditAddress, setShowEditAddress] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedAddress, setSelectedAddress] = useState(null)
   const [addresses, setAddresses] = useState([])
 
   // user data
@@ -55,10 +56,8 @@ const Shipping = ({ nextStep }) => {
   }
   const handleRadioSelection = (index) => {
     setSelectedIndex(index)
+    setSelectedAddress(userAddresses[index])
   }
-  // const handleAddAddress = (newAddress) => {
-  //   setAddresses([...addresses, newAddress])
-  // }
 
   const handleDelete = async () => {
     try {
@@ -93,12 +92,13 @@ const Shipping = ({ nextStep }) => {
             setShowAddAddress={setShowAddAddress}
             userId={userData.member_id}
             setAddresses={setAddresses}
-          // handleAddAddress={handleAddAddress}
           />
           : showEditAddress
             ? <EditAddress
               showEditAddress={showEditAddress}
               setShowEditAddress={setShowEditAddress}
+              selectedAddress={selectedAddress}
+              setAddresses={setAddresses}
             />
             : (
               <div>

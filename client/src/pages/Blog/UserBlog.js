@@ -11,10 +11,14 @@ import TagsCategory from 'components/TagsCategory'
 import { NotFound } from 'pages/NotFound'
 
 const UserBlog = () => {
-  const [post, setPost] = useState({})
+  const [post, setPost] = useState([])
   const [id, setId] = useState([])
   const [main, setMain] = useState(true)
   const [likePost, setLikePost] = useState({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(4)
+  const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const currentLikePost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   const { memberId } = useParams()
   const { userData } = userInfo()
 
@@ -48,8 +52,7 @@ const UserBlog = () => {
     .catch(err => console.log(err))
   }
 
-  // TagsCategory props:
-  const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
+  console.log(post)
 
   if (id.includes(memberId)) {
     return (
@@ -75,7 +78,7 @@ const UserBlog = () => {
                 </div>
                 {main
                 ? post &&
-                  post.map((v, i) => (
+                  currentPost.map((v, i) => (
                     <Card4
                       key={'c4' + v.post_id}
                       userMemberId={userData.member_id}
@@ -88,7 +91,7 @@ const UserBlog = () => {
                       postContent={v.post_content} />
                   ))
                 : likePost &&
-                  likePost.map((v, i) => (
+                  currentLikePost.map((v, i) => (
                     <Card4
                     key={'c4' + v.post_id}
                     userMemberId={userData.member_id}
@@ -101,8 +104,13 @@ const UserBlog = () => {
                     postContent={v.post_content} />
                   ))
                 }
-                <div className='userblog-pagination'>
-                  <Pagination />
+                <div className='userblog-pagination blog-pagination'>
+                  <Pagination
+                    current={currentPage}
+                    total={post.length}
+                    pageSize={4}
+                    onChange={page => setCurrentPage(page)}
+                  />
                 </div>
               </div>
               <div className='userblog-aside'>
@@ -126,7 +134,7 @@ const UserBlog = () => {
                   <BlogCategory />
                 </div>
                 <div className='userblog-aside-item'>
-                  <TagsCategory tags={tagsCategory} />
+                  <TagsCategory />
                 </div>
               </div>
             </div>

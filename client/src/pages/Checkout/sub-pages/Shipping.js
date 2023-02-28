@@ -9,12 +9,12 @@ import './Shipping.scss'
 import { userInfo } from 'components/userInfo/UserInfo'
 
 
-const Shipping = ({ nextStep }) => {
+const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
 
   const [showAddAddress, setShowAddAddress] = useState(false)
   const [showEditAddress, setShowEditAddress] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const [selectedAddress, setSelectedAddress] = useState(null)
+  // const [selectedAddress, setSelectedAddress] = useState(null)
   const [addresses, setAddresses] = useState([])
 
   // user data
@@ -39,9 +39,6 @@ const Shipping = ({ nextStep }) => {
     fetchAddress()
   }, [userData.member_id, addresses])
 
-  // useEffect(() => {
-  //   setUserAddresses([...userAddresses, ...addresses])
-  // }, [addresses])
 
   const toggleEditAddress = () => {
     setShowEditAddress(!showEditAddress)

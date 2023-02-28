@@ -118,13 +118,7 @@ const ProductDetail = () => {
 
         <div className='recommendations'>
           <div className='recommend-list'>
-            {/* {sampleData.map((item) => (
-              <div key={item.id} className='recommend-product'>
-                <img className='rec-img' src={item.img[0]} alt="" />
-                <h5>{item.name}</h5>
-                <p>Price: ${item.price}</p>
-              </div>
-            ))} */}
+
           </div>
         </div>
       </div>

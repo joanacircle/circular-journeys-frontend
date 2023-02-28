@@ -3,7 +3,7 @@ import DynamicSelect from '../../../components/Select/DynamicSelect'
 import './EditAddress.scss'
 
 const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, setAddresses, userData }) => {
-  console.log("selected address is", selectedAddress)
+
   const [inputData, setInputData] = useState(selectedAddress)
 
   const handleInputChange = (event) => {

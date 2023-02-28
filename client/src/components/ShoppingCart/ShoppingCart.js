@@ -37,6 +37,7 @@ export const ShoppingCart = ({ toggleModal }) => {
     for (let i = 0; i < cartItems.length; i++) {
       price += cartItems[i].count * cartItems[i].price
     }
+    localStorage.setItem('cart-total', price)
     return price
   }
 

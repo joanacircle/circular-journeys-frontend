@@ -14,6 +14,9 @@ import axios from 'axios'
 
 const NavResult = () => {
   const [post, setPost] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(4)
+  const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   const { tagId } = useParams()
   const { userData } = userInfo()
 
@@ -23,11 +26,6 @@ const NavResult = () => {
     .then(r => { setPost(r.data) })
     .catch(error => console.log(error))
   }
-
-  // 從 database 取得
-  const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
-
-  console.log(post)
 
   return (
     <>
@@ -45,7 +43,7 @@ const NavResult = () => {
           <div className='blog-container row justify-content-md-center justify-content-xl-between'>
             <div className='col-md-10 col-lg-8 col-xl-7 text-center'>
               <div className='row'>
-                {post.map((v, i) => {
+                {currentPost.map((v, i) => {
                   return (
                     <div className='blog-post col-md-6' key={v.post_id}>
                       {/* 問題：無法依照時間排版 */}
@@ -63,7 +61,12 @@ const NavResult = () => {
                   )
                 })}
                 <div className='blog-pagination'>
-                  <Pagination />
+                  <Pagination
+                    current={currentPage}
+                    total={post.length}
+                    pageSize={4}
+                    onChange={page => setCurrentPage(page)}
+                  />
                 </div>
               </div>
             </div>
@@ -81,7 +84,7 @@ const NavResult = () => {
                 <BlogCategory />
               </div>
               <div className='blog-aside-item'>
-                <TagsCategory tags={tagsCategory} />
+                <TagsCategory />
               </div>
             </div>
           </div>

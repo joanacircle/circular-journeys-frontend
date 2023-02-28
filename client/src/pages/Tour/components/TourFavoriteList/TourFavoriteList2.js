@@ -20,15 +20,16 @@ export default function TourFavoriteListA(props) {
               setTourFavoriteList(prevTourFavoriteList => [...prevTourFavoriteList, { id }])
             }
           }
-        } else {
-          // setData(prevTourFavoriteList => prevTourFavoriteList.filter(item => item !== prevTourFavoriteList))
         }
+        // else {
+        // setData(prevTourFavoriteList => prevTourFavoriteList.filter(item => item !== prevTourFavoriteList))
+        // }
       }
       setData(cards.filter(card => TourFavoriteList.some(({ id }) => id === card.id)))
-    }, [count])
+    }, [])
     return (
     <>
-      <MyContext.Provider value={{ count, setCount }}></MyContext.Provider>
+      {/* <MyContext.Provider value={{ count, setCount }}></MyContext.Provider> */}
     <div className='tourCardList'>
     {
       data.length > 0

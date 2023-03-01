@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
 import './Header.scss'
@@ -12,7 +12,7 @@ import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 import { userInfo } from 'components/userInfo/UserInfo'
-import { useIsLoggedIn } from '../hooks/useIsLoggedIn'
+import MemberContext from 'components/MemberContext'
 
 const Header = () => {
 
@@ -21,7 +21,7 @@ const Header = () => {
 
   // for modals
   const [loginModal, setLoginModal] = useState(false)
-
+  const { isLogin, setIsLogin } = useContext(MemberContext)
   // shopping cart modal
   const [cartVisibility, setCartVisibility] = useState(false)
   const toggleModal = () => {
@@ -29,7 +29,6 @@ const Header = () => {
   }
 
   const { userData } = userInfo()
-  const { isLogin } = useIsLoggedIn()
 
   // const [cartCount, setCartCount] = useState(localStorage.getItem('cart-count') || 0)
 
@@ -45,7 +44,7 @@ const Header = () => {
 
   // Login modal
   const handleToggleLoginModal = () => (
-    isLogin.state ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
+    isLogin.userState ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
   )
   return (
     <>

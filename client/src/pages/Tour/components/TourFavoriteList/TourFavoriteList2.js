@@ -5,7 +5,6 @@ import TourCard from '../TourCard/TourCard'
 export default function TourFavoriteListA(props) {
     const { cards } = props
     const [TourFavoriteList, setTourFavoriteList] = useState([])
-    const [count, setCount] = useState(0)
     const [data, setData] = useState([])
     const [storage, setStorage] = useState(0)
     const MyContext = React.createContext()
@@ -19,11 +18,11 @@ export default function TourFavoriteListA(props) {
           if (favoriteCard) {
             if (!isExit) {
               setTourFavoriteList(prevTourFavoriteList => [...prevTourFavoriteList, { id }])
+            } else {
+              setData(prevTourFavoriteList => prevTourFavoriteList.filter(item => item !== prevTourFavoriteList))
             }
           }
-        } else {
-        // setData(prevTourFavoriteList => prevTourFavoriteList.filter(item => item !== prevTourFavoriteList))
-      }
+        }
       }
       setData(cards.filter(card => TourFavoriteList.some(({ id }) => id === card.id)))
     }, [])

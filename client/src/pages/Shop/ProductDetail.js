@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
+import { CartCountContext } from 'components/ShoppingCart/CartCountProvider'
 import './ProductDetail.scss'
 
 
 const ProductDetail = () => {
+
+  const { updateCount } = useContext(CartCountContext)
 
   const location = useLocation()
   const product = location.state?.product
@@ -65,15 +68,14 @@ const ProductDetail = () => {
       }
       updatedCartItems.push(cartItem)
     }
+
     localStorage.setItem('cart', JSON.stringify(updatedCartItems))
-    // window.dispatchEvent(new Event("storage"))
+    updateCount(localStorage.getItem('cart-count'))
   }
 
   const handleCheckout = () => {
     localStorage.setItem('loginFromCheckout', true)
   }
-
-
 
   return (
     <>

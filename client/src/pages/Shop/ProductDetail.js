@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import './ProductDetail.scss'
 
+import { userInfo } from '../../components/userInfo/UserInfo'
 
 const ProductDetail = () => {
-
   const location = useLocation()
   const product = location.state?.product
   const [selectedThumbnailIndex, setSelectedThumbnailIndex] = useState(0)
+  const [isLogin, setIsLogin] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,8 @@ const ProductDetail = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  const { userData } = userInfo()
 
   const getImgPath = () => {
     const paths = []
@@ -70,7 +73,11 @@ const ProductDetail = () => {
   }
 
   const handleCheckout = () => {
-    localStorage.setItem('loginFromCheckout', true)
+    if (!userData) {
+      localStorage.setItem('loginFromCheckout', true)
+      setIsLogin(!isLogin)
+
+    }
   }
 
 
@@ -110,12 +117,12 @@ const ProductDetail = () => {
                 <hr />
                 <p className='price-p'>限定價: ${parseFloat(product.price).toLocaleString('zh-TW')}</p>
                 <button className='put-kart' onClick={handleAddToCart}>加入購物袋</button>
-                <Link
-                  to='/checkout'
+                <button
+                  // to='/checkout'
                   onClick={handleCheckout}
                 >
                   <p className='buy-now'>立即購買</p>
-                </Link>
+                </button>
               </div>
             </div>
           </div>

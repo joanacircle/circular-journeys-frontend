@@ -4,6 +4,7 @@ import Footer from './Footer'
 import './MainLayout.scss'
 
 const MainLayout = () => {
+
   return (
     <>
       <>

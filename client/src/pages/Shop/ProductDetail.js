@@ -70,7 +70,7 @@ const ProductDetail = () => {
     }
 
     localStorage.setItem('cart', JSON.stringify(updatedCartItems))
-    updateCount(localStorage.getItem('cart-count'))
+    updateCount(updatedCartItems)
   }
 
   const handleCheckout = () => {

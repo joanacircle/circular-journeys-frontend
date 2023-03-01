@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './ShoppingCart.scss'
 import 'animate.css'
-import { useEffect, useState } from 'react'
+
 import CartList from './CartList'
 import CartTotal from './CartTotal'
 
@@ -24,16 +25,6 @@ export const ShoppingCart = ({ toggleModal }) => {
   const handleCheckout = () => {
     toggleModal()
     localStorage.setItem('loginFromCheckout', true)
-  }
-
-  const totalQuantity = () => {
-    let qty = 0
-    for (let i = 0; i < cartItems.length; i++) {
-      qty += +cartItems[i].count
-    }
-    localStorage.setItem('cart-count', qty)
-
-    return qty
   }
 
   const totalPrice = () => {
@@ -65,7 +56,7 @@ export const ShoppingCart = ({ toggleModal }) => {
           <hr className='cart-separator' />
 
           <CartTotal
-            totalQuantity={totalQuantity()}
+            cartItems={cartItems}
             totalPrice={totalPrice()}
           />
           <div className='checkout-box' >

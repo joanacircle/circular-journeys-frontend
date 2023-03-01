@@ -44,7 +44,9 @@ const PostEditor = () => {
   return (
     <>
     <div className='edit-container'>
+
       <h2>-新增文章-</h2>
+
       <div className="edit-wrapper">
         <form className="edit-form-group"
           onSubmit={handleSubmit}>

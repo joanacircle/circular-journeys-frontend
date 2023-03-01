@@ -12,7 +12,7 @@ import { NotFound } from 'pages/NotFound'
 
 const UserBlog = () => {
   const [post, setPost] = useState([])
-  const [id, setId] = useState([])
+  const [notFound, setNotFound] = useState(false)
   const [main, setMain] = useState(true)
   const [likePost, setLikePost] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
@@ -29,12 +29,13 @@ const UserBlog = () => {
   }, [memberId])
 
   function fetcher() {
-    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api`)
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${memberId}`)
       .then(r => {
-        const mId = r.data.member[0].member_id
-        setId(mId)
-      })
-      .catch(err => console.log(err))
+        if (r.data.member.length === 0) {
+          setNotFound(!notFound)
+        }
+    })
+    .catch(err => console.log(err))
   }
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
@@ -49,47 +50,35 @@ const UserBlog = () => {
     .then(r => { setLikePost(r.data) })
     .catch(err => console.log(err))
   }
-  console.log(likePost)
 
-  if (id.includes(memberId)) {
-    return (
-      <>
-        <div>
-          <div className='userblog-container'>
-            <div className='page-body'>
-              <div className='post-container'>
-                <h2 className='userblog-h2'>{post && post[0].user_nickname}</h2>
-                <div className='userblog-nav'>
-                  <ul>
-                      {main
-                      ? <>
-                        <li className='Active'>主頁</li>
-                        <li className='Inactive' onClick={handleClick}>喜歡的文章</li>
-                        </>
-                      : <>
-                        <li className='Inactive' onClick={handleClick}>主頁</li>
-                        <li className='Active'>喜歡的文章</li>
-                        </>
-                      }
-                  </ul>
-                </div>
-                {main
-                ? post &&
-                  currentPost.map((v, i) => (
-                    <Card4
-                      key={'c4' + v.post_id}
-                      userMemberId={userData.member_id}
-                      tags={v.tag}
-                      title={v.post_title}
-                      postId={v.post_id}
-                      img={v.cover}
-                      createAt={v.create_at}
-                      likes={v.total_likes}
-                      postContent={v.post_content} />
-                  ))
-                : likePost &&
-                  currentLikePost.map((v, i) => (
-                    <Card4
+  if (notFound) {
+    return <NotFound />
+  }
+  return (
+    <>
+      <div>
+        <div className='userblog-container'>
+          <div className='page-body'>
+            <div className='post-container'>
+              <h2 className='userblog-h2'>{post && post[0].user_nickname}</h2>
+              <div className='userblog-nav'>
+                <ul>
+                    {main
+                    ? <>
+                      <li className='Active'>主頁</li>
+                      <li className='Inactive' onClick={handleClick}>喜歡的文章</li>
+                      </>
+                    : <>
+                      <li className='Inactive' onClick={handleClick}>主頁</li>
+                      <li className='Active'>喜歡的文章</li>
+                      </>
+                    }
+                </ul>
+              </div>
+              {main
+              ? post &&
+                currentPost.map((v, i) => (
+                  <Card4
                     key={'c4' + v.post_id}
                     userMemberId={userData.member_id}
                     tags={v.tag}
@@ -99,49 +88,59 @@ const UserBlog = () => {
                     createAt={v.create_at}
                     likes={v.total_likes}
                     postContent={v.post_content} />
-                  ))
-                }
-                <div className='userblog-pagination blog-pagination'>
-                  <Pagination
-                    current={currentPage}
-                    total={main ? post.length : likePost.length}
-                    pageSize={4}
-                    onChange={page => setCurrentPage(page)}
-                  />
+                ))
+              : likePost &&
+                currentLikePost.map((v, i) => (
+                  <Card4
+                  key={'c4' + v.post_id}
+                  userMemberId={userData.member_id}
+                  tags={v.tag}
+                  title={v.post_title}
+                  postId={v.post_id}
+                  img={v.cover}
+                  createAt={v.create_at}
+                  likes={v.total_likes}
+                  postContent={v.post_content} />
+                ))
+              }
+              <div className='userblog-pagination blog-pagination'>
+                <Pagination
+                  current={currentPage}
+                  total={main ? post.length : likePost.length}
+                  pageSize={4}
+                  onChange={page => setCurrentPage(page)}
+                />
+              </div>
+            </div>
+            <div className='userblog-aside'>
+              <div className="userblog-aside-item">
+                <div className='member-avatar'>
+                  <img src={post && post[0].picture} alt="avatar" />
+                  {/* TODO: 如果會員沒有撰寫文章時 */}
+                  <h4>{post && post[0].user_nickname}</h4>
                 </div>
               </div>
-              <div className='userblog-aside'>
-                <div className="userblog-aside-item">
-                  <div className='member-avatar'>
-                    <img src={post && post[0].picture} alt="avatar" />
-                    {/* TODO: 如果會員沒有撰寫文章時 */}
-                    <h4>{post && post[0].user_nickname}</h4>
-                  </div>
-                </div>
-                <div className='userblog-aside-item'>
-                  <form className='blog-search'>
-                    <input className='blog-input' placeholder="Search">
-                    </input>
-                    <button className='blog-button' type="submit">
-                      <BiSearch className='search-icon' />
-                    </button>
-                  </form>
-                </div>
-                <div className='userblog-aside-item'>
-                  <BlogCategory />
-                </div>
-                <div className='userblog-aside-item'>
-                  <TagsCategory />
-                </div>
+              <div className='userblog-aside-item'>
+                <form className='blog-search'>
+                  <input className='blog-input' placeholder="Search">
+                  </input>
+                  <button className='blog-button' type="submit">
+                    <BiSearch className='search-icon' />
+                  </button>
+                </form>
+              </div>
+              <div className='userblog-aside-item'>
+                <BlogCategory />
+              </div>
+              <div className='userblog-aside-item'>
+                <TagsCategory />
               </div>
             </div>
           </div>
         </div>
-      </>
-    )
-  } else {
-    return <NotFound />
-  }
+      </div>
+    </>
+  )
 }
 
 export default UserBlog

@@ -4,9 +4,11 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './EditPost.scss'
+import { NotFound } from 'pages/NotFound'
 
 const EditPost = () => {
   const { postId } = useParams()
+  const [notFound, setNotFound] = useState(false)
   const [form, setForm] = useState({
     postId: `${postId}`,
     title: '',
@@ -24,7 +26,20 @@ const EditPost = () => {
     })
   )
 
-  useEffect(() => { getData() }, [])
+  useEffect(() => {
+    fetcher() // 驗證 parameter的 postId是否存在於資料庫
+    getData()
+  }, [postId])
+
+  function fetcher() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${postId}`)
+      .then(r => {
+        if (r.data.post.length === 0) {
+          setNotFound(!notFound)
+        }
+      })
+      .catch(err => console.log(err))
+  }
   function getData () {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`)
     .then(r => {
@@ -83,7 +98,10 @@ const EditPost = () => {
     })
     .catch(err => console.log(err))
   }
-  console.log(form)
+
+  if (notFound) {
+    return <NotFound />
+  }
   return (
     <>
     <div className='edit-container'>

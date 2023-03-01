@@ -4,6 +4,7 @@ import Pagination from 'rc-pagination'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './NavResult.scss'
+import { NotFound } from 'pages/NotFound'
 import Banner from 'images/Blog/blog-banner.jpeg'
 import { userInfo } from 'components/userInfo/UserInfo'
 import Card3 from 'components/Cards/Card3'
@@ -12,20 +13,35 @@ import TagsCategory from 'components/TagsCategory'
 
 
 const NavResult = () => {
+  const { tagId } = useParams()
   const [post, setPost] = useState([])
+  const [notFound, setNotFound] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(4)
   const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-  const { tagId } = useParams()
   const { userData } = userInfo()
 
-  useEffect(() => { getData() }, [tagId])
+  useEffect(() => {
+    fetcher() // 驗證 parameter的 tagId 是否存在於資料庫
+    getData()
+  }, [tagId])
+
+  function fetcher() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${tagId}`)
+      .then(r => {
+        if (r.data.tag === 0) {
+          setNotFound(!notFound)
+        }
+    })
+    .catch(err => console.log(err))
+  }
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/tag/${tagId}`)
     .then(r => { setPost(r.data) })
     .catch(err => console.log(err))
   }
 
+  if (notFound) { return <NotFound /> }
   return (
     <>
       <div>

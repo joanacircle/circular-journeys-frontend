@@ -46,23 +46,38 @@ router.get('/', async (req, res) => {
 })
 
 // TODO 改用後端驗證
-// http://localhost:3001/blog/api
-router.get('/api', async (req, res) => {
-  const sql =`SELECT JSON_ARRAYAGG(post_id) AS post_id FROM posts WHERE 1`
-  const sql2 =`SELECT JSON_ARRAYAGG(member_id) AS member_id FROM users_information WHERE 1`
-  const sql3 =`SELECT JSON_ARRAYAGG(tag_id) AS tag_id FROM post_tags WHERE 1`
+// http://localhost:3001/blog/api/:id
+router.get('/api/:id', async (req, res) => {
+  // const sql =`SELECT JSON_ARRAYAGG(post_id) AS post_id FROM posts WHERE 1`
+  // const sql2 =`SELECT JSON_ARRAYAGG(member_id) AS member_id FROM users_information WHERE 1`
+  // const sql3 =`SELECT JSON_ARRAYAGG(tag_id) AS tag_id FROM post_tags WHERE 1`
+
+  // try{
+  //   const [rows] = await db.query(sql)
+  //   const [rows2] = await db.query(sql2)
+  //   const [rows3] = await db.query(sql3)
+
+  //   res.json({post: rows, member: rows2, tag: rows3})
+  // }
+  // catch(err){
+  //   res.json(err)
+  // }
+
+  const id = req.params.id
+  const sql =`SELECT post_id FROM posts WHERE post_id = ?`
+  const sql2 =`SELECT member_id FROM users_information WHERE member_id = ?`
+  const sql3 =`SELECT tag_id FROM post_tags WHERE tag_id = ?`
 
   try{
-    const [rows] = await db.query(sql)
-    const [rows2] = await db.query(sql2)
-    const [rows3] = await db.query(sql3)
+    const [rows] = await db.query(sql,[id])
+    const [rows2] = await db.query(sql2,[id])
+    const [rows3] = await db.query(sql3,[id])
 
     res.json({post: rows, member: rows2, tag: rows3})
   }
   catch(err){
     res.json(err)
   }
-
 })
 
 // http://localhost:3001/blog/tag -> side nav

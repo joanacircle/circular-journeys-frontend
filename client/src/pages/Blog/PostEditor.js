@@ -4,9 +4,11 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './PostEditor.scss'
+import { NotFound } from 'pages/NotFound'
 
 const PostEditor = () => {
   const { memberId } = useParams()
+  const [notFound, setNotFound] = useState(false)
   const [form, setForm] = useState({ memberId: `${memberId}`, title: '', tags: '', tag1: '', tag2: '', tag3: '', cover: '', content: '' })
   const category = ['美食', '景點', '住宿']
   const [ctag, setCtag] = useState(
@@ -20,6 +22,17 @@ const PostEditor = () => {
     const newTags = ctag.filter((v) => v.checked).map((v) => v.value)
     setForm({ ...form, tags: newTags })
    }, [ctag])
+   useEffect(() => { fetcher() }, [memberId])
+
+   function fetcher() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${memberId}`)
+      .then(r => {
+        if (r.data.member.length === 0) {
+          setNotFound(!notFound)
+        }
+    })
+    .catch(err => console.log(err))
+  }
 
   // 關鍵字
   const handleChange = (e) => {
@@ -41,6 +54,7 @@ const PostEditor = () => {
     .catch(err => console.log(err))
   }
 
+  if (notFound) { return <NotFound /> }
   return (
     <>
     <div className='edit-container'>

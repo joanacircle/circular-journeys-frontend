@@ -9,6 +9,7 @@ const user = require('./src/route/user/users')
 const shopRouter = require('./src/route/shop/shop')
 const checkoutRouter = require('./src/route/shop/checkout')
 const paymentRouter = require("./src/route/shop/payment")(cors)
+const orderRouter = require('./src/route/shop/orders')
 const blogRouter = require('./src/route/blog/blog')
 
 // general middleware
@@ -28,6 +29,7 @@ app.use('/user', user)
 // payment
 app.use('/shop', shopRouter)
 app.use('/checkout', checkoutRouter)
+app.use('/orders', orderRouter)
 app.post('/payment', paymentRouter)
 
 // blog

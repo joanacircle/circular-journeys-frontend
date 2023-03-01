@@ -1,8 +1,5 @@
-@import 'index.scss';
 
 .FormRow{
-  // display: flex;
-  // flex-direction: column;
 
   .card-element {
       display: flex;
@@ -39,13 +36,14 @@
   button {
     padding: 5px;
     width: 25%;
-    background-color: $orange;
+    background-color: var(--orange);
     color: white;
-    border-radius: $br2;
+    border-radius: var(--br2);
     font-weight: bold;
 
-    &:hover{
-      // cursor: pointer;
-    }
+  }
+  .error{
+    color: red;
+    white-space: nowrap;
   }
 }

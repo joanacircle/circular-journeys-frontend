@@ -22,9 +22,6 @@ const UserBlog = () => {
   const { memberId } = useParams()
   const { userData } = userInfo()
 
-  // test
-  console.log(post)
-
   useEffect(() => {
     fetcher() // 驗證 parameter的 memberId是否存在於資料庫
     getData()
@@ -40,7 +37,7 @@ const UserBlog = () => {
     })
     .catch(err => console.log(err))
   }
-  // TODO: get not thing
+
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
       .then(r => { setPost(r.data) })
@@ -55,16 +52,14 @@ const UserBlog = () => {
       .catch(err => console.log(err))
   }
 
-  if (notFound) {
-    return <NotFound />
-  }
+  if (notFound) { return <NotFound /> }
   return (
     <>
       <div>
         <div className='userblog-container'>
           <div className='page-body'>
             <div className='post-container'>
-              <h2 className='userblog-h2'>{post[0].user_nickname}</h2>
+              <h2 className='userblog-h2'>{post[0] && post[0].user_nickname}</h2>
               <div className='userblog-nav'>
                 <ul>
                     {main

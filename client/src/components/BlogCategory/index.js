@@ -9,19 +9,19 @@ const BlogCategory = () => {
     <ul className='blog-categories'>
       {/* TODO */}
       <li>
-        <Link to='#' title='熱門'>熱門</Link>
+        <Link to='/blog/tag/popular' title='熱門'>熱門</Link>
       </li>
       <li >
-        <Link to='#' title='最新'>最新</Link>
+        <Link to='/blog/tag/latest' title='最新'>最新</Link>
       </li>
       <li >
-        <Link to='#' title='美食'>美食</Link>
+        <Link to='/blog/tag/t1' title='美食'>美食</Link>
       </li>
       <li>
-        <Link to='#' title='景點'>景點</Link>
+        <Link to='/blog/tag/t2' title='景點'>景點</Link>
       </li>
       <li>
-        <Link to='#' title='住宿'>住宿</Link>
+        <Link to='/blog/tag/t3' title='住宿'>住宿</Link>
       </li>
     </ul>
     </>

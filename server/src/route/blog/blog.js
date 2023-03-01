@@ -35,8 +35,8 @@ router.get('/', async (req, res) => {
   
   rows.forEach(row => {
     row.create_at = moment(row.create_at).format('YYYY/MM/DD')
-  });
-  res.json(rows);
+  })
+  res.json(rows)
 })
 
 // TODO 改用後端驗證
@@ -52,6 +52,25 @@ router.get('/api', async (req, res) => {
   const [rows3] = await db.query(sql3)
 
   res.json({post: rows, member: rows2, tag: rows3})
+})
+
+// http://localhost:3001/blog/tag -> side nav
+router.get('/tag', async(req, res)=>{
+  const sql =`
+    SELECT tag_id, tag FROM post_tags
+  `
+  try{
+    let [rows] = await db.query(sql)
+    rows = rows.filter((v, i, self)=>(
+      i === self.findIndex(v2=>(
+        v.tag === v2.tag && v.tag_id === v2.tag_id
+      ))
+    ))
+    res.json(rows)
+  }
+  catch(err){
+    console.log(err)
+  }
 })
 
 // http://localhost:3001/blog/postLike/:member_id
@@ -289,47 +308,6 @@ router.put('/post/:post_id', async(req, res)=>{
   }
 })
 
-// http://localhost:3001/blog/:member_id -> UserBlog
-router.get('/:member_id', async (req, res) => {
-const memberId = req.params.member_id;
-
-const sql =`
-SELECT 
-  posts.post_id,  
-  posts.create_at,  
-  posts.post_title, 
-  posts.post_content, 
-  posts.total_likes,
-  posts.cover, 
-  users_information.user_nickname,
-  users_information.picture,
-  (
-    SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
-    FROM post_tags 
-    WHERE post_tags.post_id = posts.post_id
-  ) 
-  AS tag 
-FROM users_information 
-JOIN posts 
-ON users_information.member_id = ?
-WHERE posts.member_id = ?
-ORDER BY create_at DESC
-`
-
-try{
-  const [rows] = await db.query(sql, [memberId, memberId])
-  
-  rows.forEach(rows => {
-    rows.create_at = moment(rows.create_at).format('YYYY/MM/DD');
-  })
-
-  res.json(rows)
-}
-catch(err) {
-  res.json(err)
-}
-})
-
 // http://localhost:3001/blog/articleLike/:member_id -> UserBlog(tab)
 router.get('/articleLike/:member_id', async (req, res)=>{
   const memberId = req.params.member_id
@@ -363,5 +341,115 @@ router.get('/articleLike/:member_id', async (req, res)=>{
   res.json(rows);
 })
 
+// http://localhost:3001/blog/tag/:tag_id -> NavResult
+router.get('/tag/:tag_id', async (req, res)=>{
+  const tagId = req.params.tag_id
+  const sql = `
+    SELECT
+      posts.post_id,
+      posts.create_at,
+      posts.member_id,
+      posts.post_title,
+      posts.total_likes,
+      posts.cover,
+      users_information.user_nickname,
+      (
+        SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+        FROM post_tags
+        WHERE post_tags.post_id = posts.post_id
+      )
+      AS tags
+    FROM users_information
+    JOIN posts
+    ON posts.member_id = users_information.member_id
+    ORDER BY ? DESC
+    `
+
+  const sqlTag = `
+    SELECT
+      posts.post_id,
+      posts.create_at,
+      posts.member_id,
+      posts.post_title,
+      posts.total_likes,
+      posts.cover,
+      users_information.user_nickname,
+      post_tags.tag,
+      (
+        SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+        FROM post_tags
+        WHERE post_tags.post_id = posts.post_id
+      )
+      AS tags
+    FROM users_information
+    JOIN posts
+    ON posts.member_id = users_information.member_id
+    JOIN post_tags
+    ON posts.post_id = post_tags.post_id
+    WHERE post_tags.tag_id =?
+    `
+
+  try{
+    let rows
+    if(tagId==='popular'){
+      [rows] = await db.query(sql, ['posts.total_likes'])
+    }
+    else if(tagId==='latest'){ 
+      // 問題：無法依照時間正確排序
+      [rows] = await db.query(sql, ['posts.create_at'])
+    }
+    else{
+      [rows] = await db.query(sqlTag, [tagId])
+    }
+    rows.forEach(row => {
+      row.create_at = moment(row.create_at).format('YYYY/MM/DD')
+    })
+    res.json(rows)
+  }
+  catch(err){
+    res.json(err)
+  }
+})
+
+// http://localhost:3001/blog/:member_id -> UserBlog
+router.get('/:member_id', async (req, res) => {
+  const memberId = req.params.member_id;
+
+  const sql =`
+  SELECT 
+    posts.post_id,  
+    posts.create_at,  
+    posts.post_title, 
+    posts.post_content, 
+    posts.total_likes,
+    posts.cover, 
+    users_information.user_nickname,
+    users_information.picture,
+    (
+      SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+      FROM post_tags 
+      WHERE post_tags.post_id = posts.post_id
+    ) 
+    AS tag 
+  FROM users_information 
+  JOIN posts 
+  ON users_information.member_id = ?
+  WHERE posts.member_id = ?
+  ORDER BY create_at DESC
+  `
+
+  try{
+    const [rows] = await db.query(sql, [memberId, memberId])
+    
+    rows.forEach(rows => {
+      rows.create_at = moment(rows.create_at).format('YYYY/MM/DD');
+    })
+
+    res.json(rows)
+  }
+  catch(err) {
+    res.json(err)
+  }
+})
 
 module.exports = router;

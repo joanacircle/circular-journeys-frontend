@@ -54,9 +54,71 @@
 
       
           .userblog-pagination{
-            margin: 30px auto;
-            // display: flex;
-            // justify-content: center;
+            margin-top: 30px;
+            
+            .rc-pagination {
+              display: flex;
+              justify-content: center;
+      
+              &-prev,
+              &-next {
+                margin: 0 8px;
+                padding: 4px 12px;
+                
+                cursor: pointer;
+                max-width: 34px;
+                width: 100%;
+      
+                button{
+                  color: var(--dark-gary);
+                }
+            
+                &:hover {
+                  border-radius: var(--br1);
+                  background-color: var(--purple);
+                  color: white;
+                }
+            
+                &-disabled {
+                  color: var(--dark-gray);
+                  cursor: default;
+                }
+              }
+      
+              &-prev button:after {
+                content: '‹';
+                display: block;
+                color: var(--dark-gary);
+              }
+      
+              &-next button:after {
+                content: '›';
+                display: block;
+                color: var(--dark-gary);
+              }
+      
+              &-item {
+                margin: 0 8px;
+                padding: 4px 12px;
+                color: var(--dark-gary);
+                cursor: pointer;
+                max-width: 34px;
+                width: 100%;
+                
+                &:hover {
+                  border-radius: var(--br1);
+                  background-color: var(--purple);
+                  color: white;
+                  
+                }
+                
+                &-active {
+                  border-radius: var(--br1);
+                  background-color: var(--purple);
+                  color: white;
+                }
+              }
+            }
           }
       }
 

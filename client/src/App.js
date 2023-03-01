@@ -10,7 +10,7 @@ import UserBlog from 'pages/Blog/UserBlog'
 import PostEditor from 'pages/Blog/PostEditor'
 import EditPost from 'pages/Blog/EditPost'
 import SinglePost from 'pages/Blog/SinglePost'
-import SearchResult from 'pages/Blog/SearchResult'
+import NavResult from 'pages/Blog/NavResult'
 import Tour from 'pages/Tour/Tour'
 import ProductDetail from 'pages/Shop/ProductDetail'
 import Menu from 'pages/User/MemberCenter/Menu'
@@ -30,7 +30,7 @@ const App = () => {
           <Route path='/blog/editor/:memberId' element={<PostEditor />} />
           <Route path='/blog/edit/:postId' element={<EditPost />} />
           <Route path='/blog/post/:postId' element={<SinglePost />} />
-          <Route path='/blog/tag/:tagId' element={<SearchResult />} />
+          <Route path='/blog/tag/:tagId' element={<NavResult />} />
           <Route path='/shop' element={<Shop />} />
           <Route path='/shop/product/:p_id' element={<ProductDetail />} />
           <Route path='/tour' element={<Tour />} />

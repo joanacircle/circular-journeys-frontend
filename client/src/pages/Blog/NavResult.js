@@ -1,29 +1,30 @@
 import { useState, useEffect } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
-// import 'rc-pagination/assets/index.css'
 import { userInfo } from 'components/userInfo/UserInfo'
-import './Blog.scss'
+import './NavResult.scss'
 import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
 import B001 from 'images/Blog/B001.jpg'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 
-const Blog = () => {
+const NavResult = () => {
   const [post, setPost] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(4)
   const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const { tagId } = useParams()
   const { userData } = userInfo()
 
-  useEffect(() => { getData() }, [])
+  useEffect(() => { getData() }, [tagId])
   function getData() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog`)
-      .then(r => r.json())
-      .then((data) => { setPost(data) })
-      .catch(error => console.log(error))
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/tag/${tagId}`)
+    .then(r => { setPost(r.data) })
+    .catch(error => console.log(error))
   }
 
   return (
@@ -31,9 +32,12 @@ const Blog = () => {
       <div>
         <div className='blog-banner'>
           <img className='blog-banner-img' src={Banner} alt="Banner"></img>
-          <h2 className='blog-title'>
-            高雄旅遊日誌
-          </h2>
+          <div className='blog-title'>
+            <h2>高雄旅遊日誌</h2>
+            {tagId === 'popular' && <h4># 熱門</h4>}
+            {tagId === 'latest' && <h4># 最新</h4>}
+            {tagId !== 'popular' && tagId !== 'latest' && <h4>{post[0] && `#${post[0].tag}`}</h4>}
+          </div>
         </div>
         <div className='page-body'>
           <div className='blog-container row justify-content-md-center justify-content-xl-between'>
@@ -42,11 +46,12 @@ const Blog = () => {
                 {currentPost.map((v, i) => {
                   return (
                     <div className='blog-post col-md-6' key={v.post_id}>
+                      {/* 問題：無法依照時間排版 */}
                       <Card3
                         postId={v.post_id}
                         userMemberId={userData.member_id}
                         img={v.cover}
-                        tags={v.tag}
+                        tags={v.tags}
                         memberId={v.member_id}
                         memberName={v.user_nickname}
                         title={v.post_title}
@@ -89,4 +94,4 @@ const Blog = () => {
   )
 }
 
-export default Blog
+export default NavResult

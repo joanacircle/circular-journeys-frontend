@@ -22,6 +22,9 @@ const UserBlog = () => {
   const { memberId } = useParams()
   const { userData } = userInfo()
 
+  // test
+  console.log(post)
+
   useEffect(() => {
     fetcher() // 驗證 parameter的 memberId是否存在於資料庫
     getData()
@@ -37,6 +40,7 @@ const UserBlog = () => {
     })
     .catch(err => console.log(err))
   }
+  // TODO: get not thing
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
       .then(r => { setPost(r.data) })
@@ -47,8 +51,8 @@ const UserBlog = () => {
 
   function getArticle () {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/articleLike/${memberId}`)
-    .then(r => { setLikePost(r.data) })
-    .catch(err => console.log(err))
+      .then(r => { setLikePost(r.data) })
+      .catch(err => console.log(err))
   }
 
   if (notFound) {

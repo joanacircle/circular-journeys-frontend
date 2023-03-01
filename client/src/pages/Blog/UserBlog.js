@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
 import './UserBlog.scss'
@@ -14,11 +14,11 @@ const UserBlog = () => {
   const [post, setPost] = useState([])
   const [id, setId] = useState([])
   const [main, setMain] = useState(true)
-  const [likePost, setLikePost] = useState({})
+  const [likePost, setLikePost] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(4)
   const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
-  const currentLikePost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const currentLikePost = likePost.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   const { memberId } = useParams()
   const { userData } = userInfo()
 
@@ -29,30 +29,27 @@ const UserBlog = () => {
   }, [memberId])
 
   function fetcher() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
-      .then(r => r.json())
-      .then((data) => {
-        const mId = data.member[0].member_id
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api`)
+      .then(r => {
+        const mId = r.data.member[0].member_id
         setId(mId)
       })
+      .catch(err => console.log(err))
   }
   function getData() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
-      .then(r => r.json())
-      .then((data) => { setPost(data) })
-      .catch(error => console.error(error))
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
+      .then(r => { setPost(r.data) })
+      .catch(err => console.error(err))
   }
 
-  function handleClick () {
-    setMain(!main)
-  }
+  function handleClick () { setMain(!main) }
+
   function getArticle () {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/articleLike/${memberId}`)
     .then(r => { setLikePost(r.data) })
     .catch(err => console.log(err))
   }
-
-  console.log(post)
+  console.log(likePost)
 
   if (id.includes(memberId)) {
     return (
@@ -107,7 +104,7 @@ const UserBlog = () => {
                 <div className='userblog-pagination blog-pagination'>
                   <Pagination
                     current={currentPage}
-                    total={post.length}
+                    total={main ? post.length : likePost.length}
                     pageSize={4}
                     onChange={page => setCurrentPage(page)}
                   />

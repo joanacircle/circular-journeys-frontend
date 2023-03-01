@@ -26,20 +26,17 @@ const SinglePost = () => {
   useEffect(() => { fillHeart() }, [postLike])
 
   function fetcher() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
-      .then(r => r.json())
-      .then((data) => {
-        const pId = data.post[0].post_id
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api`)
+      .then(r => {
+        const pId = r.data.post[0].post_id
         setId(pId)
       })
+      .catch(err => console.log(err))
   }
   function getData() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`)
-      .then(r => r.json())
-      .then((data) => {
-        setPost(data[0])
-      })
-      .catch(error => console.log(error))
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`)
+      .then(r => { setPost(r.data[0]) })
+      .catch(err => console.log(err))
   }
 
   function getPostLike() {
@@ -85,7 +82,6 @@ const SinglePost = () => {
     .catch(err => console.log(err))
   }
 
-  console.log(postLike)
   if (id.includes(postId)) {
     return (
       <>

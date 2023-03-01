@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { BiSearch } from 'react-icons/bi'
+import axios from 'axios'
 import Pagination from 'rc-pagination'
 // import 'rc-pagination/assets/index.css'
 import { userInfo } from 'components/userInfo/UserInfo'
@@ -8,8 +9,6 @@ import Banner from 'images/Blog/blog-banner.jpeg'
 import Card3 from 'components/Cards/Card3'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
-import B001 from 'images/Blog/B001.jpg'
-
 
 const Blog = () => {
   const [post, setPost] = useState([])
@@ -20,10 +19,9 @@ const Blog = () => {
 
   useEffect(() => { getData() }, [])
   function getData() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/blog`)
-      .then(r => r.json())
-      .then((data) => { setPost(data) })
-      .catch(error => console.log(error))
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog`)
+      .then(r => { setPost(r.data) })
+      .catch(err => console.log(err))
   }
 
   return (

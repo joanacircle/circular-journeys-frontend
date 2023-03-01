@@ -1,5 +1,6 @@
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartCountContext } from '../../../components/ShoppingCart/CartCountProvider'
 import { StripeContainer } from 'components/Stripe/StripeContainer'
 import './Payment.scss'
 import CartList from '../../../components/ShoppingCart/CartList'
@@ -9,9 +10,14 @@ const Payment = ({ prevStep, nextStep, selectedAddress }) => {
 
   const cartDetail = JSON.parse(localStorage.getItem('cart')) || []
 
-  const [products, setProducts] = useState(cartDetail.map((v, i) => ({
-    ...v, count: 1
+  const [cartItems, setCartItems] = useState(cartDetail.map((v, i) => ({
+    ...v
   })))
+
+  const { total } = useContext(CartCountContext)
+  const { updateTotal } = useContext(CartCountContext)
+  updateTotal(cartItems)
+
 
   return (
     <>
@@ -23,7 +29,7 @@ const Payment = ({ prevStep, nextStep, selectedAddress }) => {
           {/* Handle Payment */}
           <StripeContainer
             className='stripe-container'
-            // cartTotal={cartTotal}
+            total={total}
             nextStep={nextStep}
           />
         </div>
@@ -39,16 +45,17 @@ const Payment = ({ prevStep, nextStep, selectedAddress }) => {
                 </div>
               </div>
               <br />
-              {Object.entries(selectedAddress).map(([key, value], i) => {
-
-                return <div key={key}>{value}</div>
-              })}
-
+              <div>{selectedAddress.address}</div>
+              <div>{selectedAddress.city}</div>
+              <div>{selectedAddress.district}</div>
+              <div>{selectedAddress.nation}</div>
+              <div>{selectedAddress.postal_code}</div>
+              <div>{selectedAddress.user_contact}</div>
             </div>
             <div className="confirm-products">
               <CartList
-                cartItems={products}
-                setCartItems={setProducts}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
               />
             </div>
           </div>

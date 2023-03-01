@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import ScrollToTop from 'components/ScrollToTop'
+import { CartCountProvider } from 'components/ShoppingCart/CartCountProvider'
 
 import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home/Home'
@@ -25,26 +26,28 @@ const App = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Routes>
-        <Route path='/' element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path='/blog' element={<Blog />} />
-          <Route path='/blog/:memberId' element={<UserBlog />} />
-          <Route path='/blog/editor/:memberId' element={<PostEditor />} />
-          <Route path='/blog/edit/:postId' element={<EditPost />} />
-          <Route path='/blog/post/:postId' element={<SinglePost />} />
-          <Route path='/blog/tag/:tagId' element={<NavResult />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/shop/product/:p_id' element={<ProductDetail />} />
-          <Route path='/tour' element={<Tour />} />
-          <Route path='/member' element={<Menu />} />
-          <Route path='login' element={<LoginModal />} />
-          <Route path='dropdownMenu' element={<DropdownMenu />} />
-          <Route path='memberSetting' element={<MemberSetting />} />
-          <Route path='*' element={<NotFound />} />
-        </Route>
-        <Route path='checkout' element={<Checkout />} />
-      </Routes>
+      <CartCountProvider>
+        <Routes>
+          <Route path='/' element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path='/blog' element={<Blog />} />
+            <Route path='/blog/:memberId' element={<UserBlog />} />
+            <Route path='/blog/editor/:memberId' element={<PostEditor />} />
+            <Route path='/blog/edit/:postId' element={<EditPost />} />
+            <Route path='/blog/post/:postId' element={<SinglePost />} />
+            <Route path='/blog/tag/:tagId' element={<NavResult />} />
+            <Route path='/shop' element={<Shop />} />
+            <Route path='/shop/product/:p_id' element={<ProductDetail />} />
+            <Route path='/tour' element={<Tour />} />
+            <Route path='/member' element={<Menu />} />
+            <Route path='login' element={<LoginModal />} />
+            <Route path='dropdownMenu' element={<DropdownMenu />} />
+            <Route path='memberSetting' element={<MemberSetting />} />
+            <Route path='*' element={<NotFound />} />
+          </Route>
+          <Route path='checkout' element={<Checkout />} />
+        </Routes>
+      </CartCountProvider>
     </BrowserRouter>
   )
 }

@@ -28,12 +28,11 @@ const CARD_OPTIONS = {
   }
 }
 
-export default function PaymentForm({ nextStep }) {
+export default function PaymentForm({ total }) {
 
   const cartTotal = localStorage.getItem('cart-total')
 
   const totalPrice = Number(cartTotal.toString() + '00')
-  // console.log(typeof totalPrice)
   const [success, setSuccess] = useState(false)
   const stripe = useStripe()
   const elements = useElements()
@@ -80,7 +79,7 @@ export default function PaymentForm({ nextStep }) {
           <div className="certifications">
             <div className="cert-img">
               <img src={ssl} alt="ssl" />
-              {/* <img src={stripe2} alt="stripe" /> */}
+
             </div>
             <div className="cert-img">
               <img src={visa} alt="visa" />
@@ -89,7 +88,7 @@ export default function PaymentForm({ nextStep }) {
           </div>
           <div className="payment-summary">
 
-            <h5>金額總計 NT ${cartTotal} 元</h5>
+            <h5>金額總計 NT ${total} 元</h5>
             <button>確認付費</button>
           </div>
 

@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './ShoppingCart.scss'
 import 'animate.css'
 
 import CartList from './CartList'
 import CartTotal from './CartTotal'
+import { userInfo } from 'components/userInfo/UserInfo'
+import Snackbar from '@mui/material/Snackbar'
 
 
 export const ShoppingCart = ({ toggleModal }) => {
 
   const [cartItems, setCartItems] = useState([])
+  const { userData } = userInfo()
+  const navigate = useNavigate()
+
+  const [loginSnackbarOpen, setLoginSnackbarOpen] = useState(false)
 
   useEffect(() => {
     const existingCartItems = JSON.parse(localStorage.getItem('cart')) || []
@@ -23,19 +29,24 @@ export const ShoppingCart = ({ toggleModal }) => {
   }
 
   const handleCheckout = () => {
-    toggleModal()
-    localStorage.setItem('loginFromCheckout', true)
-  }
 
-  const totalPrice = () => {
-    let price = 0
-
-    for (let i = 0; i < cartItems.length; i++) {
-      price += cartItems[i].count * cartItems[i].price
+    if (userData.member_id) {
+      toggleModal()
+      navigate('/checkout')
+    } else {
+      setLoginSnackbarOpen(true)
     }
-    localStorage.setItem('cart-total', price)
-    return price
   }
+
+  // const totalPrice = () => {
+  //   let price = 0
+
+  //   for (let i = 0; i < cartItems.length; i++) {
+  //     price += cartItems[i].count * cartItems[i].price
+  //   }
+  //   localStorage.setItem('cart-total', price)
+  //   return price
+  // }
 
 
   return (
@@ -57,22 +68,23 @@ export const ShoppingCart = ({ toggleModal }) => {
 
           <CartTotal
             cartItems={cartItems}
-            totalPrice={totalPrice()}
+          // totalPrice={totalPrice()}
           />
           <div className='checkout-box' >
-            <Link
-              onClick={handleCheckout}
-              to="../checkout"
-              title="結帳">
-              <button className="checkout-button">
-                結帳
-              </button>
-            </Link>
+            <button className="checkout-button" onClick={handleCheckout}>
+              結帳
+            </button>
           </div>
 
         </div>
 
       </div>
+      <Snackbar
+        open={loginSnackbarOpen}
+        autoHideDuration={1000}
+        // onClose={handleCloseSnackbar}
+        message="請先登入!"
+      />
     </>
   )
 }

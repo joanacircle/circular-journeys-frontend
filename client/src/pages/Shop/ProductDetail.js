@@ -1,11 +1,25 @@
 import { useContext, useState, useEffect } from 'react'
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import Snackbar from '@mui/material/Snackbar'
 import { CartCountContext } from 'components/ShoppingCart/CartCountProvider'
+import { userInfo } from 'components/userInfo/UserInfo'
 import './ProductDetail.scss'
 
 
 const ProductDetail = () => {
 
+  const { userData } = userInfo()
+  const navigate = useNavigate()
+  const [snackbarOpen, setSnackbarOpen] = useState(false)
+  const [loginSnackbarOpen, setLoginSnackbarOpen] = useState(false)
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setSnackbarOpen(false)
+    setLoginSnackbarOpen(false)
+  }
   const { updateCount } = useContext(CartCountContext)
 
   const location = useLocation()
@@ -71,10 +85,16 @@ const ProductDetail = () => {
 
     localStorage.setItem('cart', JSON.stringify(updatedCartItems))
     updateCount(updatedCartItems)
+
+    setSnackbarOpen(true)
   }
 
   const handleCheckout = () => {
-    localStorage.setItem('loginFromCheckout', true)
+    if (userData.member_id) {
+      navigate('/checkout')
+    } else {
+      setLoginSnackbarOpen(true)
+    }
   }
 
   return (
@@ -113,16 +133,25 @@ const ProductDetail = () => {
                 <hr />
                 <p className='price-p'>限定價: ${parseFloat(product.price).toLocaleString('zh-TW')}</p>
                 <button className='put-kart' onClick={handleAddToCart}>加入購物袋</button>
-                <Link
-                  to='/checkout'
-                  onClick={handleCheckout}
-                >
+                <button onClick={handleCheckout}>
                   <p className='buy-now'>立即購買</p>
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </div>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={1000}
+          onClose={handleCloseSnackbar}
+          message="已新增至購物車!"
+        />
+        <Snackbar
+          open={loginSnackbarOpen}
+          autoHideDuration={1000}
+          onClose={handleCloseSnackbar}
+          message="請先登入!"
+        />
 
         <div className='recommendations'>
           <div className='recommend-list'>

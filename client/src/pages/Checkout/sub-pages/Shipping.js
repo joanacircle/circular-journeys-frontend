@@ -27,10 +27,10 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
       try {
         const memberId = userData.member_id
 
-        // const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=${memberId}`)
-        const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=104709174078800080046`)
+        const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=${memberId}`)
+        // const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=104709174078800080046`)
         const data = await response.json()
-        console.log(`user data is ${data}`)
+        console.log('user data is', { data })
         setUserAddresses(data)
       } catch (error) {
         console.log(`address responded with ${error}`)
@@ -58,8 +58,8 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
 
   const handleDelete = async () => {
     try {
-      // const memberId = userData.member_id
-      const memberId = '104709174078800080046'
+      const memberId = userData.member_id
+      // const memberId = '104709174078800080046'
       const selectedAddress = userAddresses[selectedIndex]
 
       await fetch(`${process.env.REACT_APP_DEV_URL}/checkout/${selectedAddress.id}`, {
@@ -127,6 +127,7 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
                         <div>{shipping.nation}</div>
                         <div>{shipping.postal_code}</div>
                         <div>{shipping.user_contact}</div>
+
                         {/* toggle Edit & Delete */}
                         {selectedIndex === index && (
                           <div className='edit-delete'>
@@ -143,9 +144,11 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
                   </div>
 
                 </div>
-                <div className='confirm-button'>
-                  <button onClick={nextStep}>確認</button>
-                </div>
+                {userAddresses.length !== 0 && (
+                  <div className='confirm-button'>
+                    <button onClick={nextStep}>確認</button>
+                  </div>
+                )}
               </div>
             )}
       </div>

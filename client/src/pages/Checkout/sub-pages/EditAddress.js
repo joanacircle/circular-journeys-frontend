@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import DynamicSelect from '../../../components/Select/DynamicSelect'
 import './EditAddress.scss'
 
 const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, setAddresses, userData }) => {
@@ -65,7 +64,7 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, set
                 id="address"
                 onChange={handleInputChange}
                 placeholder='忠孝東路一段101號'
-                value={inputData.value}
+                value={inputData.address}
 
                 required
               />
@@ -131,6 +130,7 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, set
                 id='telephone'
                 onChange={handleInputChange}
                 placeholder='0912345678'
+                value={inputData.user_contact}
                 required
               />
             </div>

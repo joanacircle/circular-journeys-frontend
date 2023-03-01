@@ -11,7 +11,7 @@ import TagsCategory from 'components/TagsCategory'
 import { NotFound } from 'pages/NotFound'
 
 const UserBlog = () => {
-  const [post, setPost] = useState([])
+  const [post, setPost] = useState([{}])
   const [notFound, setNotFound] = useState(false)
   const [main, setMain] = useState(true)
   const [likePost, setLikePost] = useState([])
@@ -64,7 +64,7 @@ const UserBlog = () => {
         <div className='userblog-container'>
           <div className='page-body'>
             <div className='post-container'>
-              <h2 className='userblog-h2'>{post && post[0].user_nickname}</h2>
+              <h2 className='userblog-h2'>{post[0].user_nickname}</h2>
               <div className='userblog-nav'>
                 <ul>
                     {main

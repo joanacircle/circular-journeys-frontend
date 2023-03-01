@@ -6,11 +6,11 @@ import './Alert.scss'
 const Alert = (props) => {
   const { message, cancel, confirm } = props
   const [content, setContent] = useState(false)
-  function handelClick() {
+  function handleClick() {
     setContent(!content)
   }
   return (
-      <div className='alert-background' onClick={handelClick}>
+      <div className='alert-background' onClick={handleClick}>
         <div className='alert-container'>
           <div className="message-grop">
             <HiExclamationCircle className='alert-icon' size={45}/>

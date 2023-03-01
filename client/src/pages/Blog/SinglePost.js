@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
+import { AiOutlineHeart, AiFillHeart, AiOutlineCalendar } from 'react-icons/ai'
 import { FiEdit, FiTrash } from 'react-icons/fi'
 import axios from 'axios'
 import './SinglePost.scss'
@@ -13,24 +13,18 @@ const SinglePost = () => {
   const [post, setPost] = useState({})
   const [id, setId] = useState([])
   const { postId } = useParams()
-  const [url, setUrl] = useState(
-    `${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`
-  )
   const [alert, setAlert] = useState(false)
+  const [like, setLike] = useState(false)
+  const [postLike, setPostLike] = useState()
   const { userData } = userInfo()
 
-  useEffect(() => { getData() }, [])
-  function getData() {
-    fetch(url)
-      .then(r => r.json())
-      .then((data) => {
-        setPost(data[0])
-      })
-      .catch(error => console.log(error))
-  }
+  useEffect(() => {
+    fetcher() // 驗證 parameter的 postId是否存在於資料庫
+    getData()
+  }, [])
+  useEffect(() => { getPostLike() }, [userData])
+  useEffect(() => { fillHeart() }, [postLike])
 
-  // 驗證 parameter的 postId是否存在於資料庫
-  useEffect(() => { fetcher() }, [])
   function fetcher() {
     fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
       .then(r => r.json())
@@ -39,13 +33,49 @@ const SinglePost = () => {
         setId(pId)
       })
   }
+  function getData() {
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`)
+      .then(r => r.json())
+      .then((data) => {
+        setPost(data[0])
+      })
+      .catch(error => console.log(error))
+  }
 
-  console.log(post)
+  function getPostLike() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/postLike/${userData.member_id}`)
+    .then(
+      r => {
+        r.data &&
+        setPostLike(r.data)
+      })
+    .catch(err => console.log(err))
+  }
+  function fillHeart () {
+    postLike &&
+    postLike.includes(postId) &&
+    setLike(true)
+  }
+  function handleClickLike () {
+    setLike(!like)
+    if (userData) {
+      if (!like) {
+        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId: userData.member_id, postId })
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      } else {
+        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      }
+    }
+  }
 
   // Alert
-  function handelClick () {
+  function handleClick () {
     setAlert(!alert)
   }
+
   function deletePost() {
     axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/post/${post.post_id}`)
     .then(r => {
@@ -55,14 +85,15 @@ const SinglePost = () => {
     .catch(err => console.log(err))
   }
 
+  console.log(postLike)
   if (id.includes(postId)) {
     return (
       <>
         <div>
           <div className="post-container">
-              {alert
-              ? <Alert message='是否要刪除此篇文章' cancel={handelClick} confirm={deletePost}/>
-              : <></>}
+            {alert
+            ? <Alert message='是否要刪除此篇文章' cancel={handleClick} confirm={deletePost}/>
+            : <></>}
             <div className="page-body">
               <div className="post-header">
                 <h2>{post.post_title}</h2>
@@ -88,7 +119,7 @@ const SinglePost = () => {
                 {post.member_id === userData.member_id && (
                   <>
                   <Link to={`/blog/edit/${postId}`} title='編輯文章'><FiEdit size={25}/></Link>
-                  <div onClick={handelClick}>
+                  <div onClick={handleClick}>
                     <Link>
                       <FiTrash size={25}/>
                     </Link>
@@ -138,7 +169,10 @@ const SinglePost = () => {
                 <p>
                   即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
                 </p>
-                <AiOutlineHeart className='heart-icon' size={40} />
+                {!like
+                ? <AiOutlineHeart size={40} className='heart-icon' onClick={handleClickLike}/>
+                : <AiFillHeart size={40} className='heart-icon' onClick={handleClickLike}/>
+                }
                 {/* TODO */}
                 <p>
                   <Link to='#'>前一篇 </Link>

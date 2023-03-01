@@ -1,11 +1,48 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { AiOutlineHeart } from 'react-icons/ai'
+import axios from 'axios'
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import shortid from 'shortid'
 import './Card2.scss'
 
 const Card2 = (props) => {
   // props.tags 傳入 object
-  const { postId, img, tags, title, likes } = props
+  const { userMemberId, postId, img, tags, title, likes } = props
+  const [like, setLike] = useState(false)
+  const [postLike, setPostLike] = useState()
+
+  useEffect(() => { getPostLike() }, [])
+  useEffect(() => { fillHeart() }, [postLike])
+
+  function getPostLike() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/postLike/${userMemberId}`)
+    .then(
+      r => {
+        r.data &&
+        setPostLike(r.data)
+      })
+    .catch(err => console.log(err))
+  }
+  function fillHeart () {
+    postLike &&
+    postLike.includes(postId) &&
+    setLike(true)
+  }
+  function handleClickLike () {
+    setLike(!like)
+    if (userMemberId) {
+      if (!like) {
+        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId, postId })
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      } else {
+        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      }
+    }
+  }
+
   return (
     <>
     <div className="card2">
@@ -29,8 +66,11 @@ const Card2 = (props) => {
           <h5 className='card-title'>
             {title}
           </h5>
-        <div className='card-likes d-flex'>
-          <AiOutlineHeart size={25} className='heart-icon'/>
+        <div className='card-meta d-flex'>
+          {!like
+          ? <AiOutlineHeart size={25} className='heart-icon' onClick={handleClickLike}/>
+          : <AiFillHeart size={25} className='heart-icon' onClick={handleClickLike}/>
+          }
           {props.likes === 0
           ? <p></p>
           : <p>{likes}</p>

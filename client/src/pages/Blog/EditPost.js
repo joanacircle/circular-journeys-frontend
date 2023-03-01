@@ -153,7 +153,6 @@ console.log(form)
             />
           </div>
 
-          {/* 問題：有時候頁面重整會得不到cover的資料 */}
           <div className="form-item">
             <label>文章首圖</label>
             <CKEditor

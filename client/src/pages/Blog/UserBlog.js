@@ -1,28 +1,36 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
 import './UserBlog.scss'
+import { userInfo } from 'components/userInfo/UserInfo'
 import Card4 from 'components/Cards/Card4'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
 import { NotFound } from 'pages/NotFound'
 
 const UserBlog = () => {
-  const [post, setPost] = useState({})
+  const [post, setPost] = useState([])
   const [id, setId] = useState([])
+  const [main, setMain] = useState(true)
+  const [likePost, setLikePost] = useState({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(4)
+  const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
+  const currentLikePost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   const { memberId } = useParams()
-  const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
-  useEffect(() => { getData() }, [])
-  function getData() {
-    fetch(url)
-      .then(r => r.json())
-      .then((data) => { setPost(data[0]) })
-      .catch(error => console.error(error))
-  }
+  const { userData } = userInfo()
 
-  // 驗證 parameter的 memberId是否存在於資料庫
-  useEffect(() => { fetcher() }, [])
+  // test
+  console.log(post)
+
+  useEffect(() => {
+    fetcher() // 驗證 parameter的 memberId是否存在於資料庫
+    getData()
+    getArticle()
+  }, [memberId])
+
   function fetcher() {
     fetch(`${process.env.REACT_APP_DEV_URL}/blog/api`)
       .then(r => r.json())
@@ -31,10 +39,24 @@ const UserBlog = () => {
         setId(mId)
       })
   }
-  console.log(post)
+  // TODO: get not thing
+  function getData() {
+    fetch(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
+      .then(r => r.json())
+      .then((data) => { setPost(data) })
+      .catch(error => console.error(error))
+  }
 
-  // TagsCategory props:
-  const tagsCategory = ['左營', '高雄港', '壽山', '旗津', '一日遊', '夜市', '新開幕', '熱門打卡', '親子餐廳']
+  function handleClick() {
+    setMain(!main)
+  }
+  function getArticle() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/articleLike/${memberId}`)
+      .then(r => { setLikePost(r.data) })
+      .catch(err => console.log(err))
+  }
+
+  console.log(post)
 
   if (id.includes(memberId)) {
     return (
@@ -43,21 +65,27 @@ const UserBlog = () => {
           <div className='userblog-container'>
             <div className='page-body'>
               <div className='post-container'>
-                <h2 className='userblog-h2'>{post.user_nickname}</h2>
+                <h2 className='userblog-h2'>{post && post[0]?.user_nickname}</h2>
                 <div className='userblog-nav'>
                   <ul>
-                    <Link to='#'>
-                      <li className='Active'>主頁</li>
-                    </Link>
-                    <Link to='#'>
-                      <li>喜歡的文章</li>
-                    </Link>
+                    {main
+                      ? <>
+                        <li className='Active'>主頁</li>
+                        <li className='Inactive' onClick={handleClick}>喜歡的文章</li>
+                      </>
+                      : <>
+                        <li className='Inactive' onClick={handleClick}>主頁</li>
+                        <li className='Active'>喜歡的文章</li>
+                      </>
+                    }
                   </ul>
                 </div>
-                {[post].map((v, i) => {
-                  return (
+                {main
+                ? post &&
+                  currentPost.map((v, i) => (
                     <Card4
                       key={'c4' + v.post_id}
+                      userMemberId={userData.member_id}
                       tags={v.tag}
                       title={v.post_title}
                       postId={v.post_id}
@@ -65,18 +93,36 @@ const UserBlog = () => {
                       createAt={v.create_at}
                       likes={v.total_likes}
                       postContent={v.post_content} />
-                  )
-                })}
-                <div className='userblog-pagination'>
-                  <Pagination />
+                  ))
+                : likePost &&
+                  currentLikePost.map((v, i) => (
+                    <Card4
+                      key={'c4' + v.post_id}
+                      userMemberId={userData.member_id}
+                      tags={v.tag}
+                      title={v.post_title}
+                      postId={v.post_id}
+                      img={v.cover}
+                      createAt={v.create_at}
+                      likes={v.total_likes}
+                      postContent={v.post_content} />
+                  ))
+                }
+                <div className='userblog-pagination blog-pagination'>
+                  <Pagination
+                    current={currentPage}
+                    total={post.length}
+                    pageSize={4}
+                    onChange={page => setCurrentPage(page)}
+                  />
                 </div>
               </div>
               <div className='userblog-aside'>
                 <div className="userblog-aside-item">
                   <div className='member-avatar'>
-                    <img src={post.picture} alt="avatar" />
+                    <img src={post && post[0]?.picture} alt="avatar" />
                     {/* TODO: 如果會員沒有撰寫文章時 */}
-                    <h4>{post.user_nickname}</h4>
+                    <h4>{post && post[0]?.user_nickname}</h4>
                   </div>
                 </div>
                 <div className='userblog-aside-item'>
@@ -92,7 +138,7 @@ const UserBlog = () => {
                   <BlogCategory />
                 </div>
                 <div className='userblog-aside-item'>
-                  <TagsCategory tags={tagsCategory} />
+                  <TagsCategory />
                 </div>
               </div>
             </div>

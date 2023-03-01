@@ -1,13 +1,47 @@
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { AiOutlineHeart, AiOutlineCalendar } from 'react-icons/ai'
+import { AiOutlineHeart, AiFillHeart, AiOutlineCalendar } from 'react-icons/ai'
 import { HiOutlineArrowLongRight } from 'react-icons/hi2'
 import shortid from 'shortid'
 import './Card4.scss'
 
-
 const Card4 = (props) => {
   // props.tag 傳入 object
-  const { tags, title, postId, img, createAt, likes, postContent } = props
+  const { userMemberId, tags, title, postId, img, createAt, likes, postContent } = props
+  const [like, setLike] = useState(false)
+  const [postLike, setPostLike] = useState()
+  useEffect(() => { getPostLike() }, [])
+  useEffect(() => { fillHeart() }, [postLike])
+  function getPostLike() {
+    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/postLike/${userMemberId}`)
+    .then(
+      r => {
+        r.data &&
+        setPostLike(r.data)
+      })
+    .catch(err => console.log(err))
+  }
+  function fillHeart () {
+    postLike &&
+    postLike.includes(postId) &&
+    setLike(true)
+  }
+  function handleClickLike () {
+    setLike(!like)
+    if (userMemberId) {
+      if (!like) {
+        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId, postId })
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      } else {
+        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
+        .then(r => console.log(r.data))
+        .catch(err => console.log(err))
+      }
+    }
+  }
+
   return (
     <>
     <div className="card4">
@@ -29,7 +63,10 @@ const Card4 = (props) => {
             </ul>
           </div>
           <div className='post-likes'>
-            <AiOutlineHeart size={35} className='heart-icon'/>
+            {!like
+            ? <AiOutlineHeart size={35} className='heart-icon' onClick={handleClickLike}/>
+            : <AiFillHeart size={35} className='heart-icon' onClick={handleClickLike}/>
+            }
           </div>
         </div>
         <h2>{title}</h2>

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
 import { BiSearch } from 'react-icons/bi'
+import { userInfo } from 'components/userInfo/UserInfo'
 import './HomeBlog.scss'
 import Card from 'components/Cards/Card'
 import Card2 from 'components/Cards/Card2'
@@ -11,14 +13,18 @@ const HomeBlog = () => {
     popular: [],
     latest: []
   })
-  const [url, setUrl] = useState(`${process.env.REACT_APP_DEV_URL}/home`)
+  const { userData } = userInfo()
+
+  // databases
   useEffect(() => { getData() }, [])
   function getData() {
-    fetch(url)
+    fetch(`${process.env.REACT_APP_DEV_URL}/home`)
       .then(r => r.json())
       .then((data) => { setPost(data) })
       .catch(error => console.log(error))
   }
+
+  // console.log(postLike)
 
   return (
     <>
@@ -63,11 +69,12 @@ const HomeBlog = () => {
                   <>
                     <Card2
                       key={'c2' + v.post_id}
+                      userMemberId={userData.member_id}
                       postId={v.post_id}
                       img={v.cover}
                       tags={v.tag}
                       title={v.post_title}
-                      likes={v.total_likes} />
+                      likes={v.total_likes}/>
                   </>
                 )
               })}

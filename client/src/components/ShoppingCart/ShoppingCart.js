@@ -21,6 +21,11 @@ export const ShoppingCart = ({ toggleModal }) => {
     }
   }
 
+  const handleCheckout = () => {
+    toggleModal()
+    localStorage.setItem('loginFromCheckout', true)
+  }
+
   const totalQuantity = () => {
     let qty = 0
     for (let i = 0; i < cartItems.length; i++) {
@@ -37,6 +42,7 @@ export const ShoppingCart = ({ toggleModal }) => {
     for (let i = 0; i < cartItems.length; i++) {
       price += cartItems[i].count * cartItems[i].price
     }
+    localStorage.setItem('cart-total', price)
     return price
   }
 
@@ -64,7 +70,7 @@ export const ShoppingCart = ({ toggleModal }) => {
           />
           <div className='checkout-box' >
             <Link
-              onClick={toggleModal}
+              onClick={handleCheckout}
               to="../checkout"
               title="結帳">
               <button className="checkout-button">

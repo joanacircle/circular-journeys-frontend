@@ -69,6 +69,10 @@ const ProductDetail = () => {
     // window.dispatchEvent(new Event("storage"))
   }
 
+  const handleCheckout = () => {
+    localStorage.setItem('loginFromCheckout', true)
+  }
+
 
   return (
     <>
@@ -108,6 +112,7 @@ const ProductDetail = () => {
                 <button className='put-kart' onClick={handleAddToCart}>加入購物袋</button>
                 <Link
                   to='/checkout'
+                  onClick={handleCheckout}
                 >
                   <p className='buy-now'>立即購買</p>
                 </Link>
@@ -118,13 +123,7 @@ const ProductDetail = () => {
 
         <div className='recommendations'>
           <div className='recommend-list'>
-            {/* {sampleData.map((item) => (
-              <div key={item.id} className='recommend-product'>
-                <img className='rec-img' src={item.img[0]} alt="" />
-                <h5>{item.name}</h5>
-                <p>Price: ${item.price}</p>
-              </div>
-            ))} */}
+
           </div>
         </div>
       </div>

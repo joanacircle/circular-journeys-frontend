@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： localhost:8889
--- 產生時間： 2023 年 03 月 01 日 13:05
+-- 產生時間： 2023 年 03 月 01 日 13:15
 -- 伺服器版本： 5.7.39
 -- PHP 版本： 7.4.33
 
@@ -293,7 +293,7 @@ CREATE TABLE `user_address` (
   `nation` varchar(25) DEFAULT NULL COMMENT '國家',
   `city` varchar(25) DEFAULT NULL COMMENT '城市',
   `districts` varchar(25) DEFAULT NULL COMMENT '區域',
-  `address` varchar(25) DEFAULT NULL COMMENT '街道',
+  `address` varchar(255) DEFAULT NULL COMMENT '街道',
   `postal_code` varchar(25) DEFAULT NULL COMMENT '郵遞區號'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='通訊地址';
 

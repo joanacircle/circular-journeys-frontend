@@ -7,6 +7,7 @@ export default function TourFavoriteListA(props) {
     const [TourFavoriteList, setTourFavoriteList] = useState([])
     const [count, setCount] = useState(0)
     const [data, setData] = useState([])
+    const [storage, setStorage] = useState(0)
     const MyContext = React.createContext()
     useEffect(() => {
       for (let i = 0; i < localStorage.length; i++) {
@@ -20,10 +21,9 @@ export default function TourFavoriteListA(props) {
               setTourFavoriteList(prevTourFavoriteList => [...prevTourFavoriteList, { id }])
             }
           }
-        }
-        // else {
+        } else {
         // setData(prevTourFavoriteList => prevTourFavoriteList.filter(item => item !== prevTourFavoriteList))
-        // }
+      }
       }
       setData(cards.filter(card => TourFavoriteList.some(({ id }) => id === card.id)))
     }, [])

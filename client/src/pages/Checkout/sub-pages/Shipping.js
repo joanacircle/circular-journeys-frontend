@@ -127,10 +127,14 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
                         <div>{shipping.nation}</div>
                         <div>{shipping.postal_code}</div>
                         <div>{shipping.user_contact}</div>
-                        <div className='edit-delete'>
-                          <VscEdit onClick={toggleEditAddress} />
-                          <RiDeleteBinFill onClick={handleDelete} />
-                        </div>
+                        {/* toggle Edit & Delete */}
+                        {selectedIndex === index && (
+                          <div className='edit-delete'>
+                            <VscEdit onClick={toggleEditAddress} />
+                            <RiDeleteBinFill onClick={handleDelete} />
+                          </div>
+
+                        )}
                       </div>
                     ))}
                   </div>

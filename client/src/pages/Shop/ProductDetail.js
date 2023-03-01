@@ -69,6 +69,10 @@ const ProductDetail = () => {
     // window.dispatchEvent(new Event("storage"))
   }
 
+  const handleCheckout = () => {
+    localStorage.setItem('loginFromCheckout', true)
+  }
+
 
   return (
     <>
@@ -108,6 +112,7 @@ const ProductDetail = () => {
                 <button className='put-kart' onClick={handleAddToCart}>加入購物袋</button>
                 <Link
                   to='/checkout'
+                  onClick={handleCheckout}
                 >
                   <p className='buy-now'>立即購買</p>
                 </Link>

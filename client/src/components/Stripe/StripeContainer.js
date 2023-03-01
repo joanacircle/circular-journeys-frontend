@@ -1,7 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import React from "react"
-import CardImage from "./CardImage"
 import PaymentForm from "./PaymentForm"
 
 
@@ -13,13 +12,12 @@ const stripeTestPromise = loadStripe(PUBLIC_KEY)
 
 export function StripeContainer({ nextStep }) {
 
-
-
   return (
     <Elements stripe={stripeTestPromise}>
-      {/* <CardImage /> */}
+
       <PaymentForm
         nextStep={nextStep}
+      // cartTotal={cartTotal}
       />
     </Elements>
   )

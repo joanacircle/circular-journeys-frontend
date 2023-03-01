@@ -42,8 +42,8 @@
 
   .info-container-parent{
     width: 30%;
-    // position: sticky;
-    // top: 80px;
+    position: sticky;
+    top: -80px;
     height: fit-content;
     align-self: start;
     
@@ -67,8 +67,8 @@
           flex-direction: column;
           width: 100%;
           padding: 10px;
-          position: sticky;
-            top: 80px;
+          // position: sticky;
+          //   top: 80px;
             height: fit-content;
 
           .desc-p {

@@ -2,8 +2,7 @@ import { useState } from 'react'
 import DynamicSelect from '../../../components/Select/DynamicSelect'
 import './EditAddress.scss'
 
-
-const EditAddress = ({ showEditAddress, setShowEditAddress, handleEditAddress, selectedAddress, userData }) => {
+const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, setAddresses, userData }) => {
 
   const [inputData, setInputData] = useState(selectedAddress)
 
@@ -16,7 +15,7 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, handleEditAddress, s
 
   const handleSubmit = async () => {
     try {
-      const memberId = userData.member_id
+      const memberId = selectedAddress.member_id
       const { id } = selectedAddress
       const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout/${id}`, {
         method: 'PUT',
@@ -26,7 +25,8 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, handleEditAddress, s
         body: JSON.stringify({ member_id: memberId, ...inputData })
       })
       const updatedAddress = await response.json()
-      handleEditAddress(updatedAddress)
+      setAddresses(updatedAddress)
+      setInputData({})
       setShowEditAddress(false)
     } catch (error) {
       console.log(`Error updating address: ${error}`)
@@ -44,13 +44,14 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, handleEditAddress, s
           <div className='input-place'>
 
             <div className='label-place' >
-              <label htmlFor="userName">姓名</label>
+              <label htmlFor="user_name">姓名</label>
               <input
                 type="text"
-                name='userName'
-                id='userName'
+                name='user_name'
+                id='user_name'
                 onChange={handleInputChange}
                 placeholder='王小明'
+                value={inputData.user_name}
 
               />
             </div>
@@ -64,6 +65,7 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, handleEditAddress, s
                 id="address"
                 onChange={handleInputChange}
                 placeholder='忠孝東路一段101號'
+                value={inputData.value}
 
                 required
               />
@@ -76,6 +78,7 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, handleEditAddress, s
                 id="nation"
                 onChange={handleInputChange}
                 placeholder='臺灣'
+                value={inputData.nation}
                 required
               />
             </div>
@@ -87,28 +90,31 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, handleEditAddress, s
                 id="city"
                 onChange={handleInputChange}
                 placeholder='台北市'
+                value={inputData.city}
                 required
               />
             </div>
             <div className='label-place'>
-              <label htmlFor="district">區域</label>
+              <label htmlFor="districts">區域</label>
               <input
                 type="text"
-                name="district"
-                id="district"
+                name="districts"
+                id="districts"
                 onChange={handleInputChange}
                 placeholder='中正區'
+                value={inputData.districts}
                 required
               />
             </div>
             <div className='label-place'>
-              <label htmlFor="postalCode">郵遞區號</label>
+              <label htmlFor="postal_code">郵遞區號</label>
               <input
                 type="text"
-                name="postalCode"
-                id="postalCode"
+                name="postal_code"
+                id="postal_code"
                 onChange={handleInputChange}
                 placeholder='100'
+                value={inputData.postal_code}
                 required
               />
             </div>

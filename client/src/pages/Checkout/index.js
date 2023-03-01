@@ -4,34 +4,12 @@ import { Link } from 'react-router-dom'
 import Shipping from './sub-pages/Shipping'
 import Payment from './sub-pages/Payment'
 import OrderDetail from './sub-pages/OrderDetail'
-
 import { CheckoutBar } from './components/CheckoutBar'
-
 import './Checkout.scss'
 
 const Checkout = () => {
 
-  const [shippingDetail, setShippingDetail] = useState([
-    {
-      name: 'Kevin La',
-      address: '56 Starbuck St',
-      city: 'Staten Island',
-      province: 'NY',
-      zip: '10304',
-      country: 'USA',
-      phone: '0917666666'
-    },
-    {
-      name: 'James La',
-      address: '58 Starstrike Ave',
-      city: 'Brooklyn',
-      province: 'NY',
-      zip: '10004',
-      country: 'USA',
-      phone: '0917666555'
-    }
-  ])
-
+  const [selectedAddress, setSelectedAddress] = useState(null)
   const maxSteps = 3
   const [step, setStep] = useState(1)
   const stepNames = ['運送地址', '付款確認', '下單完成!']
@@ -66,10 +44,8 @@ const Checkout = () => {
 
         <div className='order-steps'>
           <BlockComponent
-            shippingDetail={shippingDetail}
-            setShippingDetail={setShippingDetail}
-            // step={step}
-            // setStep={setStep}
+            selectedAddress={selectedAddress}
+            setSelectedAddress={setSelectedAddress}
             prevStep={prevStep}
             nextStep={nextStep}
           />

@@ -87,7 +87,7 @@ const EditPost = () => {
   return (
     <>
     <div className='edit-container'>
-      <h2>修改文章</h2>
+      <h2>-修改文章-</h2>
       <div className="edit-wrapper">
         <form className="edit-form-group"
           onSubmit={handleSubmit}>

@@ -1,13 +1,24 @@
 .edit-container{
-  max-width: 1160;
-  width: 100%;
-
+  position: absolute;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  background-color: var(--gray);
+  
   h2{
     text-align: center;
-    margin-top: 30px;
+    margin: 30px 0 15px 0;
+    color: white;
   }
   .edit-wrapper{
+    max-width: 1160px;
+    width: 100%;
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    border-radius: var(--br2);
+    background-color: rgba(255, 255, 255, 0.7);
     font-size: 20px;
+    color: var(--dark-gray);
 
     .edit-form-group{
       .form-item{
@@ -15,12 +26,18 @@
         flex-direction: column;
         margin-bottom: 10px;
 
+        label{
+          padding-left: 5px;
+        }
         input{
-          border: 1px solid var(--dark-gray);
+          border: 1px solid var(--gray);
+          border-radius: var(--br2);
+          border: 1px solid var(--gray);
           padding: 5px;
         }
         
         .category{
+          padding-left: 5px;
           display: flex;
           flex-direction: row;
           gap: 10px;
@@ -29,16 +46,30 @@
             display: flex;
             gap: 3px;
             align-items: center;
-          }
+            }
         }
 
         .tags{
           display: flex;
+          gap: 10px;
           justify-content: space-evenly;
           input{
             width: 100%;
           }
         }
+
+        .ck {
+          &-toolbar{
+            padding-left: 8px;
+            border: 1px solid var(--gray);
+            border-radius: var(--br2) var(--br2) 0 0;
+          }
+
+          &-content{
+            border: 1px solid var(--gray);
+            border-radius: 0 0 var(--br2) var(--br2);
+          }
+      }
 
         .submit-btn{
           border-radius: var(--br1);

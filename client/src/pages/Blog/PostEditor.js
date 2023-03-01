@@ -44,7 +44,7 @@ const PostEditor = () => {
   return (
     <>
     <div className='edit-container'>
-      <h2>新增文章</h2>
+      <h2>-新增文章-</h2>
       <div className="edit-wrapper">
         <form className="edit-form-group"
           onSubmit={handleSubmit}>
@@ -54,7 +54,7 @@ const PostEditor = () => {
             type="text" name='title'
             value={form.title}
             onChange={handleChange}
-            placeholder='文章標題...' required/>
+            required/>
           </div>
 
           <div className="form-item">
@@ -87,19 +87,16 @@ const PostEditor = () => {
               type="text" name='tag1'
               value={form.tag1}
               onChange={handleChange}
-              placeholder='#關鍵字'
               />
               <input
               type="text" name='tag2'
               value={form.tag2}
               onChange={handleChange}
-              placeholder='#關鍵字'
               />
               <input
               type="text" name='tag3'
               value={form.tag3}
               onChange={handleChange}
-              placeholder='#關鍵字'
               />
             </div>
           </div>

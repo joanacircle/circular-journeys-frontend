@@ -21,8 +21,8 @@ const TourBanner = () => {
             <BiSearch className='tour-search-icon'/>
             </button>
           </form>
-          <TourDatePicker/>
         </div>
+          <TourDatePicker/>
       </div>
     </div>
     </>

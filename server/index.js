@@ -18,22 +18,17 @@ app.use(cors())
 
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
-  res.json('this is home page')
-});
-
 // home
 app.use('/home', homeRouter)
 
 // user
 app.use('/user', user)
 
-
 // shop
 // payment
 app.use('/shop', shopRouter)
 app.use('/checkout', checkoutRouter)
-app.post('/checkout', paymentRouter)
+app.post('/payment', paymentRouter)
 
 // blog
 app.use('/blog', blogRouter)

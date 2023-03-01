@@ -3,9 +3,7 @@ import axios from "axios"
 import React, { useState } from 'react'
 import './PaymentForm.scss'
 
-
 import ssl from '../../images/payment/ssl.png'
-import stripe2 from '../../images/payment/stripe.png'
 import visa from '../../images/payment/visa.png'
 import master from '../../images/payment/master.png'
 
@@ -32,11 +30,13 @@ const CARD_OPTIONS = {
 
 export default function PaymentForm({ nextStep }) {
 
-  const totalPrice = 888
+  const cartTotal = localStorage.getItem('cart-total')
+
+  const totalPrice = Number(cartTotal.toString() + '00')
+  // console.log(typeof totalPrice)
   const [success, setSuccess] = useState(false)
   const stripe = useStripe()
   const elements = useElements()
-
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -50,7 +50,7 @@ export default function PaymentForm({ nextStep }) {
         console.log('PaymentForm:' + paymentMethod)
         const { id } = paymentMethod
         const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/payment`, {
-          amount: 10000,
+          amount: { totalPrice },
           id
         })
 
@@ -66,10 +66,6 @@ export default function PaymentForm({ nextStep }) {
       console.log(error.message)
     }
   }
-
-  // const completePayment = () => {
-  //   setStep(step += 1)
-  // }
 
   return (
     <>
@@ -93,8 +89,8 @@ export default function PaymentForm({ nextStep }) {
           </div>
           <div className="payment-summary">
 
-            <h5>金額總計 NT ${totalPrice} 元</h5>
-            <button onClick={nextStep}>確認付費</button>
+            <h5>金額總計 NT ${cartTotal} 元</h5>
+            <button>確認付費</button>
           </div>
 
         </form>

@@ -15,21 +15,16 @@ const HomeBlog = () => {
   })
   const { userData } = userInfo()
 
-  // databases
   useEffect(() => { getData() }, [])
   function getData() {
-    fetch(`${process.env.REACT_APP_DEV_URL}/home`)
-      .then(r => r.json())
-      .then((data) => { setPost(data) })
-      .catch(error => console.log(error))
+    axios.get(`${process.env.REACT_APP_DEV_URL}/home`)
+      .then(r => { setPost(r.data) })
+      .catch(err => console.log(err))
   }
-
-  // console.log(postLike)
 
   return (
     <>
       <div className='home-banner section'>
-        {/* alt 下關鍵字 */}
         <img className='home-banner-img' src={Banner} alt="Banner"></img>
         <div className='title-section'>
           <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
@@ -60,26 +55,26 @@ const HomeBlog = () => {
             })}
             <BsFillArrowRightCircleFill className='arrow-right' />
           </div>
-          <div className='post-section'>
-            <h2>最新文章</h2>
-            <div className='card-container'>
-              <BsFillArrowLeftCircleFill className='arrow-left' />
-              {post.latest.slice(0, 4).map((v, i) => {
-                return (
-                  <>
-                    <Card2
-                      key={'c2' + v.post_id}
-                      userMemberId={userData.member_id}
-                      postId={v.post_id}
-                      img={v.cover}
-                      tags={v.tag}
-                      title={v.post_title}
-                      likes={v.total_likes}/>
-                  </>
-                )
-              })}
-              <BsFillArrowRightCircleFill className='arrow-right' />
-            </div>
+        </div>
+        <div className='post-section'>
+          <h2>最新文章</h2>
+          <div className='card-container'>
+            <BsFillArrowLeftCircleFill className='arrow-left' />
+            {post.latest.slice(0, 4).map((v, i) => {
+              return (
+                <>
+                  <Card2
+                    key={'c2' + v.post_id}
+                    userMemberId={userData.member_id}
+                    postId={v.post_id}
+                    img={v.cover}
+                    tags={v.tag}
+                    title={v.post_title}
+                    likes={v.total_likes}/>
+                </>
+              )
+            })}
+            <BsFillArrowRightCircleFill className='arrow-right' />
           </div>
         </div>
       </div>

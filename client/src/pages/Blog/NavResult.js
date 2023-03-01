@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
 import { BiSearch } from 'react-icons/bi'
 import Pagination from 'rc-pagination'
-import { userInfo } from 'components/userInfo/UserInfo'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 import './NavResult.scss'
 import Banner from 'images/Blog/blog-banner.jpeg'
+import { userInfo } from 'components/userInfo/UserInfo'
 import Card3 from 'components/Cards/Card3'
 import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
-import B001 from 'images/Blog/B001.jpg'
-import { useParams } from 'react-router-dom'
-import axios from 'axios'
 
 
 const NavResult = () => {
@@ -24,7 +23,7 @@ const NavResult = () => {
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/tag/${tagId}`)
     .then(r => { setPost(r.data) })
-    .catch(error => console.log(error))
+    .catch(err => console.log(err))
   }
 
   return (

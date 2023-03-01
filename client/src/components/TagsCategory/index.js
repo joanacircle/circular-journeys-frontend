@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import shortid from 'shortid'
 import './TagsCategory.scss'
 
-const TagsCategory = (props) => {
+const TagsCategory = () => {
   const [tags, setTags] = useState()
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/tag`)
@@ -19,7 +20,7 @@ const TagsCategory = (props) => {
       ? <></>
       : tags.map((v, i) =>
         (
-          <Link to={`/blog/tag/${v.tag_id}`} key={v.tag_id}>
+          <Link to={`/blog/tag/${v.tag_id}`} key={shortid.generate()}>
             <li># {v.tag}</li>
           </Link>
         )

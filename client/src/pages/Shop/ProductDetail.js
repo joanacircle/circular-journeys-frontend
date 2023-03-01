@@ -74,6 +74,7 @@ const ProductDetail = () => {
   }
 
 
+
   return (
     <>
       <div className='product-detail-page'>

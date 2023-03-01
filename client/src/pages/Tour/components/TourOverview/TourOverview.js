@@ -9,38 +9,29 @@ import './TourOverview.scss'
 
 const App = (p) => {
   const tourTopCards = TourCards
-  const [widgets, setwidgets] = useState([])
-  function handleOnDrag (e, widgetsType) {
-    e.dataTransfer.setData("widgetType", widgetsType)
-  }
+  const [list, setlist] = useState([])
   function handleOnDrop(e) {
-    const widgetType = e.dataTransfer.getData("widgetType")
-    setwidgets([...widgets, widgetType])
-}
+    e.preventDefault()
+    console.log(e)
+    console.log(e.dataTransfer.getData("card"))
+    const dragCards = JSON.parse(e.dataTransfer.getData("card"))
+
+    console.log(dragCards)
+    setlist([...list, dragCards])
+    console.log([...list, dragCards])
+  }
   function handleDragOver(e) {
     e.preventDefault()
   }
   return (
-  <>
- <div className='widget' draggable onDragStart={(e) => handleOnDrag(e, "Widget A")}>
-  widget A
-  </div>
-  <div className='widget' draggable onDragStart={(e) => handleOnDrag(e, "Widget B")}>
-  widget B
-  </div>
-  <div className='widget' draggable onDragStart={(e) => handleOnDrag(e, "Widget C")}>
-  widget C
-  </div>
-  <div className='page' onDrop={handleOnDrop} onDragOver={handleDragOver}>
+    <>
+  <div className='tour-main-list' onDrop={handleOnDrop} onDragOver={handleDragOver}>
+  <from>
+    <h1>托放景點</h1>
     {
-      widgets.map((widget, index) => {
-        return (
-        <div className='widget' key={index}>
-          {widget}
-        </div>
-        )
-      })
+          <TourCardList key={list.id} cards={list} />
     }
+    </from>
   </div>
   <div className='tour-main-list'>
     <from>

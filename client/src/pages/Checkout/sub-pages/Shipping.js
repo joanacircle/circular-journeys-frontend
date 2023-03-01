@@ -9,11 +9,12 @@ import './Shipping.scss'
 import { userInfo } from 'components/userInfo/UserInfo'
 
 
-const Shipping = ({ nextStep }) => {
+const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
 
   const [showAddAddress, setShowAddAddress] = useState(false)
   const [showEditAddress, setShowEditAddress] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  // const [selectedAddress, setSelectedAddress] = useState(null)
   const [addresses, setAddresses] = useState([])
 
   // user data
@@ -38,9 +39,6 @@ const Shipping = ({ nextStep }) => {
     fetchAddress()
   }, [userData.member_id, addresses])
 
-  // useEffect(() => {
-  //   setUserAddresses([...userAddresses, ...addresses])
-  // }, [addresses])
 
   const toggleEditAddress = () => {
     setShowEditAddress(!showEditAddress)
@@ -55,10 +53,8 @@ const Shipping = ({ nextStep }) => {
   }
   const handleRadioSelection = (index) => {
     setSelectedIndex(index)
+    setSelectedAddress(userAddresses[index])
   }
-  // const handleAddAddress = (newAddress) => {
-  //   setAddresses([...addresses, newAddress])
-  // }
 
   const handleDelete = async () => {
     try {
@@ -93,12 +89,13 @@ const Shipping = ({ nextStep }) => {
             setShowAddAddress={setShowAddAddress}
             userId={userData.member_id}
             setAddresses={setAddresses}
-          // handleAddAddress={handleAddAddress}
           />
           : showEditAddress
             ? <EditAddress
               showEditAddress={showEditAddress}
               setShowEditAddress={setShowEditAddress}
+              selectedAddress={selectedAddress}
+              setAddresses={setAddresses}
             />
             : (
               <div>
@@ -130,10 +127,14 @@ const Shipping = ({ nextStep }) => {
                         <div>{shipping.nation}</div>
                         <div>{shipping.postal_code}</div>
                         <div>{shipping.user_contact}</div>
-                        <div className='edit-delete'>
-                          <VscEdit onClick={toggleEditAddress} />
-                          <RiDeleteBinFill onClick={handleDelete} />
-                        </div>
+                        {/* toggle Edit & Delete */}
+                        {selectedIndex === index && (
+                          <div className='edit-delete'>
+                            <VscEdit onClick={toggleEditAddress} />
+                            <RiDeleteBinFill onClick={handleDelete} />
+                          </div>
+
+                        )}
                       </div>
                     ))}
                   </div>

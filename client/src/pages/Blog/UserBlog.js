@@ -22,6 +22,9 @@ const UserBlog = () => {
   const { memberId } = useParams()
   const { userData } = userInfo()
 
+  // test
+  console.log(post)
+
   useEffect(() => {
     fetcher() // 驗證 parameter的 memberId是否存在於資料庫
     getData()
@@ -36,6 +39,7 @@ const UserBlog = () => {
       })
       .catch(err => console.log(err))
   }
+  // TODO: get not thing
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
       .then(r => { setPost(r.data) })
@@ -46,8 +50,8 @@ const UserBlog = () => {
 
   function getArticle () {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/articleLike/${memberId}`)
-    .then(r => { setLikePost(r.data) })
-    .catch(err => console.log(err))
+      .then(r => { setLikePost(r.data) })
+      .catch(err => console.log(err))
   }
   console.log(likePost)
 
@@ -58,19 +62,19 @@ const UserBlog = () => {
           <div className='userblog-container'>
             <div className='page-body'>
               <div className='post-container'>
-                <h2 className='userblog-h2'>{post && post[0].user_nickname}</h2>
+                <h2 className='userblog-h2'>{post && post[0]?.user_nickname}</h2>
                 <div className='userblog-nav'>
                   <ul>
-                      {main
+                    {main
                       ? <>
                         <li className='Active'>主頁</li>
                         <li className='Inactive' onClick={handleClick}>喜歡的文章</li>
-                        </>
+                      </>
                       : <>
                         <li className='Inactive' onClick={handleClick}>主頁</li>
                         <li className='Active'>喜歡的文章</li>
-                        </>
-                      }
+                      </>
+                    }
                   </ul>
                 </div>
                 {main
@@ -90,15 +94,15 @@ const UserBlog = () => {
                 : likePost &&
                   currentLikePost.map((v, i) => (
                     <Card4
-                    key={'c4' + v.post_id}
-                    userMemberId={userData.member_id}
-                    tags={v.tag}
-                    title={v.post_title}
-                    postId={v.post_id}
-                    img={v.cover}
-                    createAt={v.create_at}
-                    likes={v.total_likes}
-                    postContent={v.post_content} />
+                      key={'c4' + v.post_id}
+                      userMemberId={userData.member_id}
+                      tags={v.tag}
+                      title={v.post_title}
+                      postId={v.post_id}
+                      img={v.cover}
+                      createAt={v.create_at}
+                      likes={v.total_likes}
+                      postContent={v.post_content} />
                   ))
                 }
                 <div className='userblog-pagination blog-pagination'>
@@ -113,9 +117,9 @@ const UserBlog = () => {
               <div className='userblog-aside'>
                 <div className="userblog-aside-item">
                   <div className='member-avatar'>
-                    <img src={post && post[0].picture} alt="avatar" />
+                    <img src={post && post[0]?.picture} alt="avatar" />
                     {/* TODO: 如果會員沒有撰寫文章時 */}
-                    <h4>{post && post[0].user_nickname}</h4>
+                    <h4>{post && post[0]?.user_nickname}</h4>
                   </div>
                 </div>
                 <div className='userblog-aside-item'>

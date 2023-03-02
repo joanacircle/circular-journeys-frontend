@@ -28,10 +28,10 @@ const DropdownMenuOptions = {
       label: '訂單管理',
       icon: <CgNotes size={20} />
     },
-    {
-      label: '消費紀錄',
-      icon: <HiOutlineShoppingCart size={20} />
-    },
+    // {
+    //   label: '消費紀錄',
+    //   icon: <HiOutlineShoppingCart size={20} />
+    // },
     // {
     //   label: '付款設定',
     //   icon: <BsCreditCard size={20} />

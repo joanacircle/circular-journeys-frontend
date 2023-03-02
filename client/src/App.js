@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import ScrollToTop from 'components/ScrollToTop'
@@ -22,11 +22,27 @@ import MemberSetting from 'pages/User/MemberCenter/Setting'
 import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 
+import useAuth from 'hooks/useAuth'
+import Context from 'components/Context'
+import ProtectedRouter from 'utils/ProtectedRouter'
+import useModal from 'hooks/useModal'
+
 const App = () => {
+  const { isLogin, setIsLogin } = useAuth()
+  const { modal, setModal } = useModal()
+
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <CartCountProvider>
+
+      <Context.Provider value={{
+        isLogin,
+        setIsLogin,
+        modal,
+        setModal
+      }} >
+
+<CartCountProvider>
         <Routes>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />} />
@@ -39,15 +55,30 @@ const App = () => {
             <Route path='/shop' element={<Shop />} />
             <Route path='/shop/product/:p_id' element={<ProductDetail />} />
             <Route path='/tour' element={<Tour />} />
-            <Route path='/member' element={<Menu />} />
+            <Route path='member' element={
+              <ProtectedRouter isLogin={isLogin}>
+                <Menu />
+              </ProtectedRouter>
+            } />
             <Route path='login' element={<LoginModal />} />
-            <Route path='dropdownMenu' element={<DropdownMenu />} />
-            <Route path='memberSetting' element={<MemberSetting />} />
+            <Route path='dropdownMenu' element={
+              <ProtectedRouter isLogin={isLogin}>
+                <DropdownMenu />
+              </ProtectedRouter>
+            } />
+            <Route path='memberSetting' element={
+              <ProtectedRouter isLogin={isLogin}>
+                <MemberSetting />
+              </ProtectedRouter>
+            } />
+
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='checkout' element={<Checkout />} />
         </Routes>
       </CartCountProvider>
+      </Context.Provider>
+
     </BrowserRouter>
   )
 }

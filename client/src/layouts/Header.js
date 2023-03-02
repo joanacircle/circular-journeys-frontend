@@ -1,3 +1,4 @@
+
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
@@ -10,21 +11,18 @@ import { BiShoppingBag } from 'react-icons/bi'
 // components
 import { CartCountContext } from '../components/ShoppingCart/CartCountProvider'
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
-import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
-import { userInfo } from 'components/userInfo/UserInfo'
-import { useIsLoggedIn } from '../hooks/useIsLoggedIn'
+import Context from 'components/Context'
+import LoginModal from 'pages/User/Login/LoginModal'
 
 const Header = () => {
 
   const { count } = useContext(CartCountContext)
 
   // for drop down
-  const [userMenu, setUserMenu] = useState(false)
-
-  // for modals
-  const [loginModal, setLoginModal] = useState(false)
-
+  const [dropdownMenu, setDropdownMenu] = useState(false)
+  // login modal
+  const { isLogin, setIsLogin, modal, setModal } = useContext(Context)
   // shopping cart modal
   const [cartVisibility, setCartVisibility] = useState(false)
   const toggleModal = () => {
@@ -33,11 +31,16 @@ const Header = () => {
 
   const { userData } = userInfo()
   const { isLogin } = useIsLoggedIn()
+  
+  // dropdown menu
+  const handleDropMenu = () => (
+    isLogin.userState && setDropdownMenu(!dropdownMenu)
 
-  // Login modal
-  const handleToggleLoginModal = () => (
-    isLogin.state ? setUserMenu(!userMenu) : setLoginModal(!loginModal)
   )
+  // login modal
+  const handleLoginModal = () => {
+    setModal(!modal)
+  }
   return (
     <>
       <header>
@@ -74,29 +77,36 @@ const Header = () => {
                 <ul>
                   <li>
                     {
-                      userMenu &&
+                      dropdownMenu &&
                       <DropdownMenu
-                        handleToggleLoginModal={handleToggleLoginModal}
+                        setDropdownMenu={setDropdownMenu}
+                        dropdownMenu={dropdownMenu}
                       />
                     }
                   </li>
                 </ul>
               </li>
               <li className='header-li'>
-                <button onClick={handleToggleLoginModal}>
+                <button>
                   {
-                    !userData.member_id
-                      ? <FaUserCircle id='user-menu' color='#555' size={40} />
+                    !isLogin?.userState
+                      ? <FaUserCircle
+                        id='user-menu'
+                        color='#555'
+                        size={40}
+                        onClick={handleLoginModal}
+                      />
                       : (
                         <img
                           id='user-menu'
                           className="user-img"
                           src={
-                            userData.picture
-                              ? userData.picture
+                            isLogin?.userData.picture
+                              ? isLogin?.userData.picture
                               : 'https://react.semantic-ui.com/images/wireframe/image.png'
                           }
                           title='User-Picture'
+                          onClick={handleDropMenu}
                         />
                       )
                   }
@@ -106,11 +116,7 @@ const Header = () => {
           </section>
         </div>
         {
-          loginModal &&
-          <LoginModal
-            loginModal={loginModal}
-            handleToggleLoginModal={handleToggleLoginModal}
-          />
+          modal && <LoginModal />
         }
         {
           cartVisibility &&

@@ -28,10 +28,10 @@ const NavResult = () => {
 
   function fetcher() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${tagId}`)
-      .then(r => {
-        if (r.data.tag === 0) {
-          setNotFound(!notFound)
-        }
+    .then(r => {
+      if (r.data.tag === 0) {
+        setNotFound(!notFound)
+      }
     })
     .catch(err => console.log(err))
   }
@@ -61,7 +61,6 @@ const NavResult = () => {
                 {currentPost.map((v, i) => {
                   return (
                     <div className='blog-post col-md-6' key={v.post_id}>
-                      {/* 問題：無法依照時間排版 */}
                       <Card3
                         postId={v.post_id}
                         userMemberId={userData.member_id}

@@ -45,24 +45,8 @@ router.get('/', async (req, res) => {
   }
 })
 
-// TODO 改用後端驗證
 // http://localhost:3001/blog/api/:id
 router.get('/api/:id', async (req, res) => {
-  // const sql =`SELECT JSON_ARRAYAGG(post_id) AS post_id FROM posts WHERE 1`
-  // const sql2 =`SELECT JSON_ARRAYAGG(member_id) AS member_id FROM users_information WHERE 1`
-  // const sql3 =`SELECT JSON_ARRAYAGG(tag_id) AS tag_id FROM post_tags WHERE 1`
-
-  // try{
-  //   const [rows] = await db.query(sql)
-  //   const [rows2] = await db.query(sql2)
-  //   const [rows3] = await db.query(sql3)
-
-  //   res.json({post: rows, member: rows2, tag: rows3})
-  // }
-  // catch(err){
-  //   res.json(err)
-  // }
-
   const id = req.params.id
   const sql =`SELECT post_id FROM posts WHERE post_id = ?`
   const sql2 =`SELECT member_id FROM users_information WHERE member_id = ?`
@@ -115,16 +99,33 @@ router.get('/postLike/:member_id', async(req, res)=>{
   }
 })
 
+// 問題 SELECT COUNT(member_id) FROM post_like WHERE post_id =?;
 // http://localhost:3001/blog/like
 router.post('/like', async (req, res) => {
   const output = { success: false, errors: '' }
   const {userMemberId, postId} = req.body
-  const sql = `
-  INSERT INTO post_like(post_id, member_id) VALUES (?,?)`
+  const sqlSelect= `SELECT post_id FROM post_like WHERE member_id = ?`
+  const sqlInsert = `
+  INSERT INTO post_like(post_id, member_id) VALUES (?, ?)`
+  const sqlDelete = `
+  DELETE FROM post_like WHERE post_id = ? AND member_id = ?`
 
   try{
-    const [rows] = await db.query(sql, [postId, userMemberId])
-    output.success = !! rows.affectedRows
+    let rows
+    const [existPostId] = await db.query(sqlSelect, [userMemberId])
+    eid = existPostId.map(v=>v.post_id)
+
+    if(eid.includes(postId)) {
+      rows = await db.query(sqlDelete, [postId, userMemberId])
+    }else{
+      rows = await db.query(sqlInsert, [postId, userMemberId])
+    }
+
+    const [[{total}]] = await db.query("SELECT COUNT(1) total FROM post_like WHERE post_id=?", [postId]);
+
+    await db.query("UPDATE `posts` SET `total_likes`=? WHERE post_id=?", [total, postId]);
+
+    output.success = true
 
     res.json(output)
   }
@@ -135,22 +136,26 @@ router.post('/like', async (req, res) => {
 })
 
 // http://localhost:3001/blog/unlike/:post_id
-router.delete('/unlike/:post_id', async (req, res) => {
-  const output = { success: false, errors: '' }
-  const postId = req.params.post_id
-  const sql = `
-  DELETE FROM post_like WHERE post_id = ?`
+// router.delete('/unlike/:post_id', async (req, res) => {
+//   const output = { success: false, errors: '' }
+//   const postId = req.params.post_id
+//   const sql = `
+//   DELETE FROM post_like WHERE post_id = ?`
 
-  try {
-    const [rows] = await db.query(sql, [postId])
-    output.success = !! rows.affectedRows;
-    res.json(output);
-  } 
-  catch (err) {
-    output.errors = err;
-    res.json(output);
-  }
-})
+//   try {
+//     const [rows] = await db.query(sql, [postId])
+//     output.success = !! rows.affectedRows;
+
+//     const [[{total}]] = await db.query("SELECT COUNT(1) total FROM post_like WHERE post_id=?", [postId]);
+
+//     await db.query("UPDATE `posts` SET `total_likes`=? WHERE post_id=?", [total, postId]);
+//     res.json(output);
+//   } 
+//   catch (err) {
+//     output.errors = err;
+//     res.json(output);
+//   }
+// })
 
 // TODO 移除沒有使用的照片
 // http://localhost:3001/blog/upload-cover -> PostEditor for upload cover-pic

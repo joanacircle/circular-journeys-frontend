@@ -56,17 +56,10 @@ const SinglePost = () => {
     setLike(true)
   }
   function handleClickLike () {
-    setLike(!like)
-    if (userData) {
-      if (!like) {
-        axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId: userData.member_id, postId })
-        .then(r => console.log(r.data))
+    if (userData.member_id) {
+      axios.post(`${process.env.REACT_APP_DEV_URL}/blog/like`, { userMemberId: userData.member_id, postId })
+        .then(r => r.data.success && setLike(!like))
         .catch(err => console.log(err))
-      } else {
-        axios.delete(`${process.env.REACT_APP_DEV_URL}/blog/unlike/${postId}`)
-        .then(r => console.log(r.data))
-        .catch(err => console.log(err))
-      }
     }
   }
 

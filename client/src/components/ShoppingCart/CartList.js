@@ -15,6 +15,7 @@ const CartList = ({ cartItems, setCartItems }) => {
   return (
     <>
       {cartItems.map((v, i) => {
+        console.log('value is ', v)
         const { p_id, title, price, img, count } = v
 
         const handleChange = (event) => {

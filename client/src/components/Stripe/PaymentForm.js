@@ -7,6 +7,8 @@ import ssl from '../../images/payment/ssl.png'
 import visa from '../../images/payment/visa.png'
 import master from '../../images/payment/master.png'
 
+import { userInfo } from '../../components/userInfo/UserInfo'
+
 const CARD_OPTIONS = {
   iconStyle: "solid",
   style: {
@@ -28,13 +30,13 @@ const CARD_OPTIONS = {
   }
 }
 
-export default function PaymentForm({ nextStep }) {
+export default function PaymentForm({ total, nextStep }) {
 
-  const cartTotal = localStorage.getItem('cart-total')
-
-  const totalPrice = Number(cartTotal.toString() + '00')
-  // console.log(typeof totalPrice)
+  // const cartTotal = localStorage.getItem('cart-total')
+  const { userData } = userInfo()
+  const totalPrice = Number(total.toString() + '00')
   const [success, setSuccess] = useState(false)
+  const [error, setError] = useState(null)
   const stripe = useStripe()
   const elements = useElements()
 
@@ -57,47 +59,66 @@ export default function PaymentForm({ nextStep }) {
         if (response.data.success) {
           console.log("Successful payment")
           setSuccess(true)
+          saveOrderToDatabase()
+          localStorage.removeItem('cart')
+          nextStep()
+        } else {
+          setError('付費失敗')
         }
 
       } catch (error) {
         console.log("Error", error)
       }
     } else {
-      console.log(error.message)
+      setError(error.message)
+    }
+  }
+
+  const saveOrderToDatabase = async () => {
+    try {
+      const cart = JSON.parse(localStorage.getItem('cart'))
+      const member_id = userData.member_id
+      const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/orders`, {
+        member_id,
+        total_price: total,
+        is_paid: 1,
+        cartItems: cart
+      })
+      console.log(response.data)
+    } catch (error) {
+      console.log("Error", error)
     }
   }
 
   return (
     <>
-      {!success
-        ? <form onSubmit={handleSubmit}>
-          <fieldset className="FormGroup">
-            <div className="FormRow">
-              <CardElement className="card-element" options={CARD_OPTIONS} />
 
-            </div>
-          </fieldset>
-          <div className="certifications">
-            <div className="cert-img">
-              <img src={ssl} alt="ssl" />
-              {/* <img src={stripe2} alt="stripe" /> */}
-            </div>
-            <div className="cert-img">
-              <img src={visa} alt="visa" />
-              <img src={master} alt="master" />
-            </div>
+      <form onSubmit={handleSubmit}>
+        <fieldset className="FormGroup">
+          <div className="FormRow">
+            <CardElement className="card-element" options={CARD_OPTIONS} />
+
           </div>
-          <div className="payment-summary">
+        </fieldset>
+        <div className="certifications">
+          <div className="cert-img">
+            <img src={ssl} alt="ssl" />
 
-            <h5>金額總計 NT ${cartTotal} 元</h5>
-            <button>確認付費</button>
           </div>
-
-        </form>
-        : <div>
-          {<h2>Thank you for your purchase</h2>}
+          <div className="cert-img">
+            <img src={visa} alt="visa" />
+            <img src={master} alt="master" />
+          </div>
         </div>
-      }
+        <div className="payment-summary">
+
+          <h5>金額總計 NT ${total} 元</h5>
+          <button>確認付費</button>
+          {error && <div className="error">{error}</div>}
+        </div>
+
+      </form>
+
 
     </>
   )

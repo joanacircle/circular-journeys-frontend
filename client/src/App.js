@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import ScrollToTop from 'components/ScrollToTop'
+import { CartCountProvider } from 'components/ShoppingCart/CartCountProvider'
 
 import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home/Home'
@@ -33,12 +34,15 @@ const App = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
+
       <Context.Provider value={{
         isLogin,
         setIsLogin,
         modal,
         setModal
       }} >
+
+<CartCountProvider>
         <Routes>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />} />
@@ -67,11 +71,14 @@ const App = () => {
                 <MemberSetting />
               </ProtectedRouter>
             } />
+
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='checkout' element={<Checkout />} />
         </Routes>
+      </CartCountProvider>
       </Context.Provider>
+
     </BrowserRouter>
   )
 }

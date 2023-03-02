@@ -1,7 +1,3 @@
-// const express = require('express')
-// const router = express.Router()
-// require("dotenv").config()
-// const cors = require('cors')
 
 const stripe = require("stripe")(process.env.SECRET_KEY)
 

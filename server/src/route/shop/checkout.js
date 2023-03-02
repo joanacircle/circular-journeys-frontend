@@ -4,8 +4,8 @@ const db = require('../../model/connect-sql')
 
 // Get Data
 router.get('/', async (req, res) => {
-  // const { member_id } = req.query
-  const member_id = '104709174078800080046'
+  const { member_id } = req.query
+  // const member_id = '104709174078800080046'
   const sql = `SELECT * FROM user_address WHERE member_id = '${member_id}'`
   const [data, index] = await db.query(sql)
   res.json(data)

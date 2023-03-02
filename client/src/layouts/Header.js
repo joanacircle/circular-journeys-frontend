@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react'
+
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../images/Logo/Logo'
 import './Header.scss'
@@ -8,12 +9,15 @@ import { FaUserCircle } from 'react-icons/fa'
 import { BiShoppingBag } from 'react-icons/bi'
 
 // components
+import { CartCountContext } from '../components/ShoppingCart/CartCountProvider'
 import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 import Context from 'components/Context'
 import LoginModal from 'pages/User/Login/LoginModal'
 
 const Header = () => {
+
+  const { count } = useContext(CartCountContext)
 
   // for drop down
   const [dropdownMenu, setDropdownMenu] = useState(false)
@@ -25,9 +29,13 @@ const Header = () => {
     setCartVisibility(!cartVisibility)
   }
 
+  const { userData } = userInfo()
+  const { isLogin } = useIsLoggedIn()
+  
   // dropdown menu
   const handleDropMenu = () => (
     isLogin.userState && setDropdownMenu(!dropdownMenu)
+
   )
   // login modal
   const handleLoginModal = () => {
@@ -64,7 +72,7 @@ const Header = () => {
               <li className='header-li'>
                 <button className='cart-button' onClick={toggleModal}>
                   <BiShoppingBag size={32} />
-                  <div className='cart-count'>{localStorage.getItem('cart-count') || 0}</div>
+                  <div className='cart-count'>{count}</div>
                 </button>
                 <ul>
                   <li>

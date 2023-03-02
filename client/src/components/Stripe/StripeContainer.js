@@ -10,14 +10,14 @@ const PUBLIC_KEY = 'pk_test_51MVV2XL9vOMbHljwYxDpUN8irGCzLHgUXSxQamceHfPCY7BdMKV
 const stripeTestPromise = loadStripe(PUBLIC_KEY)
 
 
-export function StripeContainer({ nextStep }) {
+export function StripeContainer({ nextStep, total }) {
 
   return (
     <Elements stripe={stripeTestPromise}>
 
       <PaymentForm
         nextStep={nextStep}
-      // cartTotal={cartTotal}
+        total={total}
       />
     </Elements>
   )

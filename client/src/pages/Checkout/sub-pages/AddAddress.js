@@ -15,8 +15,8 @@ const AddAddress = ({ showAddAddress, setShowAddAddress, setAddresses, userId })
 
   const handleSubmit = async () => {
     try {
-      // const memberId = userId
-      const memberId = '104709174078800080046'
+      const memberId = userId
+      // const memberId = '104709174078800080046'
       const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout`, {
         method: 'POST',
         headers: {

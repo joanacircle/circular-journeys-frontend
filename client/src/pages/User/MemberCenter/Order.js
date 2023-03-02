@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './Order.scss'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 // Context
 import Context from 'components/Context'
@@ -8,7 +9,6 @@ import Context from 'components/Context'
 // icon
 import { BsBoxArrowInDownRight } from 'react-icons/bs'
 import { TfiClose } from 'react-icons/tfi'
-
 
 // url
 const ordersURL = `${process.env.REACT_APP_DEV_URL}/userorders/orders`
@@ -74,6 +74,7 @@ const OrderPage = () => {
                 <tr>
                   <td></td>
                   <td>訂單編號</td>
+                  <td>訂單時間</td>
                   <td>總金額</td>
                 </tr>
               </thead>
@@ -89,6 +90,7 @@ const OrderPage = () => {
                         <BsBoxArrowInDownRight color='green' />
                       </th>
                       <th>{order?.order_numbers}</th>
+                      <th>{dayjs(order?.created_at).format('YYYY-MM-DD HH:mm')}</th>
                       <th>{formatter.format(order.total_price)}
                       </th>
                     </tr>

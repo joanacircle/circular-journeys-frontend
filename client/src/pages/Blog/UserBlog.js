@@ -25,8 +25,8 @@ const UserBlog = () => {
   useEffect(() => {
     fetcher() // 驗證 parameter的 memberId是否存在於資料庫
     getData()
-    getArticle()
   }, [memberId])
+  useEffect(() => { getArticle() }, [main])
 
   function fetcher() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${memberId}`)
@@ -86,7 +86,8 @@ const UserBlog = () => {
                     img={v.cover}
                     createAt={v.create_at}
                     likes={v.total_likes}
-                    postContent={v.post_content} />
+                    postContent={v.post_content}
+                    main={main} />
                 ))
               : likePost &&
                 currentLikePost.map((v, i) => (

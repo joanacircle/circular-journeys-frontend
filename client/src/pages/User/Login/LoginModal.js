@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './LoginModal.scss'
 import 'animate.css'
 import SignupModal from '../Signup/SignupModal'
@@ -14,8 +14,9 @@ import 'firebase/compat/auth'
 import axios from 'axios'
 import md5 from 'md5'
 import validator from 'validator'
+import Context from 'components/Context'
 
-const LoginModal = ({ handleToggleLoginModal }) => {
+const LoginModal = () => {
 
   const navigate = useNavigate()
   const [signupModal, setSignupModal] = useState(false)
@@ -27,6 +28,7 @@ const LoginModal = ({ handleToggleLoginModal }) => {
     postalCode: '',
     contact: ''
   })
+  const { modal, setModal } = useContext(Context)
 
   // handle input change
   const handelInputChange = (event) => {
@@ -50,7 +52,6 @@ const LoginModal = ({ handleToggleLoginModal }) => {
     )
     if (response.data.state) {
       setTimeout(() => {
-        handleToggleLoginModal()
         // save token to localStorage
         localStorage.setItem('token', response.data.token)
         window.location = '/'
@@ -81,7 +82,6 @@ const LoginModal = ({ handleToggleLoginModal }) => {
         })
         const { token } = signupState.data
         setTimeout(() => {
-          handleToggleLoginModal()
           // save token to localStorage
           localStorage.setItem('token', token)
           window.location = '/'
@@ -91,7 +91,6 @@ const LoginModal = ({ handleToggleLoginModal }) => {
         const loginState = await axios.post(url, { userId: id })
         const { token } = loginState.data
         setTimeout(() => {
-          handleToggleLoginModal()
           // save token to localStorage
           localStorage.setItem('token', token)
           window.location = '/'
@@ -123,10 +122,15 @@ const LoginModal = ({ handleToggleLoginModal }) => {
       })
   }
 
+
+  // handle close modal
+  const handleCloseModal = () => (
+    setModal(false)
+  )
   // handle modal change
   const handleCloseLoginModal = (event) => {
     if (event.target === event.currentTarget) {
-      handleToggleLoginModal()
+      setModal(false)
     }
   }
   const handleShowPasswordButton = () => {
@@ -168,7 +172,8 @@ const LoginModal = ({ handleToggleLoginModal }) => {
                   : (
 
                     <div
-                      onClick={handleToggleLoginModal}>
+                      onClick={handleCloseModal}
+                    >
                       <IoCloseSharp size={30} />
                     </div>
                   )

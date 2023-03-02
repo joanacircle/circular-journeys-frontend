@@ -12,10 +12,10 @@ const useAuth = () => {
 
   const getUserData = async () => {
     const result = await axios.post(url, { token })
-    const { member_id } = result?.data
+    const data = result.data
     setIsLogin({
       userState: true,
-      userData: member_id
+      userData: data
     })
   }
 

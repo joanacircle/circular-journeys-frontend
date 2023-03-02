@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import ScrollToTop from 'components/ScrollToTop'
@@ -22,16 +22,23 @@ import LoginModal from 'pages/User/Login/LoginModal'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 
 import useAuth from 'hooks/useAuth'
-import MemberContext from 'components/MemberContext'
+import Context from 'components/Context'
 import ProtectedRouter from 'utils/ProtectedRouter'
+import useModal from 'hooks/useModal'
 
 const App = () => {
   const { isLogin, setIsLogin } = useAuth()
+  const { modal, setModal } = useModal()
 
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <MemberContext.Provider value={{ isLogin, setIsLogin }} >
+      <Context.Provider value={{
+        isLogin,
+        setIsLogin,
+        modal,
+        setModal
+      }} >
         <Routes>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<Home />} />
@@ -44,16 +51,12 @@ const App = () => {
             <Route path='/shop' element={<Shop />} />
             <Route path='/shop/product/:p_id' element={<ProductDetail />} />
             <Route path='/tour' element={<Tour />} />
-            <Route path='/member' element={
+            <Route path='member' element={
               <ProtectedRouter isLogin={isLogin}>
                 <Menu />
               </ProtectedRouter>
             } />
-            <Route path='login' element={
-              <ProtectedRouter isLogin={isLogin}>
-                <LoginModal />
-              </ProtectedRouter>
-            } />
+            <Route path='login' element={<LoginModal />} />
             <Route path='dropdownMenu' element={
               <ProtectedRouter isLogin={isLogin}>
                 <DropdownMenu />
@@ -68,7 +71,7 @@ const App = () => {
           </Route>
           <Route path='checkout' element={<Checkout />} />
         </Routes>
-      </MemberContext.Provider>
+      </Context.Provider>
     </BrowserRouter>
   )
 }

@@ -5,7 +5,7 @@
   margin-top: 10px;
   border-radius: 8px;
   background: white;
-  min-width: 250px;
+  min-width: 220px;
   box-shadow: 0 0 10px 0.5px var(--gray);
   .menu-place {
     width: 100%;
@@ -53,10 +53,6 @@
       .ticket {
         color: lightsalmon;
       }
-      // .message {
-      //   // color: #d77a61;
-      //   color: #db504a;
-      // }
     }
     .logout-button {
       @include flex(center, "");

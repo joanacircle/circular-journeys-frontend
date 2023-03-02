@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import firebase from '../../../components/Firebase/firebase'
 import 'firebase/compat/auth'
@@ -6,7 +6,7 @@ import './DropdownMenu.scss'
 import 'animate.css'
 
 // components
-import { userInfo } from 'components/userInfo/UserInfo'
+import Context from 'components/Context'
 
 // icon
 import { FaRegAddressBook } from 'react-icons/fa'
@@ -47,9 +47,9 @@ const DropdownMenuOptions = {
   ]
 }
 
-const DropdownMenu = ({ handleToggleLoginModal }) => {
+const DropdownMenu = ({ dropdownMenu, setDropdownMenu }) => {
   const [dropdownOptions, setDropdownOptions] = useState(DropdownMenuOptions)
-  const { userData } = userInfo()
+  const { isLogin, setIsLogin } = useContext(Context)
 
   // handleClickOutside
   useEffect(() => {
@@ -58,7 +58,7 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
         !(event.target.id === 'user-menu' && 'user-img') &&
         !(event.target.tagName === 'path')
       ) {
-        handleToggleLoginModal()
+        setDropdownMenu(!dropdownMenu)
       }
     }
     window.addEventListener('click', handleClickOutside)
@@ -98,13 +98,13 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
               className="user-name-photo"
               id='帳號設定'
               src={
-                userData.picture
-                  ? userData.picture
+                isLogin?.userData.picture
+                  ? isLogin?.userData.picture
                   : 'https://react.semantic-ui.com/images/wireframe/image.png'
               }
             />
             <div className='user-info' id='帳號設定'>
-              <h5 id='帳號設定'>{userData && userData.user_nickname}</h5>
+              <h5 id='帳號設定'>{isLogin?.userData && isLogin?.userData.user_nickname}</h5>
             </div>
           </div>
         </Link>
@@ -133,14 +133,14 @@ const DropdownMenu = ({ handleToggleLoginModal }) => {
         <div className='divider'></div>
 
         {/* for ' circle circle ' */}
-        <Link className='menu-option' to={`/blog/${userData.member_id}`}>
+        <Link className='menu-option' to={`/blog/${isLogin?.userData.member_id}`}>
           <div className='user-name'>
             <BsPersonBadge size={20} />
             <p>個人首頁</p>
           </div>
         </Link>
 
-        <Link className='menu-option' to={`/blog/editor/${userData.member_id}`}>
+        <Link className='menu-option' to={`/blog/editor/${isLogin?.userData.member_id}`}>
           <div className='user-name'>
             <CiEdit size={20} />
             <p>撰寫日誌</p>

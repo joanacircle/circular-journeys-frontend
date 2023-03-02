@@ -14,6 +14,7 @@ import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 import Context from 'components/Context'
 import LoginModal from 'pages/User/Login/LoginModal'
+import { userInfo } from '../components/userInfo/UserInfo'
 
 const Header = () => {
 
@@ -30,8 +31,7 @@ const Header = () => {
   }
 
   const { userData } = userInfo()
-  const { isLogin } = useIsLoggedIn()
-  
+
   // dropdown menu
   const handleDropMenu = () => (
     isLogin.userState && setDropdownMenu(!dropdownMenu)

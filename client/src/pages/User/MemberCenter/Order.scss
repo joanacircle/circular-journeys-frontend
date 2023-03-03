@@ -1,1 +1,64 @@
 @import "../styles/styles.scss";
+
+.table-place {
+  @include flex(center, column);
+  .icon-place {
+    padding: 3px;
+    cursor: pointer;
+  }
+  .tr-hover-order {
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background: var(--light-gray);
+    }
+    th {
+      padding: 10px;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+  table {
+    width: 100%;
+    td {
+      padding: 10px;
+      margin: 5px;
+      letter-spacing: 0.5px;
+      font-size:20px;
+    }
+  }
+}
+
+.product-place {
+  @include flex(center, column);
+  margin-top: 20px;
+  .icon-place {
+    padding: 3px;
+    cursor: pointer;
+  }
+  .tr-hover-order {
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background: var(--light-gray);
+    }
+    th {
+      padding: 10px;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+  table {
+    text-align: center;
+    width: 100%;
+    td {
+      padding: 10px;
+      margin: 5px;
+      letter-spacing: 0.5px;
+      font-size:20px;
+    }
+  }
+}
+.icon-pointer {
+  cursor: pointer;
+}

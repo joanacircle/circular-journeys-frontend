@@ -6,6 +6,8 @@ const cors = require('cors')
 // individual component
 const homeRouter = require('./src/route/home/home')
 const user = require('./src/route/user/users')
+const userOrders = require('./src/route/user/userOrders')
+const userPosts = require('./src/route/user/userPosts')
 const shopRouter = require('./src/route/shop/shop')
 const checkoutRouter = require('./src/route/shop/checkout')
 const paymentRouter = require("./src/route/shop/payment")(cors)
@@ -24,6 +26,8 @@ app.use('/home', homeRouter)
 
 // user
 app.use('/user', user)
+app.use('/userorders', userOrders)
+app.use('/userposts', userPosts)
 
 // shop
 // payment

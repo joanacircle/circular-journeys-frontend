@@ -35,12 +35,12 @@ const MenuOptions = {
       icon: <CgNotes />,
       element: <OrderPage />
     },
-    {
-      state: false,
-      label: '消費紀錄',
-      icon: <HiOutlineShoppingCart />,
-      element: <ShopHistoryPage />
-    },
+    // {
+    //   state: false,
+    //   label: '消費紀錄',
+    //   icon: <HiOutlineShoppingCart />,
+    //   element: <ShopHistoryPage />
+    // },
     {
       state: false,
       label: '通訊地址',

@@ -140,6 +140,42 @@
           }
         }
 
+        .weather-section{
+          border-radius: var(--br1);
+          background-color: rgb(109, 173, 216);
+          margin-bottom: 30px;
+          padding: 10px;
+          max-width: 350px;
+          color: white;
+
+          .weather-section::after{
+            background-color: rgba(255, 255, 255, 0.3);
+            max-width: 400px;
+          }
+          
+          &-select{
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0 20px 0;
+        
+            select{
+              font-size: 20px;
+              background-color: rgb(109, 173, 216);
+            }
+          }
+        
+          &-data{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+
+            p{
+              font-size: 40px;
+            }
+          }
+        }
       }
     }
   }

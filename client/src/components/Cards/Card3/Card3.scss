@@ -15,7 +15,7 @@
 
   .card-caption{
     background: white;
-    border-radius: var(--br1);
+    border-radius: 0 0 var(--br1) var(--br1);
     padding-top: 25px;
 
     .card-header{

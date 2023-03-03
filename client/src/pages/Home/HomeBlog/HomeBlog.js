@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill } from 'react-icons/bs'
-import { BiSearch } from 'react-icons/bi'
+// import { BiSearch } from 'react-icons/bi'
 import { userInfo } from 'components/userInfo/UserInfo'
 import './HomeBlog.scss'
 import Card from 'components/Cards/Card'
@@ -16,10 +16,11 @@ const HomeBlog = () => {
   const { userData } = userInfo()
 
   useEffect(() => { getData() }, [])
+
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/home`)
-      .then(r => { setPost(r.data) })
-      .catch(err => console.log(err))
+    .then(r => { setPost(r.data) })
+    .catch(err => console.log(err))
   }
 
   return (
@@ -28,15 +29,18 @@ const HomeBlog = () => {
         <img className='home-banner-img' src={Banner} alt="Banner"></img>
         <div className='title-section'>
           <h1 className='home-blog-h1'>高雄最棒的旅遊體驗</h1>
-          <form className='home-search'>
+          {/* <form className='home-search'>
             <input className='home-input' placeholder="Search">
             </input>
             <button className='home-button' type="submit">
               <BiSearch className='home-search-icon' />
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
+      <div>
+      </div>
+
       <div className='blog-section'>
         <div className='post-section'>
           <h2>熱門文章</h2>
@@ -78,6 +82,7 @@ const HomeBlog = () => {
           </div>
         </div>
       </div>
+
     </>
   )
 }

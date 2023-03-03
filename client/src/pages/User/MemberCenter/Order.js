@@ -8,7 +8,7 @@ import Context from 'components/Context'
 
 // icon
 import { BsBoxArrowInDownRight } from 'react-icons/bs'
-import { TfiClose } from 'react-icons/tfi'
+import { MdFileUpload } from 'react-icons/md'
 
 // url
 const ordersURL = `${process.env.REACT_APP_DEV_URL}/userorders/orders`
@@ -111,7 +111,12 @@ const OrderPage = () => {
               <thead>
                 <tr>
                   <th>
-                    <TfiClose className='icon-pointer' color='red' onClick={handleClose} />
+                    <MdFileUpload
+                      className='icon-pointer'
+                      color='#514895'
+                      size={25}
+                      onClick={handleClose}
+                    />
                   </th>
                   <td>商品名稱</td>
                   <td>商品分類</td>

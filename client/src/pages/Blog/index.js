@@ -67,11 +67,6 @@ const Blog = () => {
       index = item.findIndex((v) => v === value)
     }
 
-
-
-    const myObj = { ...dataIndex, [name]: index }
-
-    console.log('myObj', myObj)
     let measureString = null
     if (index === 0 || index === 2) {
       measureString = '%'
@@ -85,7 +80,6 @@ const Blog = () => {
 
     setDataIndex({ ...dataIndex, [name]: index, measure: measureString })
   }
-  console.log(dataIndex)
 
   return (
     <>
@@ -147,17 +141,15 @@ const Blog = () => {
                   <div className="weather-section-select">
                     <select
                     name='district'
-                    // value={district[dataIndex.district]}
                     onChange={(e) => handleChange(e)}>
-                      {district && district.map((v, i) => (
+                      {district.length > 0 && district.map((v, i) => (
                         <option key={'d' + i} value={v}>{v}</option>
                       ))}
                     </select>
                     <select
                     name="item"
-                    // value={item[dataIndex.item]}
                     onChange={(e) => handleChange(e)}>
-                      {item && item.map((v, i) => (
+                      {item.length > 0 && item.map((v, i) => (
                         <option key={'i' + i} value={v}>{v}</option>
                       ))
                     }

@@ -22,7 +22,7 @@ const NavResult = () => {
   const { userData } = userInfo()
 
   useEffect(() => {
-    fetcher() // 驗證 parameter的 tagId 是否存在於資料庫
+    fetcher()
     getData()
   }, [tagId])
 

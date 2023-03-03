@@ -27,18 +27,18 @@ const EditPost = () => {
   )
 
   useEffect(() => {
-    fetcher() // 驗證 parameter的 postId是否存在於資料庫
+    fetcher()
     getData()
   }, [postId])
 
   function fetcher() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${postId}`)
-      .then(r => {
-        if (r.data.post.length === 0) {
-          setNotFound(!notFound)
-        }
-      })
-      .catch(err => console.log(err))
+    .then(r => {
+      if (r.data.post.length === 0) {
+        setNotFound(!notFound)
+      }
+    })
+    .catch(err => console.log(err))
   }
   function getData () {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/post/${postId}`)

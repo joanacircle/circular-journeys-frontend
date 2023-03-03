@@ -23,33 +23,33 @@ const UserBlog = () => {
   const { userData } = userInfo()
 
   useEffect(() => {
-    fetcher() // 驗證 parameter的 memberId是否存在於資料庫
+    fetcher()
     getData()
   }, [memberId])
   useEffect(() => { getArticle() }, [main])
 
   function fetcher() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${memberId}`)
-      .then(r => {
-        if (r.data.member.length === 0) {
-          setNotFound(!notFound)
-        }
+    .then(r => {
+      if (r.data.member.length === 0) {
+        setNotFound(!notFound)
+      }
     })
     .catch(err => console.log(err))
   }
 
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/${memberId}`)
-      .then(r => { setPost(r.data) })
-      .catch(err => console.error(err))
+    .then(r => { setPost(r.data) })
+    .catch(err => console.error(err))
   }
 
   function handleClick () { setMain(!main) }
 
   function getArticle () {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/articleLike/${memberId}`)
-      .then(r => { setLikePost(r.data) })
-      .catch(err => console.log(err))
+    .then(r => { setLikePost(r.data) })
+    .catch(err => console.log(err))
   }
 
   if (notFound) { return <NotFound /> }

@@ -46,7 +46,7 @@ const HomeBlog = () => {
           <h2>熱門文章</h2>
           <div className='card-container'>
             <BsFillArrowLeftCircleFill className='arrow-left' />
-            {post.popular.slice(0, 4).map((v, i) => {
+            {post.popular.length > 0 && post.popular.slice(0, 4).map((v, i) => {
               return (
                 <>
                   <Card
@@ -64,7 +64,7 @@ const HomeBlog = () => {
           <h2>最新文章</h2>
           <div className='card-container'>
             <BsFillArrowLeftCircleFill className='arrow-left' />
-            {post.latest.slice(0, 4).map((v, i) => {
+            {post.latest.length > 0 && post.latest.slice(0, 4).map((v, i) => {
               return (
                 <>
                   <Card2

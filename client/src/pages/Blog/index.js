@@ -11,18 +11,81 @@ import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
 
 const Blog = () => {
+  const [weather, setWeather] = useState([])
+  const [district, setDistrict] = useState([])
+  const [item, setItem] = useState([])
+  const [dataIndex, setDataIndex] = useState({ district: 0, item: 0, measure: '%' })
   const [post, setPost] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(4)
   const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   const { userData } = userInfo()
 
-  useEffect(() => { getData() }, [])
+  useEffect(() => {
+    console.log('weather dataIndex')
+    if (weather.length > 0) {
+      setDistrict(weather.map(v => v.locationName))
+      setItem(weather[0].weatherElement.map(v => v.description))
+    }
+  }, [weather])
+
+  useEffect(() => {
+    getData()
+    getWeather()
+  }, [])
+  function change() {
+    if (dataIndex.item === 0 || dataIndex.item === 2) {
+      setDataIndex({ ...dataIndex, measure: '%' })
+    } else if (dataIndex.item === 1 || dataIndex.item === 5 || dataIndex.item === 8 || dataIndex.item === 11) {
+      setDataIndex({ ...dataIndex, measure: '°C' })
+    } else if (dataIndex.item === 4) {
+      setDataIndex({ ...dataIndex, measure: '公尺/秒' })
+    } else {
+      setDataIndex({ ...dataIndex, measure: '' })
+    }
+  }
+
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog`)
       .then(r => { setPost(r.data) })
       .catch(err => console.log(err))
   }
+  function getWeather () {
+    axios.get(`https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-067?Authorization=${process.env.REACT_APP_WEATHER_KEY}&format=JSON`)
+    .then(r =>
+      setWeather(r.data.records.locations[0].location)
+    )
+    .catch(err => console.log(err))
+  }
+  function handleChange (e) {
+    console.log('hi')
+    const { name, value } = e.target
+    let index = -1
+    if (name === 'district') {
+      index = district.findIndex((v) => v === value)
+    } else if (name === 'item') {
+      index = item.findIndex((v) => v === value)
+    }
+
+
+
+    const myObj = { ...dataIndex, [name]: index }
+
+    console.log('myObj', myObj)
+    let measureString = null
+    if (index === 0 || index === 2) {
+      measureString = '%'
+    } else if (index === 1 || index === 5 || index === 8 || index === 11) {
+      measureString = '°C'
+    } else if (index === 4) {
+      measureString = ' 公尺/秒'
+    } else {
+      measureString = ''
+    }
+
+    setDataIndex({ ...dataIndex, [name]: index, measure: measureString })
+  }
+  console.log(dataIndex)
 
   return (
     <>
@@ -78,6 +141,32 @@ const Blog = () => {
               </div>
               <div className='blog-aside-item'>
                 <TagsCategory />
+              </div>
+              <div className='blog-aside-item'>
+                <div className="weather-section">
+                  <div className="weather-section-select">
+                    <select
+                    name='district'
+                    // value={district[dataIndex.district]}
+                    onChange={(e) => handleChange(e)}>
+                      {district && district.map((v, i) => (
+                        <option key={'d' + i} value={v}>{v}</option>
+                      ))}
+                    </select>
+                    <select
+                    name="item"
+                    // value={item[dataIndex.item]}
+                    onChange={(e) => handleChange(e)}>
+                      {item && item.map((v, i) => (
+                        <option key={'i' + i} value={v}>{v}</option>
+                      ))
+                    }
+                    </select>
+                  </div>
+                  <div className="weather-section-data">
+                    <p>{weather.length > 0 && weather[dataIndex.district].weatherElement[dataIndex.item].time[0].elementValue[0].value}{dataIndex.measure}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

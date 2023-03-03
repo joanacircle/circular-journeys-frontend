@@ -21,6 +21,7 @@ const LikeHistoryPage = () => {
       try {
         const result = await axios.post(likedURL, { member_id: isLogin.userData.member_id })
         const { data } = result
+        console.log(data)
         setPosts(data)
       } catch (err) {
         console.log(err)

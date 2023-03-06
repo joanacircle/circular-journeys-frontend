@@ -70,8 +70,8 @@ const Blog = () => {
     let measureString = null
     if (index === 0 || index === 2) {
       measureString = '%'
-    } else if (index === 1 || index === 5 || index === 8 || index === 11) {
-      measureString = '°C'
+    } else if (index === 1 || index === 5 || index === 8 || index === 11 || index === 14) {
+      measureString = 'C'
     } else if (index === 4) {
       measureString = ' 公尺/秒'
     } else {
@@ -156,7 +156,15 @@ const Blog = () => {
                     </select>
                   </div>
                   <div className="weather-section-data">
-                    <p>{weather.length > 0 && weather[dataIndex.district].weatherElement[dataIndex.item].time[0].elementValue[0].value}{dataIndex.measure}</p>
+                    {/* <img src={`${process.env.REACT_APP_DEV_URL}/blog/weather-icon.png`} alt="" /> */}
+                    <p>
+                      {weather.length > 0 &&
+                      dataIndex.item &&
+                      dataIndex.item === 10
+                      ? weather[dataIndex.district].weatherElement[10].time[0].elementValue[0].value.split('。')[0]
+                      : weather[dataIndex.district].weatherElement[dataIndex.item].time[0].elementValue[0].value}
+                      {dataIndex.measure}
+                    </p>
                   </div>
                 </div>
               </div>

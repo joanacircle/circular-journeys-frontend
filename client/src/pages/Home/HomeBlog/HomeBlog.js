@@ -45,7 +45,7 @@ const HomeBlog = () => {
         <div className='post-section'>
           <h2>熱門文章</h2>
           <div className='card-container'>
-            <BsFillArrowLeftCircleFill className='arrow-left' />
+            {/* <BsFillArrowLeftCircleFill className='arrow-left' /> */}
             {post.popular.length > 0 && post.popular.slice(0, 4).map((v, i) => {
               return (
                 <>
@@ -57,13 +57,13 @@ const HomeBlog = () => {
                 </>
               )
             })}
-            <BsFillArrowRightCircleFill className='arrow-right' />
+            {/* <BsFillArrowRightCircleFill className='arrow-right' /> */}
           </div>
         </div>
         <div className='post-section'>
           <h2>最新文章</h2>
           <div className='card-container'>
-            <BsFillArrowLeftCircleFill className='arrow-left' />
+            {/* <BsFillArrowLeftCircleFill className='arrow-left' /> */}
             {post.latest.length > 0 && post.latest.slice(0, 4).map((v, i) => {
               return (
                 <>
@@ -78,7 +78,7 @@ const HomeBlog = () => {
                 </>
               )
             })}
-            <BsFillArrowRightCircleFill className='arrow-right' />
+            {/* <BsFillArrowRightCircleFill className='arrow-right' /> */}
           </div>
         </div>
       </div>

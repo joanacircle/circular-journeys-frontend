@@ -6,7 +6,8 @@
 
   @keyframes move {
       from {
-        transform: translateX(-80px);
+        transform: translateX(-20vw);
+        // transform: translateX(-200%);
       }
   
       to {
@@ -16,9 +17,9 @@
   
     .car {
       position: absolute;
-      // top: 17px;
       top: 0.5px;
-      left: 16px;
+      // left: 16px;
+      left: 2vw;
       animation: move 1.5s ease-in-out;
       height: 30px;
     }

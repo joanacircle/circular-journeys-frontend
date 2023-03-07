@@ -22,28 +22,17 @@ const Blog = () => {
   const { userData } = userInfo()
 
   useEffect(() => {
-    console.log('weather dataIndex')
+    getData()
+  }, [])
+
+  useEffect(() => { getWeather() }, [dataIndex])
+
+  useEffect(() => {
     if (weather.length > 0) {
       setDistrict(weather.map(v => v.locationName))
       setItem(weather[0].weatherElement.map(v => v.description))
     }
   }, [weather])
-
-  useEffect(() => {
-    getData()
-    getWeather()
-  }, [])
-  function change() {
-    if (dataIndex.item === 0 || dataIndex.item === 2) {
-      setDataIndex({ ...dataIndex, measure: '%' })
-    } else if (dataIndex.item === 1 || dataIndex.item === 5 || dataIndex.item === 8 || dataIndex.item === 11) {
-      setDataIndex({ ...dataIndex, measure: '°C' })
-    } else if (dataIndex.item === 4) {
-      setDataIndex({ ...dataIndex, measure: '公尺/秒' })
-    } else {
-      setDataIndex({ ...dataIndex, measure: '' })
-    }
-  }
 
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog`)
@@ -58,7 +47,6 @@ const Blog = () => {
     .catch(err => console.log(err))
   }
   function handleChange (e) {
-    console.log('hi')
     const { name, value } = e.target
     let index = -1
     if (name === 'district') {
@@ -70,15 +58,19 @@ const Blog = () => {
     let measureString = null
     if (index === 0 || index === 2) {
       measureString = '%'
-    } else if (index === 1 || index === 5 || index === 8 || index === 11) {
-      measureString = '°C'
+    } else if (index === 1 || index === 5 || index === 8 || index === 11 || index === 14) {
+      measureString = 'C'
     } else if (index === 4) {
       measureString = ' 公尺/秒'
     } else {
       measureString = ''
     }
 
-    setDataIndex({ ...dataIndex, [name]: index, measure: measureString })
+    if (name === 'item') {
+      setDataIndex({ ...dataIndex, [name]: index, measure: measureString })
+    } else {
+      setDataIndex({ ...dataIndex, [name]: index })
+    }
   }
 
   return (
@@ -94,7 +86,7 @@ const Blog = () => {
           <div className='blog-container row justify-content-md-center justify-content-xl-between'>
             <div className='col-md-10 col-lg-8 col-xl-7 text-center'>
               <div className='row'>
-                {currentPost.map((v, i) => {
+                {post.length > 0 && currentPost.map((v, i) => {
                   return (
                     <div className='blog-post col-md-6' key={v.post_id}>
                       <Card3
@@ -156,7 +148,11 @@ const Blog = () => {
                     </select>
                   </div>
                   <div className="weather-section-data">
-                    <p>{weather.length > 0 && weather[dataIndex.district].weatherElement[dataIndex.item].time[0].elementValue[0].value}{dataIndex.measure}</p>
+                    {/* <img src={`${process.env.REACT_APP_DEV_URL}/blog/weather-icon.png`} alt="" /> */}
+                    <p>
+                      {weather.length > 0 && weather[dataIndex.district].weatherElement[dataIndex.item].time[0].elementValue[0].value.split('。')[0]}
+                      {dataIndex.measure}
+                    </p>
                   </div>
                 </div>
               </div>

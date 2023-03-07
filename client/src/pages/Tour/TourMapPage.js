@@ -10,10 +10,10 @@ export default function TourMapPage() {
       TourMapPage
       </h1>
       <div style={{ display: "flex" }}>
-        <div style={{ border: "2px solid blue", width: "100vh", height: "100vh" }}>
+        <div style={{ border: "2px solid blue", width: "700px", height: "560px", zIndex: 9 }}>
           <TourMap />
         </div>
-        <div style={{ border: "2px solid blue", width: "100vh", height: "100vh" }}>
+        <div style={{ border: "2px solid blue", width: "700px", height: "560px" }}>
           <TourSearchBar />
         </div>
       </div>

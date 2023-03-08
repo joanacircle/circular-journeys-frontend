@@ -3,12 +3,11 @@ import './TourCard.scss'
 import TourFavorite from '../TourFavorite/TourFavorite'
 
 
-const TourCard = (props) => {
-  const { card } = props
+const TourCard = ({ card, onClick }) => {
   const { id, name, adress, img, tags } = card
     return (
     <>
-    <div className='TourCard'>
+    <div className='TourCard' onClick={onClick}>
     <img src={require(`images/Tour/${img}.jpg`)}
     className='TourCardImg' alt='TourCardImg'/>
       <span className='TourCardText'>

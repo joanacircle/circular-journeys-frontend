@@ -15,6 +15,7 @@ import EditPost from 'pages/Blog/EditPost'
 import SinglePost from 'pages/Blog/SinglePost'
 import NavResult from 'pages/Blog/NavResult'
 import Tour from 'pages/Tour/Tour'
+import TourMapPage from 'pages/Tour/TourMapPage'
 import ProductDetail from 'pages/Shop/ProductDetail'
 import Menu from 'pages/User/MemberCenter/Menu'
 import { NotFound } from './pages/NotFound'
@@ -54,6 +55,7 @@ const App = () => {
               <Route path='/shop' element={<Shop />} />
               <Route path='/shop/product/:p_id' element={<ProductDetail />} />
               <Route path='/tour' element={<Tour />} />
+              <Route path='/tour/tourmappage' element={<TourMapPage />} />
               <Route path='member' element={
                 <ProtectedRouter isLogin={isLogin}>
                   <Menu />
@@ -70,7 +72,6 @@ const App = () => {
                   <MemberSetting />
                 </ProtectedRouter>
               } />
-
               <Route path='*' element={<NotFound />} />
             </Route>
             <Route path='checkout' element={<Checkout />} />

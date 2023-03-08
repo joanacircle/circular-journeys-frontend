@@ -3,13 +3,12 @@ import { useContext, useState } from 'react'
 import { CartCountContext } from '../../../components/ShoppingCart/CartCountProvider'
 import { StripeContainer } from 'components/Stripe/StripeContainer'
 import './Payment.scss'
-import CartList from '../../../components/ShoppingCart/CartList'
+import PaymentCartList from '../../../components/ShoppingCart/PaymentCartList'
 
 
 const Payment = ({ prevStep, nextStep, selectedAddress }) => {
 
   const cartDetail = JSON.parse(localStorage.getItem('cart')) || []
-
   const [cartItems, setCartItems] = useState(cartDetail.map((v, i) => ({
     ...v
   })))
@@ -18,12 +17,10 @@ const Payment = ({ prevStep, nextStep, selectedAddress }) => {
   const { updateTotal } = useContext(CartCountContext)
   updateTotal(cartItems)
 
-
   return (
     <>
       <div className='payment-container'>
         <h5 className='payment-title'>請輸入信用卡資訊</h5>
-
 
         <div className='credit-info'>
           {/* Handle Payment */}
@@ -52,7 +49,7 @@ const Payment = ({ prevStep, nextStep, selectedAddress }) => {
               <div>tel: {selectedAddress.user_contact}</div>
             </div>
             <div className="confirm-products">
-              <CartList
+              <PaymentCartList
                 cartItems={cartItems}
                 setCartItems={setCartItems}
               />

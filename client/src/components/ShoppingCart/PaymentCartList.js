@@ -1,16 +1,7 @@
 import React from 'react'
 import './CartList.scss'
-import { RxCrossCircled } from 'react-icons/rx'
-
 
 const CartList = ({ cartItems, setCartItems }) => {
-
-  const deleteProduct = (p_id) => {
-    const updatedCartItems = cartItems.filter((item, i2) => p_id !== item.p_id)
-    setCartItems(updatedCartItems)
-
-    localStorage.setItem('cart', JSON.stringify(updatedCartItems))
-  }
 
   return (
     <>
@@ -28,13 +19,7 @@ const CartList = ({ cartItems, setCartItems }) => {
         return (
           <div key={p_id}>
             <div className='itemImage'>
-              <RxCrossCircled
-                className="deleteItem"
-                onClick={() => {
-                  deleteProduct(p_id)
-                }} />
               <img className='cart-img' src={img} alt="product image" />
-
             </div>
             <div className='itemDetail'>
               <p className='cart-title'>{title}</p>

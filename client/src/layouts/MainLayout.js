@@ -2,14 +2,12 @@ import { Outlet } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer'
 import './MainLayout.scss'
-// import { CartCountProvider } from 'components/ShoppingCart/CartCountProvider'
 
 const MainLayout = () => {
 
   return (
     <>
       <>
-        {/* <CartCountProvider> */}
         <Header />
 
         <main className='main-content' >
@@ -19,7 +17,6 @@ const MainLayout = () => {
         </main>
 
         <Footer />
-        {/* </CartCountProvider> */}
       </>
     </>
   )

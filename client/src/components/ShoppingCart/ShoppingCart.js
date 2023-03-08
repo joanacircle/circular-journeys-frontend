@@ -8,7 +8,6 @@ import CartTotal from './CartTotal'
 import { userInfo } from 'components/userInfo/UserInfo'
 import Snackbar from '@mui/material/Snackbar'
 
-
 export const ShoppingCart = ({ toggleModal, count }) => {
 
   const [cartItems, setCartItems] = useState([])

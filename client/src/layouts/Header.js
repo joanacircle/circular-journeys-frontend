@@ -14,7 +14,6 @@ import { ShoppingCart } from 'components/ShoppingCart/ShoppingCart'
 import DropdownMenu from 'pages/User/DropdownMenu/DropdownMenu'
 import Context from 'components/Context'
 import LoginModal from 'pages/User/Login/LoginModal'
-import { userInfo } from '../components/userInfo/UserInfo'
 
 const Header = () => {
 
@@ -29,8 +28,6 @@ const Header = () => {
   const toggleModal = () => {
     setCartVisibility(!cartVisibility)
   }
-
-  const { userData } = userInfo()
 
   // dropdown menu
   const handleDropMenu = () => (

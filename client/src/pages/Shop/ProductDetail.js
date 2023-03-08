@@ -22,7 +22,7 @@ const ProductDetail = () => {
     setLoginSnackbarOpen(false)
     setEmptyCartSnackbarOpen(false)
   }
-  const { count, updateCount } = useContext(CartCountContext)
+  const { updateCount } = useContext(CartCountContext)
 
   const location = useLocation()
   const product = location.state?.product

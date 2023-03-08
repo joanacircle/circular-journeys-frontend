@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-
 import Shipping from './sub-pages/Shipping'
 import Payment from './sub-pages/Payment'
 import OrderDetail from './sub-pages/OrderDetail'

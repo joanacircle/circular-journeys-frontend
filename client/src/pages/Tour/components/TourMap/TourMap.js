@@ -29,7 +29,7 @@ export default function TourMap({ selectedCard }) {
         if (data && data.length > 0) {
           const { lat, lon } = data[0]
           setPosition([lat, lon])
-          mapRef.current.flyTo([lat, lon], 14, { animate: true })
+          mapRef.current.flyTo([lat, lon], 16, { animate: true })
         }
       })
     }

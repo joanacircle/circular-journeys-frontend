@@ -1,1 +1,32 @@
 @import "../styles/styles.scss";
+
+.table-place {
+  @include flex(space-around, column);
+  .icon-place {
+    padding: 3px;
+    cursor: pointer;
+  }
+  .tr-hover-post {
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background: var(--light-gray);
+    }
+    th,
+    td {
+      padding: 10px 5px;
+      font-size: 18px;
+      text-align: center;
+      border: 0.2px solid var(--gray);
+    }
+  }
+}
+
+.post-context-place {
+  figure {
+    img {
+      height: 100px;
+      margin: 0 auto;
+    }
+  }
+}

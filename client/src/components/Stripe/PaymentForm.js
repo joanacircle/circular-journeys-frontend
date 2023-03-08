@@ -1,11 +1,13 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { CartCountContext } from '../ShoppingCart/CartCountProvider'
 import './PaymentForm.scss'
 
 import ssl from '../../images/payment/ssl.png'
 import visa from '../../images/payment/visa.png'
 import master from '../../images/payment/master.png'
+
 
 import { userInfo } from '../../components/userInfo/UserInfo'
 
@@ -32,7 +34,7 @@ const CARD_OPTIONS = {
 
 export default function PaymentForm({ total, nextStep }) {
 
-  // const cartTotal = localStorage.getItem('cart-total')
+  const { updateCount } = useContext(CartCountContext)
   const { userData } = userInfo()
   const totalPrice = Number(total.toString() + '00')
   const [success, setSuccess] = useState(false)
@@ -60,6 +62,7 @@ export default function PaymentForm({ total, nextStep }) {
           console.log("Successful payment")
           setSuccess(true)
           saveOrderToDatabase()
+          updateCount(0)
           localStorage.removeItem('cart')
           nextStep()
         } else {

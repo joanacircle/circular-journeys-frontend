@@ -12,6 +12,7 @@ const ProductDetail = () => {
   const navigate = useNavigate()
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [loginSnackbarOpen, setLoginSnackbarOpen] = useState(false)
+  const [emptyCartSnackbarOpen, setEmptyCartSnackbarOpen] = useState(false)
 
   const handleCloseSnackbar = (event, reason) => {
     if (reason === 'clickaway') {
@@ -19,8 +20,9 @@ const ProductDetail = () => {
     }
     setSnackbarOpen(false)
     setLoginSnackbarOpen(false)
+    setEmptyCartSnackbarOpen(false)
   }
-  const { updateCount } = useContext(CartCountContext)
+  const { count, updateCount } = useContext(CartCountContext)
 
   const location = useLocation()
   const product = location.state?.product
@@ -90,6 +92,7 @@ const ProductDetail = () => {
   }
 
   const handleCheckout = () => {
+    handleAddToCart()
     if (userData.member_id) {
       navigate('/checkout')
     } else {
@@ -151,6 +154,12 @@ const ProductDetail = () => {
           autoHideDuration={1000}
           onClose={handleCloseSnackbar}
           message="請先登入!"
+        />
+        <Snackbar
+          open={emptyCartSnackbarOpen}
+          autoHideDuration={1000}
+          onClose={handleCloseSnackbar}
+          message="購物袋是空的喔!"
         />
 
         <div className='recommendations'>

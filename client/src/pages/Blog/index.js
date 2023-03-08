@@ -11,17 +11,66 @@ import BlogCategory from 'components/BlogCategory'
 import TagsCategory from 'components/TagsCategory'
 
 const Blog = () => {
+  const [weather, setWeather] = useState([])
+  const [district, setDistrict] = useState([])
+  const [item, setItem] = useState([])
+  const [dataIndex, setDataIndex] = useState({ district: 0, item: 0, measure: '%' })
   const [post, setPost] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(4)
   const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   const { userData } = userInfo()
 
-  useEffect(() => { getData() }, [])
+  useEffect(() => {
+    getData()
+  }, [])
+
+  useEffect(() => { getWeather() }, [dataIndex])
+
+  useEffect(() => {
+    if (weather.length > 0) {
+      setDistrict(weather.map(v => v.locationName))
+      setItem(weather[0].weatherElement.map(v => v.description))
+    }
+  }, [weather])
+
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog`)
       .then(r => { setPost(r.data) })
       .catch(err => console.log(err))
+  }
+  function getWeather () {
+    axios.get(`https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-067?Authorization=${process.env.REACT_APP_WEATHER_KEY}&format=JSON`)
+    .then(r =>
+      setWeather(r.data.records.locations[0].location)
+    )
+    .catch(err => console.log(err))
+  }
+  function handleChange (e) {
+    const { name, value } = e.target
+    let index = -1
+    if (name === 'district') {
+      index = district.findIndex((v) => v === value)
+    } else if (name === 'item') {
+      index = item.findIndex((v) => v === value)
+    }
+
+    let measureString = null
+    if (index === 0 || index === 2) {
+      measureString = '%'
+    } else if (index === 1 || index === 5 || index === 8 || index === 11 || index === 14) {
+      measureString = 'C'
+    } else if (index === 4) {
+      measureString = ' 公尺/秒'
+    } else {
+      measureString = ''
+    }
+
+    if (name === 'item') {
+      setDataIndex({ ...dataIndex, [name]: index, measure: measureString })
+    } else {
+      setDataIndex({ ...dataIndex, [name]: index })
+    }
   }
 
   return (
@@ -37,7 +86,7 @@ const Blog = () => {
           <div className='blog-container row justify-content-md-center justify-content-xl-between'>
             <div className='col-md-10 col-lg-8 col-xl-7 text-center'>
               <div className='row'>
-                {currentPost.map((v, i) => {
+                {post.length > 0 && currentPost.map((v, i) => {
                   return (
                     <div className='blog-post col-md-6' key={v.post_id}>
                       <Card3
@@ -78,6 +127,34 @@ const Blog = () => {
               </div>
               <div className='blog-aside-item'>
                 <TagsCategory />
+              </div>
+              <div className='blog-aside-item'>
+                <div className="weather-section">
+                  <div className="weather-section-select">
+                    <select
+                    name='district'
+                    onChange={(e) => handleChange(e)}>
+                      {district.length > 0 && district.map((v, i) => (
+                        <option key={'d' + i} value={v}>{v}</option>
+                      ))}
+                    </select>
+                    <select
+                    name="item"
+                    onChange={(e) => handleChange(e)}>
+                      {item.length > 0 && item.map((v, i) => (
+                        <option key={'i' + i} value={v}>{v}</option>
+                      ))
+                    }
+                    </select>
+                  </div>
+                  <div className="weather-section-data">
+                    {/* <img src={`${process.env.REACT_APP_DEV_URL}/blog/weather-icon.png`} alt="" /> */}
+                    <p>
+                      {weather.length > 0 && weather[dataIndex.district].weatherElement[dataIndex.item].time[0].elementValue[0].value.split('。')[0]}
+                      {dataIndex.measure}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

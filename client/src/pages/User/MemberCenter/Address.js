@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './Address.scss'
 import axios from 'axios'
 import validator from 'validator'
 
 // components
 import DynamicSelect from '../../../components/Select/DynamicSelect'
-import { userInfo } from 'components/userInfo/UserInfo'
+import Context from 'components/Context'
 
 // icon
 import { TfiTrash } from 'react-icons/tfi'
@@ -21,6 +21,9 @@ const Address = () => {
     userEmail: ''
   })
 
+  // user info
+  const { isLogin } = useContext(Context)
+
   // get address list
   useEffect(() => {
     const getAddressList = async () => {
@@ -28,7 +31,7 @@ const Address = () => {
         const list = await axios.post(
           `${process.env.REACT_APP_DEV_URL}/user/address/list`,
           {
-            member_id: userData.member_id
+            member_id: isLogin?.userData.member_id
           }
         )
         setAddressList(list.data.data)
@@ -38,9 +41,6 @@ const Address = () => {
     }
     getAddressList()
   }, [addressList])
-
-  // user info
-  const { userData } = userInfo()
 
   const handleInputChange = (event) => {
     setInputData({
@@ -56,7 +56,7 @@ const Address = () => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/user/address`,
         {
-          member_id: userData.member_id,
+          member_id: isLogin?.userData.member_id,
           userName,
           userContact,
           userAddress,

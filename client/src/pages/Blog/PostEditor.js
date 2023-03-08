@@ -45,7 +45,7 @@ const PostEditor = () => {
     e.preventDefault()
     axios.post(`${process.env.REACT_APP_DEV_URL}/blog/newpost/${memberId}`, form)
     .then(r => {
-      const { message, postId } = r.data
+      const { postId } = r.data
       if (r.data.success === true) {
         window.location = `http://localhost:3000/blog/post/${postId}`
       }
@@ -58,9 +58,7 @@ const PostEditor = () => {
   return (
     <>
     <div className='edit-container'>
-
       <h2>-新增文章-</h2>
-
       <div className="edit-wrapper">
         <form className="edit-form-group"
           onSubmit={handleSubmit}>

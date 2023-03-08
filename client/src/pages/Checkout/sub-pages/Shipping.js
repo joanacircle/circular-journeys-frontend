@@ -7,15 +7,16 @@ import EditAddress from './EditAddress'
 import AddAddress from './AddAddress'
 import './Shipping.scss'
 import { userInfo } from 'components/userInfo/UserInfo'
+import Snackbar from '@mui/material/Snackbar'
 
 
 const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
 
   const [showAddAddress, setShowAddAddress] = useState(false)
   const [showEditAddress, setShowEditAddress] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  // const [selectedAddress, setSelectedAddress] = useState(null)
+  const [selectedIndex, setSelectedIndex] = useState()
   const [addresses, setAddresses] = useState([])
+  const [addressSnackbarOpen, setAddressSnackbarOpen] = useState(false)
 
   // user data
   const { userData } = userInfo()
@@ -28,7 +29,6 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
         const memberId = userData.member_id
 
         const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=${memberId}`)
-        // const response = await fetch(`${process.env.REACT_APP_DEV_URL}/checkout?member_id=104709174078800080046`)
         const data = await response.json()
         console.log('user data is', { data })
         setUserAddresses(data)
@@ -59,7 +59,6 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
   const handleDelete = async () => {
     try {
       const memberId = userData.member_id
-      // const memberId = '104709174078800080046'
       const selectedAddress = userAddresses[selectedIndex]
 
       await fetch(`${process.env.REACT_APP_DEV_URL}/checkout/${selectedAddress.id}`, {
@@ -72,10 +71,20 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
       setUserAddresses(userAddresses.filter((address, index) =>
         index !== selectedIndex
       ))
-      setSelectedIndex(0)
+      setSelectedIndex()
+      setSelectedAddress(null)
     } catch (error) {
       console.log(`Error deleting address: ${error}`)
     }
+  }
+
+  const confirmAddress = () => {
+    if (selectedAddress !== null) {
+      nextStep()
+    } else {
+      setAddressSnackbarOpen(true)
+    }
+
   }
 
   return (
@@ -95,7 +104,9 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
               showEditAddress={showEditAddress}
               setShowEditAddress={setShowEditAddress}
               selectedAddress={selectedAddress}
+              setSelectedAddress={setSelectedAddress}
               setAddresses={setAddresses}
+              setSelectedIndex={setSelectedIndex}
             />
             : (
               <div>
@@ -124,18 +135,23 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
                         <div>{shipping.address}</div>
                         <div>{shipping.city}</div>
                         <div>{shipping.district}</div>
-                        <div>{shipping.nation}</div>
-                        <div>{shipping.postal_code}</div>
-                        <div>{shipping.user_contact}</div>
+                        <div>{shipping.nation} {shipping.postal_code}</div>
+                        <div>tel: {shipping.user_contact}</div>
 
                         {/* toggle Edit & Delete */}
-                        {selectedIndex === index && (
-                          <div className='edit-delete'>
-                            <VscEdit onClick={toggleEditAddress} />
-                            <RiDeleteBinFill onClick={handleDelete} />
-                          </div>
 
-                        )}
+
+                        {selectedIndex === index
+                          ? (
+                            <div className='edit-delete'>
+                              <VscEdit onClick={toggleEditAddress} />
+                              <RiDeleteBinFill onClick={handleDelete} />
+                            </div>
+                          )
+                          : <div className='empty-edit-delete'>
+
+                          </div>
+                        }
                       </div>
                     ))}
                   </div>
@@ -146,11 +162,17 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
                 </div>
                 {userAddresses.length !== 0 && (
                   <div className='confirm-button'>
-                    <button onClick={nextStep}>確認</button>
+                    <button onClick={confirmAddress}>確認</button>
                   </div>
                 )}
               </div>
             )}
+        <Snackbar
+          open={addressSnackbarOpen}
+          autoHideDuration={500}
+          // onClose={handleCloseSnackbar}
+          message="請選擇運送地址"
+        />
       </div>
     </>
   )

@@ -48,9 +48,8 @@ const Payment = ({ prevStep, nextStep, selectedAddress }) => {
               <div>{selectedAddress.address}</div>
               <div>{selectedAddress.city}</div>
               <div>{selectedAddress.district}</div>
-              <div>{selectedAddress.nation}</div>
-              <div>{selectedAddress.postal_code}</div>
-              <div>{selectedAddress.user_contact}</div>
+              <div>{selectedAddress.nation} {selectedAddress.postal_code}</div>
+              <div>tel: {selectedAddress.user_contact}</div>
             </div>
             <div className="confirm-products">
               <CartList

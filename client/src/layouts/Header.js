@@ -122,6 +122,7 @@ const Header = () => {
           cartVisibility &&
           <ShoppingCart
             toggleModal={toggleModal}
+            count={count}
           />
         }
 

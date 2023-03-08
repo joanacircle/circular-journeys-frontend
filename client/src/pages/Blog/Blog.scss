@@ -140,6 +140,45 @@
           }
         }
 
+        .weather-section{
+          border-radius: var(--br1);
+          background-color: var(--orange);
+          margin-bottom: 30px;
+          padding: 20px;
+          width: fit-content;
+          color: white;
+          display: flex;
+
+          
+          &-select{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+            padding-right: 20px;
+
+            img{
+              width: 80px;
+            }
+        
+            select{
+              font-size: 20px;
+              background-color: var(--orange);
+            }
+          }
+        
+          &-data{
+            border-left: 1px solid rgba(255,255,255,0.7);
+            padding-left: 20px;
+            text-align: center;
+
+            p{
+              margin: 0 auto;
+              font-size: 60px;
+              white-space: nowrap;
+            }
+          }
+        }
       }
     }
   }

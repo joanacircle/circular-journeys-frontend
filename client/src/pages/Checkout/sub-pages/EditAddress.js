@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './EditAddress.scss'
 
-const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, setAddresses, userData }) => {
+const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, setSelectedAddress, setAddresses, userData, setSelectedIndex }) => {
 
   const [inputData, setInputData] = useState(selectedAddress)
 
@@ -25,7 +25,10 @@ const EditAddress = ({ showEditAddress, setShowEditAddress, selectedAddress, set
       })
       const updatedAddress = await response.json()
       setAddresses(updatedAddress)
+      setSelectedAddress(null)
+      setSelectedIndex(null)
       setInputData({})
+
       setShowEditAddress(false)
     } catch (error) {
       console.log(`Error updating address: ${error}`)

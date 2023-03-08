@@ -41,13 +41,17 @@
       }
       .selected {
         border-color: var(--orange);
+
       }
 
       .edit-delete {
         display: flex;
         justify-content: space-around;
         font-size: 20px;
-        padding: 10%;
+        padding: 6% 0;
+      }
+      .empty-edit-delete{
+        padding: 13% 0;
       }
 
     }

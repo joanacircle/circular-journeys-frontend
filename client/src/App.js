@@ -42,43 +42,41 @@ const App = () => {
         modal,
         setModal
       }} >
-
-<CartCountProvider>
-        <Routes>
-          <Route path='/' element={<MainLayout />}>
-            <Route index element={<Home />} />
-            <Route path='/blog' element={<Blog />} />
-            <Route path='/blog/:memberId' element={<UserBlog />} />
-            <Route path='/blog/editor/:memberId' element={<PostEditor />} />
-            <Route path='/blog/edit/:postId' element={<EditPost />} />
-            <Route path='/blog/post/:postId' element={<SinglePost />} />
-            <Route path='/blog/tag/:tagId' element={<NavResult />} />
-            <Route path='/shop' element={<Shop />} />
-            <Route path='/shop/product/:p_id' element={<ProductDetail />} />
-            <Route path='/tour' element={<Tour />} />
-            <Route path='/tour/tourmappage' element={<TourMapPage />} />
-            <Route path='member' element={
-              <ProtectedRouter isLogin={isLogin}>
-                <Menu />
-              </ProtectedRouter>
-            } />
-            <Route path='login' element={<LoginModal />} />
-            <Route path='dropdownMenu' element={
-              <ProtectedRouter isLogin={isLogin}>
-                <DropdownMenu />
-              </ProtectedRouter>
-            } />
-            <Route path='memberSetting' element={
-              <ProtectedRouter isLogin={isLogin}>
-                <MemberSetting />
-              </ProtectedRouter>
-            } />
-
-            <Route path='*' element={<NotFound />} />
-          </Route>
-          <Route path='checkout' element={<Checkout />} />
-        </Routes>
-      </CartCountProvider>
+        <CartCountProvider>
+          <Routes>
+            <Route path='/' element={<MainLayout />}>
+              <Route index element={<Home />} />
+              <Route path='/blog' element={<Blog />} />
+              <Route path='/blog/:memberId' element={<UserBlog />} />
+              <Route path='/blog/editor/:memberId' element={<PostEditor />} />
+              <Route path='/blog/edit/:postId' element={<EditPost />} />
+              <Route path='/blog/post/:postId' element={<SinglePost />} />
+              <Route path='/blog/tag/:tagId' element={<NavResult />} />
+              <Route path='/shop' element={<Shop />} />
+              <Route path='/shop/product/:p_id' element={<ProductDetail />} />
+              <Route path='/tour' element={<Tour />} />
+              <Route path='/tour/tourmappage' element={<TourMapPage />} />
+              <Route path='member' element={
+                <ProtectedRouter isLogin={isLogin}>
+                  <Menu />
+                </ProtectedRouter>
+              } />
+              <Route path='login' element={<LoginModal />} />
+              <Route path='dropdownMenu' element={
+                <ProtectedRouter isLogin={isLogin}>
+                  <DropdownMenu />
+                </ProtectedRouter>
+              } />
+              <Route path='memberSetting' element={
+                <ProtectedRouter isLogin={isLogin}>
+                  <MemberSetting />
+                </ProtectedRouter>
+              } />
+              <Route path='*' element={<NotFound />} />
+            </Route>
+            <Route path='checkout' element={<Checkout />} />
+          </Routes>
+        </CartCountProvider>
       </Context.Provider>
 
     </BrowserRouter>

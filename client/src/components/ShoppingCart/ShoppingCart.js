@@ -9,13 +9,14 @@ import { userInfo } from 'components/userInfo/UserInfo'
 import Snackbar from '@mui/material/Snackbar'
 
 
-export const ShoppingCart = ({ toggleModal }) => {
+export const ShoppingCart = ({ toggleModal, count }) => {
 
   const [cartItems, setCartItems] = useState([])
   const { userData } = userInfo()
   const navigate = useNavigate()
 
   const [loginSnackbarOpen, setLoginSnackbarOpen] = useState(false)
+  const [emptyCartSnackbarOpen, setEmptyCartSnackbarOpen] = useState(false)
 
   useEffect(() => {
     const existingCartItems = JSON.parse(localStorage.getItem('cart')) || []
@@ -30,24 +31,15 @@ export const ShoppingCart = ({ toggleModal }) => {
 
   const handleCheckout = () => {
 
-    if (userData.member_id) {
-      toggleModal()
+    if (userData.member_id && count !== 0) {
       navigate('/checkout')
     } else {
+      if (userData.member_id) {
+        setEmptyCartSnackbarOpen(true)
+      }
       setLoginSnackbarOpen(true)
     }
   }
-
-  // const totalPrice = () => {
-  //   let price = 0
-
-  //   for (let i = 0; i < cartItems.length; i++) {
-  //     price += cartItems[i].count * cartItems[i].price
-  //   }
-  //   localStorage.setItem('cart-total', price)
-  //   return price
-  // }
-
 
   return (
     <>
@@ -82,8 +74,12 @@ export const ShoppingCart = ({ toggleModal }) => {
       <Snackbar
         open={loginSnackbarOpen}
         autoHideDuration={1000}
-        // onClose={handleCloseSnackbar}
         message="請先登入!"
+      />
+      <Snackbar
+        open={emptyCartSnackbarOpen}
+        autoHideDuration={1000}
+        message="購物袋是空的喔!"
       />
     </>
   )

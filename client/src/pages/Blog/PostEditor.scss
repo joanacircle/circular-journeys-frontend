@@ -3,12 +3,12 @@
   left: 0;
   right: 0;
   min-height: 100vh;
-  background-color: var(--gray);
+  background-color: var(--light-gray);
   
   h2{
     text-align: center;
     margin: 30px 0 15px 0;
-    color: white;
+    color: black;
   }
   .edit-wrapper{
     max-width: 1160px;
@@ -16,7 +16,7 @@
     margin: 0 auto 30px auto;
     padding: 20px;
     border-radius: var(--br2);
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.9);
     font-size: 20px;
     color: var(--dark-gray);
 
@@ -31,7 +31,7 @@
         }
         input{
           border: 1px solid var(--gray);
-          border-radius: var(--br2);
+          border-radius: var(--br1);
           border: 1px solid var(--gray);
           padding: 5px;
         }
@@ -62,19 +62,19 @@
           &-toolbar{
             padding-left: 8px;
             border: 1px solid var(--gray);
-            border-radius: var(--br2) var(--br2) 0 0;
+            border-radius: var(--br1) var(--br1) 0 0;
           }
 
           &-content{
             border: 1px solid var(--gray);
-            border-radius: 0 0 var(--br2) var(--br2);
+            border-radius: 0 0 var(--br1) var(--br1);
           }
       }
 
         .submit-btn{
           border-radius: var(--br1);
           max-width: 56px;
-          margin: 0 auto;
+          margin: 20px auto 0 auto;
           padding: 10px;
           color: white;
           background: var(--orange);

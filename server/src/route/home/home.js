@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
   try{
     const [rows] = await db.query(condition_sql('total_likes'))
     const [rows2] = await db.query(condition_sql('create_at'))
-      // 問題：無法依照時間正確排序
 
     res.json({
       popular: rows,

@@ -99,7 +99,6 @@ router.get('/postLike/:member_id', async(req, res)=>{
   }
 })
 
-// 問題 SELECT COUNT(member_id) FROM post_like WHERE post_id =?;
 // http://localhost:3001/blog/like
 router.post('/like', async (req, res) => {
   const output = { success: false, errors: '' }
@@ -395,6 +394,24 @@ router.get('/articleLike/:member_id', async (req, res)=>{
   }
 })
 
+const condition_sql = col=>`
+  SELECT
+    posts.member_id,
+    posts.post_id,
+    posts.post_title,
+    posts.total_likes,
+    posts.cover,
+    posts.create_at,
+    (
+      SELECT JSON_OBJECTAGG(post_tags.tag_id, post_tags.tag)
+      FROM post_tags 
+      WHERE post_tags.post_id = posts.post_id
+    ) 
+    AS tag
+  FROM posts
+  ORDER BY ${col} DESC
+  `;
+
 // http://localhost:3001/blog/tag/:tag_id -> NavResult
 router.get('/tag/:tag_id', async (req, res)=>{
   const tagId = req.params.tag_id
@@ -446,11 +463,10 @@ router.get('/tag/:tag_id', async (req, res)=>{
   try{
     let rows
     if(tagId==='popular'){
-      [rows] = await db.query(sql, ['posts.total_likes'])
+      [rows] = await db.query(condition_sql('posts.total_likes'))
     }
     else if(tagId==='latest'){ 
-      // 問題：無法依照時間正確排序
-      [rows] = await db.query(sql, ['posts.create_at'])
+      [rows] = await db.query(condition_sql('posts.create_at'))
     }
     else{
       [rows] = await db.query(sqlTag, [tagId])

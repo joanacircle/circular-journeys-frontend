@@ -81,13 +81,15 @@ export default function PaymentForm({ total, nextStep }) {
     try {
       const cart = JSON.parse(localStorage.getItem('cart'))
       const member_id = userData.member_id
+      const orderNumber = `${Date.now()}${member_id}`
       const response = await axios.post(`${process.env.REACT_APP_DEV_URL}/orders`, {
         member_id,
         total_price: total,
         is_paid: 1,
+        order_numbers: orderNumber,
         cartItems: cart
       })
-      console.log(response.data)
+      console.log('123', response.data)
     } catch (error) {
       console.log("Error", error)
     }

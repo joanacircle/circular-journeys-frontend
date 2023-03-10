@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../../model/connect-sql')
 
-// Get Data
+// Get Products Data
 router.get('/', async (req, res) => {
   const { member_id } = req.query
   const sql = `SELECT * FROM user_address WHERE member_id = '${member_id}'`
@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   res.json(data)
 })
 
-// Add Data
+// Add Address
 router.post('/', async (req, res) => {
   const {
     member_id,

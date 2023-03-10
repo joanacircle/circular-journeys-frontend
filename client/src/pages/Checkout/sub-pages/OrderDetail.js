@@ -1,5 +1,4 @@
 import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import { Link, useNavigate } from 'react-router-dom'
 import { userInfo } from 'components/userInfo/UserInfo'
 import './OrderDetail.scss'
@@ -8,7 +7,6 @@ const OrderDetail = () => {
   const navigate = useNavigate()
   const { userData } = userInfo()
   const memberId = userData.member_id
-  // const orderNumber = `${Date.now()}-${uuidv4()}-${memberId}`
   const orderNumber = `${Date.now()}${memberId}`
 
   const handleLinkClick = (path) => {

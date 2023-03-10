@@ -116,11 +116,10 @@ const UserBlog = () => {
               <div className="userblog-aside-item">
                 <div className='member-avatar'>
                   <img src={post && post[0].picture} alt="avatar" />
-                  {/* TODO: 如果會員沒有撰寫文章時 */}
                   <h4>{post && post[0].user_nickname}</h4>
                 </div>
               </div>
-              <div className='userblog-aside-item'>
+              {/* <div className='userblog-aside-item'>
                 <form className='blog-search'>
                   <input className='blog-input' placeholder="Search">
                   </input>
@@ -128,7 +127,7 @@ const UserBlog = () => {
                     <BiSearch className='search-icon' />
                   </button>
                 </form>
-              </div>
+              </div> */}
               <div className='userblog-aside-item'>
                 <BlogCategory />
               </div>

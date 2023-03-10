@@ -7,7 +7,6 @@ import './SinglePost.scss'
 import { NotFound } from 'pages/NotFound'
 import Alert from 'components/Alert'
 import { userInfo } from 'components/userInfo/UserInfo'
-import Card2 from 'components/Cards/Card2'
 
 const SinglePost = () => {
   const [post, setPost] = useState({})
@@ -164,48 +163,7 @@ const SinglePost = () => {
               ? <AiOutlineHeart size={40} className='heart-icon' onClick={handleClickLike}/>
               : <AiFillHeart size={40} className='heart-icon' onClick={handleClickLike}/>
               }
-              {/* TODO */}
-              <p>
-                <Link to='#'>前一篇 </Link>
-                |
-                <Link to='#'> 後一篇</Link>
-              </p>
             </div>
-            {/* TODO */}
-            {/* <div className="related-post">
-            <Card2
-              tags={tags}
-              postId={postId}
-              imgSrc={imgSrc[0]}
-              imgAlt={imgAlt[0]}
-              tagId={tagId}
-              title={title}
-              likes={likes}/>
-            <Card2
-              tags={tags}
-              postId={postId}
-              imgSrc={imgSrc[1]}
-              imgAlt={imgAlt[1]}
-              tagId={tagId}
-              title={title}
-              likes={likes}/>
-            <Card2
-              tags={tags}
-              postId={postId}
-              imgSrc={imgSrc[2]}
-              imgAlt={imgAlt[2]}
-              tagId={tagId}
-              title={title}
-              likes={likes}/>
-            <Card2
-              tags={tags}
-              postId={postId}
-              imgSrc={imgSrc[3]}
-              imgAlt={imgAlt[3]}
-              tagId={tagId}
-              title={title}
-              likes={likes}/>
-          </div> */}
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 export const CartCountContext = createContext()
 
@@ -20,7 +20,6 @@ export const CartCountProvider = ({ children }) => {
     for (let i = 0; i < cartItems.length; i++) {
       price += cartItems[i].count * cartItems[i].price
     }
-    // localStorage.setItem('cart-total', price)
     setTotal(price)
   }
 

@@ -140,7 +140,6 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
 
                         {/* toggle Edit & Delete */}
 
-
                         {selectedIndex === index
                           ? (
                             <div className='edit-delete'>
@@ -170,7 +169,6 @@ const Shipping = ({ nextStep, selectedAddress, setSelectedAddress }) => {
         <Snackbar
           open={addressSnackbarOpen}
           autoHideDuration={500}
-          // onClose={handleCloseSnackbar}
           message="請選擇運送地址"
         />
       </div>

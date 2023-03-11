@@ -156,7 +156,6 @@ router.post('/like', async (req, res) => {
 //   }
 // })
 
-// TODO 移除沒有使用的照片
 // http://localhost:3001/blog/upload-cover -> PostEditor for upload cover-pic
 router.post('/upload-cover', MultipartyMiddleWare, async (req, res) => {
   const TempFile = req.files.upload 

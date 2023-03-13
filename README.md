@@ -33,7 +33,10 @@ For added functionality, I also incorporated Firebase storage to allow users to 
 
 ## Blog Section 
 ### ✏️  By Joana
-In this project, I responsibled for both the front-end and back-end development of the blog page. 
+
+<img width="1426" alt="截圖 2023-03-13 下午2 48 01" src="https://user-images.githubusercontent.com/117150342/224627842-1e0b39e8-dd01-4931-955a-369509916a95.png">
+
+In this project, I was responsible for both the front-end and back-end development of the blog page. 
 
 Regarding the front-end, I designed and implemented the CKEditor as the article editor, which enables users to create and edit articles. I also added the functionality for users to add hashtags to their articles, increasing their richness and exposure. Additionally, I implemented the like feature that enables users to show their appreciation for articles. Moreover, I integrated the official weather API open data to provide weather forecasts for different regions of Kaohsiung, enhancing the user experience.
 

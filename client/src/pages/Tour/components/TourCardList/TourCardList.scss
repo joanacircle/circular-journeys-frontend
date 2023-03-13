@@ -1,7 +1,7 @@
 .tourCardList{
   display: flex;
   width:80vw;
-  height: 280px;
+  height: fit-content;
   overflow:scroll;
   flex-wrap: nowrap; 
   flex-direction: row;

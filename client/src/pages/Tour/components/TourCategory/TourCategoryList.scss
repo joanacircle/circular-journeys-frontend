@@ -1,4 +1,5 @@
-.tourCardList2{
+
+.tourCategoryList{
   display: flex;
   width:fit-content;
   height: fit-content;
@@ -12,14 +13,4 @@
   padding-left: 12px;
   padding-right: 12px;
   padding-bottom: 15px;
-}
-.tourCardList2::-webkit-scrollbar{
-  display: block;
-  overflow: auto;
-  width: 0px;
-  height: 12px;
-  background-color:#F8DA95;
-}
-.tourCardList2::-webkit-scrollbar-thumb {
- background: #424242;
 }

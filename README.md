@@ -28,6 +28,16 @@ Users have the option to register and log in to their accounts using either thei
 
 For added functionality, I also incorporated Firebase storage to allow users to upload and change their profile pictures. Additionally, to establish seamless communication between the server and backend data, I utilized HTTP CORS and Axios to send and receive API requests.
 
+## Blog Section 
+### ✏️  By Joana
+In this project, I responsibled for both the front-end and back-end development of the blog page. 
+
+Regarding the front-end, I designed and implemented the CKEditor as the article editor, which enables users to create and edit articles. I also added the functionality for users to add hashtags to their articles, increasing their richness and exposure. Additionally, I implemented the like feature that enables users to show their appreciation for articles. Moreover, I integrated the official weather API open data to provide weather forecasts for different regions of Kaohsiung, enhancing the user experience.
+
+On the back-end, I worked on the database design and implementation, as well as developed APIs to handle front-end requests and stored data in a mySQL database. I also implemented parameter validation to verify if the id in the parameter exists in the database. If it does not exist, the user is redirected to a not-found page.
+
+Overall, my contributions to this project included a range of front-end and back-end tasks, which enabled the creation of a user-friendly and functional blog page.
+
 
 
 ## 🔨 Built With

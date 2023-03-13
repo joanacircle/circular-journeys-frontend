@@ -1,8 +1,7 @@
-.tourCardList{
+.tourCardList2{
   display: flex;
-  width:80vw;
-  height: 280px;
-  overflow:scroll;
+  width:fit-content;
+  height: fit-content;
   flex-wrap: nowrap; 
   flex-direction: row;
   gap: 15px;
@@ -14,13 +13,13 @@
   padding-right: 12px;
   padding-bottom: 15px;
 }
-.tourCardList::-webkit-scrollbar{
+.tourCardList2::-webkit-scrollbar{
   display: block;
   overflow: auto;
   width: 0px;
   height: 12px;
   background-color:#F8DA95;
 }
-.tourCardList::-webkit-scrollbar-thumb {
+.tourCardList2::-webkit-scrollbar-thumb {
  background: #424242;
 }

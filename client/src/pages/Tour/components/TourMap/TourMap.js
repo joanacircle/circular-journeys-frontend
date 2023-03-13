@@ -18,7 +18,6 @@ export default function TourMap({ selectedCard }) {
   const markerRef = useRef()
   // 起始位置(Lat, Lng)經緯度 與預設地點
   const [position, setPosition] = useState([22.63940, 120.30256])
-  const [address, setaddress] = useState([null])
   // 透過Nominatim 搜尋關鍵字 得到經緯度
   useEffect(() => {
     if (selectedCard) {

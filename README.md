@@ -25,6 +25,8 @@ Technologies used: React, JavaScript, CSS3/SCSS, Node.js, MySQL, and the Stripe 
 ## Membership System
 ### ✏️ By Alan Chou
 
+![CleanShot 2023-03-13 at 23 04 44@2x](https://user-images.githubusercontent.com/99056343/224742330-5e95c293-91e4-446c-b6d4-40f3b7a578c1.png)
+
 The membership system plays a critical role in our website, allowing users to create accounts, log in, and access exclusive content. As the developer in charge of this system, I worked closely with other team members to seamlessly integrate it into the site, prioritizing security and user-friendliness.
 
 Users have the option to register and log in to their accounts using either their email or Google accounts. To ensure security and prevent unauthorized access, I implemented email verification through emailjs, which also includes the option to reset forgotten passwords.

@@ -53,14 +53,14 @@
 //   padding: 5px;
 // }
 
-// .TourCard3:hover .TourCard3Img{
-//   background: linear-gradient(135deg, #f403d1, #64b5f6);
-//   background: linear-gradient(135deg, #24ff72, #2196f3);
-//   filter: blur(8px);
-//   // transform: translateY(30px) scale(0.9);
-// }
-// .TourCard3:hover .TourCard3Text{
-//   color:$dark-gray;
-//   background: linear-gradient(135deg, #ffec61, #f321d7);
+.TourCard3:hover .TourCard3Img{
+  background: linear-gradient(135deg, #f403d1, #64b5f6);
+  background: linear-gradient(135deg, #24ff72, #2196f3);
+  filter: blur(8px);
+  // transform: translateY(30px) scale(0.9);
+}
+.TourCard3:hover .TourCard3Text{
+  color:$dark-gray;
+  background: linear-gradient(135deg, #ffec61, #f321d7);
 
-// }
+}

@@ -9,15 +9,18 @@ The website has been designed into four main features include: Member Center, Tr
 ## E-commerce Section 
 ### ✏️  By Kevin La
 
-I played a key role in building out the ecommerce page and implementing a secure payment system for our users. One of the key features I worked on was integrating the Stripe API to provide a seamless payment experience that ensures customer data is kept secure.
+![ecommerce_landing](https://user-images.githubusercontent.com/46846552/224605597-408d2e53-f0fd-4526-8357-97cb061915da.JPG)
 
-To help with styling, I utilized Sass, a powerful CSS preprocessor that allows for cleaner and more efficient code. I also applied Material UI to create an intuitive slider bar for filtering product prices, which helped to improve the user experience.
+I was responsible for designing and structuring the website's online store, as well as implementing the shopping process. I integrated the Stripe API to handle credit card authentication and payments, ensuring that customer information remains secure.
 
-For added visual effects, I incorporated Animate.css, a library that provides pre-built CSS animations that can be easily added to elements on the page. It was used for the shopping cart.
+Implementations include:
+- Search, filter and sort the products and display them with infinite scrolling 
+- Designed the shopping cart modal and use useContext to synchronize data throuout the site
+- Employed SCSS for the styling and utilized Material UI to create a slider that filters product prices
+- Add, modify, and delete user addresses and update the database asynchrounously using fetch
+- CORS and Express to handle HTTP requests and responses and to prevent cross-platform resource sharing errors
 
-I implemented react-loading-skeleton, a library that provides customizable placeholders for images while they're being loaded in the background.
-
-Finally, I used CORS and Express to handle HTTP requests and responses, and to prevent cross-platform resource sharing errors.
+Technologies used: React, JavaScript, CSS3/SCSS, Node.js, MySQL, and the Stripe API
 
 ## Membership System
 ### ✏️ By Alan Chou

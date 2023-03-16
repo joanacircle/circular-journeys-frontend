@@ -3,6 +3,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import placeholder from '../../../../images/Tour/placeholder.png'
+import './TourMap.scss'
 
 const icon = L.icon({
   iconUrl: placeholder,
@@ -42,13 +43,14 @@ export default function TourMap({ selectedCard }) {
 
   return (
     <>
-      <button onClick={changeStyle}>Style</button>
+      <button className='btn' onClick={changeStyle}>STYLE</button>
       <MapContainer
         center={position}
         zoom={13}
         style={{ width: '100%', height: '100%' }}
         scrollWheelZoom={false}
         ref={mapRef}
+        className='tourmap'
       >
         <TileLayer attribution='&copy; OpenStreetMap contributors ' url={mapStyle} />
         <Marker position={position} icon={icon}>

@@ -28,6 +28,9 @@ const TourOverview = () => {
     ? TourCards.filter((card) => card.tags.includes(selectedCategory))
     : TourCards
 
+  const tourView = TourCards.filter((card) => card.tags.includes('景點'))
+  const tourFood = TourCards.filter((card) => card.tags.includes('美食'))
+
   return (
     <>
       <div className='tour-main-list'>
@@ -46,12 +49,12 @@ const TourOverview = () => {
       <div className='tour-main-list'>
         <h1>熱門景點</h1>
         <h6>快來收藏景點安排行程吧!</h6>
-        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={filteredCards} />
+        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={tourView} />
       </div>
       <div className='tour-main-list'>
         <h1>探索美食地圖</h1>
         <h6>製作專屬你的美食地圖!</h6>
-        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={filteredCards} />
+        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={tourFood} />
       </div>
       <div className='tour-main-list'>
         <h1>住宿</h1>

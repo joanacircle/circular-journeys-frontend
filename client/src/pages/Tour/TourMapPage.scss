@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .right {
+    flex: 2;
+    position: relative;
+  }
+  
+  .tour-map {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .draggable-card-list {
+    display: flex;
+    overflow-x: scroll;
+    gap: 20px;
+    padding: 20px;
+  }
+  

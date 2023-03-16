@@ -4,7 +4,7 @@ import TourSearchBar from './components/TourSearchBar/TourSearchBar'
 import TourCardList from './components/TourCardList/TourCardList'
 import { data as TourCards } from './data/index'
 import TourFavoriteList from './components/TourFavoriteList/TourFavoriteList'
-
+import './TourMapPage.scss'
 export default function TourMapPage() {
 
   const [selectedCard, setselectedCard] = useState(null)
@@ -33,32 +33,23 @@ export default function TourMapPage() {
 
   return (
     <>
-    <div>
-      <div className='tour-plan-list' onDrop={handleOnDrop} onDragOver={handleDragOver}>
-        <from>
-        <h1>托放景點</h1>
-        {
-              <TourCardList key={list.id} cards={list} />
-        }
-        </from>
-      </div>
-      <h1>
-      TourMapPage
-      </h1>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ border: "2px solid blue" }}>
-          <TourSearchBar />
-          <div>
-        <TourFavoriteList listType='tourCardList3' cardType='TourCard3' cards={TourCards} onClickCard={clickEvent}/>
-          <TourCardList listType='tourCardList' cardType='TourCard' cards={TourCards} onClickCard={clickEvent}/>
+      <div className="container">
+        <div className="left">
+          <div className="draggable-card-list">
+            <TourFavoriteList listType="tourCardList3" cardType="TourCard3" cards={TourCards} onClickCard={clickEvent} />
+            <TourCardList listType="tourCardList" cardType="TourCard" cards={TourCards} onClickCard={clickEvent} />
+          </div>
+          <div className="tour-plan-list" onDrop={handleOnDrop} onDragOver={handleDragOver}>
+            <h1>托放景點</h1>
+            <TourCardList key={list.id} cards={list} />
           </div>
         </div>
-        <div style={{ border: "2px solid blue", width: "60vw", height: "380px", zIndex: 9 }}>
-          <TourMap selectedCard={selectedCard}/>
+        <div className="right">
+          <div className="tour-map">
+            <TourMap selectedCard={selectedCard} />
+          </div>
         </div>
-
       </div>
-    </div>
     </>
   )
 }

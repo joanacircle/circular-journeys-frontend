@@ -113,7 +113,7 @@ const Blog = () => {
               </div>
             </div>
             <div className='blog-aside col-md-10 col-lg-4'>
-              <div className='blog-aside-item'>
+              {/* <div className='blog-aside-item'>
                 <form className='blog-search'>
                   <input className='blog-input' placeholder="Search">
                   </input>
@@ -121,7 +121,7 @@ const Blog = () => {
                     <BiSearch className='search-icon' />
                   </button>
                 </form>
-              </div>
+              </div> */}
               <div className='blog-aside-item'>
                 <BlogCategory />
               </div>

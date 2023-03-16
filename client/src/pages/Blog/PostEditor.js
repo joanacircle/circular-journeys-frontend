@@ -54,118 +54,119 @@ const PostEditor = () => {
     .catch(err => console.log(err))
   }
 
-  if (notFound) { return <NotFound /> }
-  return (
-    <>
-    <div className='edit-container'>
-      <h2>-新增文章-</h2>
-      <div className="edit-wrapper">
-        <form className="edit-form-group"
-          onSubmit={handleSubmit}>
-          <div className="form-item">
-            <label htmlFor="title">標題</label>
-            <input
-            type="text" name='title'
-            value={form.title}
-            onChange={handleChange}
-            required/>
-          </div>
-
-          <div className="form-item">
-            <label>分類</label>
-            <div className="category">
-              {ctag.map((v, i) => (
-                <div key={i}>
-                  <input
-                  type='checkbox'
-                  value={v.value}
-                  checked={v.checked}
-                  onChange={() => {
-                    const newCtag = ctag.map((v2, i2) => {
-                      if (v2.id === v.id) return { ...v2, checked: !v2.checked }
-                      return { ...v2 }
-                    })
-                    setCtag(newCtag)
-                  }}
-                  />
-                  <label>{v.value}</label>
-                </div>
-              ))}
-            </div>
+  if (notFound) { return <NotFound /> } else {
+    return (
+      <>
+      <div className='edit-container'>
+        <h2>-新增文章-</h2>
+        <div className="edit-wrapper">
+          <form className="edit-form-group"
+            onSubmit={handleSubmit}>
+            <div className="form-item">
+              <label htmlFor="title">標題</label>
+              <input
+              type="text" name='title'
+              value={form.title}
+              onChange={handleChange}
+              required/>
             </div>
 
-          <div className="form-item">
-            <label>關鍵字</label>
-            <div className="tags">
-              <input
-              type="text" name='tag1'
-              value={form.tag1}
-              onChange={handleChange}
-              />
-              <input
-              type="text" name='tag2'
-              value={form.tag2}
-              onChange={handleChange}
-              />
-              <input
-              type="text" name='tag3'
-              value={form.tag3}
-              onChange={handleChange}
-              />
+            <div className="form-item">
+              <label>分類</label>
+              <div className="category">
+                {ctag.map((v, i) => (
+                  <div key={i}>
+                    <input
+                    type='checkbox'
+                    value={v.value}
+                    checked={v.checked}
+                    onChange={() => {
+                      const newCtag = ctag.map((v2, i2) => {
+                        if (v2.id === v.id) return { ...v2, checked: !v2.checked }
+                        return { ...v2 }
+                      })
+                      setCtag(newCtag)
+                    }}
+                    />
+                    <label>{v.value}</label>
+                  </div>
+                ))}
+              </div>
+              </div>
+
+            <div className="form-item">
+              <label>關鍵字</label>
+              <div className="tags">
+                <input
+                type="text" name='tag1'
+                value={form.tag1}
+                onChange={handleChange}
+                />
+                <input
+                type="text" name='tag2'
+                value={form.tag2}
+                onChange={handleChange}
+                />
+                <input
+                type="text" name='tag3'
+                value={form.tag3}
+                onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="form-item">
-            <label>首圖</label>
-            <CKEditor
-              editor={ ClassicEditor }
-              data=''
-              onChange={(event, editor) => {
-                const cover = editor.getData()
-                setForm({ ...form, cover: [cover] })
-              }}
-              config={
-                {
-                  ckfinder: {
-                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-cover`
-                  },
-                  toolbar: ['imageUpload']
-                }
-              }
-            />
-          </div>
-
-          <div className="form-item">
-            <label>內文</label>
-            <CKEditor
-              editor={ ClassicEditor }
-              data='<p>文章內文</p>'
-              onChange={ (event, editor) => {
-                const data = editor.getData()
-                setForm({ ...form, content: [data] })
-              } }
-              config={
-                {
-                  ckfinder: {
-                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
+            <div className="form-item">
+              <label>首圖</label>
+              <CKEditor
+                editor={ ClassicEditor }
+                data='請上傳png或jpg檔'
+                onChange={(event, editor) => {
+                  const cover = editor.getData()
+                  setForm({ ...form, cover: [cover] })
+                }}
+                config={
+                  {
+                    ckfinder: {
+                      uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-cover`
+                    },
+                    toolbar: ['imageUpload']
                   }
                 }
-              }
-            />
-          </div>
+              />
+            </div>
 
-          <div className="form-item">
-            <input
-            type="submit"
-            name='submit'
-            value='完成'
-            className='submit-btn'/>
-          </div>
-        </form>
+            <div className="form-item">
+              <label>內文</label>
+              <CKEditor
+                editor={ ClassicEditor }
+                data='<p>請上傳png或jpg檔</p>'
+                onChange={ (event, editor) => {
+                  const data = editor.getData()
+                  setForm({ ...form, content: [data] })
+                } }
+                config={
+                  {
+                    ckfinder: {
+                      uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
+                    }
+                  }
+                }
+              />
+            </div>
+
+            <div className="form-item">
+              <input
+              type="submit"
+              name='submit'
+              value='完成'
+              className='submit-btn'/>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default PostEditor

@@ -84,22 +84,22 @@ const NavResult = () => {
                   </div>
                 </div>
               </div>
-              <div className='blog-aside col-md-10 col-lg-4'>
-                {/* <div className='blog-aside-item'>
-                  <form className='blog-search'>
-                    <input className='blog-input' placeholder="Search">
-                    </input>
-                    <button className='blog-button' type="submit">
-                      <BiSearch className='search-icon' />
-                    </button>
-                  </form>
-                </div> */}
-                <div className='blog-aside-item'>
-                  <BlogCategory />
-                </div>
-                <div className='blog-aside-item'>
-                  <TagsCategory />
-                </div>
+            </div>
+            <div className='blog-aside col-md-10 col-lg-4'>
+              {/* <div className='blog-aside-item'>
+                <form className='blog-search'>
+                  <input className='blog-input' placeholder="Search">
+                  </input>
+                  <button className='blog-button' type="submit">
+                    <BiSearch className='search-icon' />
+                  </button>
+                </form>
+              </div> */}
+              <div className='blog-aside-item'>
+                <BlogCategory />
+              </div>
+              <div className='blog-aside-item'>
+                <TagsCategory />
               </div>
             </div>
           </div>

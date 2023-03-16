@@ -21,9 +21,7 @@ const Blog = () => {
   const currentPost = post.slice((currentPage - 1) * pageSize, currentPage * pageSize)
   const { userData } = userInfo()
 
-  useEffect(() => {
-    getData()
-  }, [])
+  useEffect(() => { getData() }, [])
 
   useEffect(() => { getWeather() }, [dataIndex])
 

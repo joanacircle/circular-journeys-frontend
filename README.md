@@ -9,24 +9,42 @@ The website has been designed into four main features include: Member Center, Tr
 ## E-commerce Section 
 ### ✏️  By Kevin La
 
-I played a key role in building out the ecommerce page and implementing a secure payment system for our users. One of the key features I worked on was integrating the Stripe API to provide a seamless payment experience that ensures customer data is kept secure.
+![ecommerce_landing](https://user-images.githubusercontent.com/46846552/224605597-408d2e53-f0fd-4526-8357-97cb061915da.JPG)
 
-To help with styling, I utilized Sass, a powerful CSS preprocessor that allows for cleaner and more efficient code. I also applied Material UI to create an intuitive slider bar for filtering product prices, which helped to improve the user experience.
+I was responsible for designing and structuring the website's online store, as well as implementing the shopping process. I integrated the Stripe API to handle credit card authentication and payments, ensuring that customer information remains secure.
 
-For added visual effects, I incorporated Animate.css, a library that provides pre-built CSS animations that can be easily added to elements on the page. It was used for the shopping cart.
+Implementations include:
+- Search, filter and sort the products and display them with infinite scrolling 
+- Designed the shopping cart modal and use useContext to synchronize data throuout the site
+- Employed SCSS for the styling and utilized Material UI to create a slider that filters product prices
+- Add, modify, and delete user addresses and update the database asynchrounously using fetch
+- CORS and Express to handle HTTP requests and responses and to prevent cross-platform resource sharing errors
 
-I implemented react-loading-skeleton, a library that provides customizable placeholders for images while they're being loaded in the background.
-
-Finally, I used CORS and Express to handle HTTP requests and responses, and to prevent cross-platform resource sharing errors.
+Technologies used: React, JavaScript, CSS3/SCSS, Node.js, MySQL, and the Stripe API
 
 ## Membership System
 ### ✏️ By Alan Chou
+
+![CleanShot 2023-03-13 at 23 04 44@2x](https://user-images.githubusercontent.com/99056343/224742330-5e95c293-91e4-446c-b6d4-40f3b7a578c1.png)
 
 The membership system plays a critical role in our website, allowing users to create accounts, log in, and access exclusive content. As the developer in charge of this system, I worked closely with other team members to seamlessly integrate it into the site, prioritizing security and user-friendliness.
 
 Users have the option to register and log in to their accounts using either their email or Google accounts. To ensure security and prevent unauthorized access, I implemented email verification through emailjs, which also includes the option to reset forgotten passwords.
 
 For added functionality, I also incorporated Firebase storage to allow users to upload and change their profile pictures. Additionally, to establish seamless communication between the server and backend data, I utilized HTTP CORS and Axios to send and receive API requests.
+
+## Blog Section 
+### ✏️  By Joana
+
+<img width="1426" alt="截圖 2023-03-13 下午2 48 01" src="https://user-images.githubusercontent.com/117150342/224627842-1e0b39e8-dd01-4931-955a-369509916a95.png">
+
+In this project, I was responsible for both the front-end and back-end development of the blog page. 
+
+Regarding the front-end, I designed and implemented the CKEditor as the article editor, which enables users to create and edit articles. I also added the functionality for users to add hashtags to their articles, increasing their richness and exposure. Additionally, I implemented the like feature that enables users to show their appreciation for articles. Moreover, I integrated the official weather API open data to provide weather forecasts for different regions of Kaohsiung, enhancing the user experience.
+
+On the back-end, I worked on the database design and implementation, as well as developed APIs to handle front-end requests and stored data in a mySQL database. I also implemented parameter validation to verify if the id in the parameter exists in the database. If it does not exist, the user is redirected to a not-found page.
+
+Overall, my contributions to this project included a range of front-end and back-end tasks, which enabled the creation of a user-friendly and functional blog page.
 
 
 

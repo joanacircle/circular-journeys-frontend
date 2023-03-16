@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import './TourCard.scss'
 import TourFavorite from '../TourFavorite/TourFavorite'
+import './TourCard.scss'
+import './TourCard2.scss'
+import './TourCard3.scss'
 
 
-const TourCard = ({ card, onClick }) => {
+const TourCard = ({ card, onClick, type }) => {
   const { id, name, adress, img, tags } = card
     return (
     <>
-    <div className='TourCard' onClick={onClick}>
+    <div className={type} onClick={onClick}>
     <img src={require(`images/Tour/${img}.jpg`)}
-    className='TourCardImg' alt='TourCardImg'/>
-      <span className='TourCardText'>
+    className={`${type}Img`} alt='TourCardImg'/>
+      <span className={`${type}Text`}>
       <div className='TourFavoriteLabel'>
     <TourFavorite id={id} className='TourFavorite' />
       </div>

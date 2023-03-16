@@ -104,40 +104,53 @@ const UserBlog = () => {
                     img={v.cover}
                     createAt={v.create_at}
                     likes={v.total_likes}
-                    postContent={v.post_content} />
-                  ))
-                }
-                <div className='userblog-pagination blog-pagination'>
-                  <Pagination
-                    current={currentPage}
-                    total={main ? post.length : likePost.length}
-                    pageSize={4}
-                    onChange={page => setCurrentPage(page)}
-                  />
+                    postContent={v.post_content}
+                    main={main} />
+                ))
+              : likePost &&
+                currentLikePost.map((v, i) => (
+                  <Card4
+                  key={'c4' + v.post_id}
+                  userMemberId={userData.member_id}
+                  tags={v.tag}
+                  title={v.post_title}
+                  postId={v.post_id}
+                  img={v.cover}
+                  createAt={v.create_at}
+                  likes={v.total_likes}
+                  postContent={v.post_content} />
+                ))
+              }
+              <div className='userblog-pagination blog-pagination'>
+                <Pagination
+                  current={currentPage}
+                  total={main ? post.length : likePost.length}
+                  pageSize={4}
+                  onChange={page => setCurrentPage(page)}
+                />
+              </div>
+            </div>
+            <div className='userblog-aside'>
+              <div className="userblog-aside-item">
+                <div className='member-avatar'>
+                  <img src={post && post[0].picture} alt="avatar" />
+                  <h4>{post && post[0].user_nickname}</h4>
                 </div>
               </div>
-              <div className='userblog-aside'>
-                <div className="userblog-aside-item">
-                  <div className='member-avatar'>
-                    <img src={post && post[0].picture} alt="avatar" />
-                    <h4>{post && post[0].user_nickname}</h4>
-                  </div>
-                </div>
-                <div className='userblog-aside-item'>
-                  {/* <form className='blog-search'>
-                    <input className='blog-input' placeholder="Search">
-                    </input>
-                    <button className='blog-button' type="submit">
-                      <BiSearch className='search-icon' />
-                    </button>
-                  </form> */}
-                </div>
-                <div className='userblog-aside-item'>
-                  <BlogCategory />
-                </div>
-                <div className='userblog-aside-item'>
-                  <TagsCategory />
-                </div>
+              {/* <div className='userblog-aside-item'>
+                <form className='blog-search'>
+                  <input className='blog-input' placeholder="Search">
+                  </input>
+                  <button className='blog-button' type="submit">
+                    <BiSearch className='search-icon' />
+                  </button>
+                </form>
+              </div> */}
+              <div className='userblog-aside-item'>
+                <BlogCategory />
+              </div>
+              <div className='userblog-aside-item'>
+                <TagsCategory />
               </div>
             </div>
           </div>

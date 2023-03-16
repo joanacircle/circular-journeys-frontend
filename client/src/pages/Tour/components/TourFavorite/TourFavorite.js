@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import './TourFavorite.scss'
-// import MyContext from '../TourFavoriteList/TourFavoriteContext'
 
 
 export default function TourFavorite(props) {
     const [TourFavorite, setTourFavorite] = useState(false)
-    // const { count, setCount } = useContext(MyContext)
     const { id } = props
     /// 如果localstorage有該ID 會顯示愛心
     useEffect(() => {

@@ -1,0 +1,16 @@
+
+.tourCategoryList{
+  display: flex;
+  width:fit-content;
+  height: fit-content;
+  flex-wrap: nowrap; 
+  flex-direction: row;
+  gap: 30px;
+  position: relative;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 15px;
+}

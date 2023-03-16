@@ -3,6 +3,7 @@ import TourMap from './components/TourMap/TourMap'
 import TourSearchBar from './components/TourSearchBar/TourSearchBar'
 import TourCardList from './components/TourCardList/TourCardList'
 import { data as TourCards } from './data/index'
+import TourFavoriteList from './components/TourFavoriteList/TourFavoriteList'
 
 export default function TourMapPage() {
 
@@ -48,12 +49,14 @@ export default function TourMapPage() {
         <div style={{ border: "2px solid blue" }}>
           <TourSearchBar />
           <div>
+        <TourFavoriteList listType='tourCardList3' cardType='TourCard3' cards={TourCards} onClickCard={clickEvent}/>
           <TourCardList listType='tourCardList' cardType='TourCard' cards={TourCards} onClickCard={clickEvent}/>
           </div>
         </div>
         <div style={{ border: "2px solid blue", width: "60vw", height: "380px", zIndex: 9 }}>
           <TourMap selectedCard={selectedCard}/>
         </div>
+
       </div>
     </div>
     </>

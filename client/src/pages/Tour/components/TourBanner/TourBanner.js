@@ -14,15 +14,15 @@ const TourBanner = () => {
       <div className='title-section'>
         <h1 className='tour-h1'>探索行程</h1>
         <div className='tour-search-row'>
-          <form className='tour-search'>
+          {/* <form className='tour-search'>
             <input className='tour-input' placeholder="Search">
             </input>
             <button className='tour-button' type="submit">
             <BiSearch className='tour-search-icon'/>
             </button>
-          </form>
+          </form> */}
         </div>
-          <TourDatePicker/>
+          {/* <TourDatePicker/> */}
       </div>
     </div>
     </>

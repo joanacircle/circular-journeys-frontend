@@ -24,7 +24,6 @@ export default function TourFavoriteListA({ cards, cardType }) {
     }, [])
     return (
     <>
-      {/* <MyContext.Provider value={{ count, setCount }}></MyContext.Provider> */}
     <div className='tourCardList'>
     {
       data.length > 0

@@ -33,13 +33,13 @@ const TourOverview = () => {
 
   return (
     <>
-      <div className='tour-main-list'>
+      {/* <div className='tour-main-list'>
         <TourCategoryList
           categories={categories}
           onClickCard={handleCardClick}
           selectedCategory={selectedCategory}
         />
-      </div>
+      </div> */}
 
       <div className='tour-main-list'>
         <h1>熱門行程</h1>

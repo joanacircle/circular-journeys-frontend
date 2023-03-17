@@ -1,25 +1,25 @@
-.tourCardList2{
-  display: flex;
-  width:fit-content;
-  height: fit-content;
-  flex-wrap: nowrap; 
-  flex-direction: row;
-  gap: 15px;
-  position: relative;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-top: 15px;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-bottom: 15px;
-}
-.tourCardList2::-webkit-scrollbar{
-  display: block;
-  overflow: auto;
-  width: 0px;
-  height: 12px;
-  background-color:#F8DA95;
-}
-.tourCardList2::-webkit-scrollbar-thumb {
- background: #424242;
-}
+// .tourCardList2{
+//   display: flex;
+//   width:fit-content;
+//   height: fit-content;
+//   flex-wrap: nowrap; 
+//   flex-direction: row;
+//   gap: 15px;
+//   position: relative;
+//   align-items: center;
+//   margin-bottom: 15px;
+//   padding-top: 15px;
+//   padding-left: 12px;
+//   padding-right: 12px;
+//   padding-bottom: 15px;
+// }
+// .tourCardList2::-webkit-scrollbar{
+//   display: block;
+//   overflow: auto;
+//   width: 0px;
+//   height: 12px;
+//   background-color:#F8DA95;
+// }
+// .tourCardList2::-webkit-scrollbar-thumb {
+//  background: #424242;
+// }

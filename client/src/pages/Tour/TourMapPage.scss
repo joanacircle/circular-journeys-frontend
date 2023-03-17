@@ -1,0 +1,53 @@
+/* TourMapPage.scss */
+
+.tour-main-list {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  // position: relative;
+  // align-items: center; 
+  // width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1060px;
+  padding: 0 20px;
+}
+
+.left {
+  width: 100%;
+}
+
+.right {
+  width: 100%;
+}
+
+.draggable-card-list {
+  margin-bottom: 20px;
+}
+
+.tour-plan-list {
+  background-color: #f5f5f5;
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  min-height: 200px;
+  padding: 20px;
+  position: relative;
+
+  h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+.tour-map {
+  min-width: 720px;
+  min-height: 560px;
+  height: 100%;
+  width: 100%;
+}

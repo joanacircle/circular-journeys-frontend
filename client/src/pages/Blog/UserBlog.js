@@ -106,21 +106,7 @@ const UserBlog = () => {
                     likes={v.total_likes}
                     postContent={v.post_content}
                     main={main} />
-                ))
-              : likePost &&
-                currentLikePost.map((v, i) => (
-                  <Card4
-                  key={'c4' + v.post_id}
-                  userMemberId={userData.member_id}
-                  tags={v.tag}
-                  title={v.post_title}
-                  postId={v.post_id}
-                  img={v.cover}
-                  createAt={v.create_at}
-                  likes={v.total_likes}
-                  postContent={v.post_content} />
-                ))
-              }
+                ))}
               <div className='userblog-pagination blog-pagination'>
                 <Pagination
                   current={currentPage}
@@ -152,6 +138,7 @@ const UserBlog = () => {
               <div className='userblog-aside-item'>
                 <TagsCategory />
               </div>
+            </div>
             </div>
           </div>
         </div>

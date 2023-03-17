@@ -41,46 +41,47 @@ const NavResult = () => {
     .catch(err => console.log(err))
   }
 
-  if (notFound) { return <NotFound /> }
-  return (
-    <>
-      <div>
-        <div className='blog-banner'>
-          <img className='blog-banner-img' src={Banner} alt="Banner"></img>
-          <div className='blog-title'>
-            <h2>高雄旅遊日誌</h2>
-            {tagId === 'popular' && <h4># 熱門</h4>}
-            {tagId === 'latest' && <h4># 最新</h4>}
-            {tagId !== 'popular' && tagId !== 'latest' && <h4>{post[0] && `#${post[0].tag}`}</h4>}
+  if (notFound) { return <NotFound /> } else {
+    return (
+      <>
+        <div>
+          <div className='blog-banner'>
+            <img className='blog-banner-img' src={Banner} alt="Banner"></img>
+            <div className='blog-title'>
+              <h2>高雄旅遊日誌</h2>
+              {tagId === 'popular' && <h4># 熱門</h4>}
+              {tagId === 'latest' && <h4># 最新</h4>}
+              {tagId !== 'popular' && tagId !== 'latest' && <h4>{post[0] && `#${post[0].tag}`}</h4>}
+            </div>
           </div>
-        </div>
-        <div className='page-body'>
-          <div className='blog-container row justify-content-md-center justify-content-xl-between'>
-            <div className='col-md-10 col-lg-8 col-xl-7 text-center'>
-              <div className='row'>
-                {currentPost.map((v, i) => {
-                  return (
-                    <div className='blog-post col-md-6' key={v.post_id}>
-                      <Card3
-                        postId={v.post_id}
-                        userMemberId={userData.member_id}
-                        img={v.cover}
-                        tags={v.tags}
-                        memberId={v.member_id}
-                        memberName={v.user_nickname}
-                        title={v.post_title}
-                        createAt={v.create_at}
-                        likes={v.total_likes} />
-                    </div>
-                  )
-                })}
-                <div className='blog-pagination'>
-                  <Pagination
-                    current={currentPage}
-                    total={post.length}
-                    pageSize={4}
-                    onChange={page => setCurrentPage(page)}
-                  />
+          <div className='page-body'>
+            <div className='blog-container row justify-content-md-center justify-content-xl-between'>
+              <div className='col-md-10 col-lg-8 col-xl-7 text-center'>
+                <div className='row'>
+                  {currentPost.map((v, i) => {
+                    return (
+                      <div className='blog-post col-md-6' key={v.post_id}>
+                        <Card3
+                          postId={v.post_id}
+                          userMemberId={userData.member_id}
+                          img={v.cover}
+                          tags={v.tags}
+                          memberId={v.member_id}
+                          memberName={v.user_nickname}
+                          title={v.post_title}
+                          createAt={v.create_at}
+                          likes={v.total_likes} />
+                      </div>
+                    )
+                  })}
+                  <div className='blog-pagination'>
+                    <Pagination
+                      current={currentPage}
+                      total={post.length}
+                      pageSize={4}
+                      onChange={page => setCurrentPage(page)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,9 +104,9 @@ const NavResult = () => {
             </div>
           </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default NavResult

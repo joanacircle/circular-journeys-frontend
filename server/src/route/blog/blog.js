@@ -67,15 +67,11 @@ router.get('/api/:id', async (req, res) => {
 // http://localhost:3001/blog/tag -> side nav
 router.get('/tag', async(req, res)=>{
   const sql =`
-    SELECT tag_id, tag FROM post_tags
+  SELECT DISTINCT tag_id, tag FROM post_tags;
   `
+
   try{
     let [rows] = await db.query(sql)
-    rows = rows.filter((v, i, self)=>(
-      i === self.findIndex(v2=>(
-        v.tag === v2.tag && v.tag_id === v2.tag_id
-      ))
-    ))
 
     res.json(rows)
   }
@@ -159,7 +155,7 @@ router.post('/like', async (req, res) => {
 // http://localhost:3001/blog/upload-cover -> PostEditor for upload cover-pic
 router.post('/upload-cover', MultipartyMiddleWare, async (req, res) => {
   const TempFile = req.files.upload 
-  const TempPathFile = TempFile.path 
+  const TempPathFile = TempFile.path
   const ext = path.extname(TempFile.originalFilename).toLowerCase()
   const fileName = uuid.v4() + ext
   const targetPathUrl = path.join(__dirname,"../../../public/blog/"+fileName)

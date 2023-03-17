@@ -33,6 +33,7 @@ const UserBlog = () => {
     .then(r => {
       if (r.data.member.length === 0) {
         setNotFound(!notFound)
+        console.log(notFound)
       }
     })
     .catch(err => console.log(err))
@@ -44,7 +45,10 @@ const UserBlog = () => {
     .catch(err => console.error(err))
   }
 
-  function handleClick () { setMain(!main) }
+  function handleClick () {
+    setCurrentPage(1)
+    setMain(!main)
+}
 
   function getArticle () {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/articleLike/${memberId}`)
@@ -52,32 +56,46 @@ const UserBlog = () => {
     .catch(err => console.log(err))
   }
 
-  if (notFound) { return <NotFound /> }
-  return (
-    <>
-      <div>
-        <div className='userblog-container'>
-          <div className='page-body'>
-            <div className='post-container'>
-              <h2 className='userblog-h2'>{post[0] && post[0].user_nickname}</h2>
-              <div className='userblog-nav'>
-                <ul>
-                    {main
-                    ? <>
-                      <li className='Active'>主頁</li>
-                      <li className='Inactive' onClick={handleClick}>喜歡的文章</li>
-                      </>
-                    : <>
-                      <li className='Inactive' onClick={handleClick}>主頁</li>
-                      <li className='Active'>喜歡的文章</li>
-                      </>
-                    }
-                </ul>
-              </div>
-              {main
-              ? post &&
-                currentPost.map((v, i) => (
-                  <Card4
+  if (notFound) { return <NotFound /> } else {
+    return (
+      <>
+        <div>
+          <div className='userblog-container'>
+            <div className='page-body'>
+              <div className='post-container'>
+                <h2 className='userblog-h2'>{post[0] && post[0].user_nickname}</h2>
+                <div className='userblog-nav'>
+                  <ul>
+                      {main
+                      ? <>
+                        <li className='Active'>我的文章</li>
+                        <li className='Inactive' onClick={handleClick}>喜歡的文章</li>
+                        </>
+                      : <>
+                        <li className='Inactive' onClick={handleClick}>我的文章</li>
+                        <li className='Active'>喜歡的文章</li>
+                        </>
+                      }
+                  </ul>
+                </div>
+                {main
+                ? post &&
+                  currentPost.map((v, i) => (
+                    <Card4
+                      key={'c4' + v.post_id}
+                      userMemberId={userData.member_id}
+                      tags={v.tag}
+                      title={v.post_title}
+                      postId={v.post_id}
+                      img={v.cover}
+                      createAt={v.create_at}
+                      likes={v.total_likes}
+                      postContent={v.post_content}
+                      main={main} />
+                  ))
+                : likePost &&
+                  currentLikePost.map((v, i) => (
+                    <Card4
                     key={'c4' + v.post_id}
                     userMemberId={userData.member_id}
                     tags={v.tag}
@@ -137,9 +155,9 @@ const UserBlog = () => {
             </div>
           </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default UserBlog

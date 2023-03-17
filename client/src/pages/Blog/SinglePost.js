@@ -76,77 +76,18 @@ const SinglePost = () => {
     .catch(err => console.log(err))
   }
 
-  if (notFound) { return <NotFound /> }
-  return (
-    <>
-      <div>
-        <div className="post-container">
-          {alert
-          ? <Alert message='是否要刪除此篇文章' cancel={handleClick} confirm={deletePost}/>
-          : <></>}
-          <div className="page-body">
-            <div className="post-header">
-              <h2>{post.post_title}</h2>
-              <ul className='tags-section'>
-                {!post.tag
-                  ? <></>
-                  : Object.entries(post.tag).map(([key, value]) => (
-                    <Link to={`/blog/tag/${key}`} key={key}>
-                      <li># {value}</li>
-                    </Link>
-                  ))
-                }
-              </ul>
-              <h5>BY:
-                <Link to={`/blog/${post.member_id}`}>
-                  {post.user_nickname}
-                </Link>
-              </h5>
-              <div className='member-avatar'>
-                <img src={post.picture} alt="fr" />
-              </div>
-              <div className='post-editor'>
-              {post.member_id === userData.member_id && (
-                <>
-                <Link to={`/blog/edit/${postId}`} title='編輯文章'><FiEdit size={25}/></Link>
-                <div onClick={handleClick}>
-                  <Link>
-                    <FiTrash size={25}/>
-                  </Link>
-                </div>
-                </>
-              )}
-              </div>
-            </div>
-            <div className="head-img">
-              <div dangerouslySetInnerHTML={{
-                __html: post.cover
-              }} />
-            </div>
-            <div className="post-body">
-              <div className='post-meta'>
-                <div className="createAt">
-                  <AiOutlineCalendar size={25} className='icon' />
-                  <p>{post.create_at}</p>
-                </div>
-                <div className="post-likes-group">
-                  {post.total_likes === 0
-                    ? (<p>{''}</p>)
-                    : (<>
-                      <AiOutlineHeart size={25} className='heart-icon' />
-                      <p>{post.total_likes}</p>
-                    </>)
-                  }
-                </div>
-              </div>
-              <div className='post-content'>
-                <div dangerouslySetInnerHTML={{
-                  __html: post.post_content
-                }} />
-              </div>
-            </div>
-            <div className="post-footer">
-              <ul className='tags-section'>
+  if (notFound) { return <NotFound /> } else {
+    return (
+      <>
+        <div>
+          <div className="post-container">
+            {alert
+            ? <Alert message='是否要刪除此篇文章' cancel={handleClick} confirm={deletePost}/>
+            : <></>}
+            <div className="page-body">
+              <div className="post-header">
+                <h2>{post.post_title}</h2>
+                <ul className='tags-section'>
                   {!post.tag
                     ? <></>
                     : Object.entries(post.tag).map(([key, value]) => (
@@ -156,19 +97,78 @@ const SinglePost = () => {
                     ))
                   }
                 </ul>
-              <p>
-                即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
-              </p>
-              {!like
-              ? <AiOutlineHeart size={40} className='heart-icon' onClick={handleClickLike}/>
-              : <AiFillHeart size={40} className='heart-icon' onClick={handleClickLike}/>
-              }
+                <h5>BY:
+                  <Link to={`/blog/${post.member_id}`}>
+                    {post.user_nickname}
+                  </Link>
+                </h5>
+                <div className='member-avatar'>
+                  <img src={post.picture} alt="fr" />
+                </div>
+                <div className='post-editor'>
+                {post.member_id === userData.member_id && (
+                  <>
+                  <Link to={`/blog/edit/${postId}`} title='編輯文章'><FiEdit size={25}/></Link>
+                  <div onClick={handleClick}>
+                    <Link>
+                      <FiTrash size={25}/>
+                    </Link>
+                  </div>
+                  </>
+                )}
+                </div>
+              </div>
+              <div className="head-img">
+                <div dangerouslySetInnerHTML={{
+                  __html: post.cover
+                }} />
+              </div>
+              <div className="post-body">
+                <div className='post-meta'>
+                  <div className="createAt">
+                    <AiOutlineCalendar size={25} className='icon' />
+                    <p>{post.create_at}</p>
+                  </div>
+                  <div className="post-likes-group">
+                    {post.total_likes === 0
+                      ? (<p>{''}</p>)
+                      : (<>
+                        <AiOutlineHeart size={25} className='heart-icon' />
+                        <p>{post.total_likes}</p>
+                      </>)
+                    }
+                  </div>
+                </div>
+                <div className='post-content'>
+                  <div dangerouslySetInnerHTML={{
+                    __html: post.post_content
+                  }} />
+                </div>
+              </div>
+              <div className="post-footer">
+                <ul className='tags-section'>
+                    {!post.tag
+                      ? <></>
+                      : Object.entries(post.tag).map(([key, value]) => (
+                        <Link to={`/blog/tag/${key}`} key={key}>
+                          <li># {value}</li>
+                        </Link>
+                      ))
+                    }
+                  </ul>
+                <p>
+                  即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
+                </p>
+                {!like
+                ? <AiOutlineHeart size={40} className='heart-icon' onClick={handleClickLike}/>
+                : <AiFillHeart size={40} className='heart-icon' onClick={handleClickLike}/>
+                }
             </div>
           </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default SinglePost

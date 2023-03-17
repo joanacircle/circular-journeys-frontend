@@ -99,127 +99,127 @@ const EditPost = () => {
     .catch(err => console.log(err))
   }
 
-  if (notFound) {
-    return <NotFound />
-  }
-  return (
-    <>
-    <div className='edit-container'>
+  if (notFound) { return <NotFound /> } else {
+    return (
+      <>
+      <div className='edit-container'>
 
-      <h2>-修改文章-</h2>
+        <h2>-修改文章-</h2>
 
-      <div className="edit-wrapper">
-        <form className="edit-form-group"
-          onSubmit={handleSubmit}>
-          <div className="form-item">
-            <label htmlFor="title">標題</label>
-            <input
-            type="text" name='title'
-            value={form.title}
-            onChange={handleChange}
-            placeholder={form.title} required/>
-          </div>
-
-          <div className="form-item">
-            <label>分類</label>
-            <div className="category">
-              {ctag.map((v, i) => (
-                <div key={i}>
-                  <input
-                  type='checkbox'
-                  value={v.value}
-                  checked={v.checked}
-                  onChange={() => {
-                    const newCtag = ctag.map((v2, i2) => {
-                      if (v2.id === v.id) return { ...v2, checked: !v2.checked }
-                      return { ...v2 }
-                    })
-                    setCtag(newCtag)
-                  }}
-                  />
-                  <label>{v.value}</label>
-                </div>
-              ))}
+        <div className="edit-wrapper">
+          <form className="edit-form-group"
+            onSubmit={handleSubmit}>
+            <div className="form-item">
+              <label htmlFor="title">標題</label>
+              <input
+              type="text" name='title'
+              value={form.title}
+              onChange={handleChange}
+              placeholder={form.title} required/>
             </div>
-          </div>
 
-          <div className="form-item">
-            <label>關鍵字</label>
-            <div className="tags">
-              <input
-              type="text" name='tag1'
-              value={form.tag1}
-              onChange={handleChange}
-              placeholder='#關鍵字'
-              />
-
-              <input
-              type="text" name='tag2'
-              value={form.tag2}
-              onChange={handleChange}
-              placeholder='#關鍵字'
-              />
-
-              <input
-              type="text" name='tag3'
-              value={form.tag3}
-              onChange={handleChange}
-              placeholder='#關鍵字'
-              />
+            <div className="form-item">
+              <label>分類</label>
+              <div className="category">
+                {ctag.map((v, i) => (
+                  <div key={i}>
+                    <input
+                    type='checkbox'
+                    value={v.value}
+                    checked={v.checked}
+                    onChange={() => {
+                      const newCtag = ctag.map((v2, i2) => {
+                        if (v2.id === v.id) return { ...v2, checked: !v2.checked }
+                        return { ...v2 }
+                      })
+                      setCtag(newCtag)
+                    }}
+                    />
+                    <label>{v.value}</label>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div className="form-item">
-            <label>首圖</label>
-            <CKEditor
-              editor={ ClassicEditor }
-              data={form.coverPath}
-              onChange={(event, editor) => {
-                const data = editor.getData()
-                setForm({ ...form, coverPath: data })
-              }}
-              config={
-                {
-                  ckfinder: {
-                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-cover`
-                  },
-                  toolbar: ['imageUpload']
-                }
-              }
-            />
-          </div>
+            <div className="form-item">
+              <label>關鍵字</label>
+              <div className="tags">
+                <input
+                type="text" name='tag1'
+                value={form.tag1}
+                onChange={handleChange}
+                placeholder='#關鍵字'
+                />
 
-          <div className="form-item">
-            <label>內文</label>
-            <CKEditor
-              editor={ ClassicEditor }
-              data={form.content}
-              onChange={ (event, editor) => {
-                const data = editor.getData()
-                setForm({ ...form, content: data })
-              } }
-              config={
-                {
-                  ckfinder: {
-                    uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
+                <input
+                type="text" name='tag2'
+                value={form.tag2}
+                onChange={handleChange}
+                placeholder='#關鍵字'
+                />
+
+                <input
+                type="text" name='tag3'
+                value={form.tag3}
+                onChange={handleChange}
+                placeholder='#關鍵字'
+                />
+              </div>
+            </div>
+
+            <div className="form-item">
+              <label>首圖</label>
+              <CKEditor
+                editor={ ClassicEditor }
+                data={form.coverPath}
+                onChange={(event, editor) => {
+                  const data = editor.getData()
+                  setForm({ ...form, coverPath: data })
+                }}
+                config={
+                  {
+                    ckfinder: {
+                      uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-cover`
+                    },
+                    toolbar: ['imageUpload']
                   }
                 }
-              }
-            />
-          </div>
+              />
+            </div>
 
-          <div className="form-item">
-            <input
-            type="submit"
-            name='submit'
-            value='完成'
-            className='submit-btn'/>
-          </div>
-        </form>
+            <div className="form-item">
+              <label>內文</label>
+              <CKEditor
+                editor={ ClassicEditor }
+                data={form.content}
+                onChange={ (event, editor) => {
+                  const data = editor.getData()
+                  setForm({ ...form, content: data })
+                } }
+                config={
+                  {
+                    ckfinder: {
+                      uploadUrl: `${process.env.REACT_APP_DEV_URL}/blog/upload-img`
+                    }
+                  }
+                }
+              />
+            </div>
+
+            <div className="form-item">
+              <input
+              type="submit"
+              name='submit'
+              value='完成'
+              className='submit-btn'/>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    </>
-  )
+      </>
+    )
+  }
+
 }
 
 export default EditPost

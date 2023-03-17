@@ -155,7 +155,7 @@ const SinglePost = () => {
                         </Link>
                       ))
                     }
-                  </ul>
+                </ul>
                 <p>
                   即將要出發去旅行了嗎？ 按「喜歡」集中儲存您絕佳的想法。
                 </p>
@@ -163,6 +163,7 @@ const SinglePost = () => {
                 ? <AiOutlineHeart size={40} className='heart-icon' onClick={handleClickLike}/>
                 : <AiFillHeart size={40} className='heart-icon' onClick={handleClickLike}/>
                 }
+            </div>
             </div>
           </div>
         </div>

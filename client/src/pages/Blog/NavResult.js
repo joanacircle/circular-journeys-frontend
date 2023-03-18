@@ -27,13 +27,17 @@ const NavResult = () => {
   }, [tagId])
 
   function fetcher() {
-    axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${tagId}`)
-    .then(r => {
-      if (r.data.tag === 0) {
-        setNotFound(!notFound)
-      }
-    })
-    .catch(err => console.log(err))
+    if (tagId !== 'popular' && tagId !== 'latest') {
+      axios.get(`${process.env.REACT_APP_DEV_URL}/blog/api/${tagId}`)
+      .then(r => {
+        if (r.data.tag.length === 0) {
+          setNotFound(true)
+        } else {
+          setNotFound(false)
+        }
+      })
+      .catch(err => console.log(err))
+    }
   }
   function getData() {
     axios.get(`${process.env.REACT_APP_DEV_URL}/blog/tag/${tagId}`)
@@ -84,22 +88,22 @@ const NavResult = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className='blog-aside col-md-10 col-lg-4'>
-              {/* <div className='blog-aside-item'>
-                <form className='blog-search'>
-                  <input className='blog-input' placeholder="Search">
-                  </input>
-                  <button className='blog-button' type="submit">
-                    <BiSearch className='search-icon' />
-                  </button>
-                </form>
-              </div> */}
-              <div className='blog-aside-item'>
-                <BlogCategory />
-              </div>
-              <div className='blog-aside-item'>
-                <TagsCategory />
+              <div className='blog-aside col-md-10 col-lg-4'>
+                {/* <div className='blog-aside-item'>
+                  <form className='blog-search'>
+                    <input className='blog-input' placeholder="Search">
+                    </input>
+                    <button className='blog-button' type="submit">
+                      <BiSearch className='search-icon' />
+                    </button>
+                  </form>
+                </div> */}
+                <div className='blog-aside-item'>
+                  <BlogCategory />
+                </div>
+                <div className='blog-aside-item'>
+                  <TagsCategory />
+                </div>
               </div>
             </div>
           </div>

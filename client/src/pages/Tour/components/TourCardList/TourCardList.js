@@ -5,7 +5,7 @@ import './TourCardList2.scss'
 import './TourCardList3.scss'
 
 
-const TourCardList = ({ cards, onClickCard, listType, cardType }) => {
+const TourCardList = ({ cards, onClickCard, listType, cardType, onRemoveFavorite }) => {
 
     const [dragCard, setDragCard] = useState(null)
     function handleOnDrag (e, currentCard) {
@@ -20,7 +20,9 @@ const TourCardList = ({ cards, onClickCard, listType, cardType }) => {
       {
         cards.map((card) => (
           <div draggable key={card.id} onDragStart={(e) => { handleOnDrag(e, card) }}>
-          <TourCard type={cardType} key={card.id} card={card} onClick={() => onClickCard(card)}/>
+          <TourCard type={cardType} key={card.id} card={card} onClick={() => onClickCard(card)}
+           onRemoveFavorite={onRemoveFavorite}
+          />
           </div>
           ))
       }

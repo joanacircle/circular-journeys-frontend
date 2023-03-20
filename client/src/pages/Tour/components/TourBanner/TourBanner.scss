@@ -60,18 +60,6 @@
       .tour-input:focus{
         outline: none;
       }
-  
-      .tour-button{
-        width: auto;
-        height: auto;
-        color: $orange;
-        border-radius: $br2;
-        
-        .tour-search-icon{
-          display: block;
-          margin: 0 auto;
-        }
-      }
     }
   }
 
@@ -80,6 +68,8 @@
 }
 
 .btn{
+  
+  min-width: fit-content;
   background-color: orange;
   border: none;
   border-radius: 4px;

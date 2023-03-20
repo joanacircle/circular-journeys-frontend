@@ -48,7 +48,7 @@ export default function TourMapPage() {
       setData(TourCards.filter(card => newTourFavoriteList.some(({ id }) => id === card.id)))
     }
 
-    updateFavorites() // 初始化
+    updateFavorites()
 
     const handleStorageChange = (e) => {
       if (e.key.startsWith('TourFavorite-')) {
@@ -84,31 +84,38 @@ export default function TourMapPage() {
       : data
   return (
     <>
-    <div className='tour-main-list'>
+    <div className='tour-map-page'>
+    <div className='tour-category'>
         <TourCategoryList
           categories={categories}
           onClickCard={handleCardClick}
           selectedCategory={selectedCategory}
         />
-      </div>
-      <div className="container">
-        <div className="left">
-          <div className="draggable-card-list">
-            <TourCardList listType="tourCardList3" cardType="TourCard3" cards={filteredCards} onClickCard={clickEvent
-            } />
-          </div>
-          <div className="tour-plan-list" onDrop={handleOnDrop} onDragOver={handleDragOver}>
-            <h1>拖放景點</h1>
-            <TourCardList key={list.id} cards={list} listType="tourCardList3" cardType="TourCard3" onClickCard={clickEvent
-            }/>
-          </div>
-        </div>
-        <div className="right">
-          <div className="tour-map">
-            <TourMap selectedCard={selectedCard} />
-          </div>
-        </div>
-      </div>
+    </div>
+    <div className="tour-favorite">
+        <TourCardList
+        className='tourCardList'
+        listType="tourCardList3"
+        cardType="TourCard3"
+        cards={filteredCards}
+        onClickCard={clickEvent}
+        onRemoveFavorite={(id) => {
+          setData((prevData) => prevData.filter((card) => card.id !== id))
+        }} />
+    </div>
+    <div className="tour-plan" onDrop={handleOnDrop} onDragOver={handleDragOver}>
+        <h1>拖放景點</h1>
+        <TourCardList key={list.id} cards={list} listType="tourCardList3" cardType="TourCard3" onClickCard={clickEvent}
+        onRemoveFavorite={(id) => {
+        setData((prevData) => prevData.filter((card) => card.id !== id))
+        }}
+    />
+    </div>
+    <div className="tour-map">
+        <TourMap className='map' selectedCard={selectedCard} />
+    </div>
+    <div className='tour-bottom'></div>
+    </div>
     </>
   )
 }

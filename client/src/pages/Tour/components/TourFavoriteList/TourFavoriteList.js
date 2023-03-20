@@ -5,22 +5,30 @@ export default function TourFavoriteListA({ cards, cardType }) {
     const [TourFavoriteList, setTourFavoriteList] = useState([])
     const [data, setData] = useState([])
     useEffect(() => {
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i)
-        if (key.startsWith("TourFavorite-")) {
-          const id = key.substring("TourFavorite-".length)
-          const isExit = TourFavoriteList.find(item => item.id === id)
-          const favoriteCard = cards.find(card => card.id === id)
-          if (favoriteCard) {
-            if (!isExit) {
-              setTourFavoriteList(prevTourFavoriteList => [...prevTourFavoriteList, { id }])
-            } else {
-              setData(prevTourFavoriteList => prevTourFavoriteList.filter(item => item !== prevTourFavoriteList))
-            }
+      const updateFavorites = () => {
+        const newTourFavoriteList = []
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i)
+          if (key.startsWith('TourFavorite-')) {
+            const id = key.substring('TourFavorite-'.length)
+            newTourFavoriteList.push({ id })
           }
         }
+        setData(cards.filter(card => newTourFavoriteList.some(({ id }) => id === card.id)))
       }
-      setData(cards.filter(card => TourFavoriteList.some(({ id }) => id === card.id)))
+
+      updateFavorites() // 初始化
+
+      const handleStorageChange = (e) => {
+        if (e.key.startsWith('TourFavorite-')) {
+          updateFavorites()
+        }
+      }
+
+      window.addEventListener('storage', handleStorageChange)
+      return () => {
+        window.removeEventListener('storage', handleStorageChange)
+      }
     }, [])
     return (
     <>

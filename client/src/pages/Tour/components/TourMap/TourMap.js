@@ -43,20 +43,22 @@ export default function TourMap({ selectedCard }) {
 
   return (
     <>
-      <button className='btn' onClick={changeStyle}>STYLE</button>
+      <div className='tour-mapcontext'>
       <MapContainer
         center={position}
         zoom={13}
         style={{ width: '100%', height: '100%' }}
         scrollWheelZoom={false}
         ref={mapRef}
-        className='tourmap'
+        className='map'
       >
         <TileLayer attribution='&copy; OpenStreetMap contributors ' url={mapStyle} />
         <Marker position={position} icon={icon}>
           <Popup></Popup>
         </Marker>
       </MapContainer>
+      <button className='tour-map-btn' onClick={changeStyle}>Map Style</button>
+      </div>
     </>
   )
 }

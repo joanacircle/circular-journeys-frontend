@@ -5,7 +5,7 @@ import './TourCard2.scss'
 import './TourCard3.scss'
 
 
-const TourCard = ({ card, onClick, type }) => {
+const TourCard = ({ card, onClick, type, onRemoveFavorite }) => {
   const { id, name, adress, img, tags } = card
     return (
     <>
@@ -14,7 +14,7 @@ const TourCard = ({ card, onClick, type }) => {
     className={`${type}Img`} alt='TourCardImg'/>
       <span className={`${type}Text`}>
       <div className='TourFavoriteLabel'>
-    <TourFavorite id={id} className='TourFavorite' />
+    <TourFavorite id={id} className='TourFavorite' onRemove={onRemoveFavorite}/>
       </div>
       <h4>{ name }</h4>
       <h6>{ adress }</h6>

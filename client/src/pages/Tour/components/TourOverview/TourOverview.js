@@ -30,6 +30,9 @@ const TourOverview = () => {
 
   const tourView = TourCards.filter((card) => card.tags.includes('景點'))
   const tourFood = TourCards.filter((card) => card.tags.includes('美食'))
+  const tourLive = TourCards.filter((card) => card.tags.includes('住宿'))
+  const tourCulcture = TourCards.filter((card) => card.tags.includes('文化'))
+  const tourNature = TourCards.filter((card) => card.tags.includes('自然'))
 
   return (
     <>
@@ -59,17 +62,17 @@ const TourOverview = () => {
       <div className='tour-main-list'>
         <h1>住宿</h1>
         <h6>快來確認距離最近的旅店吧!</h6>
-        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={filteredCards} />
+        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={tourLive} />
       </div>
       <div className='tour-main-list'>
         <h1>特色文化</h1>
         <h6>趕快加入體驗在地文化特色!</h6>
-        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={filteredCards} />
+        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={tourCulcture} />
       </div>
       <div className='tour-main-list'>
         <h1>自然景觀</h1>
         <h6>在大自然中好好放鬆!</h6>
-        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={filteredCards} />
+        <TourCardList listType='tourCardList3' cardType='TourCard3' cards={tourNature} />
       </div>
     </>
   )

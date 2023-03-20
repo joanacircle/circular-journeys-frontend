@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TourMap from './components/TourMap/TourMap'
-import TourSearchBar from './components/TourSearchBar/TourSearchBar'
 import TourCardList from './components/TourCardList/TourCardList'
 import { data as TourCards } from './data/index'
-import TourFavoriteList from './components/TourFavoriteList/TourFavoriteList'
 import './TourMapPage.scss'
 import TourCategoryList from './components/TourCategory/TourCategoryList'
 
@@ -63,11 +61,11 @@ export default function TourMapPage() {
   }, [])
 
     const categories = [
-      { id: "TC001", name: "景點", context: "", img: "T01", tags: "景點" },
-      { id: "TC002", name: "美食", context: "", img: "T02", tags: "美食" },
-      { id: "TC003", name: "住宿", context: "", img: "T03", tags: "住宿" },
-      { id: "TC004", name: "文化", context: "", img: "T04", tags: "文化" },
-      { id: "TC005", name: "自然", context: "", img: "T05", tags: "自然" }
+      { id: "TC001", name: "景點", context: "", img: "TCA001", tags: "景點" },
+      { id: "TC002", name: "美食", context: "", img: "TCA002", tags: "美食" },
+      { id: "TC003", name: "住宿", context: "", img: "TCA003", tags: "住宿" },
+      { id: "TC004", name: "文化", context: "", img: "TCA004", tags: "文化" },
+      { id: "TC005", name: "自然", context: "", img: "TCA005", tags: "自然" }
     ]
     const [cards, setCards] = useState(TourCards)
     const [selectedCategory, setSelectedCategory] = useState(null)
@@ -105,7 +103,7 @@ export default function TourMapPage() {
     </div>
     <div className="tour-plan" onDrop={handleOnDrop} onDragOver={handleDragOver}>
         <h1>拖放景點</h1>
-        <TourCardList key={list.id} cards={list} listType="tourCardList3" cardType="TourCard3" onClickCard={clickEvent}
+        <TourCardList key={'plan' + list} cards={list} listType="tourCardList3" cardType="TourCard3" onClickCard={clickEvent}
         onRemoveFavorite={(id) => {
         setData((prevData) => prevData.filter((card) => card.id !== id))
         }}

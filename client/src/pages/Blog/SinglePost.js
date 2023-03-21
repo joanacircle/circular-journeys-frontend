@@ -29,6 +29,8 @@ const SinglePost = () => {
     .then(r => {
       if (r.data.post.length === 0) {
         setNotFound(!notFound)
+      } else {
+        setNotFound(false)
       }
     })
     .catch(err => console.log(err))

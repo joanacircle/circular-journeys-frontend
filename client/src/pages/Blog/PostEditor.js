@@ -29,6 +29,8 @@ const PostEditor = () => {
       .then(r => {
         if (r.data.member.length === 0) {
           setNotFound(!notFound)
+        } else {
+          setNotFound(false)
         }
     })
     .catch(err => console.log(err))

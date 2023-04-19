@@ -13,13 +13,13 @@ The website has been designed into four main features include: Member Center, Tr
 
 In this project, I was responsible for both the front-end and back-end development of a blog page. My contributions included a range of tasks that enabled the creation of a functional blog page.
 
-Front-end:
+Frontend:
 - Designed and implemented the CKEditor as the article editor, enabling users to create and edit articles
 - Added the functionality for users to add hashtags to their articles, increasing their richness and exposure
 - Implemented the like feature that allows users to show their appreciation for articles
 - Integrated the official weather API open data to provide weather forecasts for different regions of Kaohsiung, enhancing the user experience
 
-Back-end:
+Backend:
 - Worked on the database design and implementation
 - Developed APIs to handle front-end requests and stored data in a mySQL database
 - Implemented parameter validation to verify if the id in the parameter exists in the database. If it does not exist, the user is redirected to a not-found page

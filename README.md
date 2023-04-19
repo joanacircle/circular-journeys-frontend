@@ -11,13 +11,20 @@ The website has been designed into four main features include: Member Center, Tr
 
 <img width="1426" alt="截圖 2023-03-13 下午2 48 01" src="https://user-images.githubusercontent.com/117150342/224627842-1e0b39e8-dd01-4931-955a-369509916a95.png">
 
-In this project, I was responsible for both the front-end and back-end development of the blog page. 
+In this project, I was responsible for both the front-end and back-end development of a blog page. My contributions included a range of tasks that enabled the creation of a functional blog page.
 
-Regarding the front-end, I designed and implemented the CKEditor as the article editor, which enables users to create and edit articles. I also added the functionality for users to add hashtags to their articles, increasing their richness and exposure. Additionally, I implemented the like feature that enables users to show their appreciation for articles. Moreover, I integrated the official weather API open data to provide weather forecasts for different regions of Kaohsiung, enhancing the user experience.
+Front-end:
+- Designed and implemented the CKEditor as the article editor, enabling users to create and edit articles
+- Added the functionality for users to add hashtags to their articles, increasing their richness and exposure
+- Implemented the like feature that allows users to show their appreciation for articles
+- Integrated the official weather API open data to provide weather forecasts for different regions of Kaohsiung, enhancing the user experience
 
-On the back-end, I worked on the database design and implementation, as well as developed APIs to handle front-end requests and stored data in a mySQL database. I also implemented parameter validation to verify if the id in the parameter exists in the database. If it does not exist, the user is redirected to a not-found page.
+Back-end:
+- Worked on the database design and implementation
+- Developed APIs to handle front-end requests and stored data in a mySQL database
+- Implemented parameter validation to verify if the id in the parameter exists in the database. If it does not exist, the user is redirected to a not-found page
 
-Overall, my contributions to this project included a range of front-end and back-end tasks, which enabled the creation of a user-friendly and functional blog page.
+Overall, my contributions to this project were crucial to creating a functional blog page.
 
 ## E-commerce Section 
 ### ✏️  By Kevin La

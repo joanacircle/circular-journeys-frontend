@@ -54,7 +54,7 @@ Users have the option to register and log in to their accounts using either thei
 For added functionality, I also incorporated Firebase storage to allow users to upload and change their profile pictures. Additionally, to establish seamless communication between the server and backend data, I utilized HTTP CORS and Axios to send and receive API requests.
 
 
-## Membership System
+## Tour Plan
 ### ✏️ By Anchor
 ![image](https://github.com/joanacircle/circular-journeys-frontend/assets/117142464/f97bccc7-1dce-459d-b263-b5d02e8b5d41)
 
